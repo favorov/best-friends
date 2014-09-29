@@ -30,7 +30,7 @@ First, let's write a simple R function that arrange (sort) tester genes by the b
 
 #The function returns the the list of tester genes that are sorted by of rev-rank of our gene (row)
 #of our gene (rows). 
-sort.by.backwards.rank<-function(correlation){
+sort.by.backwards.rank<-function(correlations){
 	backwards.rank<-apply(-correlations,2, rank)
 
 	# negation is to have decreasing rank
@@ -40,7 +40,7 @@ sort.by.backwards.rank<-function(correlation){
 	#the correlation with tester.
 	
 	sort.by.backwards.rank<-apply(backwards.rank,1,function(set){
-		colnames(correlation)[order(set)]}
+		colnames(correlations)[order(set)]}
 	)
 	#apply cbinds, we want to have our genes in rows, do we transpose
 
@@ -54,20 +54,20 @@ sort.by.backwards.rank<-function(correlation){
 And now, let's run a simple example. We have 5 genes (A,B,...D). A is strongly correlateds with everybody; B and C has correlation 0.75, all others are more or less independent. Naive approach would idetify A as best frind for B and C.
 
 ```{r}
-correlations=matrix(
+correl=matrix(
 	c(1,0.9,0.9,0.9,0.9,0.9,1,0.75,0.2,0.25,0.9,0.75,1,0.20,0.22,0.9,0.2,0.2,1,0.15,0.9,0.25,.22,.15,1),
 	ncol=5,byrow=TRUE
 )
 gene.names<-c('A','B','C','D','E')
-colnames(correlations)<-gene.names
-rownames(correlations)<-gene.names
-correlations
+colnames(correl)<-gene.names
+rownames(correl)<-gene.names
+correl
 ```
 
 Applying the function to our example.
 
 ```{r}
-genelists<-sort.by.backwards.rank(correlations)
+genelists<-sort.by.backwards.rank(correl)
 genelists
 ```
 
@@ -82,7 +82,7 @@ Again, the input is square matrix with the correaltion. The output is the matrix
 
 #this function returns the rank of rev-rank of our gene (row)
 #in the tester gene's list (column)
-rank.backwards.rank<-function(correlation){
+rank.backwards.rank<-function(correlations){
 	backwards.rank<-apply(-correlations,2, rank)
 
 	# negation is to have decreasing rank
@@ -104,7 +104,7 @@ rank.backwards.rank<-function(correlation){
 Now, let's apply the functions to our example.
 
 ```{r}
-rank.backward.ranks<-rank.backwards.rank(correlations)
+rank.backward.ranks<-rank.backwards.rank(correl)
 rank.backward.ranks
 ```
 Our genes are rows, the columns are tester genes. The matrix is asymmetric.

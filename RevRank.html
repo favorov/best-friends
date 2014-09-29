@@ -226,7 +226,7 @@ hr {
 
 <pre><code class="r">#The function returns the the list of tester genes that are sorted by of rev-rank of our gene (row)
 #of our gene (rows). 
-sort.by.backwards.rank&lt;-function(correlation){
+sort.by.backwards.rank&lt;-function(correlations){
     backwards.rank&lt;-apply(-correlations,2, rank)
 
     # negation is to have decreasing rank
@@ -236,7 +236,7 @@ sort.by.backwards.rank&lt;-function(correlation){
     #the correlation with tester.
 
     sort.by.backwards.rank&lt;-apply(backwards.rank,1,function(set){
-        colnames(correlation)[order(set)]}
+        colnames(correlations)[order(set)]}
     )
     #apply cbinds, we want to have our genes in rows, do we transpose
 
@@ -249,14 +249,14 @@ sort.by.backwards.rank&lt;-function(correlation){
 
 <p>And now, let&#39;s run a simple example. We have 5 genes (A,B,&hellip;D). A is strongly correlateds with everybody; B and C has correlation 0.75, all others are more or less independent. Naive approach would idetify A as best frind for B and C.</p>
 
-<pre><code class="r">correlations=matrix(
+<pre><code class="r">correl=matrix(
     c(1,0.9,0.9,0.9,0.9,0.9,1,0.75,0.2,0.25,0.9,0.75,1,0.20,0.22,0.9,0.2,0.2,1,0.15,0.9,0.25,.22,.15,1),
     ncol=5,byrow=TRUE
 )
 gene.names&lt;-c(&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;,&#39;E&#39;)
-colnames(correlations)&lt;-gene.names
-rownames(correlations)&lt;-gene.names
-correlations
+colnames(correl)&lt;-gene.names
+rownames(correl)&lt;-gene.names
+correl
 </code></pre>
 
 <pre><code>##     A    B    C    D    E
@@ -269,7 +269,7 @@ correlations
 
 <p>Applying the function to our example.</p>
 
-<pre><code class="r">genelists&lt;-sort.by.backwards.rank(correlations)
+<pre><code class="r">genelists&lt;-sort.by.backwards.rank(correl)
 genelists
 </code></pre>
 
@@ -290,7 +290,7 @@ Again, the input is square matrix with the correaltion. The output is the matrix
 
 <pre><code class="r">#this function returns the rank of rev-rank of our gene (row)
 #in the tester gene&#39;s list (column)
-rank.backwards.rank&lt;-function(correlation){
+rank.backwards.rank&lt;-function(correlations){
     backwards.rank&lt;-apply(-correlations,2, rank)
 
     # negation is to have decreasing rank
@@ -310,7 +310,7 @@ rank.backwards.rank&lt;-function(correlation){
 
 <p>Now, let&#39;s apply the functions to our example.</p>
 
-<pre><code class="r">rank.backward.ranks&lt;-rank.backwards.rank(correlations)
+<pre><code class="r">rank.backward.ranks&lt;-rank.backwards.rank(correl)
 rank.backward.ranks
 </code></pre>
 
