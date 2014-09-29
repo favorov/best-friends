@@ -1,0 +1,111 @@
+What genes are connected with our genes: rank of backward ranks
+========================================================
+
+Alexander Favorov  
+-----------------------------------------------
+
+### `r format(Sys.Date(), "%d %b %Y")` 
+
+`r library('knitr')`
+`r options(width=80)`
+`r opts_chunk$set(echo=T,message=F,cache=F,warning=F)`
+<!-- cache is off, we save all the neccessary things in Rda -->
+
+
+### Gene rank and reverse (double) rank
+
+Suppose we have a kind of gene-to-gene correlation matrix. The closer the genes are, the closer the value is to $1$, otherwise - to $-1$. Actually, the following holds for any comparable value, we will refer to it as a correlation just to be more definite. We want to find the list of best 'friends' for each (or for some particular) gene. The naive approach would be to rank all the genes by our-to-him correlation. If we use it, we cannot tell the genes that are correlated with everything from genes that are correlated specifically with our gene. We could try to post a kind of normalization, but it narrows the method (the precedure is to be whatever defined) and it prefers the genes that have a few friend for those that have a lot instead of to prefer specific friends of our gene for those that are friends of everybody, and it is not exactly the same thing.
+
+The backwards-rank approach we use here is based on a simple proposition that for a tested gene that is a friend of our gene (to be more formal, it is specifiacaly correlated with our gene of interest), the rank of our gene in the tested gene's correlations list is to be rather high. Otherwise, if the tested gene is a firend-of-everybody, our gene's rank in his list can be quite low, while the tester's gene rank in our list is still high. Thus, we gather the the 'where we are in his list' ranks and then we sort this ranks to create the best-friends list.
+
+
+### Code examples
+
+
+#### Sorting by backwards ranking
+
+First, let's write a simple R function that arrange (sort) tester genes by the backwards ranking. The input is square matrix with the correaltion. The output is the matrix where the rows are named by genes and each row contain sorted set of friends of that gene, the best is first.
+
+```{r}
+
+#The function returns the the list of tester genes that are sorted by of rev-rank of our gene (row)
+#of our gene (rows). 
+sort.by.backwards.rank<-function(correlation){
+	backwards.rank<-apply(-correlations,2, rank)
+
+	# negation is to have decreasing rank
+	
+	#we apply it by columns because our gene of interest is in row
+	#each column correspods to 'tester gene' and the rank 'our' genes by 
+	#the correlation with tester.
+	
+	sort.by.backwards.rank<-apply(backwards.rank,1,function(set){
+		colnames(correlation)[order(set)]}
+	)
+	#apply cbinds, we want to have our genes in rows, do we transpose
+
+	colnames(sort.by.backwards.rank)<-colnames(correlations) 
+	#it will be rownames
+	
+	t(sort.by.backwards.rank)	
+}
+```
+
+And now, let's run a simple example. We have 5 genes (A,B,...D). A is strongly correlateds with everybody; B and C has correlation 0.75, all others are more or less independent. Naive approach would idetify A as best frind for B and C.
+
+```{r}
+correlations=matrix(
+	c(1,0.9,0.9,0.9,0.9,0.9,1,0.75,0.2,0.25,0.9,0.75,1,0.20,0.22,0.9,0.2,0.2,1,0.15,0.9,0.25,.22,.15,1),
+	ncol=5,byrow=TRUE
+)
+gene.names<-c('A','B','C','D','E')
+colnames(correlations)<-gene.names
+rownames(correlations)<-gene.names
+correlations
+```
+
+Applying the function to our example.
+
+```{r}
+genelists<-sort.by.backwards.rank(correlations)
+genelists
+```
+
+B and C are mutually best friends (see column 2 of B and C row), it is exactly what we want to see. The first column is trivial: every gene is the best friend to itself. 
+
+#### Ranking by backwards ranking
+
+Sometimes, it is necessary to have ranks for all genes rather than the ordered list. This is the version of the code.
+Again, the input is square matrix with the correaltion. The output is the matrix of the ranks-of-reverse-ranks that order the genes by how freindly are they to the gene that is represented by a row. Row is 'our' gene, column is the tester. The matrix is asymmetric.
+
+```{r}
+
+#this function returns the rank of rev-rank of our gene (row)
+#in the tester gene's list (column)
+rank.backwards.rank<-function(correlation){
+	backwards.rank<-apply(-correlations,2, rank)
+
+	# negation is to have decreasing rank
+	
+	#we apply it by columns because our gene of interest is in row
+	#each column correspods to 'tester gene' and the rank 'our' genes by 
+	#the correlation with tester.
+
+	rank.backwards.rank<-apply(backwards.rank,1,rank)
+	# now, we rank tester by rank of our in the tester's list
+	#remember that our genes rows, testers are columns
+	rownames(rank.backwards.rank)<-rownames(correlations)
+	colnames(rank.backwards.rank)<-colnames(correlations)
+	rank.backwards.rank	
+}
+
+```
+
+Now, let's apply the functions to our example.
+
+```{r}
+rank.backward.ranks<-rank.backwards.rank(correlations)
+rank.backward.ranks
+```
+Our genes are rows, the columns are tester genes. The matrix is asymmetric.
+
