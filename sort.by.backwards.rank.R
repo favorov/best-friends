@@ -10,7 +10,7 @@ sort.by.backwards.rank<-function(correlations){
 	#the correlation with tester.
 	
 	sort.by.backwards.rank<-apply(backwards.rank,1,function(set){
-		colnames(correlation)[order(set)]}
+		colnames(correlations)[order(set)]}
 	)
 	#apply cbinds, we want to have our genes in rows, do we transpose
 
