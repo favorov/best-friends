@@ -1,5 +1,6 @@
 #The function returns the the list of tester genes that are sorted by of rev-rank of our gene (row)
 #of our gene (rows). 
+#The code is the same with the Rmd file
 sort.by.backwards.rank<-function(correlations){
 	backwards.rank<-apply(-correlations,2, rank)
 
