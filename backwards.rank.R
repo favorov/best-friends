@@ -1,45 +1,63 @@
-#The function returns the the list of tester genes that are sorted by of rev-rank of our gene (row)
-#of our gene (rows). 
-#The code is the same with the Rmd file
 sort.by.backwards.rank<-function(correlations){
+	#The function returns the the list of tester genes 
+	#that are sorted by of bckw-rank of our gene (row)
 	backwards.rank<-apply(-correlations,2, rank)
+	
+	#we apply ranking by columns :
+	#our gene of interest correspond to row
+	#each column correspods to 'tester gene' 
+	#and the row of 'our' gene carries the ranks of 'our' 
+	#genes by in the tester's correlation lists
+	
+	# negation is to have decreasing rank 
 
-	# negation is to have decreasing rank
-	
-	#we apply it by columns because our gene of interest is in row
-	#each column correspods to 'tester gene' and the rank 'our' genes by 
-	#the correlation with tester.
-	
+	#now, for each 'our' gene (row), we prepare 
+	#the list of names of testers ordered by
+	#rank of 'our' gene in the tester's list 
 	sort.by.backwards.rank<-apply(backwards.rank,1,function(set){
 		colnames(correlations)[order(set)]}
 	)
-	#apply cbinds, we want to have our genes in rows, do we transpose
-
+	#apply return the result in columns, so now 'our' is columns
 	colnames(sort.by.backwards.rank)<-colnames(correlations) 
-	#it will be rownames
-	
+	#apply names of genes
+
+	#we want to have our genes in rows, so we transpose
+
 	t(sort.by.backwards.rank)	
 }
 
 
-#this function returns the rank of rev-rank of our gene (row)
-#in the tester gene's list (column)
 rank.backwards.rank<-function(correlations){
+	#this function returns the rank of bckw-rank of our gene (row)
+	#in the tester gene's list (column)
 	backwards.rank<-apply(-correlations,2, rank)
-
-	# negation is to have decreasing rank
 	
-	#we apply it by columns because our gene of interest is in row
-	#each column correspods to 'tester gene' and the rank 'our' genes by 
-	#the correlation with tester.
+	#see comments in sort.by.backwards.rank()
 
 	rank.backwards.rank<-apply(backwards.rank,1,rank)
 	# now, we rank tester by rank of our in the tester's list
-	# remember that our genes rows, testers are columns
+	# 'our' genes are columns, tester are rows (apply does this)
 	rownames(rank.backwards.rank)<-rownames(correlations)
 	colnames(rank.backwards.rank)<-colnames(correlations)
 	#after t, our genes is row 
 	t(rank.backwards.rank)	
 }
 
+distance.by.backwards.rank<-function(correlations){
+	#this function returns the gene-to=-gene symmetric 
+	#distance that is based of bckw-rank
+	#in the tester gene's list (column)
+	backwards.rank<-apply(-correlations,2, rank)
+	
+	#see comments in sort.by.backwards.rank()
+
+	rank.backwards.rank<-apply(backwards.rank,1,rank)
+	
+	# now, we rank tester by rank of our in the tester's list
+	# remember that our genes rows, testers are columns
+	rownames(rank.backwards.rank)<-rownames(correlations)
+	colnames(rank.backwards.rank)<-colnames(correlations)
+	#after t, our genes is row 
+	(t(rank.backwards.rank)+rank.backwards.rank)/(2*dim(correlations)[1]-2)	
+}
 
