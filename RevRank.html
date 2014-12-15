@@ -208,7 +208,7 @@ hr {
 
 <h2>Alexander Favorov  </h2>
 
-<h3>12 Dec 2014</h3>
+<h3>15 Dec 2014</h3>
 
 <!-- cache is off, we save all the neccessary things in Rda -->
 
@@ -218,37 +218,47 @@ hr {
 
 <p>The backwards-rank approach we use here is based on a simple proposition that for a tested gene that is a friend of our gene (to be more formal, it is specifiacaly correlated with our gene of interest), the rank of our gene in the tested gene&#39;s correlations list is to be rather high. Otherwise, if the tested gene is a firend-of-everybody, our gene&#39;s rank in his list can be quite low, while the tester&#39;s gene rank in our list is still high. Thus, we gather the the &#39;where we are in his list&#39; ranks and then we sort this ranks to create the best-friends list.</p>
 
-<h3>Code</h3>
-
-<pre><code class="r">source(&#39;backwards.rank.R&#39;,echo=TRUE,max.deparse.length = 10000,continue.echo=&#39;&#39;)
-</code></pre>
-
-<pre><code>## 
-## &gt; sort.by.backwards.rank &lt;- function(correlations) {
-##     backwards.rank &lt;- apply(-correlations, 2, rank)
-##     sort.by.backwards.rank &lt;- apply(backwards.rank, 1, function(set) {
-##         colnames(correlations)[order(set)]
-##     })
-##     colnames(sort.by.backwards.rank) &lt;- colnames(correlations)
-##     t(sort.by.backwards.rank)
-## }
-## 
-## &gt; rank.backwards.rank &lt;- function(correlations) {
-##     backwards.rank &lt;- apply(-correlations, 2, rank)
-##     rank.backwards.rank &lt;- apply(backwards.rank, 1, rank)
-##     rownames(rank.backwards.rank) &lt;- rownames(correlations)
-##     colnames(rank.backwards.rank) &lt;- colnames(correlations)
-##     t(rank.backwards.rank)
-## }
-</code></pre>
-
-<h3>Code examples</h3>
+<h3>Code and examples</h3>
 
 <h4>Sorting by backwards ranking</h4>
 
 <p>First, let&#39;s write a simple R function that arrange (sort) tester genes by the backwards ranking. The input is square matrix with the correaltion. The output is the matrix where the rows are named by genes and each row contain sorted set of friends of that gene, the best is first.</p>
 
-<p>And now, let&#39;s run a simple example. We have 5 genes (A,B,&hellip;D). A is strongly correlateds with everybody; B and C has correlation 0.75, all others are more or less independent. Naive approach would idetify A as best frind for B and C.</p>
+<p>Here is the code of the function:</p>
+
+<pre><code class="r">sort.by.backwards.rank
+</code></pre>
+
+<pre><code>## function(correlations){
+##  #The function returns the the list of tester genes 
+##  #that are sorted by of bckw-rank of our gene (row)
+##  backwards.rank&lt;-apply(-correlations,2, rank)
+##  
+##  #we apply ranking by columns :
+##  #our gene of interest correspond to row
+##  #each column correspods to &#39;tester gene&#39; 
+##  #and the row of &#39;our&#39; gene carries the ranks of &#39;our&#39; 
+##  #genes by in the tester&#39;s correlation lists
+##  
+##  # negation is to have decreasing rank 
+## 
+##  #now, for each &#39;our&#39; gene (row), we prepare 
+##  #the list of names of testers ordered by
+##  #rank of &#39;our&#39; gene in the tester&#39;s list 
+##  sort.by.backwards.rank&lt;-apply(backwards.rank,1,function(set){
+##      colnames(correlations)[order(set)]}
+##  )
+##  #apply return the result in columns, so now &#39;our&#39; is columns
+##  colnames(sort.by.backwards.rank)&lt;-colnames(correlations) 
+##  #apply names of genes
+## 
+##  #we want to have our genes in rows, so we transpose
+## 
+##  t(sort.by.backwards.rank)   
+## }
+</code></pre>
+
+<p>And now, let&#39;s prepare a simple example. We have 5 genes (A,B,&hellip;D). A is strongly correlateds with everybody; B and C has correlation 0.75, all others are more or less independent. Naive approach would idetify A as best frind for B and C.</p>
 
 <pre><code class="r">correl=matrix(
     c(1,0.9,0.9,0.9,0.9,0.9,1,0.75,0.2,0.25,0.9,0.75,1,0.20,0.22,0.9,0.2,0.2,1,0.15,0.9,0.25,.22,.15,1),
@@ -289,10 +299,32 @@ genelists
 <p>Sometimes, it is necessary to have ranks for all genes rather than the ordered list. This is the version of the code.
 Again, the input is square matrix with the correaltion. The output is the matrix of the ranks-of-reverse-ranks that order the genes by how freindly are they to the gene that is represented by a row. Row is &#39;our&#39; gene, column is the tester. The matrix is asymmetric.</p>
 
-<p>Now, let&#39;s apply the functions to our example.</p>
+<p>Here is the code of the function:</p>
 
-<pre><code class="r">rank.backward.ranks&lt;-rank.backwards.rank(correl)
-rank.backward.ranks
+<pre><code class="r">rank.by.backwards.rank
+</code></pre>
+
+<pre><code>## function(correlations){
+##  #this function returns the rank of bckw-rank of our gene (row)
+##  #in the tester gene&#39;s list (column)
+##  backwards.rank&lt;-apply(-correlations,2, rank)
+##  
+##  #see comments in sort.by.backwards.rank()
+## 
+##  rank.backwards.rank&lt;-apply(backwards.rank,1,rank)
+##  # now, we rank tester by rank of our in the tester&#39;s list
+##  # &#39;our&#39; genes are columns, tester are rows (apply does this)
+##  rownames(rank.backwards.rank)&lt;-rownames(correlations)
+##  colnames(rank.backwards.rank)&lt;-colnames(correlations)
+##  #after t, our genes is row 
+##  t(rank.backwards.rank)  
+## }
+</code></pre>
+
+<p>Let&#39;s apply the functions to our example.</p>
+
+<pre><code class="r">ranks&lt;-rank.by.backwards.rank(correl)
+ranks
 </code></pre>
 
 <pre><code>##     A   B   C   D   E
@@ -303,7 +335,39 @@ rank.backward.ranks
 ## E 2.0 3.5 3.5 5.0 1.0
 </code></pre>
 
-<p>Our genes are rows, the columns are tester genes. The matrix is asymmetric.</p>
+<h4>Distance by backwards ranking</h4>
+
+<p>To apply most standard clustering techniques, we need a symmetric distance with self-distance = 0. It can be done if we add the direct and reverse ranks form previous function (A for B and B for A), decrease them both by 1 to achieve |GG|=0 for any gene G and, eventually, map it o [0,1] interval. We can also treat this distance as a kind of p-value is we suupiose that the rank is distributed uniformely.  </p>
+
+<p>Code of the function:</p>
+
+<pre><code class="r">distance.by.backwards.rank
+</code></pre>
+
+<pre><code>## function(correlations){
+##  backwards.rank&lt;-apply(-correlations,2, rank)
+##  rank.backwards.rank&lt;-apply(backwards.rank,1,rank)
+##  rownames(rank.backwards.rank)&lt;-rownames(correlations)
+##  colnames(rank.backwards.rank)&lt;-colnames(correlations)
+##  #it is the same code as for rank.by.backwards.rank
+##  #we do not call it to avoid t() twice, just to save time
+##  (t(rank.backwards.rank)+rank.backwards.rank-2)/(2*dim(correlations)[1]-2)   
+## }
+</code></pre>
+
+<p>Applying to our example:</p>
+
+<pre><code class="r">distance&lt;-distance.by.backwards.rank(correl)
+distance
+</code></pre>
+
+<pre><code>##        A      B      C      D      E
+## A 0.0000 0.7500 0.6250 0.4375 0.4375
+## B 0.7500 0.0000 0.3125 0.8125 0.5000
+## C 0.6250 0.3125 0.0000 0.6875 0.8125
+## D 0.4375 0.8125 0.6875 0.0000 0.8750
+## E 0.4375 0.5000 0.8125 0.8750 0.0000
+</code></pre>
 
 </body>
 

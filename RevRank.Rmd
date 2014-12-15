@@ -7,7 +7,7 @@ Alexander Favorov
 ### `r format(Sys.Date(), "%d %b %Y")` 
 
 `r library('knitr')`
-`r options(width=80)`
+`r options(width=80,keep.source=TRUE)`
 `r opts_chunk$set(echo=T,message=F,cache=F,warning=F)`
 <!-- cache is off, we save all the neccessary things in Rda -->
 
@@ -19,19 +19,22 @@ Suppose we have a kind of gene-to-gene correlation matrix. The closer the genes 
 The backwards-rank approach we use here is based on a simple proposition that for a tested gene that is a friend of our gene (to be more formal, it is specifiacaly correlated with our gene of interest), the rank of our gene in the tested gene's correlations list is to be rather high. Otherwise, if the tested gene is a firend-of-everybody, our gene's rank in his list can be quite low, while the tester's gene rank in our list is still high. Thus, we gather the the 'where we are in his list' ranks and then we sort this ranks to create the best-friends list.
 
 
-### Code 
-```{r source}
-source('backwards.rank.R',echo=TRUE,max.deparse.length = 10000,continue.echo='')
+```{r source, echo=FALSE}
+source('backwards.rank.R')
 ```
 
-### Code examples
+### Code and examples
 
 #### Sorting by backwards ranking
 
 First, let's write a simple R function that arrange (sort) tester genes by the backwards ranking. The input is square matrix with the correaltion. The output is the matrix where the rows are named by genes and each row contain sorted set of friends of that gene, the best is first.
 
+Here is the code of the function:
+```{r show.sort.code}
+sort.by.backwards.rank
+```
 
-And now, let's run a simple example. We have 5 genes (A,B,...D). A is strongly correlateds with everybody; B and C has correlation 0.75, all others are more or less independent. Naive approach would idetify A as best frind for B and C.
+And now, let's prepare a simple example. We have 5 genes (A,B,...D). A is strongly correlateds with everybody; B and C has correlation 0.75, all others are more or less independent. Naive approach would idetify A as best frind for B and C.
 
 ```{r}
 correl=matrix(
@@ -58,11 +61,31 @@ B and C are mutually best friends (see column 2 of B and C row), it is exactly w
 Sometimes, it is necessary to have ranks for all genes rather than the ordered list. This is the version of the code.
 Again, the input is square matrix with the correaltion. The output is the matrix of the ranks-of-reverse-ranks that order the genes by how freindly are they to the gene that is represented by a row. Row is 'our' gene, column is the tester. The matrix is asymmetric.
 
-Now, let's apply the functions to our example.
+Here is the code of the function:
+```{r show.rank.code}
+rank.by.backwards.rank
+```
+
+Let's apply the functions to our example.
 
 ```{r}
-rank.backward.ranks<-rank.backwards.rank(correl)
-rank.backward.ranks
+ranks<-rank.by.backwards.rank(correl)
+ranks
 ```
-Our genes are rows, the columns are tester genes. The matrix is asymmetric.
+
+#### Distance by backwards ranking
+
+To apply most standard clustering techniques, we need a symmetric distance with self-distance = 0. It can be done if we add the direct and reverse ranks form previous function (A for B and B for A), decrease them both by 1 to achieve |GG|=0 for any gene G and, eventually, map it o [0,1] interval. We can also treat this distance as a kind of p-value is we suupiose that the rank is distributed uniformely.  
+
+Code of the function:
+```{r show.distance.code}
+distance.by.backwards.rank
+```
+
+Applying to our example:
+
+```{r}
+distance<-distance.by.backwards.rank(correl)
+distance
+```
 

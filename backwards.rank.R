@@ -27,7 +27,7 @@ sort.by.backwards.rank<-function(correlations){
 }
 
 
-rank.backwards.rank<-function(correlations){
+rank.by.backwards.rank<-function(correlations){
 	#this function returns the rank of bckw-rank of our gene (row)
 	#in the tester gene's list (column)
 	backwards.rank<-apply(-correlations,2, rank)
@@ -44,20 +44,12 @@ rank.backwards.rank<-function(correlations){
 }
 
 distance.by.backwards.rank<-function(correlations){
-	#this function returns the gene-to=-gene symmetric 
-	#distance that is based of bckw-rank
-	#in the tester gene's list (column)
 	backwards.rank<-apply(-correlations,2, rank)
-	
-	#see comments in sort.by.backwards.rank()
-
 	rank.backwards.rank<-apply(backwards.rank,1,rank)
-	
-	# now, we rank tester by rank of our in the tester's list
-	# remember that our genes rows, testers are columns
 	rownames(rank.backwards.rank)<-rownames(correlations)
 	colnames(rank.backwards.rank)<-colnames(correlations)
-	#after t, our genes is row 
-	(t(rank.backwards.rank)+rank.backwards.rank)/(2*dim(correlations)[1]-2)	
+	#it is the same code as for rank.by.backwards.rank
+	#we do not call it to avoid t() twice, just to save time
+	(t(rank.backwards.rank)+rank.backwards.rank-2)/(2*dim(correlations)[1]-2)	
 }
 
