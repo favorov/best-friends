@@ -18,16 +18,23 @@ Suppose we have a kind of gene-to-gene correlation matrix. The closer the genes 
 
 The backwards-rank approach we use here is based on a simple proposition that for a tested gene that is a friend of our gene (to be more formal, it is specifiacaly correlated with our gene of interest), the rank of our gene in the tested gene's correlations list is to be rather high. Otherwise, if the tested gene is a firend-of-everybody, our gene's rank in his list can be quite low, while the tester's gene rank in our list is still high. Thus, we gather the the 'where we are in his list' ranks and then we sort this ranks to create the best-friends list.
 
+### Gene rank and reverse (double) rank : formal description
+
+Suppose we have similarity(correlation) matrix $C_{ij}$ for time- or sample- series of a set of $k$ genes $G=\{g_i: i\in1..k\}$. The requirements for the matrix itself are very relaxed - it is to represent similarity of the series corresponding to genes and $C_{ij}\gt C_{il}$ means that $g_i$ series are more similar to $g_j$ than to $g_l$.
+
+Now, we want to rank all genes ${G \backslash g_i}$ by their specific concordance (friendship) with gene $g_i$. The ranking by $C_{ij}$ will rank genes by the common trancription pattern similarity rather than by specific similarity with $g_j$. Instead of this, let's define the friendship function $F(j|i)$ that is the rank of $C_{ij}$ in the list of all $C_{lj}$. In other words, the friendship function of $j$ to $i$ is the rank of $i$ in the $C_{*j}$ list (backwards rank).
+
+Now, it's easy to define the best friends (the most concordant genes) of gene $g_i$. The higher is the $F(j|i)$, the better is the friend. The best $N$ friends of $g_i$ is the top-$N$ of the ordered $F(j|i)$ list.
 
 ```{r source, echo=FALSE}
 source('backwards.rank.R')
 ```
 
-### Code and examples
+### Code and examples in R
 
 #### Sorting by backwards ranking
 
-First, let's write a simple R function that arrange (sort) tester genes by the backwards ranking. The input is square matrix with the correaltion. The output is the matrix where the rows are named by genes and each row contain sorted set of friends of that gene, the best is first.
+First, we need a function that arrange (sort) tester genes by the backwards ranking. The input is square matrix with the correaltion. The output is the matrix where the rows are named by genes and each row contain sorted set of friends of the row-naming gene, the best is first.
 
 Here is the code of the function:
 ```{r show.sort.code}
@@ -58,7 +65,7 @@ B and C are mutually best friends (see column 2 of B and C row), it is exactly w
 
 #### Ranking by backwards ranking
 
-Sometimes, it is necessary to have ranks for all genes rather than the ordered list. This is the version of the code.
+Sometimes, it is necessary to have ranks $F(i|j)$ for all genes rather than the ordered list. This is the version of the code.
 Again, the input is square matrix with the correaltion. The output is the matrix of the ranks-of-reverse-ranks that order the genes by how freindly are they to the gene that is represented by a row. Row is 'our' gene, column is the tester. The matrix is asymmetric.
 
 Here is the code of the function:
