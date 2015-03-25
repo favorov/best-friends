@@ -15,6 +15,8 @@ Alexander Favorov
 
 For each gene $g_i$ we have a ranked list of all the genes that is based on the ranking of $F(j|i)$ value (see <a href=RevRank.html>the best friends by ranking of reverse ranks</a> document), let's denote the list for $g_i$ as $F_i$ list. The $j_{th}$ gene in the list is $F_i^j$. The position of the gene G in $F_i$ is $r(G,F_i)$. Obviously, $G=F_i^{r(G,F_i)}$ and $k=r(F_i^k,F_i)$.
 
+Let's define the simplest cluster (0-cluster) as such a set of genes $C$ that for each $g_i \in C \{F_i^k, k=1..|C|\} = C$ 
+
 ```{r source, echo=FALSE}
 source('backwards.rank.R')
 ```
