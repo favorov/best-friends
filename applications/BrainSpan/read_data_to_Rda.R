@@ -4,11 +4,11 @@ genenames<-genenames<-read.table(log.file.name,stringsAsFactors = FALSE,colClass
 #debug
 #genenames<-genenames[1:1000,]
 number_of_genes<-dim(genenames)[1]
-correlations <- data.frame(t(rep(NA,number_of_genes)))
-correlations[number_of_genes,number_of_genes]=NA
+correlations <- data.frame(t(rep(0.,number_of_genes)))
+correlations[number_of_genes,number_of_genes]=1.
 colnames(correlations)=genenames[,2]
 rownames(correlations)=genenames[,2]
-for (ind in 1:number_of_genes) {
+for (ind in 1:number_of_genes-1) {
 	correlations[ind,ind]=1.
 }
 nr.tsv <- file(corr.snake.name,"r")
