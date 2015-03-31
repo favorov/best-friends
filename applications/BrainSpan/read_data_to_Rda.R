@@ -11,7 +11,7 @@ message('corner is set')
 colnames(correlations)=genenames[,2]
 rownames(correlations)=genenames[,2]
 message('names are set')
-for (ind in 1:number_of_genes-1) {
+for (ind in 1:(number_of_genes-1)) {
 	correlations[ind,ind]=1.
 }
 message('diagonal is set')
