@@ -20,6 +20,6 @@ for (i in 1:maxindex)
 	ind1<-corr.data[i,idx1]
 	ind2<-corr.data[i,idx2]
 	c<-corr.data[i,corr]
-	correlations[idx==ind1,ind2:=corr]
+	correlations[idx==ind1,eval(as.name(ind2)):=corr]
 }
 save(file='prenatal.correlations.matrix.Rda',list=c('correlations','gene.index'))
