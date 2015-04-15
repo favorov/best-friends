@@ -1,5 +1,5 @@
 sort.by.backwards.rank<-function(correlations){
-	#The function returns the the list of tester genes 
+	#The function returns the list of tester genes 
 	#that are sorted by of bckw-rank of our gene (row)
 	backwards.rank<-apply(-correlations,2, rank)
 	
