@@ -44,6 +44,7 @@ sort.by.backwards.rank
 And now, let's prepare a simple example. We have 5 genes (A,B,...D). A is strongly correlateds with everybody; B and C has correlation 0.75, all others are more or less independent. Naive approach would idetify A as best frind for B and C.
 
 ```{r}
+library(data.table)
 correl=matrix(
 	c(1,0.9,0.9,0.9,0.9,0.9,1,0.75,0.2,0.25,0.9,0.75,1,0.20,0.22,0.9,0.2,0.2,1,0.15,0.9,0.25,.22,.15,1),
 	ncol=5,byrow=TRUE
@@ -51,7 +52,7 @@ correl=matrix(
 gene.names<-c('A','B','C','D','E')
 colnames(correl)<-gene.names
 corr.table<-data.table(idx=gene.names,correl)
-cor.table
+corr.table
 ```
 
 Applying the function to our example.
