@@ -1,0 +1,23 @@
+Package: gene.best.friends
+Type: Package
+Title: Genes That Are Best Friends package
+Version: 0.0.1
+Date: 2015-04-17
+Author@R: c( person("Alexander","Favorov",email = "favorov@sensi.org"),
+    person("Vasily","J.","Fertig", email="ejfertig@jhmi.edu"),
+    person("Andrey","A.","Mironov", email="dgaykal1@jhmi.edu")
+    )
+Author: Alexander Favorov, Vasily Ramensky, Andrey A. Mironov
+Maintainer: Alexander Favorov <favorov@sensi.org>
+Description: We have a transcription correlation matrix for a lot of genes. We what to know what genes are 
+the best friends for our genes of interest.
+License: Artistic-2.0
+LazyLoad: yes
+Depends:
+    R (>= 3.1.0),
+    data.table,
+    Matrix
+biocViews: Annotation, Genetics, Infrastructure, DataRepresentation,
+    Bioinformatics
+URL: https://github.com/favorov/gene.friends/pkg
+Packaged: 2014-11-28 07:07:07 EST; favorov
