@@ -44,18 +44,22 @@ sort.data.table.by.backwards.rank<-function(correlation.table,by.column=TRUE,sim
 		gene.names<-colnames(correlation.table)[-1] #all the column names but first
 		if (length(gene.names)!=length(unique(gene.names)))
 			stop('The colnames of data.pable passed to sort.data.table.by.backwards.rank are not unique')
-		row.names<-correlation.table[,eval(as.name(colnames(correlation.table)[1]))]
-		if (length(row.names)!=length(unique(row.names)))
+		my.row.names<-correlation.table[,eval(as.name(colnames(correlation.table)[1]))]
+		if (length(my.row.names)!=length(unique(my.row.names)))
 			stop('The names in the first column of the data.pable passed to sort.data.table.by.backwards.rank are not unique')
-		#gene.names is index we apply to gene.names to obtain row.names if the lists are equal sets; otherwise, the procedure will not provide row.names
-		#genes2rows<-order(gene.names)[rank(row.names)]
-		genes2rows<-charmatch(row.names,gene.names)
-		if (!identical(row.names,gene.names[genes2rows]))
-				stop("Correlaion table passed to sort.by.backwards.rank is not organised as we suppose to see:\nthe names in first column do not map to column names")
-		#now, we use genes2rows as an ordering index to obtain the same order of names in rows as it was in gene.names
-		correlation.table[,...TO.ORDER:=genes2rows] #...TO.ORDER is a column to be ordered, then, we remove it.
-		setorder(correlation.table,'...TO.ORDER')
-		correlation.table[,...TO.ORDER:=NULL] #...TO.ORDER is not necessary an more
+		#gene.names is index we apply to gene.names to obtain my.row.names if the lists are equal sets;
+		#otherwise, the procedure will not provide my.row.names
+		#genes2rows<-order(gene.names)[rank(my.row.names)]
+		if (!identical(my.row.names,gene.names)) # if they are, we are not to do all the mapping
+		{
+			genes2rows<-charmatch(my.row.names,gene.names)
+			if (!identical(my.row.names,gene.names[genes2rows]))
+					stop("Correlaion table passed to sort.by.backwards.rank is not organised as we suppose to see:\nthe names in first column do not map to column names")
+			#now, we use genes2rows as an ordering index to obtain the same order of names in rows as it was in gene.names
+			correlation.table[,...TO.ORDER:=genes2rows] #...TO.ORDER is a column to be ordered, then, we remove it.
+			setorder(correlation.table,'...TO.ORDER')
+			correlation.table[,...TO.ORDER:=NULL] #...TO.ORDER is not necessary an more
+		}
 	}
 	
 	#creating a data.table with columns
@@ -97,7 +101,7 @@ sort.data.table.by.backwards.rank<-function(correlation.table,by.column=TRUE,sim
 	if(by.column){return(sorted.table)}
 	#if we are here, we need to transpose the thing
 	sorted.table.t<-data.table(gene.names)
-	setnames(sorted.table.t,1,'idx')
+	setnames(sorted.table.t,1,'name')
 	#browser()
 	for (i in 1:length(gene.names))
 		sorted.table.t[,eval(as.name(i)):=unlist(sorted.table[i,])]
@@ -105,7 +109,7 @@ sort.data.table.by.backwards.rank<-function(correlation.table,by.column=TRUE,sim
 }
 
 
-rank.by.backwards.rank<-function(correlations){
+rank.data.table.by.backwards.rank<-function(correlations){
 	#this function returns the rank of bckw-rank of our gene (row)
 	#in the tester gene's list (column)
 	backwards.rank<-apply(-correlations,2, rank)
@@ -121,7 +125,7 @@ rank.by.backwards.rank<-function(correlations){
 	t(rank.backwards.rank)	
 }
 
-distance.by.backwards.rank<-function(correlations){
+distance.data.table.by.backwards.rank<-function(correlations){
 	backwards.rank<-apply(-correlations,2, rank)
 	rank.backwards.rank<-apply(backwards.rank,1,rank)
 	rownames(rank.backwards.rank)<-rownames(correlations)
