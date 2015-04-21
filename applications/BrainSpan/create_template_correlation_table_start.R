@@ -28,5 +28,5 @@ if (!template.brainspan.corr.table.loaded)
 		correlations[idx==id,eval(as.name(id)):=1]
 	}
 	message('corr table is a diagonal 0/1 now')
-	save(file='template.brainspan.corr.table.Rda',list=c('correlations','gene.index','genes.number'))
+	save(file='template.brainspan.corr.table.Rda',list=c('correlations','gene.index'))
 }
