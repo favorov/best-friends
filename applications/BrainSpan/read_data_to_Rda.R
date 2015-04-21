@@ -1,25 +1,18 @@
-library(data.table)
-log.file.name='corr.min1.prenatal.log'
-corr.snake.name="corr.min1.prenatal.nr.tsv"
-gene.index<-fread(log.file.name)
-setnames(gene.index,1:3,c('idx','gene.id','cnt'))
-gene.idx<-gene.index[,idx]
-#debug
-correlations <- data.table(idx=gene.idx)
-setkey(correlations,idx)
-message('frame is created')
-corr.data<-fread(corr.snake.name)
-setnames(corr.data,1:3,c('idx1','idx2','corr'))
-#curr.idx1 = -1
-#band.start = 1
-#band.end = 0 #inclusive
-#maxindex<-dim(corr.data[1])
-maxindex=100000
-for (i in 1:maxindex)
+source('create_template_correlation_table_start.R')
+#	save(file='template.brainspan.corr.table.Rda',list=c('correlations','gene.index')
+snake<-file(description = 'corr.min1.prenatal.nr.tsv',open='r')
+report.every<-1000000
+i<-0
+while(length(line<-scan(file=snake,nlines=1,what='character'))==3)
 {
-	ind1<-corr.data[i,idx1]
-	ind2<-corr.data[i,idx2]
-	c<-corr.data[i,corr]
+	i<i+1
+	if (i %% report.every == 0)
+		cat(paste0(i,"\n"))
+	ind1<-scan[1]
+	ind2<-scan[2]
+	c<-as,numeric(scan[3])
 	correlations[idx==ind1,eval(as.name(ind2)):=c]
+	correlations[idx==ind2,eval(as.name(ind1)):=c]
 }
-save(file='prenatal.correlations.matrix.Rda',list=c('correlations','gene.index'))
+save(file='prenatal.brainspan.corr.table.Rda',list=c('correlations','gene.index'))
+
