@@ -1,11 +1,11 @@
 library(data.table)
-template.brainspan.corr.table.loaded<-FALSE
-if(file.exists('template.brainspan.corr.table.Rda'))
-	if ('correlations' %in% load('template.brainspan.corr.table.Rda'))
+template.brainspan.corr.frame.loaded<-FALSE
+if(file.exists('template.brainspan.corr.Rda'))
+	if ('correlations' %in% load('template.brainspan.corr.frame.Rda'))
 		if ('data.table' %in% class(correlations))
-			template.brainspan.corr.table.loaded<-TRUE
+			template.brainspan.corr.frame.loaded<-TRUE
 
-if (!template.brainspan.corr.table.loaded)
+if (!template.brainspan.corr.frame.loaded)
 {
 	log.file.name='corr.min1.prenatal.log'
 	corr.snake.name="corr.min1.prenatal.nr.tsv"
@@ -15,8 +15,8 @@ if (!template.brainspan.corr.table.loaded)
 	genes.number<-length(gene.idx)
 	message('index table is created')
 	#debug
-	correlations <- data.table(idx=gene.idx)
-	setkey(correlations,idx)
+	correlations.table <- data.table(idx=gene.idx)
+	setkey(correlations.table,idx)
 	message(paste0('corr table is created, number og genes=',genes.number))
 	report.every<-1000
 	for (i in 1:genes.number)
@@ -24,9 +24,16 @@ if (!template.brainspan.corr.table.loaded)
 		if (i %% report.every == 0)
 			cat(paste0(i,"\n"))
 		id<-gene.idx[i]
-		correlations[,eval(as.name(id)):=rep(0,genes.number)]
-		correlations[idx==id,eval(as.name(id)):=1]
+		correlations.table[,eval(as.name(id)):=rep(0,genes.number)]
+		correlations.table[idx==id,eval(as.name(id)):=1]
 	}
-	message('corr table is a diagonal 0/1 now')
-	save(file='template.brainspan.corr.table.Rda',list=c('correlations','gene.index'))
+	message('identiy table prepared...')
+	correlation.with.names.column<-as.data.frame(correlations.table)
+	rm(correlations.table)
+	message('converted to frame...')
+	correlations<-correlation.with.names.column[,-1] #remove the names
+	message('finalised...')
+	colnames(correlations)<-gene.idx
+	rownames(correlations)<-gene.idx
+	save(file='template.brainspan.corr.frame.Rda',list=c('correlations','gene.index'))
 }
