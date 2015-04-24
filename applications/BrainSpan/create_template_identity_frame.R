@@ -15,26 +15,18 @@ if (!template.brainspan.corr.frame.loaded)
 	genes.number<-length(gene.idx)
 	message('index table is created')
 	#debug
-	correlations.table <- data.table(idx=gene.idx)
-	setkey(correlations.table,idx)
-	message(paste0('corr table is created, number og genes=',genes.number))
 	report.every<-1000
-	for (i in 1:genes.number)
+	message('creating...')
+	correlations <- data.frame(rep(0.,genes.number))
+	for (i in 2:genes.number)
 	{
-		if (i %% report.every == 0)
-			cat(paste0(i,"\n"))
-		id<-gene.idx[i]
-		correlations.table[,eval(as.name(id)):=rep(0,genes.number)]
-		correlations.table[idx==id,eval(as.name(id)):=1]
+		correlations<-rbind(correlations,rep(0.,genes.number))
+		if (i %% report.every == 0) message(i)
 	}
+	message(paste0('corr frame is created, number og genes=',genes.number))
+	for (i in 1:genes.number)
+		correlations[i,i]=1.
 	message('identiy table prepared...')
-	fresh.copy<-copy(correlations.table)
-	rm(correlations.table)
-	correlation.with.names.column<-data.frame(fresh.copy)
-	rm(correlations.table)
-	message('converted to frame...')
-	correlations<-correlation.with.names.column[,-1] #remove the names
-	message('finalised...')
 	colnames(correlations)<-gene.idx
 	rownames(correlations)<-gene.idx
 	save(file='template.brainspan.corr.frame.Rda',list=c('correlations','gene.index'))
