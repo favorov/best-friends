@@ -28,7 +28,9 @@ if (!template.brainspan.corr.frame.loaded)
 		correlations.table[idx==id,eval(as.name(id)):=1]
 	}
 	message('identiy table prepared...')
-	correlation.with.names.column<-as.data.frame(correlations.table)
+	fresh.copy<-copy(correlations.table)
+	rm(correlations.table)
+	correlation.with.names.column<-data.frame(fresh.copy)
 	rm(correlations.table)
 	message('converted to frame...')
 	correlations<-correlation.with.names.column[,-1] #remove the names
@@ -37,5 +39,4 @@ if (!template.brainspan.corr.frame.loaded)
 	rownames(correlations)<-gene.idx
 	save(file='template.brainspan.corr.frame.Rda',list=c('correlations','gene.index'))
 	message('saved..')
-}
-else message("identity frame loaded")
+} else message("identity frame loaded")
