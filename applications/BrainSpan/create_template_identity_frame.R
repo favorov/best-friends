@@ -36,4 +36,6 @@ if (!template.brainspan.corr.frame.loaded)
 	colnames(correlations)<-gene.idx
 	rownames(correlations)<-gene.idx
 	save(file='template.brainspan.corr.frame.Rda',list=c('correlations','gene.index'))
+	message('saved..')
 }
+else message("identity frame loaded")
