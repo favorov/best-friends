@@ -37,30 +37,38 @@ $ head -5 corr.min1.prenatal.nr.tsv
 using std::string;
 using std::vector;
 using std::ostream;
+using std::cout;
 using std::endl;
 
 
-template class T class PairwiseMatrix:public vector < vector <T> >
+template <class T> class PairwiseMatrix : public vector < vector <T> >
 {
 private:
-	CorrelationMatrix<T>
-			(const CorrelationMatrix<T> &);
+	PairwiseMatrix (const PairwiseMatrix &);
 	//copy constructor is forbidden
-	CorrelationMatrix<T> & operator=
-			(const CorrelationMatrix<T> &);
+	PairwiseMatrix & operator= (const PairwiseMatrix &);
 	//copy operator is forbidden
 public:
+	PairwiseMatrix(){};
 	vector<string> names;
 	void setsize(unsigned long nsize)
 	{
-		clear();
+		this->clear();
 		for (unsigned long i=0;i<nsize;i++)
-			push_back(* new vector<T> (nsize));
+			this->push_back(* new vector<T> (nsize));
 	}
-	friend ostream &operator<<( ostream &output, 
-																	 const Distance &D )
-	{ 
-		 output<<
-		 return output;            
-	}
+};
+
+template <class T>
+ostream &operator<<( ostream &output, const PairwiseMatrix<T> &PM )
+{ 
+	 output<<"Size:"<<PM[0].size();
+	 return output;            
+}
+
+int main ()
+{
+	PairwiseMatrix<int> A;
+	A.setsize(5);
+	cout<<A;
 }
