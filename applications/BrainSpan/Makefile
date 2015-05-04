@@ -7,4 +7,5 @@ exename=$(name)
 all: $(exename)
 
 $(exename):$(name).cc
-	g++ $(name).cc -Wall -o $(name) 
+	g++ $(name).cc -Wall -o $(name)
+	chmod 755 $(name)
