@@ -31,14 +31,19 @@ $ head -5 corr.min1.prenatal.nr.tsv
 
 #include <string>
 #include <vector>
+#include <iterator>
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 
 using std::string;
 using std::vector;
 using std::ostream;
+using std::ostream_iterator;
+using std::ifstream;
 using std::cout;
 using std::endl;
+using std::copy;
 
 
 template <class T> class PairwiseMatrix : public vector < vector <T> >
@@ -62,13 +67,41 @@ public:
 template <class T>
 ostream &operator<<( ostream &output, const PairwiseMatrix<T> &PM )
 { 
-	 output<<"Size:"<<PM[0].size();
-	 return output;            
+	ostream_iterator<string> out_strit (output,"\t");
+	copy (PM.names.begin(),PM.names.end(), out_strit);
+	output<<endl;
+	ostream_iterator<T> out_Tit (output,"\t");
+	for (typename PairwiseMatrix<T>::const_iterator vit=PM.begin();vit<PM.end();vit++)
+	{
+		copy(vit->begin(),vit->end(),out_Tit);	
+		output<<endl;
+	}
+	return output;            
 }
 
 int main ()
 {
 	PairwiseMatrix<int> A;
-	A.setsize(5);
+	ifstream is ("corr.min1.prenatal.log");
+	string st;
+	is>>st;is>>st;is>>st;is>>st; //four tokens = first line
+	while(is>>st)
+	{
+		is>>st;
+		A.names.push_back(st);
+		is>>st;
+	}
+	is.close();
+	A.setsize(A.names.size());
+	ifstream isc ("corr.min1.prenatal.nr.tsv");
+	unsigned int i;
+	unsigned int j;
+	double corr;
+	while(isc>>i)
+	{
+		isc>>j;
+		isc>>corr;
+		A[i][j]=corr;
+	}
 	cout<<A;
 }
