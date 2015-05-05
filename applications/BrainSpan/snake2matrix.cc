@@ -42,6 +42,7 @@ using std::ostream;
 using std::ostream_iterator;
 using std::ifstream;
 using std::cout;
+using std::cerr;
 using std::endl;
 using std::copy;
 
@@ -92,16 +93,24 @@ int main ()
 		is>>st;
 	}
 	is.close();
+	cerr<<"Names read..."<<endl;
 	A.setsize(A.names.size());
+	cerr<<"Size set..."<<endl;
 	ifstream isc ("corr.min1.prenatal.nr.tsv");
 	unsigned int i;
 	unsigned int j;
 	double corr;
+	unsigned long count=0;
+	cerr<<"Reading snake..."<<endl;
 	while(isc>>i)
 	{
 		isc>>j;
 		isc>>corr;
 		A[i][j]=corr;
+		count++;
+		if (!(count % 1000000ul)) cerr<<count<<endl;
 	}
+	cerr<<"Read snake ok"<<endl;
 	cout<<A;
+	cerr<<"Saved, done."<<endl;
 }
