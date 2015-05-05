@@ -82,7 +82,7 @@ ostream &operator<<( ostream &output, const PairwiseMatrix<T> &PM )
 
 int main ()
 {
-	PairwiseMatrix<int> A;
+	PairwiseMatrix<float> A;
 	ifstream is ("corr.min1.prenatal.log");
 	string st;
 	is>>st;is>>st;is>>st;is>>st; //four tokens = first line
@@ -97,16 +97,19 @@ int main ()
 	A.setsize(A.names.size());
 	cerr<<"Size set..."<<endl;
 	ifstream isc ("corr.min1.prenatal.nr.tsv");
+	unsigned long count=0;
+	for (unsigned i=0;i<A.names.size();i++)
+		A[i][i]=1.;
+	cerr<<"Reading snake..."<<endl;
 	unsigned int i;
 	unsigned int j;
 	double corr;
-	unsigned long count=0;
-	cerr<<"Reading snake..."<<endl;
 	while(isc>>i)
 	{
 		isc>>j;
 		isc>>corr;
 		A[i][j]=corr;
+		A[j][i]=corr;
 		count++;
 		if (!(count % 1000000ul)) cerr<<count<<endl;
 	}
