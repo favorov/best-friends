@@ -9,8 +9,7 @@ Author@R: c( person("Alexander","Favorov",email = "favorov@sensi.org"),
     )
 Author: Alexander Favorov, Vasily Ramensky, Andrey A. Mironov
 Maintainer: Alexander Favorov <favorov@sensi.org>
-Description: We have a transcription correlation matrix for a lot of genes. We what to know what genes are 
-the best friends for our genes of interest.
+Description: We have a transcription correlation matrix for a lot of genes. We what to know what genes are the best friends for our genes of interest.
 License: Artistic-2.0
 LazyLoad: yes
 Depends:
