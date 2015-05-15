@@ -1,3 +1,6 @@
 We start it as a package just to easy install to R.
 
 0.0.1 - initial version
+0.0.2 - names changed to OrderByBackwardsRank style
+		roxygen2 docs
+		sort is now order (saves memory)

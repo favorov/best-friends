@@ -1,4 +1,4 @@
-.sort.data.table.by.backwards.rank<-function(correlation.table,by.column=TRUE,similarity.measure=TRUE){
+.OrderByBackwardsRank.data.table<-function(correlation.table,by.column=TRUE,similarity.measure=TRUE){
 	#correlations.table is now a data.table with correlations
 	#all colnames are the names (indices) of genes
 	#if the table is square, its structure is 
@@ -89,7 +89,7 @@
 	setnames(sorted.table,1,gene.names[1])
 	#see comment for previuos setname
 	for (i in 2:length(gene.names))
-		sorted.table[,eval(as.name(gene.names[i])):=gene.names[order(backwards.rank.table[i,])]]
+		sorted.table[,eval(as.name(gene.names[i])):=order(backwards.rank.table[i,])]
 	#browser()
 	#apply return the result in columns, so now 'our' is columns
 	#colnames(sort.by.backwards.rank)<-colnames(correlations) 
@@ -109,7 +109,7 @@
 }
 
 
-.rank.data.table.by.backwards.rank<-function(correlation.table,by.column=TRUE,similarity.measure=TRUE){
+.RankByBackwardsRank.data.table<-function(correlation.table,by.column=TRUE,similarity.measure=TRUE){
 	#correlations.table is now a data.table with correlations
 	#all colnames are the names (indices) of genes
 	#if the table is square, its structure is 
@@ -200,7 +200,7 @@
 	setnames(sorted.table,1,gene.names[1])
 	#see comment for previuos setname
 	for (i in 2:length(gene.names))
-		sorted.table[,eval(as.name(gene.names[i])):=gene.names[order(backwards.rank.table[i,])]]
+		sorted.table[,eval(as.name(gene.names[i])):=rank(backwards.rank.table[i,])]
 	#browser()
 	#apply return the result in columns, so now 'our' is columns
 	#colnames(sort.by.backwards.rank)<-colnames(correlations) 
@@ -219,13 +219,20 @@
 	sorted.table.t
 }
 
-.distance.data.table.by.backwards.rank<-function(correlations){
-	backwards.rank<-apply(-correlations,2, rank)
+.DistanceByBackwardsRank.data.table<-function(correlation.table){
+	correlations<-as.data.frame(correlation.table)
+	#not done yet
+	sign <- ifelse(similarity.measure,-1,1)
+	backwards.rank<-apply(sign*correlations,2,rank)
 	rank.backwards.rank<-apply(backwards.rank,1,rank)
 	rownames(rank.backwards.rank)<-rownames(correlations)
 	colnames(rank.backwards.rank)<-colnames(correlations)
 	#it is the same code as for rank.by.backwards.rank
 	#we do not call it to avoid t() twice, just to save time
-	(t(rank.backwards.rank)+rank.backwards.rank-2)/(2*dim(correlations)[1]-2)	
+	maxrank<-dim(correlations)[2]-1
+	tra<-t(rank.backwards.rank)
+	mitra<-min(tra,rank.backwards.rank)
+	matra<-max(tre,rank.backwards.rank)
+	ifelse(matra*2<maxrank,mitra,matra)/(2*maxrank-1)
 }
 
