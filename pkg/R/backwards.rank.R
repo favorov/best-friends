@@ -7,7 +7,7 @@
 #'
 #'Create gene number lists that are orders of genes in ranking by backwards-rank of the genenes correlations matrix.
 #'\code{gene.names[number list]} gives the sorted list of gene nemes
-#'Best friends has the highest order.
+#'Best friends has the lowest order.
 #'
 #'@param correlations is the correlation-like (similarity) matrix to be processed it is supposed to be ranked; it is desribed by \code{similarity.measure} parameter 
 #'@param by.column - if \code{by.column==TRUE} (default) columns of returned object corresponds to tester (our) genes:  if \code{by.column==FALSE}, the rows corrdspond to tester genes 
@@ -48,7 +48,7 @@ OrderByBackwardsRank<-function(correlations,by.column=TRUE,similarity.measure=TR
 #'Creates the matrix of rankes of genes by the backwards ranks in correlation matrix
 #'
 #'@inheritParams OrderByBackwardsRank 
-#'@return \code{matrix} object if \code{correlations} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column (or row, see \code{by.column} parameter description) of the object represet ranks of genes by backwards-rank relation to the tester gene tester gene is column if \code{by.column}; the possible friend of tester gene is row; the higher is the rank, the best is the friend
+#'@return \code{matrix} object if \code{correlations} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column (or row, see \code{by.column} parameter description) of the object represet ranks of genes by backwards-rank relation to the tester gene tester gene is column if \code{by.column}; the possible friend of tester gene is row; the lower is the rank, the better is the friend
 RankByBackwardsRank<-function(correlations,by.column=TRUE,similarity.measure=TRUE){
 	if('data.table' %in% class(correlations))
 		return(.RankByBackwardsRank.data.table(correlations,by.column,similarity.measure))

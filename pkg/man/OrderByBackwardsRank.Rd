@@ -20,6 +20,6 @@ OrderByBackwardsRank(correlations, by.column = TRUE,
 \description{
 Create gene number lists that are orders of genes in ranking by backwards-rank of the genenes correlations matrix.
 \code{gene.names[number list]} gives the sorted list of gene nemes
-Best friends has the highest order.
+Best friends has the lowest order.
 }
 
