@@ -3,8 +3,7 @@
 \name{RankByBackwardsRank}
 \alias{RankByBackwardsRank}
 \title{Rank by backwards rank
-create gene name lists that are sorted by backwards-rank in the correlations matrix
-best friends first}
+Creates the matrix of rankes of genes by the backwards ranks in correlation matrix}
 \usage{
 RankByBackwardsRank(correlations, by.column = TRUE,
   similarity.measure = TRUE)
@@ -15,11 +14,10 @@ RankByBackwardsRank(correlations, by.column = TRUE,
 \item{by.column}{- if \code{by.column==TRUE} (default) columns of returned object corresponds to tester (our) genes:  if \code{by.column==FALSE}, the rows corrdspond to tester genes}
 }
 \value{
-\code{matrix} object if \code{correlations} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column (or row, see \code{by.column} parameter description) of the object is is a list of rankes of backwards ranks of genes by relation to the tester gene (the gene the row is devoted to)
+\code{matrix} object if \code{correlations} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column (or row, see \code{by.column} parameter description) of the object represet ranks of genes by backwards-rank relation to the tester gene tester gene is column if \code{by.column}; the possible friend of tester gene is row; the higher is the rank, the best is the friend
 }
 \description{
 Rank by backwards rank
-create gene name lists that are sorted by backwards-rank in the correlations matrix
-best friends first
+Creates the matrix of rankes of genes by the backwards ranks in correlation matrix
 }
 

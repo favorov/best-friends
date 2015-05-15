@@ -2,10 +2,7 @@
 % Please edit documentation in R/backwards.rank.R
 \name{OrderByBackwardsRank}
 \alias{OrderByBackwardsRank}
-\title{Order by backwards rank
-create gene number lists that are orders of genes in ranking by backwards-rank of the genenes correlations matrix.
-\code{gene.names[number list]} gives the sorted list of gene nemes
-Best friends has the hihest order}
+\title{Order by backwards rank}
 \usage{
 OrderByBackwardsRank(correlations, by.column = TRUE,
   similarity.measure = TRUE)
@@ -18,12 +15,11 @@ OrderByBackwardsRank(correlations, by.column = TRUE,
 \item{similarity.measure;}{if \code{TRUE}, the \code{correlations} matrix is similarity (the larger it is, the closer are the genes); if it is \code{FALSE}, it is distance}
 }
 \value{
-\code{matrix} object if \code{correlations} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column (or row if \code{by.column}, see \code{by.column} parameter description) of the object is is a list of orders of genes as sorted by backwards rank by relation to the tester gene, tester gen is the row
+\code{matrix} object if \code{correlations} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column (or row if \code{by.column}, see \code{by.column} parameter description) of the object is is a list of orders of genes as sorted by backwards rank by relation to the tester gene, tester gen is the column (if \code{by.column})
 }
 \description{
-Order by backwards rank
-create gene number lists that are orders of genes in ranking by backwards-rank of the genenes correlations matrix.
+Create gene number lists that are orders of genes in ranking by backwards-rank of the genenes correlations matrix.
 \code{gene.names[number list]} gives the sorted list of gene nemes
-Best friends has the hihest order
+Best friends has the highest order.
 }
 
