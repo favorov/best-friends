@@ -2,7 +2,8 @@
 % Please edit documentation in R/backwards.rank.R
 \name{sort.by.backwards.rank}
 \alias{sort.by.backwards.rank}
-\title{sort.by.backwards.rank}
+\title{create gene name lists that are sorted by backwards-rank in the correlations matrix
+best friends first}
 \usage{
 \method{sort}{by.backwards.rank}(correlations, by.column = TRUE,
   similarity.measure = TRUE)

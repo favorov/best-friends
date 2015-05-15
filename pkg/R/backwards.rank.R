@@ -3,8 +3,6 @@
 
 #main functions
 
-#'sort.by.backwards.rank
-#'
 #'create gene name lists that are sorted by backwards-rank in the correlations matrix
 #'best friends first
 #'
@@ -46,8 +44,6 @@ sort.by.backwards.rank<-function(correlations,by.column=TRUE,similarity.measure=
 }
 
 
-#'rank.by.backwards.rank
-#'
 #'create gene name lists that are sorted by backwards-rank in the correlations matrix
 #'best friends first
 #'
@@ -73,8 +69,6 @@ rank.by.backwards.rank<-function(correlations,by.column=TRUE,similarity.measure=
 	t(rank.backwards.rank)	
 }
 
-#'distance.by.backwards.rank
-#'
 #'create distance matrix based on the rank-reverse-rank
 #'best friends first
 #'

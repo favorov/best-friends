@@ -2,7 +2,8 @@
 % Please edit documentation in R/backwards.rank.R
 \name{distance.by.backwards.rank}
 \alias{distance.by.backwards.rank}
-\title{distance.by.backwards.rank}
+\title{create distance matrix based on the rank-reverse-rank
+best friends first}
 \usage{
 distance.by.backwards.rank(correlations, similarity.measure = TRUE)
 }
