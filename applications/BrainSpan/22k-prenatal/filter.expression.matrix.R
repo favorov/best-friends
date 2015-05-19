@@ -1,6 +1,6 @@
 library('data.table')
-#express<-fread('expression_matrix.csv')
-#express[,V1:=NULL]
+express<-fread('expression_matrix.csv')
+express[,V1:=NULL]
 samples<-fread('columns_metadata.csv',header=TRUE)
 genes<-fread('rows_metadata.csv',header=TRUE)
 my.gene.ids<-fread('lists/22k-genes.txt',header=FALSE)[,V1]
