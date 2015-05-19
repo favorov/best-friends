@@ -9,9 +9,10 @@ gene.symbols<-genes[,gene_symbol][the.22.k.genes.selector]
 gene.ensemble.ids<-genes[,ensembl_gene_id][the.22.k.genes.selector]
 prenatal.ages<-unique(samples[,age])[1:13]
 prenatal.sample.selector<-samples[,age] %in% prenatal.ages
+prenatal.sample.ids<-samples$column_num[prenatal.sample.selector]
 prenatal.22k.genes.expression<-as.data.frame(express)[the.22.k.genes.selector,prenatal.sample.selector]
 rownames(prenatal.22k.genes.expression)<-gene.ensemble.ids
-colnames(prenatal.22k.genes.expression)<-samples$column_num[prenatal.sample.selector]
+colnames(prenatal.22k.genes.expression)<-prenatal.sample.ids
 save(list=c('prenatal.sample.ids','gene.symbols','gene.ensemble.ids','prenatal.22k.genes.expression'),file='prenatal.22.expression.Rda')
 corr.22k.prenatal<-cor(t(prenatal.22k.genes.expression))
 colnames(corr.22k.prenatal)<-gene.ensemble.ids
