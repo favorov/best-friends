@@ -7,7 +7,6 @@ if (!suppressWarnings(require('gene.best.friends')))
 		library("devtools")
 	}
 	install_github('favorov/gene-friends/pkg')
-	library(devtools)
 	library(gene.best.friends)
 }
 gene.expression<-fread('21-gene.expr.tsv',stringsAsFactors = FALSE,header = TRUE)
