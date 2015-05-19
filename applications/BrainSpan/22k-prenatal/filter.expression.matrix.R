@@ -17,10 +17,10 @@ save(list=c('prenatal.sample.ids','gene.symbols','gene.ensemble.ids','prenatal.2
 corr.22k.prenatal<-cor(t(prenatal.22k.genes.expression))
 colnames(corr.22k.prenatal)<-gene.ensemble.ids
 rownames(corr.22k.prenatal)<-gene.ensemble.ids
-save(list=c('corr.22k.prenatal',file='prenatal.22.correlations.Rda'))
+save(list=c('corr.22k.prenatal'),file='prenatal.22k.correlations.Rda')
 q<-quantile(corr.22k.prenatal)
 q25=q[['25%']]
 q75=q[['75%']]
 med=q[['50%']]
 corr.22k.prenatal.filtered<-ifelse((corr.22k.prenatal<q75 & corr.22k.prenatal> q25),med,corr.22k.prenatal)
-save(list=c('corr.22k.prenatal.filtered'),file='prenatal.22.correlations.filtered.Rda')}
+save(list=c('corr.22k.prenatal.filtered'),file='prenatal.22k.correlations.filtered.Rda')

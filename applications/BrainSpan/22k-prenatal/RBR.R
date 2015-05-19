@@ -9,6 +9,6 @@ if (!suppressWarnings(require('gene.best.friends')))
 	install_github('favorov/gene-friends/pkg')
 	library(gene.best.friends)
 }
-load('prenatal.22.expression.Rda')
+load('prenatal.22k.correlations.Rda')
 order.22k.prenatal<-OrderByBackwardsRank(corr.22k.prenatal)
-save(list='order.22k.prenatal',file='prenatal.22.correlations.Rda')
+save(list='order.22k.prenatal',file='prenatal.22k.order.Rda')
