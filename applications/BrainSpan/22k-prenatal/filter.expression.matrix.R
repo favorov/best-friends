@@ -13,7 +13,7 @@ prenatal.sample.ids<-samples$column_num[prenatal.sample.selector]
 prenatal.22k.genes.expression<-as.data.frame(express)[the.22.k.genes.selector,prenatal.sample.selector]
 rownames(prenatal.22k.genes.expression)<-gene.ensemble.ids
 colnames(prenatal.22k.genes.expression)<-prenatal.sample.ids
-save(list=c('prenatal.sample.ids','gene.symbols','gene.ensemble.ids','prenatal.22k.genes.expression'),file='prenatal.22.expression.Rda')
+save(list=c('prenatal.sample.ids','gene.symbols','gene.ensemble.ids','prenatal.22k.genes.expression'),file='prenatal.22k.expression.Rda')
 corr.22k.prenatal<-cor(t(prenatal.22k.genes.expression))
 colnames(corr.22k.prenatal)<-gene.ensemble.ids
 rownames(corr.22k.prenatal)<-gene.ensemble.ids
