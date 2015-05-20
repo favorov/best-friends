@@ -10,6 +10,7 @@ if (!suppressWarnings(require('gene.best.friends')))
 	library(gene.best.friends)
 }
 library(Matrix)
+library(data.table)
 load('prenatal.22k.correlations.Rda')
 order.22k.prenatal<-OrderByBackwardsRank(corr.22k.prenatal)
 save(list='order.22k.prenatal',file='prenatal.22k.order.Rda')
