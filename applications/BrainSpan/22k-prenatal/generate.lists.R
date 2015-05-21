@@ -12,4 +12,4 @@ friends.LINC01122.RBR.filtered.5<-gene.ensemble.ids[order.22k.prenatal.filtered[
 friends.LINC01122.naive.1<-gene.ensemble.ids[order(corr.22k.prenatal[our.gene.id,],decreasing=TRUE)[1:list.1.length]]
 friends.LINC01122.naive.5<-gene.ensemble.ids[order(corr.22k.prenatal[our.gene.id,],decreasing=TRUE)[1:list.5.length]]
 listnames<-ls()[grep('friends.LINC01122',ls())]
-lapply(listnames,function(name) {sink(paste0(name,'.txt'));cat(eval(as.name(name)),sep="\n");sink();NULL}
+lapply(listnames,function(name) {sink(paste0(name,'.txt'));cat(eval(as.name(name)),sep="\n");sink();NULL})
