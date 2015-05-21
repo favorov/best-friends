@@ -93,8 +93,8 @@ DistanceByBackwardsRank<-function(correlations,similarity.measure=TRUE)
 	#we do not call it to avoid t() twice, just to save time
 	maxrank<-dim(correlations)[2]-1
 	tra<-t(rank.backwards.rank)
-	mitra<-min(tra,rank.backwards.rank)
-	matra<-max(tra,rank.backwards.rank)
+	mitra<-pmin(tra,rank.backwards.rank)
+	matra<-pmax(tra,rank.backwards.rank)
 	ifelse(matra*2<maxrank,mitra,matra)/(2*maxrank-1)
 }
 

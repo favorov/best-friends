@@ -28,25 +28,34 @@ Now, we want to rank all genes $\{G \backslash g_i\}$ by their specific concorda
 Now, it's easy to define the best friends (the most concordant genes) of gene $g_i$. The higher is the $F(j|i)$, the better is the friend. The best $N$ friends of $g_i$ is the top-$N$ of the ordered $F(j|i)$ list.
 
 ```{r source, echo=FALSE}
-source('backwards.rank.R')
+if (!suppressWarnings(require('gene.best.friends')))
+{
+	if (!suppressWarnings(require('devtools')))
+	{
+		source("http://bioconductor.org/biocLite.R")
+		biocLite("devtools")
+		library("devtools")
+	}
+	install_github('favorov/gene-friends/pkg')
+	library(gene.best.friends)
+}
 ```
 
 ### Code and examples in R
 
 #### Sorting by backwards ranking
 
-First, we need a function that arrange (sort) tester genes by the backwards ranking. The input is square matrix with the correaltion. The output is the matrix where the rows are named by genes and each row contain sorted set of friends of the row-naming gene, the best is first.
-
-Here is the code of the function:
-```{r show.sort.code}
-sort.by.backwards.rank
-```
+First, we need a function that arrange (sort) tester genes by the backwards ranking. The input is square matrix with the correaltion. The output is the matrix where the rows are named by genes and each row contain indices of sorted set (indices) of friends of the row-naming gene, the best is first.
 
 And now, let's prepare a simple example. We have 5 genes (A,B,...D). A is strongly correlateds with everybody; B and C has correlation 0.75, all others are more or less independent. Naive approach would idetify A as best frind for B and C.
 
 ```{r}
 correl=matrix(
-	c(1,0.9,0.9,0.9,0.9,0.9,1,0.75,0.2,0.25,0.9,0.75,1,0.20,0.22,0.9,0.2,0.2,1,0.15,0.9,0.25,.22,.15,1),
+	c(1.00, 0.95, 0.92, 0.91, 0.97,
+		0.95, 1.00, 0.75, 0.20, 0.25,
+		0.92, 0.75, 1.00, 0.20, 0.22,
+		0.91, 0.20, 0.20, 1.00, 0.15,
+		0.97, 0.25, 0.22, 0.15, 1.00),
 	ncol=5,byrow=TRUE
 )
 gene.names<-c('A','B','C','D','E')
@@ -58,7 +67,7 @@ correl
 Applying the function to our example.
 
 ```{r}
-genelists<-sort.by.backwards.rank(correl)
+genelists<-OrderByBackwardsRank(correl)
 genelists
 ```
 
@@ -69,15 +78,10 @@ B and C are mutually best friends (see column 2 of B and C row), it is exactly w
 Sometimes, it is necessary to have ranks $F(i|j)$ for all genes rather than the ordered list. This is the version of the code.
 Again, the input is square matrix with the correaltion. The output is the matrix of the ranks-of-reverse-ranks that order the genes by how freindly are they to the gene that is represented by a row. Row is 'our' gene, column is the tester. The matrix is asymmetric.
 
-Here is the code of the function:
-```{r show.rank.code}
-rank.by.backwards.rank
-```
-
 Let's apply the functions to our example.
 
 ```{r}
-ranks<-rank.by.backwards.rank(correl)
+ranks<-RankByBackwardsRank(correl)
 ranks
 ```
 
@@ -85,15 +89,10 @@ ranks
 
 To apply most standard clustering techniques, we need a symmetric distance with self-distance = 0. It can be done if we add the direct and reverse ranks form previous function (A for B and B for A), decrease them both by 1 to achieve |GG|=0 for any gene G and, eventually, map it on [0,1] interval. We can also treat this distance as a kind of p-value is we suppose that the rank is distributed uniformly.  
 
-Code of the function:
-```{r show.distance.code}
-distance.by.backwards.rank
-```
-
 Applying to our example:
 
 ```{r}
-distance<-distance.by.backwards.rank(correl)
+distance<-DistanceByBackwardsRank(correl)
 distance
 ```
 
