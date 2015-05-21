@@ -13,7 +13,7 @@ for (gwas.gene in gwas.genes) {
   friends<-gene.symbols[order.22k.prenatal[,gwas.gene.no][1:list.5.length]]
   gwas.genes.by.me<-setdiff(gwas.genes,c(gwas.gene))
   my.gwas.friends<-gwas.genes.by.me[gwas.genes.by.me %in% friends]
-  cat(paste(gwas.gene,my.gwas.friends,sep=' -> '),sep='\n')
+  cat(paste(gwas.gene,my.gwas.friends,sep=' -> '),sep=';\n')
 }
 sink()
 
@@ -23,7 +23,7 @@ for (gwas.gene in gwas.genes) {
   friends<-gene.symbols[order.22k.prenatal.filtered[,gwas.gene.no][1:list.5.length]]
   gwas.genes.by.me<-setdiff(gwas.genes,c(gwas.gene))
   my.gwas.friends<-gwas.genes.by.me[gwas.genes.by.me %in% friends]
-  cat(paste(gwas.gene,my.gwas.friends,sep=' -> '),sep='\n')
+  cat(paste(gwas.gene,my.gwas.friends,sep=' -> '),sep=';\n')
 }
 sink()
 
@@ -33,6 +33,6 @@ for (gwas.gene in gwas.genes) {
   friends<-gene.symbols[order(corr.22k.prenatal[gwas.gene.no,],decreasing=TRUE)[1:list.5.length]]
   gwas.genes.by.me<-setdiff(gwas.genes,c(gwas.gene))
   my.gwas.friends<-gwas.genes.by.me[gwas.genes.by.me %in% friends]
-  cat(paste(gwas.gene,my.gwas.friends,sep=' -> '),sep='\n')
+  cat(paste(gwas.gene,my.gwas.friends,sep=' -> '),sep=';\n')
 }
 sink()
