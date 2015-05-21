@@ -69,8 +69,8 @@ img {
 <h3>20 May 2015</h3>
 <!-- cache is off, we save all the neccessary things in Rda -->
 </div>
-<div id="gene-rank-and-reverse-double-rank" class="section level3">
-<h3>Gene rank and reverse (double) rank</h3>
+<div id="gene-rank-and-rank-reverse-rank" class="section level3">
+<h3>Gene rank and rank-reverse-rank</h3>
 <p>Suppose we have a kind of gene-to-gene correlation matrix, e.g. correlation of expression. The more the genes are alike, the lager the value is. Actually, the following holds for any kind of comparable value, we will refer to it as a correlation just to be more definite. We want to find the list of best ‘friends’ for each (or for some particular) gene (our gene). Friends are the genes (they) that are the closest to our gene. The naÃ¯ve approach would be to rank all the genes by our-to-him correlation. Its drawback is that we cannot tell the genes that are correlated with everything from genes that are correlated specifically with our gene. A kind of normalization could be applied to the correlation vectors of â<U+0080><U+0098>theyâ<U+0080><U+0099> genes, but it is a way to prefer the genes that have a few friend for those that have a lot instead of to prefer specific friends of our gene for those that are friends of everybody, and it is not exactly the same thing. In addition, the result of ranking of normalized data can depend on the normalization procedure more than on the initial data.</p>
 <p>The rank-backwards-rank (RBR) approach we propose here is based on a simple proposition that for a gene that is a good friend of our gene (to be more formal, it is specifically correlated with our gene), the rank of our gene in the tested gene’s correlations list is to be rather high. Otherwise, if the tested gene is a friend-of-everybody, our gene’s rank in his list can be quite low, while the tester’s gene rank in our list is still high. Thus, we gather the the ‘where we are in his list’ ranks and then we sort this ranks to create the best-friends list.</p>
 </div>
@@ -87,10 +87,10 @@ img {
 <p>First, we need a function that arrange (sort) tester genes by the backwards ranking. The input is square matrix with the correaltion. The output is the matrix where the rows are named by genes and each row contain indices of sorted set (indices) of friends of the row-naming gene, the best is first.</p>
 <p>And now, let’s prepare a simple example. We have 5 genes (A,B,…D). A is strongly correlateds with everybody; B and C has correlation 0.75, all others are more or less independent. Naive approach would idetify A as best frind for B and C.</p>
 <pre class="r"><code>correl=matrix(
-    c(1.00, 0.95, 0.92, 0.91, 0.97,
+    c(1.00, 0.95, 0.92, 0.96, 0.97,
         0.95, 1.00, 0.75, 0.20, 0.25,
         0.92, 0.75, 1.00, 0.20, 0.22,
-        0.91, 0.20, 0.20, 1.00, 0.15,
+        0.96, 0.20, 0.20, 1.00, 0.15,
         0.97, 0.25, 0.22, 0.15, 1.00),
     ncol=5,byrow=TRUE
 )
@@ -99,20 +99,29 @@ colnames(correl)&lt;-gene.names
 rownames(correl)&lt;-gene.names
 correl</code></pre>
 <pre><code>##      A    B    C    D    E
-## A 1.00 0.95 0.92 0.91 0.97
+## A 1.00 0.95 0.92 0.96 0.97
 ## B 0.95 1.00 0.75 0.20 0.25
 ## C 0.92 0.75 1.00 0.20 0.22
-## D 0.91 0.20 0.20 1.00 0.15
+## D 0.96 0.20 0.20 1.00 0.15
 ## E 0.97 0.25 0.22 0.15 1.00</code></pre>
 <p>Applying the function to our example.</p>
-<pre class="r"><code>genelists&lt;-OrderByBackwardsRank(correl)
-genelists</code></pre>
+<pre class="r"><code>ranklists&lt;-OrderByBackwardsRank(correl)
+ranklists</code></pre>
 <pre><code>##      A B C D E
 ## [1,] 1 2 3 4 5
-## [2,] 2 1 2 1 1
-## [3,] 3 3 4 2 2
-## [4,] 4 5 1 3 3
-## [5,] 5 4 5 5 4</code></pre>
+## [2,] 2 3 2 1 1
+## [3,] 3 5 4 2 2
+## [4,] 4 4 5 3 3
+## [5,] 5 1 1 5 4</code></pre>
+<p>We want to see gene names rather than indices:</p>
+<pre class="r"><code>genelists&lt;-apply(ranklists,2,function(col) gene.names[col])
+genelists</code></pre>
+<pre><code>##      A   B   C   D   E  
+## [1,] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot;
+## [2,] &quot;B&quot; &quot;C&quot; &quot;B&quot; &quot;A&quot; &quot;A&quot;
+## [3,] &quot;C&quot; &quot;E&quot; &quot;D&quot; &quot;B&quot; &quot;B&quot;
+## [4,] &quot;D&quot; &quot;D&quot; &quot;E&quot; &quot;C&quot; &quot;C&quot;
+## [5,] &quot;E&quot; &quot;A&quot; &quot;A&quot; &quot;E&quot; &quot;D&quot;</code></pre>
 <p>B and C are mutually best friends (see column 2 of B and C row), it is exactly what we want to see. The first column is trivial: every gene is the best friend to itself.</p>
 </div>
 <div id="ranking-by-backwards-ranking" class="section level4">
@@ -121,12 +130,12 @@ genelists</code></pre>
 <p>Let’s apply the functions to our example.</p>
 <pre class="r"><code>ranks&lt;-RankByBackwardsRank(correl)
 ranks</code></pre>
-<pre><code>##     A B   C   D   E
-## A 1.0 3 4.5 3.5 2.0
-## B 3.5 1 2.0 3.5 3.5
-## C 3.5 3 1.0 3.5 3.5
-## D 3.5 5 3.0 1.0 5.0
-## E 3.5 3 4.5 3.5 1.0</code></pre>
+<pre><code>##     A   B C D   E
+## A 1.0 5.0 5 2 2.0
+## B 3.5 1.0 2 4 3.5
+## C 3.5 2.5 1 4 3.5
+## D 3.5 4.0 3 1 5.0
+## E 3.5 2.5 4 4 1.0</code></pre>
 </div>
 <div id="distance-by-backwards-ranking" class="section level4">
 <h4>Distance by backwards ranking</h4>
@@ -135,11 +144,11 @@ ranks</code></pre>
 <pre class="r"><code>distance&lt;-DistanceByBackwardsRank(correl)
 distance</code></pre>
 <pre><code>##           A         B         C         D         E
-## A 0.1428571 0.5000000 0.6428571 0.5000000 0.5000000
-## B 0.5000000 0.1428571 0.4285714 0.7142857 0.5000000
-## C 0.6428571 0.4285714 0.1428571 0.5000000 0.6428571
-## D 0.5000000 0.7142857 0.5000000 0.1428571 0.7142857
-## E 0.5000000 0.5000000 0.6428571 0.7142857 0.1428571</code></pre>
+## A 0.1428571 0.7142857 0.7142857 0.5000000 0.5000000
+## B 0.7142857 0.1428571 0.3571429 0.5714286 0.5000000
+## C 0.7142857 0.3571429 0.1428571 0.5714286 0.5714286
+## D 0.5000000 0.5714286 0.5714286 0.1428571 0.7142857
+## E 0.5000000 0.5000000 0.5714286 0.7142857 0.1428571</code></pre>
 </div>
 </div>
 </div>

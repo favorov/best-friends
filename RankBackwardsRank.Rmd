@@ -12,7 +12,7 @@ Alexander Favorov
 <!-- cache is off, we save all the neccessary things in Rda -->
 
 
-### Gene rank and reverse (double) rank
+### Gene rank and rank-reverse-rank
 
 Suppose we have a kind of gene-to-gene correlation matrix, e.g. correlation of expression. The more the genes are alike, the lager the value is. Actually, the following holds for any kind of comparable value, we will refer to it as a correlation just to be more definite. We want to find the list of best 'friends' for each (or for some particular) gene (our gene). Friends are the genes (they) that are the closest to our gene. The naïve approach would be to rank all the genes by our-to-him correlation. Its drawback is that we cannot tell the genes that are correlated with everything from genes that are correlated specifically with our gene. A kind of normalization could be applied to the correlation vectors of ‘they’ genes, but it is a way to prefer the genes that have a few friend for those that have a lot instead of to prefer specific friends of our gene for those that are friends of everybody, and it is not exactly the same thing. In addition, the result of ranking of normalized data can depend on the normalization procedure more than on the initial data.
 
@@ -51,10 +51,10 @@ And now, let's prepare a simple example. We have 5 genes (A,B,...D). A is strong
 
 ```{r}
 correl=matrix(
-	c(1.00, 0.95, 0.92, 0.91, 0.97,
+	c(1.00, 0.95, 0.92, 0.96, 0.97,
 		0.95, 1.00, 0.75, 0.20, 0.25,
 		0.92, 0.75, 1.00, 0.20, 0.22,
-		0.91, 0.20, 0.20, 1.00, 0.15,
+		0.96, 0.20, 0.20, 1.00, 0.15,
 		0.97, 0.25, 0.22, 0.15, 1.00),
 	ncol=5,byrow=TRUE
 )
@@ -67,7 +67,14 @@ correl
 Applying the function to our example.
 
 ```{r}
-genelists<-OrderByBackwardsRank(correl)
+ranklists<-OrderByBackwardsRank(correl)
+ranklists
+```
+
+We want to see gene names rather than indices:
+
+```{r}
+genelists<-apply(ranklists,2,function(col) gene.names[col])
 genelists
 ```
 
