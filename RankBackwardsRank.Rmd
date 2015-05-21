@@ -94,7 +94,7 @@ ranks
 
 #### Distance by backwards ranking
 
-To apply most standard clustering techniques, we need a symmetric distance with self-distance = 0. It can be done if we add the direct and reverse ranks form previous function (A for B and B for A), decrease them both by 1 to achieve |GG|=0 for any gene G and, eventually, map it on [0,1] interval. We can also treat this distance as a kind of p-value is we suppose that the rank is distributed uniformly.  
+To apply most standard clustering techniques, we need a symmetric distance with self-distance = 0. We can map RBR ranks $F(j|i)$ and $F(i|j)$ on $[0..1]$ by dividing then by $k$ and then choose more marginal of then (upper if they a cloase to 1 or lower is they are close to 0).
 
 Applying to our example:
 
