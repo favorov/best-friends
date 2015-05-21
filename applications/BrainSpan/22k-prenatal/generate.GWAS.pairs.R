@@ -38,7 +38,7 @@ sink()
 sink('GWAS.naive.pairs.txt')
 for (gwas.gene in gwas.genes) {
   gwas.gene.no<-which(gwas.gene==gene.symbols)
-  friends<-gene.symbols[order.22k.prenatal.filtered[,gwas.gene.no][1:list.5.length]]
+  friends<-gene.symbols[order(corr.22k.prenatal[our.gene.id,],decreasing=TRUE)[1:list.5.length]]
   gwas.genes.by.me<-setdiff(gwas.genes,c(gwas.gene))
   my.gwas.friends<-gwas.genes.by.me[gwas.genes.by.me %in% friends]
   cat(paste(gwas.gene,my.gwas.friends,sep=' -> '),sep='\n')
