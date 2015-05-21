@@ -1,11 +1,11 @@
 Package: gene.best.friends
 Type: Package
 Title: Genes That Are Best Friends package
-Version: 0.0.2
-Date: 2015-05-15
+Version: 0.0.3
+Date: 2015-05-21
 Author@R: c( person("Alexander","Favorov",email = "favorov@sensi.org"),
-    person("Vasily","J.","Fertig", email="ejfertig@jhmi.edu"),
-    person("Andrey","A.","Mironov", email="dgaykal1@jhmi.edu")
+    person("Vasily","Ramensky", email="ramensky@gmail.com "),
+    person("Andrey","A.","Mironov", email="mironov@bioinf.fbb.msu.ru ")
     )
 Author: Alexander Favorov, Vasily Ramensky, Andrey A. Mironov
 Maintainer: Alexander Favorov <favorov@sensi.org>
