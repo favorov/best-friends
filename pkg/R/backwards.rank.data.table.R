@@ -84,7 +84,7 @@
 	#now, for each 'our' gene (column), we prepare 
 	#the list of names of testers ordered by
 	#rank of 'our' gene in the tester's list 
-	sorted.table<-data.table(gene.names[order(backwards.rank.table[1,])])
+	sorted.table<-data.table(order(backwards.rank.table[1,]))
 	#it means: first row, but no first (name) element
 	setnames(sorted.table,1,gene.names[1])
 	#see comment for previuos setname
@@ -195,7 +195,7 @@
 	#now, for each 'our' gene (column), we prepare 
 	#the list of names of testers ordered by
 	#rank of 'our' gene in the tester's list 
-	sorted.table<-data.table(gene.names[order(backwards.rank.table[1,])])
+	sorted.table<-data.table(rank(backwards.rank.table[1,]))
 	#it means: first row, but no first (name) element
 	setnames(sorted.table,1,gene.names[1])
 	#see comment for previuos setname
