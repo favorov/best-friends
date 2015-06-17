@@ -97,4 +97,24 @@ DistanceByBackwardsRank<-function(correlations,similarity.measure=TRUE)
 	matra<-pmax(tra,rank.backwards.rank)
 	ifelse(matra*2<maxrank,mitra,matra)/(2*maxrank-1)
 }
+#'backwards rank
+#'
+#'The simplest function of the family, just rank data in columns and return
+#' it in columns if by \code{by.column==TRUE}
+#'
+#'@inheritParams OrderByBackwardsRank 
+#'@return \code{matrix} object if \code{correlations} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column (or row if \code{by.column}, see \code{by.column} parameter description) of the object is ranks in columns of corelations matrix 
+BackwardsRank<-function(correlations,by.column=TRUE,similarity.measure=TRUE){
+	
+	if('data.table' %in% class(correlations))
+		return(.BackwardsRank.data.table(correlations,by.column,similarity.measure))
+	#it is not data.table, go on	
+	sign <- ifelse(similarity.measure,-1,1)
+	
+	backwards.rank<-apply(sign*correlations,2, rank)
+	if(by.column) return(backwards.rank)
+	#we want to have our genes in rows, so we transpose
+	t(backwards.rank)	
+}
+
 
