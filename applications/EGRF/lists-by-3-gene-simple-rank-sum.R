@@ -9,11 +9,10 @@ if (!suppressWarnings(require('gene.best.friends')))
 	install_github('favorov/gene-friends/pkg')
 	library(gene.best.friends)
 }
-
 load('HaCaT.TFGene.TrtDiff.RData')
 HaCaT.Corr.Spearman.Diff<-cor(t(HaCaT.TFGene.TrtDiff),method = 'spearman')
 gene.names<-colnames(HaCaT.Corr.Spearman.Diff)
-backwards.ranks<-apply(-1*HaCaT.Corr.Spearman.Diff,2, rank)
+backwards.ranks<-BackwardsRank(HaCaT.Corr.Spearman.Diff)
 order.to.three<-sapply(gene.names,function(g) backwards.ranks[g,'EGFR']+backwards.ranks[g,'ERBB2']+backwards.ranks[g,'ERBB3'])
 load('TRANSFAC_Genes_2014.Rda')
 gene.names<-setdiff(gene.names,c('EGFR','ERBB2','ERBB3'))
