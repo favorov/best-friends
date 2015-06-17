@@ -4,3 +4,5 @@ We start it as a package just to easy install to R.
 0.0.2 - names changed to OrderByBackwardsRank style
 		roxygen2 docs
 		sort is now order (saves memory)
+0.0.3 - all the names changed. data.table version added
+0.0.4 - simple BackwardsRank added

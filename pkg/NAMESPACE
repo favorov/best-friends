@@ -1,1 +1,1 @@
-export('OrderByBackwardsRank','RankByBackwardsRank','DistanceByBackwardsRank')
+export('OrderByBackwardsRank','RankByBackwardsRank','DistanceByBackwardsRank','BackwardsRank')

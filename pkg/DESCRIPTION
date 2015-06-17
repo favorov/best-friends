@@ -1,8 +1,8 @@
 Package: gene.best.friends
 Type: Package
 Title: Genes That Are Best Friends package
-Version: 0.0.3
-Date: 2015-05-21
+Version: 0.0.4
+Date: 2015-06-17
 Author@R: c( person("Alexander","Favorov",email = "favorov@sensi.org"),
     person("Vasily","Ramensky", email="ramensky@gmail.com "),
     person("Andrey","A.","Mironov", email="mironov@bioinf.fbb.msu.ru ")
