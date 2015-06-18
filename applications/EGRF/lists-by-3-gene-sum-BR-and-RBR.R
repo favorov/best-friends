@@ -21,7 +21,7 @@ friend.to.three<-RBRs[,'EGFR']+RBRs[,'ERBB2']+RBRs[,'ERBB3']
 
 load('TRANSFAC_Genes_2014.Rda')
 gene.names<-setdiff(gene.names,c('EGFR','ERBB2','ERBB3'))
-TRANSFAC.p.values.BR<-sapply(TF2Gene,function(TF.list){
+TRANSFAC.p.values.3genes.BR<-sapply(TF2Gene,function(TF.list){
 		in.list=intersect(TF.list,gene.names)
 		out.list=setdiff(gene.names,in.list)
 		if(length(in.list)==0 || length(out.list)==0) return(NA)
@@ -29,7 +29,7 @@ TRANSFAC.p.values.BR<-sapply(TF2Gene,function(TF.list){
 	}
 )
 
-TRANSFAC.p.values.RBR<-sapply(TF2Gene,function(TF.list){
+TRANSFAC.p.values.3genes.RBR<-sapply(TF2Gene,function(TF.list){
 		in.list=intersect(TF.list,gene.names)
 		out.list=setdiff(gene.names,in.list)
 		if(length(in.list)==0 || length(out.list)==0) return(NA)
@@ -37,4 +37,4 @@ TRANSFAC.p.values.RBR<-sapply(TF2Gene,function(TF.list){
 	}
 )
 
-save(file='TRANSFAC_p_values.Rda',list=c('TRANSFAC.p.values.BR','TRANSFAC.p.values.RBR'))
+save(file='TRANSFAC_p_values_3_genes.Rda',list=c('TRANSFAC.p.values.3genes.BR','TRANSFAC.p.values.3genes.RBR'))
