@@ -65,8 +65,8 @@ img {
 <h1>What genes are connected with our genes: rank of backward ranks</h1>
 <div id="alexander-favorov" class="section level2">
 <h2>Alexander Favorov</h2>
-<div id="may-2015" class="section level3">
-<h3>21 May 2015</h3>
+<div id="jun-2015" class="section level3">
+<h3>24 Jun 2015</h3>
 <!-- cache is off, we save all the neccessary things in Rda -->
 </div>
 <div id="gene-rank-and-rank-reverse-rank" class="section level3">
@@ -139,7 +139,7 @@ ranks</code></pre>
 </div>
 <div id="distance-by-backwards-ranking" class="section level4">
 <h4>Distance by backwards ranking</h4>
-<p>To apply most standard clustering techniques, we need a symmetric distance with self-distance = 0. We can map RBR ranks <span class="math">\(F(j|i)\)</span> and <span class="math">\(F(i|j)\)</span> on <span class="math">\([0..1]\)</span> and then choose more marginal of then (upper if they a cloase to 1 or lower is they are close to 0).</p>
+<p>To apply most standard clustering techniques, we need a symmetric distance with self-distance = 0. We can map RBR ranks <span class="math">\(F(j|i)\)</span> and <span class="math">\(F(i|j)\)</span> on <span class="math">\([0..1]\)</span> by dividing then by <span class="math">\(k\)</span> and then choose more marginal of then (upper if they a cloase to 1 or lower is they are close to 0).</p>
 <p>Applying to our example:</p>
 <pre class="r"><code>distance&lt;-DistanceByBackwardsRank(correl)
 distance</code></pre>
