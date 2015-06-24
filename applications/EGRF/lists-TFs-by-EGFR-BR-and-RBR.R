@@ -14,26 +14,27 @@ HaCaT.Corr.Spearman.Diff<-cor(t(HaCaT.TFGene.TrtDiff),method = 'spearman')
 gene.names<-colnames(HaCaT.Corr.Spearman.Diff)
 
 backwards.ranks<-BackwardsRank(HaCaT.Corr.Spearman.Diff)
-order.to.three<-backwards.ranks[,'EGFR']+backwards.ranks[,'ERBB2']+backwards.ranks[,'ERBB3']
+BR<-backwards.ranks[,'EGFR']
 
 RBRs<-RankByBackwardsRank(HaCaT.Corr.Spearman.Diff)
-friend.to.three<-RBRs[,'EGFR']+RBRs[,'ERBB2']+RBRs[,'ERBB3']
+RBR<-RBRs[,'EGFR']
 
 load('TRANSFAC_Genes_2014.Rda')
-gene.names<-setdiff(gene.names,c('EGFR','ERBB2','ERBB3'))
-TRANSFAC.p.values.3genes.BR<-sapply(TF2Gene,function(TF.list){
+gene.names<-setdiff(gene.names,c('EGFR'))
+
+TRANSFAC.p.values.EGFR.BR<-sapply(TF2Gene,function(TF.list){
 		in.list=intersect(TF.list,gene.names)
 		out.list=setdiff(gene.names,in.list)
 		if(length(in.list)==0 || length(out.list)==0) return(NA)
-		wilcox.test(order.to.three[in.list],order.to.three[out.list])$p.value
+		wilcox.test(BR[in.list],BR[out.list])$p.value
 	}
 )
 
-TRANSFAC.p.values.3genes.RBR<-sapply(TF2Gene,function(TF.list){
+TRANSFAC.p.values.EGFR.RBR<-sapply(TF2Gene,function(TF.list){
 		in.list=intersect(TF.list,gene.names)
 		out.list=setdiff(gene.names,in.list)
 		if(length(in.list)==0 || length(out.list)==0) return(NA)
-		wilcox.test(friend.to.three[in.list],friend.to.three[out.list])$p.value
+		wilcox.test(RBR[in.list],RBR[out.list])$p.value
 	}
 )
 
