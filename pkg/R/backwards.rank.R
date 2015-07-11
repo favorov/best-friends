@@ -1,5 +1,5 @@
 #gene-best-friends library
-#A. Favorov, V. Ramensky, A. Mironov 2014
+#A. Favorov, V. Ramensky, A. Mironov 2014-2015
 
 #main functions
 
@@ -95,7 +95,7 @@ DistanceByBackwardsRank<-function(correlations,similarity.measure=TRUE)
 	tra<-t(rank.backwards.rank)
 	mitra<-pmin(tra,rank.backwards.rank)
 	matra<-pmax(tra,rank.backwards.rank)
-	ifelse(maxrank-matra<mitra-1,matra,mitra)/maxrank
+	ifelse(maxrank-matra<mitra-1,matra,mitra-1)/maxrank
 }
 #'backwards rank
 #'
