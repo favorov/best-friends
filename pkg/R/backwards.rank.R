@@ -13,6 +13,7 @@
 #'@param by.column - if \code{by.column==TRUE} (default) columns of returned object corresponds to tester (our) genes:  if \code{by.column==FALSE}, the rows corrdspond to tester genes 
 #'@param similarity.measure; if \code{TRUE}, the \code{correlations} matrix is similarity (the larger it is, the closer are the genes); if it is \code{FALSE}, it is distance
 #'@return \code{matrix} object if \code{correlations} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column (or row if \code{by.column}, see \code{by.column} parameter description) of the object is is a list of orders of genes as sorted by backwards rank by relation to the tester gene, tester gen is the column (if \code{by.column})
+#'@export
 OrderByBackwardsRank<-function(correlations,by.column=TRUE,similarity.measure=TRUE){
 	
 	if('data.table' %in% class(correlations))
@@ -49,6 +50,7 @@ OrderByBackwardsRank<-function(correlations,by.column=TRUE,similarity.measure=TR
 #'
 #'@inheritParams OrderByBackwardsRank 
 #'@return \code{matrix} object if \code{correlations} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column (or row, see \code{by.column} parameter description) of the object represet ranks of genes by backwards-rank relation to the tester gene tester gene is column if \code{by.column}; the possible friend of tester gene is row; the lower is the rank, the better is the friend
+#'@export
 RankByBackwardsRank<-function(correlations,by.column=TRUE,similarity.measure=TRUE){
 	if('data.table' %in% class(correlations))
 		return(.RankByBackwardsRank.data.table(correlations,by.column,similarity.measure))
@@ -79,6 +81,7 @@ RankByBackwardsRank<-function(correlations,by.column=TRUE,similarity.measure=TRU
 #'@param similarity.measure; if \code{TRUE}, the measure in the matrix is similarity (the larger it is, the closer are the genes); if it is \code{FALSE}, it is distance
 #'
 #'@return \code{matrix} object if \code{correlations} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; the return is new distance matrix 
+#'@export
 DistanceByBackwardsRank<-function(correlations,similarity.measure=TRUE)
 {
 	if('data.table' %in% class(correlations))
@@ -104,6 +107,7 @@ DistanceByBackwardsRank<-function(correlations,similarity.measure=TRUE)
 #'
 #'@inheritParams OrderByBackwardsRank 
 #'@return \code{matrix} object if \code{correlations} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column (or row if \code{by.column}, see \code{by.column} parameter description) of the object is ranks in columns of corelations matrix 
+#'@export
 BackwardsRank<-function(correlations,by.column=TRUE,similarity.measure=TRUE){
 	
 	if('data.table' %in% class(correlations))
