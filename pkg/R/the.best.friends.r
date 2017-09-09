@@ -61,7 +61,7 @@ OrderByBestFriendOf<-function(friendship){
 	order.by.best.friends.rank<-apply(reflexive.ranks,1,order, decreasing=TRUE)
 	#apply return the result in columns, so now 'our' is columns
 	#not is is trasnposed again
-	#best/heaviest are to have lowerst order
+	#best/heaviest are to the first, so order is decreasing
 	colnames(order.by.best.friends.rank)<-colnames(friendship) 
 	order.by.best.friends.rank
 }
