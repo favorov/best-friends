@@ -20,14 +20,14 @@ RankByBestFriendOf<-function(friendship){
 		
 	#columns are A, and rows are B
 	#we rank b's for each b
-	reflexive.ranks<-apply(friendship,1, frank)
+	reflexive.ranks<-apply(friendship,1, data.table::frank)
 	#we applied ranking row-by-row; A's were ranked in each row,
 	#and apply transposes, so now B are columns
 	#and and rows are A and they are ranked (upper rank is highest) 
 	
 	#now, we select a's and rank the a's ranks for each b
 	#so, row-by-row again
-	rank.by.best.friends.rank<-apply(reflexive.ranks,1,frank)
+	rank.by.best.friends.rank<-apply(reflexive.ranks,1, data.table::frank)
 	#apply return the result in columns, so now 'our' is columns
 	#not is is trasnposed again
 	colnames(rank.by.best.friends.rank)<-colnames(friendship) 
@@ -51,7 +51,7 @@ OrderByBestFriendOf<-function(friendship){
 		
 	#columns are A, and rows are B
 	#we rank b's for each b
-	reflexive.ranks<-apply(friendship,1, frank)
+	reflexive.ranks<-apply(friendship,1, data.table::frank)
 	#we applied ranking row-by-row; A's were ranked in each row,
 	#and apply transposes, so now B are columns
 	#and and rows are A and they are ranked (upper rank is highest) 
