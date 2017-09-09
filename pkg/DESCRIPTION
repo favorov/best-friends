@@ -13,9 +13,10 @@ Description: We have some similarity of interaction measure for pairs of instnce
     We want to know what genes are the specifially best friends for selected regulators and vice versa.
 License: Artistic-2.0
 LazyLoad: yes
-Depends:
-    R (>= 3.0.0),
-    Matrix
+Depends:  R (>= 3.0.0)
+Suggests:
+    Matrix,
+    data.table
 biocViews: Annotation, Genetics, Infrastructure, DataRepresentation,
     Bioinformatics
 URL: https://github.com/favorov/gene.friends/
