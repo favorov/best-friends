@@ -1,8 +1,8 @@
-Package: gene.best.friends
+Package: best.friends.of
 Type: Package
-Title: Genes That Are Best Friends package
-Version: 0.0.4
-Date: 2015-06-17
+Title: Best Friends of (someone) package
+Version: 0.0.1
+Date: 2017-08-30
 Author@R: c( person("Alexander","Favorov",email = "favorov@sensi.org"),
     person("Vasily","Ramensky", email="ramensky@gmail.com "),
     person("Andrey","A.","Mironov", email="mironov@bioinf.fbb.msu.ru ")
@@ -15,10 +15,9 @@ License: Artistic-2.0
 LazyLoad: yes
 Depends:
     R (>= 3.0.0),
-    data.table,
     Matrix
 biocViews: Annotation, Genetics, Infrastructure, DataRepresentation,
     Bioinformatics
 URL: https://github.com/favorov/gene.friends/
-Packaged: 2014-11-28 07:07:07 EST; favorov
-RoxygenNote: 6.0.1
+Packaged: 2017-08-30 07:07:07 EST; favorov
+RoxygenNote: 5.0.1
