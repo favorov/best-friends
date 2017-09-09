@@ -1,0 +1,18 @@
+What is the most dedicated upstream for each downstream?
+What is the most dedicated downstrea for each upstream?
+========================================================
+
+Alexander Favorov  
+-----------------------------------------------
+
+### `r format(Sys.Date(), "%d %b %Y")` 
+
+`r library(knitr)`
+`r options(width=80,keep.source=TRUE)`
+`r opts_chunk$set(echo=T,message=F,cache=F,warning=F)`
+<!-- cache is off, we save all the neccessary things in Rda -->
+
+Both questions and much more questions of this kind (which gene behaves the most specifically like a selected one, etc..) based on the same consideration. Suppose we have any two sets, $A$ and $B$, and we have a pairwise relation measure $\left<a,b\right>$ for each of element $(a,b)$ of their Cartesian product $A x B$. Let's say the relation is similarity rather than distance, the higher it is, the more the elements in the pair are related. A and B could be the same. If a pair does not make a sense for the relation we describe, we acn say that the measure is 0. Now, for each selected $a \element A$ we have a ranking of $b \element B$' elemants based on the relation. But, actually, the top of the ranking can be filles with $b$'s that do not specifically relate to $a$, they just strongly interact with all or almost all the $a$'s. Sometimes, it makes semse (what are strongest regulator for gene G?), but sometimes, we want to answer other question: what is the strongest specific regulator for gene G (let's call it the best friend of G). In our notation, $A$ is set of genes, $B$ is the regulators, and $\left<a,b\right>$ is some regulatory strenght.
+
+Let's do the following operations.
+
