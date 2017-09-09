@@ -2,7 +2,7 @@
 % Please edit documentation in R/the.best.friends.r
 \name{RankByBestFriendOf}
 \alias{RankByBestFriendOf}
-\title{RankByBestFriendsOf
+\title{RankByBestFriendOf
 We have someones to be friended by as columns and we have the possible frieds as rows.
 The function outputs a matrix where in each column and row there is a value of how the raw specifically friendly to this column.
 \code{my.row.names[number list]} will give the sorted list of gene nemes
@@ -19,7 +19,7 @@ Best friend has the highest order, the worst has the lowest
 export
 }
 \description{
-RankByBestFriendsOf
+RankByBestFriendOf
 We have someones to be friended by as columns and we have the possible frieds as rows.
 The function outputs a matrix where in each column and row there is a value of how the raw specifically friendly to this column.
 \code{my.row.names[number list]} will give the sorted list of gene nemes
