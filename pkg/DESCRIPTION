@@ -14,7 +14,7 @@ Description: We have some similarity of interaction measure for pairs of instnce
 License: Artistic-2.0
 LazyLoad: yes
 Depends:  R (>= 3.0.0)
-Import:
+Imports:
 	data.table
 biocViews: Annotation, Genetics, Infrastructure, DataRepresentation,
     Bioinformatics
