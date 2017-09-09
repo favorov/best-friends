@@ -1,7 +1,7 @@
 #best-friends-of- library
 #A. Favorov, V. Ramensky, A. Mironov 2014-2017
 
-#'RankByBestFriendsOf
+#'RankByBestFriendOf
 ##
 #'We have someones to be friended by as columns and we have the possible frieds as rows.
 #'The function outputs a matrix where in each column and row there is a value of how the raw specifically friendly to this column.
@@ -35,7 +35,7 @@ RankByBestFriendOf<-function(friendship){
 	rank.by.best.friends.rank
 }
 
-#'OrderByBestFriendsOf
+#'OrderByBestFriendOf
 ##
 #'We have someones to be friended by as columns and we have the possible frieds as rows. 
 #'The function outputs a matrix where in each column, the list of the numbers of the rows are ordered by how this row is specifically friendly to this column. Create gene number lists that are orders of genes in ranking by backwards-rank of the genenes correlations matrix.

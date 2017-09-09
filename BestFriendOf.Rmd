@@ -57,12 +57,12 @@ regulation
 Applying the function to our example.
 
 ```{r}
-ranklists<-RankByBestFriend(regulation)
+ranklists<-RankByBestFriendOf(regulation)
 ranklists
 ```
 #### Best Friends ordering
 
-orderlists<-OrderByBackwardsRank(regulation)
+orderlists<-OrderByBestFriendOf(regulation)
 orderlists
 ```
 
