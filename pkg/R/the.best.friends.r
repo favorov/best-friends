@@ -58,7 +58,7 @@ OrderByBestFriendOf<-function(friendship){
 	
 	#now, we select a's and rank the a's ranks for each b
 	#so, row-by-row again
-	order.by.best.friends.rank<-apply(reflexive.ranks,1,frank)
+	order.by.best.friends.rank<-apply(reflexive.ranks,1,order)
 	#apply return the result in columns, so now 'our' is columns
 	#not is is trasnposed again
 	colnames(order.by.best.friends.rank)<-colnames(friendship) 

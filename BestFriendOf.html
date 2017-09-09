@@ -159,6 +159,22 @@ ranklists</code></pre>
 ## TF2 3.0 1.0 1.0 1.0 1.0
 ## TF3 1.5 2.5 2.5 2.5 2.5</code></pre>
 </div>
+<div id="best-friends-ordering" class="section level4">
+<h4>Best Friends ordering</h4>
+<pre class="r"><code>orderlists&lt;-OrderByBestFriendOf(regulation)
+orderlists</code></pre>
+<pre><code>##        A   B   C   D   E
+## [1,] 1.5 2.5 2.5 2.5 2.5
+## [2,] 3.0 1.0 1.0 1.0 1.0
+## [3,] 1.5 2.5 2.5 2.5 2.5</code></pre>
+<p>We want to see gene names rather than indices:</p>
+<pre class="r"><code>TFlists&lt;-apply(orderlists,2,function(col) TF.names[col])
+TFlists</code></pre>
+<pre><code>##      A     B     C     D     E    
+## [1,] &quot;TF1&quot; &quot;TF2&quot; &quot;TF2&quot; &quot;TF2&quot; &quot;TF2&quot;
+## [2,] &quot;TF3&quot; &quot;TF1&quot; &quot;TF1&quot; &quot;TF1&quot; &quot;TF1&quot;
+## [3,] &quot;TF1&quot; &quot;TF2&quot; &quot;TF2&quot; &quot;TF2&quot; &quot;TF2&quot;</code></pre>
+</div>
 </div>
 </div>
 </div>
