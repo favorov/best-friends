@@ -62,6 +62,7 @@ ranklists
 ```
 #### Best Friends ordering
 
+```{r}
 orderlists<-OrderByBestFriendOf(regulation)
 orderlists
 ```
