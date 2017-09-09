@@ -17,6 +17,9 @@ Let's think about ranks. Suppose we ranked all the $b$'s by $\left<a,b\right>$ f
 
 $$BFRank_a(b)=Rank_a(Rank_b(a))$$
 
+Please note, the $\left<a,b\right>$ measure is not to be symmetric, the backwards value $\left<b,a\right>$ is never used and thus even not required to be defined.
+
+
 ```{r source, echo=FALSE}
 if (!suppressWarnings(require('gene.best.friends')))
 {
@@ -27,7 +30,34 @@ if (!suppressWarnings(require('gene.best.friends')))
 		library("devtools")
 	}
 	install_github('favorov/gene-friends/pkg')
-	library(gene.best.friends)
+	library(best.friends.of)
 }
+```
+
+### Code and examples in R
+
+#### Best Friends ranking
+
+And now, let's prepare a simple example. We have five genes (A,B,C,D,E) and three TFs (TF1,TF2,TF3). The strength of tregulation is shown by the matrix. 
+
+```{r}
+regulation=matrix(
+	c(1.00, 1.00, 1.00, 1.00, 1.00,
+		0.5, 0.2, 0.2, 0.2, 0.2,
+		0.7, 0.7, 0.7, 0.7, 0.7),
+	ncol=5,byrow=TRUE
+)
+gene.names<-c('A','B','C','D','E')
+TF.names<-c('TF1','TF2','TF3')
+colnames(regulation)<-gene.names
+rownames(regulation)<-TF.names
+correl
+```
+
+Applying the function to our example.
+
+```{r}
+ranklists<-RankByBestFriendOf(regulation)
+ranklists
 ```
 
