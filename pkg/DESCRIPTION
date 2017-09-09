@@ -20,4 +20,4 @@ biocViews: Annotation, Genetics, Infrastructure, DataRepresentation,
     Bioinformatics
 URL: https://github.com/favorov/gene.friends/
 Packaged: 2017-08-30 07:07:07 EST; favorov
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

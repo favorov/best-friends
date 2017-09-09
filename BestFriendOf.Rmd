@@ -51,7 +51,7 @@ gene.names<-c('A','B','C','D','E')
 TF.names<-c('TF1','TF2','TF3')
 colnames(regulation)<-gene.names
 rownames(regulation)<-TF.names
-correl
+regulation
 ```
 
 Applying the function to our example.

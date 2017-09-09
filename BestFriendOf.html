@@ -129,6 +129,33 @@ $(document).ready(function () {
 <p>Both questions and much more questions of this kind (which gene behaves the most specifically like a selected one, etc..) based on the following consideration. Suppose we have any two sets, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, and we have a pairwise relation measure <span class="math inline">\(\left&lt;a,b\right&gt;\)</span> for each of element <span class="math inline">\((a,b)\)</span> of their Cartesian product <span class="math inline">\(A x B\)</span>. Let’s say the relation is similarity rather than distance, the higher it is, the more the elements in the pair are related. <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> could be the same. If a pair <span class="math inline">\((a,b)\)</span> does not make a sense for the relation we describe, we can say that the measure is <span class="math inline">\(\left&lt;a,b\right&gt;=0\)</span>. Now, for each selected <span class="math inline">\(a \in A\)</span> we can make a ranking of all the <span class="math inline">\(b \in B\)</span> elements based on the relation <span class="math inline">\(\left&lt;a,b\right&gt;\)</span>. But, actually, the top of the ranking can be filles with <span class="math inline">\(b\)</span>’s that do not specifically relate to the selected <span class="math inline">\(a\)</span>, they just strongly interact with all or almost all the <span class="math inline">\(a\)</span>’s. Sometimes, it makes sense (if we wnat to know what are strongest regulators for gene G?), but sometimes, we want to answer other question: what is the strongest specific regulator for gene G (let’s call it the best friend of G). In our notation, <span class="math inline">\(A\)</span> is the set of genes, and <span class="math inline">\(B\)</span> is the set of regulators, and $  $ is some regulatory strenght.</p>
 <p>Let’s think about ranks. Suppose we ranked all the <span class="math inline">\(b\)</span>’s by <span class="math inline">\(\left&lt;a,b\right&gt;\)</span> for a selected <span class="math inline">\(a\)</span>. The result is <span class="math inline">\(Rank_a(b)= \# \left\{ \beta \in B : \left&lt; a, \beta \right&gt; \leqslant \left&lt; a, b \right&gt; \right\}\)</span>. To answer the ‘best-friend’ question, we are to calculate more complicated value. We want to raise up those <span class="math inline">\(b\)</span>’s that are specifically similar to our <span class="math inline">\(a\)</span>, so we first rank all <span class="math inline">\(a\)</span>’s for all <span class="math inline">\(b\)</span>’s by the <span class="math inline">\(\left&lt;a,b\right&gt;\)</span> values and then rank the ranks our selected <span class="math inline">\(a\)</span> get in the rankings for different <span class="math inline">\(b\)</span>’s. The best rank <span class="math inline">\(b\)</span>’s now are those that provide unusially high rank for our selcted <span class="math inline">\(a\)</span> in their ranking.</p>
 <p><span class="math display">\[BFRank_a(b)=Rank_a(Rank_b(a))\]</span></p>
+<p>Please note, the <span class="math inline">\(\left&lt;a,b\right&gt;\)</span> measure is not to be symmetric, the backwards value <span class="math inline">\(\left&lt;b,a\right&gt;\)</span> is never used and thus even not required to be defined.</p>
+</div>
+<div id="code-and-examples-in-r" class="section level3">
+<h3>Code and examples in R</h3>
+<div id="best-friends-ranking" class="section level4">
+<h4>Best Friends ranking</h4>
+<p>And now, let’s prepare a simple example. We have five genes (A,B,C,D,E) and three TFs (TF1,TF2,TF3). The strength of tregulation is shown by the matrix.</p>
+<pre class="r"><code>regulation=matrix(
+    c(1.00, 1.00, 1.00, 1.00, 1.00,
+        0.5, 0.2, 0.2, 0.2, 0.2,
+        0.7, 0.7, 0.7, 0.7, 0.7),
+    ncol=5,byrow=TRUE
+)
+gene.names&lt;-c('A','B','C','D','E')
+TF.names&lt;-c('TF1','TF2','TF3')
+colnames(regulation)&lt;-gene.names
+rownames(regulation)&lt;-TF.names
+regulation</code></pre>
+<pre><code>##       A   B   C   D   E
+## TF1 1.0 1.0 1.0 1.0 1.0
+## TF2 0.5 0.2 0.2 0.2 0.2
+## TF3 0.7 0.7 0.7 0.7 0.7</code></pre>
+<p>Applying the function to our example.</p>
+<pre class="r"><code>ranklists&lt;-RankByBestFriendOf(regulation)
+ranklists</code></pre>
+<pre><code>## [1] &quot;TF1&quot; &quot;TF2&quot; &quot;TF3&quot;</code></pre>
+</div>
 </div>
 </div>
 </div>

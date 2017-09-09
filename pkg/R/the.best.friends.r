@@ -8,7 +8,7 @@
 #'\code{my.row.names[number list]} will give the sorted list of gene nemes
 #'Best friend has the lowest order.
 #'
-#'@param frriendship is the similarity matrix to be processed; the someones to be frinded by are columns; frinds are rows  
+#'@param frriendship is the similarity matrix to be processed; the someones to be friended by are columns; possible friends are in rows  
 #'@return \code{matrix} object if \code{frriendship} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column (or row if \code{by.column}, see \code{by.column} parameter description) of the object is is a list of orders of genes as sorted by backwards rank by relation to the tester gene, tester gen is the column (if \code{by.column})
 #'export
 RankByBestFriendOf<-function(friendship){
@@ -28,6 +28,7 @@ RankByBestFriendOf<-function(friendship){
 	rank.by.best.friends.rank<-apply(reflexive.ranks,1,frank)
 	#apply return the result in columns, so now 'our' is columns
 	colnames(rank.by.best.friends.rank)<-colnames(friendship) 
-	rownames(rank.by.best.friends.rank)<-rownames(friendship) 
+	rownames(rank.by.best.friends.rank)<-rownames(friendship)
+	rank.by.best.friends.rank
 }
 
