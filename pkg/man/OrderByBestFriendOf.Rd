@@ -14,7 +14,6 @@ OrderByBestFriendOf(friendship)
 }
 \value{
 \code{matrix} object if \code{frriendship} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column of the object is a list of orders of genes as sorted by best friends rank in the column (if \code{by.column})
-export
 }
 \description{
 OrderByBestFriendOf

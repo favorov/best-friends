@@ -12,7 +12,7 @@
 #'@param friendship is the freindship (e.g.similarity) matrix to be processed; the someones to be friended by are columns; possible friends are in rows  
 #'@return \code{matrix} object if \code{frriendship} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column (or row if \code{by.column}, see \code{by.column} parameter description) of the object is is a matrix of best frindship ranks of rows for the column. Provide usual increasing ranks.
 #'Best friend has the highest order, the worst has the lowest
-#'export
+#'@export
 RankByBestFriendOf<-function(friendship){
 	#if('data.table' %in% class(friendship))
 	#	return(OrderByBackwardsRank.data.table(friendship))
@@ -43,7 +43,7 @@ RankByBestFriendOf<-function(friendship){
 #'
 #'@inheritParams RankByBestFriendOf
 #'@return \code{matrix} object if \code{frriendship} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column of the object is a list of orders of genes as sorted by best friends rank in the column (if \code{by.column})
-#'export
+#'@export
 OrderByBestFriendOf<-function(friendship){
 	#if('data.table' %in% class(friendship))
 	#	return(OrderByBackwardsRank.data.table(friendship))

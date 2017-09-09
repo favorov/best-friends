@@ -16,7 +16,6 @@ RankByBestFriendOf(friendship)
 \value{
 \code{matrix} object if \code{frriendship} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column (or row if \code{by.column}, see \code{by.column} parameter description) of the object is is a matrix of best frindship ranks of rows for the column. Provide usual increasing ranks.
 Best friend has the highest order, the worst has the lowest
-export
 }
 \description{
 RankByBestFriendOf

@@ -1,16 +1,16 @@
 Package: best.friends.of
 Type: Package
 Title: Best Friends of (someone) package
-Version: 0.0.1
-Date: 2017-08-30
+Version: 0.0.2
+Date: 2017-09-09
 Author@R: c( person("Alexander","Favorov",email = "favorov@sensi.org"),
     person("Vasily","Ramensky", email="ramensky@gmail.com "),
     person("Andrey","A.","Mironov", email="mironov@bioinf.fbb.msu.ru ")
     )
 Author: Alexander Favorov, Vasily Ramensky, Andrey A. Mironov
 Maintainer: Alexander Favorov <favorov@sensi.org>
-Description: We have a transcription correlation matrix for a lot of genes. We
-    what to know what genes are the best friends for our genes of interest.
+Description: We have some similarity of interaction measure for pairs of instnces, e.q. genes and regulators.
+    We want to know what genes are the specifially best friends for selected regulators and vice versa.
 License: Artistic-2.0
 LazyLoad: yes
 Depends:
