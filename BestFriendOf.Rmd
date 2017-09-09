@@ -21,7 +21,7 @@ Please note, the $\left<a,b\right>$ measure is not to be symmetric, the backward
 
 
 ```{r source, echo=FALSE}
-if (!suppressWarnings(require('gene.best.friends')))
+if (!suppressWarnings(require('best.friends.of')))
 {
 	if (!suppressWarnings(require('devtools')))
 	{
