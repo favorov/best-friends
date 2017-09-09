@@ -14,9 +14,8 @@ Description: We have some similarity of interaction measure for pairs of instnce
 License: Artistic-2.0
 LazyLoad: yes
 Depends:  R (>= 3.0.0)
-Suggests:
-    Matrix,
-    data.table
+Import:
+	data.table
 biocViews: Annotation, Genetics, Infrastructure, DataRepresentation,
     Bioinformatics
 URL: https://github.com/favorov/gene.friends/
