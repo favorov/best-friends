@@ -1,67 +1,71 @@
 #best-friends-of- library
-#A. Favorov, V. Ramensky, A. Mironov 2014-2017
+#A. Favorov, V. Ramensky, A. Mironov 2014-2020
 
-#'RankByBestFriendOf
+#'BestFriendsOf
 ##
-#'We have someones to be friended by as columns and we have the possible frieds as rows.
-#'The function outputs a matrix where in each column and row there is a value of how the raw specifically friendly to this column.
-# The values are ranks, they make sense only to compare.
-#'\code{my.row.names[number list]} will give the sorted list of gene nemes
-#'Best friend has the lowest order.
-#'
-#'@param friendship is the freindship (e.g.similarity) matrix to be processed; the someones to be friended by are columns; possible friends are in rows  
-#'@return \code{matrix} object if \code{frriendship} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column (or row if \code{by.column}, see \code{by.column} parameter description) of the object is is a matrix of best frindship ranks of rows for the column. Provide usual increasing ranks.
+#'We have someones to be a friend (entity) as columns and we have what is to be friends of (features) as rows.
+#`matrix where in each column and row there is a value of how the raw specifically friendly to this column.
+#'@param relation is the fetures*entities matrix of the relations between features ans entities
+#'@return \code{data.frame} with 3 columns: feature index, friend entity index, uncorrected p-value for the pair
 #'Best friend has the highest order, the worst has the lowest
 #'@export
-RankByBestFriendOf<-function(friendship){
-	#if('data.table' %in% class(friendship))
-	#	return(OrderByBackwardsRank.data.table(friendship))
-	#it is not data.table, go on	
-		
-	#columns are A, and rows are B
-	#we rank b's for each b
-	reflexive.ranks<-apply(friendship,1, data.table::frank)
-	#we applied ranking row-by-row; A's were ranked in each row,
-	#and apply transposes, so now B are columns
-	#and and rows are A and they are ranked (upper rank is highest) 
-	
-	#now, we select a's and rank the a's ranks for each b
-	#so, row-by-row again
-	rank.by.best.friends.rank<-apply(reflexive.ranks,1, data.table::frank)
-	#apply return the result in columns, so now 'our' is columns
-	#not is is trasnposed again
-	colnames(rank.by.best.friends.rank)<-colnames(friendship) 
-	rownames(rank.by.best.friends.rank)<-rownames(friendship)
-	rank.by.best.friends.rank
+best.friend.of<-function(relation){
+  dims<-dim(relation)
+	feature.ranks<<-apply(relation,2, 
+	      function(x){
+	        1-data.table::frank(x,ties.method='average')/dims[1]
+	      }
+	    )
+	#we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
+	fp<-as.data.frame(t(apply(feature.ranks,1,friend_and_p_value)))
+	colnames(fp)<-c("friend","pval")
+	cbind(feature=c(1:dims[1]),fp)
 }
 
-#'OrderByBestFriendOf
-##
-#'We have someones to be friended by as columns and we have the possible frieds as rows. 
-#'The function outputs a matrix where in each column, the list of the numbers of the rows are ordered by how this row is specifically friendly to this column. Create gene number lists that are orders of genes in ranking by backwards-rank of the genenes correlations matrix.
-#'\code{my.row.names[number list]} will give the sorted list of gene nemes
-#'
-#'@inheritParams RankByBestFriendOf
-#'@return \code{matrix} object if \code{frriendship} is a matrix-like object; \code{data.table} if it is \code{data.table}; error otherwise; each column of the object is a list of orders of genes as sorted by best friends rank in the column (if \code{by.column})
-#'@export
-OrderByBestFriendOf<-function(friendship){
-	#if('data.table' %in% class(friendship))
-	#	return(OrderByBackwardsRank.data.table(friendship))
-	#it is not data.table, go on	
-		
-	#columns are A, and rows are B
-	#we rank b's for each b
-	reflexive.ranks<-apply(friendship,1, data.table::frank)
-	#we applied ranking row-by-row; A's were ranked in each row,
-	#and apply transposes, so now B are columns
-	#and and rows are A and they are ranked (upper rank is highest) 
-	
-	#now, we select a's and rank the a's ranks for each b
-	#so, row-by-row again
-	order.by.best.friends.rank<-apply(reflexive.ranks,1,order, decreasing=TRUE)
-	#apply return the result in columns, so now 'our' is columns
-	#not is is trasnposed again
-	#best/heaviest are to the first, so order is decreasing
-	colnames(order.by.best.friends.rank)<-colnames(friendship) 
-	order.by.best.friends.rank
+friend_and_p_value<-function(x) { #x is anumeric vector
+	#we are to find the difference of the best and the next; 
+	#we know that all values are between 0 and 1
+	#best and next are the smallest and the next
+	bestv <- 1.1;
+	nextv <- 1.1;
+	n<-length(x);
+	bestind<-n+1;
+	if (n<2) return(c(1,0));
+	for(i in c(1:n)) {
+		if (x[i]<bestv) {
+			nextv<-bestv;
+			bestv<-x[i];
+			bestind<-i;
+			next;
+		};
+		#if we are here, x[i] >= best
+		if (x[i]<nextv) {
+			nextv=x[i];
+		};
+	}
+	return (c(bestind,(1-nextv+bestv)^n,bestv,nextv,n));
+}
+
+
+if(0) {
+cppFunction("
+	double bestminusnext(NumericVector x) {
+	//we are to find the difference of the best and the next; 
+	//we know that all values are between 0 and 1
+	//best and next are the smallest and the next
+	int n = x.size(), i; 
+	double best = 1.1, next=1.1;
+	if (n<2) return 0;
+	for(i = 0; i < n; i++) {
+		if (x[i]<best) {
+			next=best;
+			best=x[i];
+			continue;
+		};
+		//if we are here, x[i] >= best
+		if (x[i]<next) {
+			next=x[i];
+		};
+		return next-best;
+	}")
 }

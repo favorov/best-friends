@@ -38,19 +38,28 @@ if (!suppressWarnings(require('best.friends.of')))
 
 #### Best Friends ranking
 
-And now, let's prepare a simple example. We have five genes (A,B,C,D,E) and three TFs (TF1,TF2,TF3). The strength of tregulation is shown by the matrix. 
+And now, let's prepare a simple example. We have five genes (A,B,C,D,E) and three TFs (TF1,TF2,TF3). The strength of the regulation is shown by the matrix. 
 
 ```{r}
+genes<-10
+gene.names<-LETTERS[seq( from = 1, to = genes )]
 regulation=matrix(
-	c(1.00, 1.00, 1.00, 1.00, 1.00,
-		0.5, 0.2, 0.2, 0.2, 0.2,
-		0.7, 0.7, 0.7, 0.7, 0.7),
-	ncol=5,byrow=TRUE
+	c(rep(1, genes),
+		0.2, 0.2, 0.2, 0.2, 0.25, rep(0.2,genes-5),
+		rep(1, genes),
+		rep(1, genes),
+		rep(1, genes),
+		rep(1, genes),
+		rep(1, genes),
+		rep(1, genes),
+		rep(1, genes),
+		rep(1, genes)
+    ),
+	ncol=10,byrow=FALSE
 )
-gene.names<-c('A','B','C','D','E')
-TF.names<-c('TF1','TF2','TF3')
-colnames(regulation)<-gene.names
-rownames(regulation)<-TF.names
+TF.names<-c('TF1','TF2','TF3','TF4','TF5','TF6','TF7','TF8','TF9','TF10')
+rownames(regulation)<-gene.names
+colnames(regulation)<-TF.names
 regulation
 ```
 

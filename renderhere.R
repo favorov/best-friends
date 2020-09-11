@@ -1,8 +1,7 @@
 #knit all Rmd in this folder
 if(!require('rmarkdown'))
 {
-	source("http://bioconductor.org/biocLite.R")
-	biocLite('rmarkdown')
+	BiocManager::install('rmarkdown')
 	library('rmarkdown')
 }
 
