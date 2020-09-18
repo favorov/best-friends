@@ -1,8 +1,9 @@
-Package: best.friends.of
+Package: best.friend.of
 Type: Package
 Title: Best Friends of (someone) package
-Version: 0.0.2
-Date: 2017-09-09
+Version: 0.1.0
+Date: 2020-09-09
+Encoding: UTF-8
 Author@R: c( person("Alexander","Favorov",email = "favorov@sensi.org"),
     person("Vasily","Ramensky", email="ramensky@gmail.com "),
     person("Andrey","A.","Mironov", email="mironov@bioinf.fbb.msu.ru ")
@@ -13,11 +14,11 @@ Description: We have some similarity of interaction measure for pairs of instnce
     We want to know what genes are the specifially best friends for selected regulators and vice versa.
 License: Artistic-2.0
 LazyLoad: yes
-Depends:  R (>= 3.0.0)
+Depends: R (>= 3.0.0)
 Imports:
 	data.table
 biocViews: Annotation, Genetics, Infrastructure, DataRepresentation,
     Bioinformatics
 URL: https://github.com/favorov/gene.friends/pkg
 Packaged: 2017-08-30 07:07:07 EST; favorov
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1

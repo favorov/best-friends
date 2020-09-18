@@ -1,6 +1,6 @@
 #best-friends-of- library
 #A. Favorov, V. Ramensky, A. Mironov 2014-2020
-
+#'
 #'BestFriendsOf
 ##
 #'We have someones to be a friend (entity) as columns and we have what is to be friends of (features) as rows.
@@ -34,6 +34,7 @@ best.friend.of<-function(relation,distance_like=FALSE){
 	data.frame(friend=as.integer(res[,1]),p.value=res[,2])
 }
 
+#' @import Rcpp
 cppFunction('
   #include <math.h>
 	NumericVector friend_and_p_value(NumericVector x) {

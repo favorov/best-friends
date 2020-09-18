@@ -3,14 +3,13 @@
 \docType{package}
 \name{best.friends.of}
 \alias{best.friends.of}
-\alias{best.friends.of-package}
 \title{best.friends.of: A package that provide the best-friend ranking}
 \description{
-Suppose We have some similarity of interaction measure for pairs of instnces, e.q. genes and regulators.
-We want to know what genes are the specifially best friends for selected regulators and vice versa.
+Suppose We have some similarity of interaction measure for pairs of instances, e.q. genes and regulators.
+We want to know what genes are the specifically best friends for selected regulators and vice versa.
 }
 \details{
-Two functions:
+Main function:
 }
 \section{best.friends.of functions}{
 
