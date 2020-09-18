@@ -34,34 +34,6 @@ best.friend.of<-function(relation,distance_like=FALSE){
 	data.frame(friend=as.integer(res[,1]),p.value=res[,2])
 }
 
-if(0) { #r code
-  friend_and_p_value<-function(x) { #x is anumeric vector
-  	#we are to find the difference of the best and the next; 
-  	#we know that all values are between 0 and 1
-  	#best and next are the smallest and the next
-  	bestv <- 1.1;
-    prevv <- 1.1;
-  	n<-length(x);
-  	bestind<-n+1;
-  	if (n<2) return(c(1,0));
-  	for(i in c(1:n)) {
-  		if (x[i]<bestv) {
-  			prevv<-bestv;
-  			bestv<-x[i];
-  			bestind<-i;
-  			next;
-  		};
-  		#if we are here, x[i] >= prevv
-  		if (x[i]<prevv) {
-  			prevv=x[i];
-  		};
-  	}
-  	return (c(bestind,(1-prevv+bestv)^n));
-  }
-}
-
-
-if(1) { #c++ code
 cppFunction('
   #include <math.h>
 	NumericVector friend_and_p_value(NumericVector x) {
@@ -90,5 +62,4 @@ cppFunction('
 		return (NumericVector::create(bestind,pow(1.-next+best,n)));
 	}'
 )
-}
 
