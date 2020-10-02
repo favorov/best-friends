@@ -1,1 +1,0 @@
-Here are examples of application of gene.friends to prepare friend lists and to calculate the revrank-based distances in a very simple manner
