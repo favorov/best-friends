@@ -24,12 +24,12 @@ best.friends.of<-function(relation,distance_like=FALSE){
     feature.ranks <- dims[1]+1 - feature.ranks
   }
 	fira<<-feature.ranks
-	feature.ranks<-feature.ranks/dims[1]
+	feature.ranks<<-feature.ranks/dims[1]
 	#we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
   #fp<-as.data.frame(t(apply(feature.ranks,1,friend_and_p_value)))
   #colnames(fp)<-c("friend","pval")
 	#cbind(feature=c(1:dims[1]),fp)
-	res<-t(apply(feature.ranks,1,friend_and_p_value))
+	res<<-t(apply(feature.ranks,1,friend_and_p_value))
 	data.frame(friend=as.integer(res[,1]),p.value=res[,2])
 }
 
