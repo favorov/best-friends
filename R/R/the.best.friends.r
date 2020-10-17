@@ -21,7 +21,7 @@ best.friends.of<-function(relation,distance_like=FALSE){
           }
   )
   if(!distance_like) {
-    feature.ranks <- dims[1]-feature.ranks
+    feature.ranks <- dims[1]+1-feature.ranks
   }
 	fira<<-feature.ranks
 	feature.ranks<-feature.ranks/dims[1]
