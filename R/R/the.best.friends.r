@@ -59,7 +59,7 @@ cppFunction('
 			  next=x[i];
 		  }
 	  };
-		return (NumericVector::create(bestind,pow(1.-next+best,n)));
+		return (NumericVector::create(bestind,best,next,pow(1.-next+best,n)));
 	}'
 )
 
