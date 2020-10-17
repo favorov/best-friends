@@ -15,17 +15,16 @@ best.friends.of<-function(relation,distance_like=FALSE){
   #if nor, descending. 
   #E.g., the least ranks are the 
   #most close relations 
-  feature.ranks<<-apply(relation,2, 
+  feature.ranks<-apply(relation,2, 
           function(x){
             data.table::frank(x,ties.method='average')
           }
   )
-  fira<<-feature.ranks
-  if(distance_like) {
-    feature.ranks <<- (feature.ranks-1)/(dims[1]-1)
-  } else {
-    feature.ranks <<- 1-(feature.ranks-1)/(dims[1]-1)
+  if(!distance_like) {
+    feature.ranks <- dims[1]-feature.ranks
   }
+	fira<<-feature.ranks
+	feature.ranks<-feature.ranks/dims[1]
 	#we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
   #fp<-as.data.frame(t(apply(feature.ranks,1,friend_and_p_value)))
   #colnames(fp)<-c("friend","pval")

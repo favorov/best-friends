@@ -23,7 +23,6 @@ Main function:
 }
 \section{best.friends.of functions}{
 
-RankByBestFriendOf takes the matrix, provide the ranks for best-friend ranking 
-OrderByBestFriendOf takes the matrix, provide the orders by best-friend ranking
+best.friends.of takes the matrix, provide the potential marker - best frind index - p-value table
 }
 

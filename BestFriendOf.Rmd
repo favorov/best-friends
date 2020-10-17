@@ -9,7 +9,7 @@ Alexander Favorov
 `r library(knitr)`
 `r options(width=80,keep.source=TRUE)`
 `r opts_chunk$set(echo=T,message=F,cache=F,warning=F)`
-<!-- cache is off, we save all the neccessary things in Rda -->
+<!-- cache is off, we save all the necessary things in Rda -->
 
 Both questions and much more questions of this kind (which gene behaves the most specifically like a selected one, etc..) based on the following consideration. Suppose we have any two sets, $A$ and $B$, and we have a pairwise relation measure $\left<a,b\right>$ for each of element $(a,b)$ of their Cartesian product $A x B$. Let's say the relation is similarity rather than distance, the higher it is, the more the elements in the pair are related. $A$ and $B$ could be the same. If a pair $(a,b)$ does not make a sense for the relation we describe, we can say that the measure is $\left<a,b\right>=0$. Now, for each selected $a \in A$ we can make a ranking of all the $b \in B$ elements based on the relation $\left<a,b\right>$. But, actually, the top of the ranking can be filles with $b$'s that do not specifically relate to the selected $a$, they just strongly interact with all or almost all the $a$'s. Sometimes, it makes sense (if we wnat to know what are strongest regulators for gene G?), but sometimes, we want to answer other question: what is the strongest specific regulator for gene G (let's call it the best friend of G). In our notation, $A$ is the set of genes, and $B$ is the set of regulators, and $ \left<a,b\right> $ is some regulatory strenght.
 
