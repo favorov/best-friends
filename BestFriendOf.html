@@ -369,8 +369,8 @@ summary {
 <h1>What is the most dedicated downstream for a selected upstream?</h1>
 <div id="alexander-favorov" class="section level2">
 <h2>Alexander Favorov</h2>
-<div id="aug-2020" class="section level3">
-<h3>12 Aug 2020</h3>
+<div id="oct-2020" class="section level3">
+<h3>16 Oct 2020</h3>
 <!-- cache is off, we save all the neccessary things in Rda -->
 <p>Both questions and much more questions of this kind (which gene behaves the most specifically like a selected one, etc..) based on the following consideration. Suppose we have any two sets, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, and we have a pairwise relation measure <span class="math inline">\(\left&lt;a,b\right&gt;\)</span> for each of element <span class="math inline">\((a,b)\)</span> of their Cartesian product <span class="math inline">\(A x B\)</span>. Let’s say the relation is similarity rather than distance, the higher it is, the more the elements in the pair are related. <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> could be the same. If a pair <span class="math inline">\((a,b)\)</span> does not make a sense for the relation we describe, we can say that the measure is <span class="math inline">\(\left&lt;a,b\right&gt;=0\)</span>. Now, for each selected <span class="math inline">\(a \in A\)</span> we can make a ranking of all the <span class="math inline">\(b \in B\)</span> elements based on the relation <span class="math inline">\(\left&lt;a,b\right&gt;\)</span>. But, actually, the top of the ranking can be filles with <span class="math inline">\(b\)</span>’s that do not specifically relate to the selected <span class="math inline">\(a\)</span>, they just strongly interact with all or almost all the <span class="math inline">\(a\)</span>’s. Sometimes, it makes sense (if we wnat to know what are strongest regulators for gene G?), but sometimes, we want to answer other question: what is the strongest specific regulator for gene G (let’s call it the best friend of G). In our notation, <span class="math inline">\(A\)</span> is the set of genes, and <span class="math inline">\(B\)</span> is the set of regulators, and $ &lt;a,b&gt; $ is some regulatory strenght.</p>
 <p>Let’s think about ranks. Suppose we ranked all the <span class="math inline">\(b\)</span>’s by <span class="math inline">\(\left&lt;a,b\right&gt;\)</span> for a selected <span class="math inline">\(a\)</span>. The result is <span class="math inline">\(Rank_a(b)= \# \left\{ \beta \in B : \left&lt; a, \beta \right&gt; \leqslant \left&lt; a, b \right&gt; \right\}\)</span>. To answer the ‘best-friend’ question, we are to calculate more complicated value. We want to raise up those <span class="math inline">\(b\)</span>’s that are specifically similar to our <span class="math inline">\(a\)</span>, so we first rank all <span class="math inline">\(a\)</span>’s for all <span class="math inline">\(b\)</span>’s by the <span class="math inline">\(\left&lt;a,b\right&gt;\)</span> values and then rank the ranks our selected <span class="math inline">\(a\)</span> get in the rankings for different <span class="math inline">\(b\)</span>’s. The best rank <span class="math inline">\(b\)</span>’s now are those that provide unusially high rank for our selcted <span class="math inline">\(a\)</span> in their ranking.</p>
@@ -381,45 +381,82 @@ summary {
 <h3>Code and examples in R</h3>
 <div id="best-friends-ranking" class="section level4">
 <h4>Best Friends ranking</h4>
-<p>And now, let’s prepare a simple example. We have five genes (A,B,C,D,E) and three TFs (TF1,TF2,TF3). The strength of tregulation is shown by the matrix.</p>
-<pre class="r"><code>regulation=matrix(
-    c(1.00, 1.00, 1.00, 1.00, 1.00,
-        0.5, 0.2, 0.2, 0.2, 0.2,
-        0.7, 0.7, 0.7, 0.7, 0.7),
-    ncol=5,byrow=TRUE
+<p>And now, let’s prepare a simple example. We have five genes (A,B,C,D,E) and three TFs (TF1,TF2,TF3). The strength of the regulation is shown by the matrix.</p>
+<pre class="r"><code>genes&lt;-10
+gene.names&lt;-LETTERS[seq( from = 1, to = genes )]
+regulation=matrix(
+    c(rep(1, genes),
+        0.2, 0.2, 0.2, 0.2, 0.25, rep(0.2,genes-5),
+        rep(1, genes),
+        rep(1, genes),
+        rep(1, genes),
+        rep(1, genes),
+        rep(1, genes),
+        rep(1, genes),
+        rep(1, genes),
+        rep(1, genes)
+    ),
+    ncol=10,byrow=FALSE
 )
-gene.names&lt;-c(&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;,&#39;E&#39;)
-TF.names&lt;-c(&#39;TF1&#39;,&#39;TF2&#39;,&#39;TF3&#39;)
-colnames(regulation)&lt;-gene.names
-rownames(regulation)&lt;-TF.names
+TF.names&lt;-c(&#39;TF1&#39;,&#39;TF2&#39;,&#39;TF3&#39;,&#39;TF4&#39;,&#39;TF5&#39;,&#39;TF6&#39;,&#39;TF7&#39;,&#39;TF8&#39;,&#39;TF9&#39;,&#39;TF10&#39;)
+rownames(regulation)&lt;-gene.names
+colnames(regulation)&lt;-TF.names
 regulation</code></pre>
-<pre><code>##       A   B   C   D   E
-## TF1 1.0 1.0 1.0 1.0 1.0
-## TF2 0.5 0.2 0.2 0.2 0.2
-## TF3 0.7 0.7 0.7 0.7 0.7</code></pre>
+<pre><code>##   TF1  TF2 TF3 TF4 TF5 TF6 TF7 TF8 TF9 TF10
+## A   1 0.20   1   1   1   1   1   1   1    1
+## B   1 0.20   1   1   1   1   1   1   1    1
+## C   1 0.20   1   1   1   1   1   1   1    1
+## D   1 0.20   1   1   1   1   1   1   1    1
+## E   1 0.25   1   1   1   1   1   1   1    1
+## F   1 0.20   1   1   1   1   1   1   1    1
+## G   1 0.20   1   1   1   1   1   1   1    1
+## H   1 0.20   1   1   1   1   1   1   1    1
+## I   1 0.20   1   1   1   1   1   1   1    1
+## J   1 0.20   1   1   1   1   1   1   1    1</code></pre>
 <p>Applying the function to our example.</p>
 <pre class="r"><code>ranklists&lt;-RankByBestFriendOf(regulation)
 ranklists</code></pre>
-<pre><code>##       A   B   C   D   E
-## TF1 1.5 2.5 2.5 2.5 2.5
-## TF2 3.0 1.0 1.0 1.0 1.0
-## TF3 1.5 2.5 2.5 2.5 2.5</code></pre>
+<pre><code>##   TF1 TF2 TF3 TF4 TF5 TF6 TF7 TF8 TF9 TF10
+## A 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5  5.5
+## B 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5  5.5
+## C 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5  5.5
+## D 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5  5.5
+## E 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5  5.5
+## F 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5  5.5
+## G 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5  5.5
+## H 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5  5.5
+## I 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5  5.5
+## J 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5  5.5</code></pre>
 </div>
 <div id="best-friends-ordering" class="section level4">
 <h4>Best Friends ordering</h4>
 <pre class="r"><code>orderlists&lt;-OrderByBestFriendOf(regulation)
 orderlists</code></pre>
-<pre><code>##      A B C D E
-## [1,] 2 1 1 1 1
-## [2,] 1 3 3 3 3
-## [3,] 3 2 2 2 2</code></pre>
+<pre><code>##       TF1 TF2 TF3 TF4 TF5 TF6 TF7 TF8 TF9 TF10
+##  [1,]   1   1   1   1   1   1   1   1   1    1
+##  [2,]   2   2   2   2   2   2   2   2   2    2
+##  [3,]   3   3   3   3   3   3   3   3   3    3
+##  [4,]   4   4   4   4   4   4   4   4   4    4
+##  [5,]   5   5   5   5   5   5   5   5   5    5
+##  [6,]   6   6   6   6   6   6   6   6   6    6
+##  [7,]   7   7   7   7   7   7   7   7   7    7
+##  [8,]   8   8   8   8   8   8   8   8   8    8
+##  [9,]   9   9   9   9   9   9   9   9   9    9
+## [10,]  10  10  10  10  10  10  10  10  10   10</code></pre>
 <p>We want to see gene names rather than indices:</p>
 <pre class="r"><code>TFlists&lt;-apply(orderlists,2,function(col) TF.names[col])
 TFlists</code></pre>
-<pre><code>##      A     B     C     D     E    
-## [1,] &quot;TF2&quot; &quot;TF1&quot; &quot;TF1&quot; &quot;TF1&quot; &quot;TF1&quot;
-## [2,] &quot;TF1&quot; &quot;TF3&quot; &quot;TF3&quot; &quot;TF3&quot; &quot;TF3&quot;
-## [3,] &quot;TF3&quot; &quot;TF2&quot; &quot;TF2&quot; &quot;TF2&quot; &quot;TF2&quot;</code></pre>
+<pre><code>##       TF1    TF2    TF3    TF4    TF5    TF6    TF7    TF8    TF9    TF10  
+##  [1,] &quot;TF1&quot;  &quot;TF1&quot;  &quot;TF1&quot;  &quot;TF1&quot;  &quot;TF1&quot;  &quot;TF1&quot;  &quot;TF1&quot;  &quot;TF1&quot;  &quot;TF1&quot;  &quot;TF1&quot; 
+##  [2,] &quot;TF2&quot;  &quot;TF2&quot;  &quot;TF2&quot;  &quot;TF2&quot;  &quot;TF2&quot;  &quot;TF2&quot;  &quot;TF2&quot;  &quot;TF2&quot;  &quot;TF2&quot;  &quot;TF2&quot; 
+##  [3,] &quot;TF3&quot;  &quot;TF3&quot;  &quot;TF3&quot;  &quot;TF3&quot;  &quot;TF3&quot;  &quot;TF3&quot;  &quot;TF3&quot;  &quot;TF3&quot;  &quot;TF3&quot;  &quot;TF3&quot; 
+##  [4,] &quot;TF4&quot;  &quot;TF4&quot;  &quot;TF4&quot;  &quot;TF4&quot;  &quot;TF4&quot;  &quot;TF4&quot;  &quot;TF4&quot;  &quot;TF4&quot;  &quot;TF4&quot;  &quot;TF4&quot; 
+##  [5,] &quot;TF5&quot;  &quot;TF5&quot;  &quot;TF5&quot;  &quot;TF5&quot;  &quot;TF5&quot;  &quot;TF5&quot;  &quot;TF5&quot;  &quot;TF5&quot;  &quot;TF5&quot;  &quot;TF5&quot; 
+##  [6,] &quot;TF6&quot;  &quot;TF6&quot;  &quot;TF6&quot;  &quot;TF6&quot;  &quot;TF6&quot;  &quot;TF6&quot;  &quot;TF6&quot;  &quot;TF6&quot;  &quot;TF6&quot;  &quot;TF6&quot; 
+##  [7,] &quot;TF7&quot;  &quot;TF7&quot;  &quot;TF7&quot;  &quot;TF7&quot;  &quot;TF7&quot;  &quot;TF7&quot;  &quot;TF7&quot;  &quot;TF7&quot;  &quot;TF7&quot;  &quot;TF7&quot; 
+##  [8,] &quot;TF8&quot;  &quot;TF8&quot;  &quot;TF8&quot;  &quot;TF8&quot;  &quot;TF8&quot;  &quot;TF8&quot;  &quot;TF8&quot;  &quot;TF8&quot;  &quot;TF8&quot;  &quot;TF8&quot; 
+##  [9,] &quot;TF9&quot;  &quot;TF9&quot;  &quot;TF9&quot;  &quot;TF9&quot;  &quot;TF9&quot;  &quot;TF9&quot;  &quot;TF9&quot;  &quot;TF9&quot;  &quot;TF9&quot;  &quot;TF9&quot; 
+## [10,] &quot;TF10&quot; &quot;TF10&quot; &quot;TF10&quot; &quot;TF10&quot; &quot;TF10&quot; &quot;TF10&quot; &quot;TF10&quot; &quot;TF10&quot; &quot;TF10&quot; &quot;TF10&quot;</code></pre>
 </div>
 </div>
 </div>

@@ -1,7 +1,7 @@
 #best-friends-of- library
 #A. Favorov, V. Ramensky, A. Mironov 2014-2020
 #'
-#'BestFriendsOf
+#'best.friends.of
 ##
 #'We have someones to be a friend (entity) as columns and we have what is to be friends of (features) as rows.
 #`matrix where in each column and row there is a value of how the raw specifically friendly to this column.
@@ -9,7 +9,7 @@
 #'@return \code{data.frame} with 3 columns: feature index, friend entity index, uncorrected p-value for the pair
 #'Best friend has the highest order, the worst has the lowest
 #'@export
-best.friend.of<-function(relation,distance_like=FALSE){
+best.friends.of<-function(relation,distance_like=FALSE){
   dims<-dim(relation)
   #if relation is distance_like, we will order in ascending
   #if nor, descending. 
