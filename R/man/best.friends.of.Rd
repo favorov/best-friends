@@ -17,6 +17,8 @@ Best friend has the highest order, the worst has the lowest
 \description{
 Suppose We have some similarity of interaction measure for pairs of instances, e.q. genes and regulators.
 We want to know what genes are the specifically best friends for selected regulators and vice versa.
+
+We have someones to be a friend (entity) as columns and we have what is to be friends of (features) as rows.
 }
 \details{
 Main function:

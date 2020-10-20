@@ -1,7 +1,8 @@
 #include <Rcpp.h>
 #include <math.h>
 using namespace Rcpp;
-NumericVector friend_and_p_value_сpp(NumericVector x) {
+// [[Rcpp::export]]
+NumericVector friend_and_p_value_cpp(NumericVector x) {
 	//we are to find the difference of the best and the next; 
 	//we know that all values are between 0 and 1
 	//best and next are the smallest and the next
