@@ -1,8 +1,13 @@
 #include <Rcpp.h>
 #include <math.h>
 using namespace Rcpp;
+//' Identifying the putative friend entity for the vector of ranks of the feature in different entities.
+//'
+//' @param x the list of ranks normalised to 0..1 -- in null, they are independently distributed
+//' 
+//' @return a vector of: index of the best, the best rank-the next rank and the p-value (it is the difference^n)
 // [[Rcpp::export]]
-NumericVector friend_and_p_value_cpp(NumericVector x) {
+NumericVector rank_diff_and_p(NumericVector x) {
 	//we are to find the difference of the best and the next; 
 	//we know that all values are between 0 and 1
 	//best and next are the smallest and the next

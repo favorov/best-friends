@@ -9,5 +9,8 @@
 #'	best.friends.of takes the matrix, provide the potential marker - best frind index - p-value table 
 #'
 #' @docType package
-#' @name best.friends.of 
+#' @name best.friends.of
+#' @useDynLib best.friends.of
+#' @importFrom Rcpp evalCpp
+# these two are Rcpp - scecific ivocations 
 NULL

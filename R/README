@@ -5,3 +5,5 @@ The stronger is the realtion, the higher is the number.
 We want to define the (specific) best friends ranking for each someone.  
 
 0.0.1 - initial version
+0.1.1 - p-value calculated 
+0.2.1 - cpp based p-value, first working version
