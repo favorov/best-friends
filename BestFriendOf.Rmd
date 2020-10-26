@@ -29,7 +29,7 @@ if (!suppressWarnings(require('best.friends.of')))
 		biocLite("devtools")
 		library("devtools")
 	}
-	install_github('favorov/gene-friends/pkg')
+	install_github('favorov/gene-friends/pkg/R')
 	library(best.friends.of)
 }
 ```
@@ -66,21 +66,7 @@ regulation
 Applying the function to our example.
 
 ```{r}
-ranklists<-RankByBestFriendOf(regulation)
-ranklists
+friends<-best.friends.of(regulation)
+friends
 ```
-#### Best Friends ordering
-
-```{r}
-orderlists<-OrderByBestFriendOf(regulation)
-orderlists
-```
-
-We want to see gene names rather than indices:
-
-```{r}
-TFlists<-apply(orderlists,2,function(col) TF.names[col])
-TFlists
-```
-
 
