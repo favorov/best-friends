@@ -13,7 +13,7 @@ best.friends.of(relation, distance_like = FALSE)
 \item{distance_like}{the default is \code{FALSE} and it shows that the relation values are not like distance, i.e. the better relation is shown by the lagrer value; is the relation is, on the contrary, distance-like, and 0 is the best, the value is \code{TRUE}.}
 }
 \value{
-\code{data.frame} with 3 columns: feature index, friend entity index, uncorrected p-value for the pair
+\code{data.frame} with 4 columns: friend entity index, uncorrected p-value for the pair, feature name, friend name 
 Best friend has the highest order, the worst has the lowest
 }
 \description{

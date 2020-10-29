@@ -8,7 +8,7 @@
 #` matrix where in each column and row there is a value of how the raw specifically friendly to this column.
 #' @param relation is the fetures*entities matrix of the relations between features and the entities
 #' @param distance_like the default is \code{FALSE} and it shows that the relation values are not like distance, i.e. the better relation is shown by the lagrer value; is the relation is, on the contrary, distance-like, and 0 is the best, the value is \code{TRUE}.
-#' @return \code{data.frame} with 3 columns: feature index, friend entity index, uncorrected p-value for the pair
+#' @return \code{data.frame} with 4 columns: friend entity index, uncorrected p-value for the pair, feature name, friend name 
 #' Best friend has the highest order, the worst has the lowest
 #' @export
 best.friends.of<-function(relation,distance_like=FALSE){
@@ -32,7 +32,7 @@ best.friends.of<-function(relation,distance_like=FALSE){
 	feature.ranks<-feature.ranks/dims[1]
 	#we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
 	res<-t(apply(feature.ranks,1,rank_diff_and_p))
-	data.frame(friend=as.integer(res[,1]),p.value=res[,2])
+	data.frame(friend=as.integer(res[,1]),p.value=res[,2],feature.name=rownames(relation),friend.name=colnames(relation)[as.integer(res[,1])])
 }
 
 
