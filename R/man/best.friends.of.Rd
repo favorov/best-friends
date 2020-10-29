@@ -8,7 +8,9 @@
 best.friends.of(relation, distance_like = FALSE)
 }
 \arguments{
-\item{relation}{is the fetures*entities matrix of the relations between features ans entities}
+\item{relation}{is the fetures*entities matrix of the relations between features and the entities}
+
+\item{distance_like}{the default is \code{FALSE} and it shows that the relation values are not like distance, i.e. the better relation is shown by the lagrer value; is the relation is, on the contrary, distance-like, and 0 is the best, the value is \code{TRUE}.}
 }
 \value{
 \code{data.frame} with 3 columns: feature index, friend entity index, uncorrected p-value for the pair
