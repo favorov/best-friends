@@ -7,3 +7,4 @@ We want to define the (specific) best friends ranking for each someone.
 0.0.1 - initial version
 0.1.1 - p-value calculated 
 0.2.1 - cpp based p-value, first working version
+0.2.2 - process NAs in relation; use frankv order parameter for the direction

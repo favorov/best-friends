@@ -1,7 +1,7 @@
 Package: best.friends.of
 Type: Package
 Title: Best Friends of (someone) package
-Version: 0.2.1
+Version: 0.2.2
 Date: 2020-10-20
 Encoding: UTF-8
 Author@R: c( person("Alexander","Favorov",email = "favorov@sensi.org"),
