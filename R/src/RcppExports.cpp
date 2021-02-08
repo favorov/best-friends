@@ -5,20 +5,20 @@
 
 using namespace Rcpp;
 
-// rank_diff_and_p
-NumericVector rank_diff_and_p(NumericVector x);
-RcppExport SEXP _best_friends_of_rank_diff_and_p(SEXP xSEXP) {
+// rank_diff_and_p_for_the_best
+NumericVector rank_diff_and_p_for_the_best(NumericVector x);
+RcppExport SEXP _best_friends_of_rank_diff_and_p_for_the_best(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rank_diff_and_p(x));
+    rcpp_result_gen = Rcpp::wrap(rank_diff_and_p_for_the_best(x));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_best_friends_of_rank_diff_and_p", (DL_FUNC) &_best_friends_of_rank_diff_and_p, 1},
+    {"_best_friends_of_rank_diff_and_p_for_the_best", (DL_FUNC) &_best_friends_of_rank_diff_and_p_for_the_best, 1},
     {NULL, NULL, 0}
 };
 

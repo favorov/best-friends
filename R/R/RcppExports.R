@@ -6,7 +6,7 @@
 #' @param x the list of ranks normalised to 0..1 -- in null, they are independently distributed
 #' 
 #' @return a vector of: index of the best, the best rank-the next rank and the p-value (it is the difference^n)
-rank_diff_and_p <- function(x) {
-    .Call('_best_friends_of_rank_diff_and_p', PACKAGE = 'best.friends.of', x)
+rank_diff_and_p_for_the_best <- function(x) {
+    .Call('_best_friends_of_rank_diff_and_p_for_the_best', PACKAGE = 'best.friends.of', x)
 }
 

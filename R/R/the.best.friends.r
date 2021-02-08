@@ -1,5 +1,5 @@
 #best-friends-of library
-#A. Favorov, V. Ramensky, A. Mironov (c) 2014-2020
+#A. Favorov, V. Ramensky, A. Mironov (c) 2014-2021
 #'
 #'
 #' best.friends.of
@@ -31,7 +31,7 @@ best.friends.of<-function(relation,distance_like=FALSE){
   #}
 	feature.ranks<-feature.ranks/dims[1]
 	#we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
-	res<-t(apply(feature.ranks,1,rank_diff_and_p))
+	res<-t(apply(feature.ranks,1,rank_diff_and_p_for_the_best))
 	data.frame(friend=as.integer(res[,1]),p.value=res[,2],feature.name=rownames(relation),friend.name=colnames(relation)[as.integer(res[,1])])
 }
 
