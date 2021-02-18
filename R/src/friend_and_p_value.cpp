@@ -54,11 +54,11 @@ typedef priority_queue<rank_pair, deque<rank_pair>,less<rank_pair> > pqt;
 //' The corresponding p-value for each of them is the difference of the next and the best to power of the size of the list of entities
 //' next here means the next by rank rather than by index in x
 //' @param x the list of ranks of the feature in different entities normalised to 0..1 -- in null, they are independently distributed
-//' @param n the number of the best entities we look at; the default is to look at all. In thes case, we return a ranking of all entitites byt the feature's rank and the p-values to split to be the worst best friend 
+//' @param n the number of the best entities we look at; the default is to look at all (-1). In thes case, we return a ranking of all entitites byt the feature's rank and the p-values to split to be the worst best friend 
 //'
 //' @return a vector of: index of the best and the p-value (it is the the_next_value-the_best_value^n)
 // [[Rcpp::export]]
-List rank_diff_and_p_for_the_best_n(NumericVector x,int n=x.size()) {
+List rank_diff_and_p_for_the_best_n(NumericVector x,int n=-1) {
 	//we are to find the p-values for difference between pairs of two sequential normalised ranks;
 	//sequential means by value rather than by index in x 
 	//normalised means the rank values are between 0 and 1
@@ -70,6 +70,7 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int n=x.size()) {
 	//p-value is (next_value - this_value)**len
 	int len = x.size(), i;
 	List Res=List::create();
+	if (n<0) {n=len}
 	if (n>len) {n=len}
 	if (n<=0) {n=len} //proceed strnge value of n
 	if (len==0 || n==0) {
