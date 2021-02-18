@@ -5,8 +5,9 @@
 #'
 #' Main function: 
 #' 
-#' @section best.friends.of functions:
-#'	best.friends.of takes the matrix, provide the potential marker - best frind index - p-value table 
+#' @section friends.of functions:
+#' best.friends.of.features takes the features x ettities matrix, and for each feature provides the index of an entity that is the potential best friend of the featurefand the corresponding p-value. The p-value is about the null hypothesis that the difference between the best and the nest index is a result of randomess.  
+#' friends.of.features does the same, but it considers n (possibly, all) the features as potential friends, and p-values is generated for each feature+entity pair. The p-values tests the null hyposthesis that claims that the differnce of the feature's index in this entity and in the next-by-friendship entity is by random. 
 #'
 #' @docType package
 #' @name best.friends.of

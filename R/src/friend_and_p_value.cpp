@@ -2,6 +2,7 @@
 #include <math.h>
 #include <queue>
 
+using namespace std;
 using namespace Rcpp;
 
 //' Estimating the p-value for the putative entity that is the best friend of a feature from a vestor of normalised ranks of the feature for different entities.
@@ -70,9 +71,9 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int n=-1) {
 	//p-value is (next_value - this_value)**len
 	int len = x.size(), i;
 	List Res=List::create();
-	if (n<0) {n=len}
-	if (n>len) {n=len}
-	if (n<=0) {n=len} //proceed strnge value of n
+	if (n<0) {n=len;}
+	if (n>len) {n=len;}
+	if (n<=0) {n=len;} //proceed strnge value of n
 	if (len==0 || n==0) {
 		return (Res); //empty vector -- emplty list
 	}
@@ -84,12 +85,12 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int n=-1) {
 	pqt sorter;
 	for(i = 0; i < len; i++) {
 		double val=x[i];
-		if (sorter.size() < n+1) 
+		if ( sorter.size() < unsigned(n+1) ) 
 			//we need one more value than n to know the next for the n-th; if n==len, there are only n values and the next for n-th is 1.
 			sorter.push(rank_pair(val,i+1));
 		//we just put it in the queue, it is not full yet
 		else {
-			double val=v[i];
+			double val=x[i];
 		   	if (sorter.top().first > val) { 
 				//if our top (the larges we have in heap) is larger than the val, let's add the val and pop the top away
 				// we want smallest
@@ -101,11 +102,11 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int n=-1) {
 	double next=1.;
 	if (n<len) { //we have the next for n-th on top, it is the largest, and we get it
 		next=sorter.top().first;
-		sorter.top;
+		sorter.pop();
 	}
 	while (!sorter.empty()) {
 		rank_pair current=sorter.top();
-		Res.push_front(NumericVector::create(current.second + 1,pow(1.-next+current.first,len)));
+		Res.push_front(NumericVector::create(current.second,pow(1.-next+current.first,len)));
 		next=current.first;
 		sorter.pop();
 	}

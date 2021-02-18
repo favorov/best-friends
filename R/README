@@ -9,3 +9,6 @@ We want to define the (specific) best friends ranking for each someone.
 0.2.1 - cpp based p-value, first working version
 0.2.2 - process NAs in relation; use frankv order parameter for the direction
 0.2.3 - returns names for the feature and the friend 
+0.2.4 - we added the calculation for n top entities - friends of the feature.
+Possibly, n is the number of the features we know, so we test each for being
+the worst of best friends. 

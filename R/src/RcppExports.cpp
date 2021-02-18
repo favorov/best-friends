@@ -16,9 +16,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// rank_diff_and_p_for_the_best_n
+List rank_diff_and_p_for_the_best_n(NumericVector x, int n);
+RcppExport SEXP _best_friends_of_rank_diff_and_p_for_the_best_n(SEXP xSEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(rank_diff_and_p_for_the_best_n(x, n));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_best_friends_of_rank_diff_and_p_for_the_best", (DL_FUNC) &_best_friends_of_rank_diff_and_p_for_the_best, 1},
+    {"_best_friends_of_rank_diff_and_p_for_the_best_n", (DL_FUNC) &_best_friends_of_rank_diff_and_p_for_the_best_n, 2},
     {NULL, NULL, 0}
 };
 
