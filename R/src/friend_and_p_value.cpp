@@ -87,7 +87,7 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int n=-1) {
 		double val=x[i];
 		if ( sorter.size() < unsigned(n+1) ) 
 			//we need one more value than n to know the next for the n-th; if n==len, there are only n values and the next for n-th is 1.
-			sorter.push(rank_pair(val,i+1));
+			sorter.push(rank_pair(val,i+1)); //coord is 1-based
 		//we just put it in the queue, it is not full yet
 		else {
 			double val=x[i];
@@ -95,7 +95,7 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int n=-1) {
 				//if our top (the larges we have in heap) is larger than the val, let's add the val and pop the top away
 				// we want smallest
 				sorter.pop();
-				sorter.push(rank_pair(val, i));
+				sorter.push(rank_pair(val, i+1)); //coord is 1-based
 		    	}
 		}
 	};
