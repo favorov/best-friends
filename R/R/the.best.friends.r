@@ -32,6 +32,8 @@ best.friends.of.features<-function(relation,distance_like=FALSE){
 	feature.ranks<-feature.ranks/dims[1]
 	#we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
 	res<-t(apply(feature.ranks,1,rank_diff_and_p_for_the_best))
+	rn<-rownames(relation); if (length(rn)==0) {as.character(1:dim(relation)[1])} 
+	cn<-rownames(relation); if (length(cn)==0) {as.character(1:dim(relation)[2])} 
 	data.frame(feature=1:dims[1],friend=as.integer(res[,1]),p.value=res[,2],feature.name=rownames(relation),friend.name=colnames(relation)[as.integer(res[,1])])
 }
 
@@ -65,6 +67,7 @@ friends.of.features<-function(relation,distance_like=FALSE,friends_num=-1){
   feature.ranks<-feature.ranks/dims[1]
   #we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
   res<-t(apply(feature.ranks,1,rank_diff_and_p_for_the_best_n,n=friends_num))
+  res
   #data.frame(friend=as.integer(res[,1]),p.value=res[,2],feature.name=rownames(relation),friend.name=colnames(relation)[as.integer(res[,1])])
 }
 
