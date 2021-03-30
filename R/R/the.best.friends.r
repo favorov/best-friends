@@ -66,8 +66,12 @@ friends.of.features<-function(relation,distance_like=FALSE,friends_num=-1){
   #}
   feature.ranks<-feature.ranks/dims[1]
   #we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
-  res<-t(apply(feature.ranks,1,rank_diff_and_p_for_the_best_n,n=friends_num))
-  res
+  qq<-t(apply(feature.ranks,1,rank_diff_and_p_for_the_best_n,n=friends_num))
+  res<-list()
+	uqq<-unlist(qq)
+	res$friend<-matrix(uqq[seq(1,length(uqq),2)],ncol = ncol(relation),nrow=nrow(relation),byrow = TRUE)
+	res$pval<-matrix(uqq[seq(2,length(uqq),2)],ncol = ncol(relation),nrow=nrow(relation),byrow = TRUE)
+	res
   #data.frame(friend=as.integer(res[,1]),p.value=res[,2],feature.name=rownames(relation),friend.name=colnames(relation)[as.integer(res[,1])])
 }
 
