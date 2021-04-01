@@ -48,11 +48,12 @@ best.friends.of.features<-function(relation,distance_like=FALSE){
 #' @export
 friends.of.features<-function(relation,distance_like=FALSE,friends_num=-1){
   dims<-dim(relation)
+	if(-1==friends_num){friends_num=dims[2]}
+  order<-ifelse(distance_like,1,-1)
   #if relation is distance_like, we will order in ascending
   #if nor, descending. 
   #E.g., the least ranks are the 
-  #most close relations 
-  order<-ifelse(distance_like,1,-1)
+  #most close relations
   # if distance_like holds, the least is the best (first)
   #and order==1 (ascending) 
   feature.ranks<-apply(relation,2, 
@@ -66,11 +67,12 @@ friends.of.features<-function(relation,distance_like=FALSE,friends_num=-1){
   #}
   feature.ranks<-feature.ranks/dims[1]
   #we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
-  qq<-t(apply(feature.ranks,1,rank_diff_and_p_for_the_best_n,n=friends_num))
+  unlistres<-unlist(t(apply(feature.ranks,1,rank_diff_and_p_for_the_best_n,n=friends_num)))
   res<-list()
-	uqq<-unlist(qq)
-	res$friend<-matrix(uqq[seq(1,length(uqq),2)],ncol = ncol(relation),nrow=nrow(relation),byrow = TRUE)
-	res$pval<-matrix(uqq[seq(2,length(uqq),2)],ncol = ncol(relation),nrow=nrow(relation),byrow = TRUE)
+	res$friends<-matrix(unlistres[seq(1,length(unlistres),2)],ncol = friends_num, nrow=dims[1], byrow = TRUE)
+	res$pvals<-matrix(unlistres[seq(2,length(unlistres),2)],ncol = friends_num, nrow=dims[1],byrow = TRUE)
+	rownames(res$friends)<-rownames(relation)
+	rownames(res$pvals)<-rownames(relation)
 	res
   #data.frame(friend=as.integer(res[,1]),p.value=res[,2],feature.name=rownames(relation),friend.name=colnames(relation)[as.integer(res[,1])])
 }

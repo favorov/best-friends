@@ -71,9 +71,8 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int n=-1) {
 	//p-value is (next_value - this_value)**len
 	int len = x.size(), i;
 	List Res=List::create();
-	if (n<0) {n=len;}
+	if (n<=0) {n=len;} //proceed strange value of n
 	if (n>len) {n=len;}
-	if (n<=0) {n=len;} //proceed strnge value of n
 	if (len==0 || n==0) {
 		return (Res); //empty vector -- emplty list
 	}
