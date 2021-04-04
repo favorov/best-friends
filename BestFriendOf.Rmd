@@ -32,6 +32,8 @@ if (!suppressWarnings(require('best.friends.of')))
 	install_github('favorov/gene-friends/pkg/R')
 	library(best.friends.of)
 }
+data.digits=2
+p.val.digits=4
 ```
 
 ### Code and examples in R
@@ -44,8 +46,8 @@ And now, let's prepare a simple example. We have five genes (A,B,C,D,E) and thre
 genes<-10
 gene.names<-LETTERS[seq( from = 1, to = genes )]
 regulation=matrix(
-	c(rep(1, genes),
-		0.2, 0.2, 0.2, 0.2, 0.25, rep(0.2,genes-5),
+	c(0.2, 0.2, 0.2, 0.2, 0.25, rep(0.2,genes-5),
+	  rep(1, genes),
 		rep(1, genes),
 		rep(1, genes),
 		rep(1, genes),
@@ -60,13 +62,29 @@ regulation=matrix(
 TF.names<-c('TF1','TF2','TF3','TF4','TF5','TF6','TF7','TF8','TF9','TF10')
 rownames(regulation)<-gene.names
 colnames(regulation)<-TF.names
-regulation
+```
+So, we have the exmple relation matrix:
+```{r}
+noquote(format(regulation,digits = data.digits))
 ```
 
 Applying the function to our example.
 
 ```{r}
-friends<-best.friends.of(regulation)
-friends
+friends<-best.friends.of.features(regulation)
+noquote(format(friends,digits = p.val.digits))
 ```
+
+Add some randomness:
+```{r}
+regulation[,2:ncol(regulation)]<-rep(runif(nrow(regulation)*(ncol(regulation)-1),0.5,1.5))
+noquote(format(regulation,digits = data.digits))
+```
+
+```{r}
+friends<-best.friends.of.features(regulation)
+noquote(format(friends,digits = p.val.digits))
+
+```
+
 
