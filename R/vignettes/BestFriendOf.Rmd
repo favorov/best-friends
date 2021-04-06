@@ -1,8 +1,12 @@
-What is the most dedicated downstream for a selected upstream?
-========================================================
+---
+title: "Best friends: what entity is selected by a feature?"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Best friends: what entity is selected by a feature?}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
 
-Alexander Favorov  
------------------------------------------------
 
 ### `r format(Sys.Date(), "%d %b %Y")` 
 
