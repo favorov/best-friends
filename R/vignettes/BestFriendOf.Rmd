@@ -95,4 +95,5 @@ noquote(format(friends,digits = p.val.digits))
 
 ```
 
+![Toy network example](green-6.png)
 
