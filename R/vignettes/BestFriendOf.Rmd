@@ -97,3 +97,16 @@ noquote(format(friends,digits = p.val.digits))
 
 ![Toy network example](green-6.png)
 
+```{r}
+connections<-matrix(nrow = 10,ncol=10,0)
+names<-c('red','purple','blue','orange','green.1','green.2','green.3','green.4','green.5','green.6')
+rownames(connections)<-names
+colnames(connections)<-names
+connections[,'red']<-5
+connections['red',]<-5
+connections['blue','orange']<-3
+connections['orange','blue']<-3
+connections['purple','blue']<-1
+connections['blue','purple']<-1
+diag(connections)=NA
+```
