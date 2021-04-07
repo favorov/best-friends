@@ -2,11 +2,15 @@
 title: "Best friends: what entity is selected by a feature?"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Best friends: what entity is selected by a feature?}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+ %\VignetteIndexEntry{Best friends: what entity is selected by a feature?}
+ %\VignetteIndexEntry{best.friends.of}
+ %\VignetteIndexEntry{best.friends}
+ %\VignetteIndexEntry{best-friends-of}
+ %\VignetteIndexEntry{best-friends}
+ %\VignettePackage{best.friends.of}
+ %\VignetteEngine{knitr::rmarkdown}
+ \usepackage[utf8]{inputenc}
 ---
-
 
 ### `r format(Sys.Date(), "%d %b %Y")` 
 
