@@ -1,8 +1,8 @@
 Package: best.friends.of
 Type: Package
 Title: Best Friends of (someone) package
-Version: 0.2.4
-Date: 2021-02-18
+Version: 0.2.5
+Date: 2021-04-08
 Encoding: UTF-8
 Author@R: c( person("Alexander","Favorov",email = "favorov@sensi.org"),
     person("Vasily","Ramensky", email="ramensky@gmail.com "),
@@ -18,7 +18,7 @@ Depends: R (>= 3.0.0)
 biocViews: Annotation, Genetics, StatisticalMethod, Bioinformatics
 URL: https://github.com/favorov/gene.friends/pkg
 VignetteBuilder: knitr
-Packaged: 2020-10-20 07:07:07 EST; favorov
+Packaged: 2021-04-08 05:05:05 EST; favorov
 Imports: Rcpp (>= 1.0.5)
 LinkingTo: Rcpp
 Roxygen: list(markdown = TRUE)
