@@ -37,6 +37,7 @@ best.friends.of.features<-function(relation,distance_like=FALSE){
 	data.frame(feature=1:dims[1],friend=as.integer(res[,1]),p.value=res[,2],feature.name=rownames(relation),friend.name=colnames(relation)[as.integer(res[,1])])
 }
 
+#'
 #' friends.of.features
 #'
 #' We have someones to be a friend (entity) as columns and we have what is to be friends of (features) as rows.
