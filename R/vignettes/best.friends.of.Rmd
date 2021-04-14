@@ -12,6 +12,8 @@ vignette: >
 
 ---
 
+[SI AUGUSTUM VIDEAT AMICOS EIUS VIDEATI]{style="float:right"}
+
 ### `r format(Sys.Date(), "%d %b %Y")` 
 
 `r library(knitr)`
@@ -19,9 +21,11 @@ vignette: >
 `r opts_chunk$set(echo=T,message=F,cache=F,warning=F)`
 <!-- cache is off, we save all the necessary things in Rda -->
 
-There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about others. And, if one sees Augustus, it makes sence to infer to see friends(s) of Augustus also.  
+There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about other persons. And, if one sees Augustus, it makes sense to infer to see friends(s) of Augustus also. Lets's try to translate it to staistical inferences.
 
-Suppose we have any two sets, $A$ and $B$, and we have a pairwise relation measure $\left<a,b\right>$ for each of element $(a,b)$ of their Cartesian product $A \times B$. Let's say the relation is similarity rather than distance, the higher it is, the more the elements in the pair are related. Sets $A$ and $B$ could be the same. If a pair $(a,b)$ does not make a sense for the relation we describe, we can say that the measure is $\left<a,b\right>=0$. Now, for each selected $a \in A$ we can make a ranking of all the $b \in B$ elements based on the relation $\left<a,b\right>$. But, actually, the top of the ranking can be filles with $b$'s that do not specifically relate to the selected $a$, they just strongly interact with all or almost all the $a$'s. Sometimes, it makes sense (if we wnat to know what are strongest regulators for gene G?), but sometimes, we want to answer other question: what is the strongest specific regulator for gene G (let's call it the best friend of G). In our notation, $A$ is the set of genes, and $B$ is the set of regulators, and $ \left<a,b\right> $ is some regulatory strenght.
+Suppose we have set of entities $E$ and a set of features $F$, and there is a numeric measure of how a feature relates to an entity $\left<f,e\right>$ for each pair $(f,e) : f \in F, e \in E$. Let's say the higher the $\left<f,e\right>$ number is, the more $f$ relates to $e$. If ets $E$ and $F$ are the same, $\left<f,e\right>$ describes the relation between the elements of the same set, the friendship terminology emerges naturally from this symmetric case.
+
+If a pair $(a,b)$ does not make a sense for the relation we describe, we can say that the measure is $\left<a,b\right>=0$. Now, for each selected $a \in A$ we can make a ranking of all the $b \in B$ elements based on the relation $\left<a,b\right>$. But, actually, the top of the ranking can be filles with $b$'s that do not specifically relate to the selected $a$, they just strongly interact with all or almost all the $a$'s. Sometimes, it makes sense (if we wnat to know what are strongest regulators for gene G?), but sometimes, we want to answer other question: what is the strongest specific regulator for gene G (let's call it the best friend of G). In our notation, $A$ is the set of genes, and $B$ is the set of regulators, and $ \left<a,b\right> $ is some regulatory strenght.
 
 Let's think about ranks. Suppose we ranked all the $b$'s by $\left<a,b\right>$ for a selected $a$. The result is $Rank_a(b)= \# \left\{ \beta \in B : \left< a, \beta \right> \leqslant \left< a, b \right> \right\}$. To answer the 'best-friend' question, we are to calculate more complicated value. We want to raise up those $b$'s that are specifically similar to our $a$, so we first rank all $a$'s for all $b$'s by the $\left<a,b\right>$  values and then rank the ranks our selected $a$ get in the rankings for different $b$'s. The best rank $b$'s now are those that provide unusially high rank for our selcted $a$ in their ranking.
 
