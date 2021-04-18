@@ -1,6 +1,7 @@
 ---
 title: "Best friends: what entity is selected by a feature?"
 output: rmarkdown::html_vignette
+
 vignette: >
  %\VignetteEngine{knitr::knitr}
  %\VignetteIndexEntry{Best friends: what entity is selected by a feature?}
@@ -10,28 +11,31 @@ vignette: >
  %\VignetteIndexEntry{best-friends}
  %\VignetteEncoding{UTF-8}
 
+
 ---
 
 [SI AUGUSTUM VIDEAT AMICOS EIUS VIDEATI]{style="float:right"}
 
-### `r format(Sys.Date(), "%d %b %Y")` 
+##
+
+`r format(Sys.Date(), "%d %b %Y")` 
 
 `r library(knitr)`
 `r options(width=80,keep.source=TRUE)`
 `r opts_chunk$set(echo=T,message=F,cache=F,warning=F)`
 <!-- cache is off, we save all the necessary things in Rda -->
 
+<div style="line-height: 1.5em;">
+
 There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about other persons. And, if one sees Augustus, it makes sense to infer to see friends(s) of Augustus also. Lets's try to translate it to staistical inferences.
 
-Suppose we have set of entities $E$ and a set of features $F$, and there is a numeric measure of how a feature relates to an entity $\left<f,e\right>$ for each pair $(f,e) : f \in F, e \in E$. Let's say the higher the $\left<f,e\right>$ number is, the more $f$ relates to $e$. If ets $E$ and $F$ are the same, $\left<f,e\right>$ describes the relation between the elements of the same set  $(f,e) : f \in F, e \in F$, and the friendship terminology emerges naturally from this symmetric case. Still, the friendship relation itself is asymmetric: a friend cares about Augustus, while Augustus does not. Let's start with asymetric setup, $F \ne E$.
+Suppose we have set of entities $E$ and a set of features $F$, and there is a numeric measure of how a feature relates to an entity $A\left(f_i,e_j\right)$ for each pair $(f_i,e_j) : f_i \in F, e_j \in E$. The higher is $A\left(f_i,e_j\right)$ number is, the more $f_i$ relates to $e_j$. If the sets $E$ and $F$ are the same, $A\left(f_i,e_j\right)$ describes the relation between the elements of the same set, and the friendship terminology emerges naturally from this symmetric case. Still, the friendship relation itself is asymmetric: a friend cares about Augustus, while Augustus does not. Let's start with asymmetric setup, $F \ne E$.
 
-For each selected entity $e \in E$ we rank of all the features $f \in F$ by the relation $\left<f,e\right>$. But, actually, the top of the ranking can be filles with $b$'s that do not specifically relate to the selected $a$, they just strongly interact with all or almost all the $a$'s. Sometimes, it makes sense (if we wnat to know what are strongest regulators for gene G?), but sometimes, we want to answer other question: what is the strongest specific regulator for gene G (let's call it the best friend of G). In our notation, $A$ is the set of genes, and $B$ is the set of regulators, and $ \left<a,b\right> $ is some regulatory strenght.
+## Best friends
 
-Let's think about ranks. Suppose we ranked all the $b$'s by $\left<a,b\right>$ for a selected $a$. The result is $Rank_a(b)= \# \left\{ \beta \in B : \left< a, \beta \right> \leqslant \left< a, b \right> \right\}$. To answer the 'best-friend' question, we are to calculate more complicated value. We want to raise up those $b$'s that are specifically similar to our $a$, so we first rank all $a$'s for all $b$'s by the $\left<a,b\right>$  values and then rank the ranks our selected $a$ get in the rankings for different $b$'s. The best rank $b$'s now are those that provide unusially high rank for our selcted $a$ in their ranking.
+For each entity $\epsilon \in E$ let's rank all the $A\left(f_i,\epsilon \right), f_i \in F$. Let's normalise the ranks, dividing by $\left|F\right|$, and let's denote the resulting value as $\left<f_i,\epsilon \right>$. All these normalised rank values (let's refer to them as) are in $\left[0,1\right]$. Let's look at the ranks of one selected feature $\varphi$ in different entities, $\left< \varphi, e_j \right>, e_j \in E$. If all the relations are at random (null hypothesis), the values $\left< \varphi, e_j \right>$ are independently and uniformly distributed in  $\left[0,1\right]$.  If an entity $e_j$ is friendly for the feature $\varphi$, the corresponding $\left< \varphi, e_j  \right>$ is to be lager than the values for other entitites $\left< \varphi, e_m  \right>, m \ne j$, and the difference is to be unexpectedly large for the null hypothesis. A friend of Augustus cares about Augustus more than about other persons. Statistics allows us to estimate the p-value of the difference and, if it is low, to conclude that the entity $e_j$ is the best friend of the feature $\varphi$. In this case, $\varphi$ is a marker for $e_j$. 
 
-$$BFRank_a(b)=Rank_a(Rank_b(a))$$
-
-Please note, the $\left<a,b\right>$ measure is not to be symmetric, the backwards value $\left<b,a\right>$ is never used and thus even not required to be defined.
+But, actually, the top of the ranking can be filles with $b$'s that do not specifically relate to the selected $a$, they just strongly interact with all or almost all the $a$'s. Sometimes, it makes sense (if we wnat to know what are strongest regulators for gene G?), but sometimes, we want to answer other question: what is the strongest specific regulator for gene G (let's call it the best friend of G). In our notation, $A$ is the set of genes, and $B$ is the set of regulators, and $ \left<a,b\right> $ is some regulatory strenght.
 
 
 ```{r source, echo=FALSE}
@@ -49,6 +53,7 @@ if (!suppressWarnings(require('best.friends.of')))
 data.digits=2
 p.val.digits=4
 ```
+</div>
 
 ## Code and examples in R
 
