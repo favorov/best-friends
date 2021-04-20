@@ -144,15 +144,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span style="float:right">SI AUGUSTUM VIDEAT AMICOS EIUS VIDEATI</span></p>
 <div id="section" class="section level2">
 <h2></h2>
-<p>18 Apr 2021</p>
+<p>20 Apr 2021</p>
 <!-- cache is off, we save all the necessary things in Rda -->
 <div style="line-height: 1.5em;">
 <p>There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about other persons. And, if one sees Augustus, it makes sense to infer to see friends(s) of Augustus also. Lets’s try to translate it to staistical inferences.</p>
 <p>Suppose we have set of entities <span class="math inline">\(E\)</span> and a set of features <span class="math inline">\(F\)</span>, and there is a numeric measure of how a feature relates to an entity <span class="math inline">\(A\left(f_i,e_j\right)\)</span> for each pair <span class="math inline">\((f_i,e_j) : f_i \in F, e_j \in E\)</span>. The higher is <span class="math inline">\(A\left(f_i,e_j\right)\)</span> number is, the more <span class="math inline">\(f_i\)</span> relates to <span class="math inline">\(e_j\)</span>. If the sets <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> are the same, <span class="math inline">\(A\left(f_i,e_j\right)\)</span> describes the relation between the elements of the same set, and the friendship terminology emerges naturally from this symmetric case. Still, the friendship relation itself is asymmetric: a friend cares about Augustus, while Augustus does not. Let’s start with asymmetric setup, <span class="math inline">\(F \ne E\)</span>.</p>
+<p>Let’s speak about genes and TF’s. Suppose, we look at a gene and the TF, that is the strongest for it. Possibly, thi TF they just strongly interact with all genes. Sometimes, it makes sense, but sometimes, we want to answer other question: what TF is the most specific regulator for gene G. The gene is the best friend to this TF.</p>
 <div id="best-friends" class="section level2">
 <h2>Best friends</h2>
-<p>For each entity <span class="math inline">\(\epsilon \in E\)</span> let’s rank all the <span class="math inline">\(A\left(f_i,\epsilon \right), f_i \in F\)</span>. Let’s normalise the ranks, dividing by <span class="math inline">\(\left|F\right|\)</span>, and let’s denote the resulting value as <span class="math inline">\(\left&lt;f_i,\epsilon \right&gt;\)</span>. All these normalised rank values (let’s refer to them as) are in <span class="math inline">\(\left[0,1\right]\)</span>. Let’s look at the ranks of one selected feature <span class="math inline">\(\varphi\)</span> in different entities, <span class="math inline">\(\left&lt; \varphi, e_j \right&gt;, e_j \in E\)</span>. If all the relations are at random (null hypothesis), the values <span class="math inline">\(\left&lt; \varphi, e_j \right&gt;\)</span> are independently and uniformly distributed in <span class="math inline">\(\left[0,1\right]\)</span>. If an entity <span class="math inline">\(e_j\)</span> is friendly for the feature <span class="math inline">\(\varphi\)</span>, the corresponding <span class="math inline">\(\left&lt; \varphi, e_j \right&gt;\)</span> is to be lager than the values for other entitites <span class="math inline">\(\left&lt; \varphi, e_m \right&gt;, m \ne j\)</span>, and the difference is to be unexpectedly large for the null hypothesis. A friend of Augustus cares about Augustus more than about other persons. Statistics allows us to estimate the p-value of the difference and, if it is low, to conclude that the entity <span class="math inline">\(e_j\)</span> is the best friend of the feature <span class="math inline">\(\varphi\)</span>. In this case, <span class="math inline">\(\varphi\)</span> is a marker for <span class="math inline">\(e_j\)</span>.</p>
-<p>But, actually, the top of the ranking can be filles with <span class="math inline">\(b\)</span>’s that do not specifically relate to the selected <span class="math inline">\(a\)</span>, they just strongly interact with all or almost all the <span class="math inline">\(a\)</span>’s. Sometimes, it makes sense (if we wnat to know what are strongest regulators for gene G?), but sometimes, we want to answer other question: what is the strongest specific regulator for gene G (let’s call it the best friend of G). In our notation, <span class="math inline">\(A\)</span> is the set of genes, and <span class="math inline">\(B\)</span> is the set of regulators, and $ &lt;a,b&gt; $ is some regulatory strenght.</p>
+<p>For each entity <span class="math inline">\(\epsilon \in E\)</span> let’s rank all the <span class="math inline">\(A\left(f_i,\epsilon \right), f_i \in F\)</span>. The ranking is acsending, so rank 1 is for the maximal value. Let’s normalise the ranks, dividing by <span class="math inline">\(\left|F\right|\)</span>, and let’s denote the resulting value as <span class="math inline">\(\left&lt;f_i,\epsilon \right&gt;\)</span>. All these normalised rank values (let’s refer to them as) are in <span class="math inline">\(\left[0,1\right]\)</span>. Let’s look at the ranks of one selected feature <span class="math inline">\(\varphi\)</span> in different entities, <span class="math inline">\(\left&lt; \varphi, e_j \right&gt;, e_j \in E\)</span>. If all the relations are at random (null hypothesis), the values <span class="math inline">\(\left&lt; \varphi, e_j \right&gt;\)</span> are independently and uniformly distributed in <span class="math inline">\(\left[0,1\right]\)</span>. If an entity <span class="math inline">\(e_j\)</span> is friendly for the feature <span class="math inline">\(\varphi\)</span>, the corresponding <span class="math inline">\(\left&lt; \varphi, e_j \right&gt;\)</span> is to be lager than the values for all other entitites <span class="math inline">\(\left&lt; \varphi, e_m \right&gt;, m \ne j\)</span>, and the difference is to be unexpectedly large for the null hypothesis. A friend of Augustus cares about Augustus more than about other persons. Let’s take the difference between the mininal and the minimal of the remainder ranks as the observation . It characterise the differnce between the best (minimal) rank and all the others. U-statistics allows us to estimate the p-value for the observation, if it is low, to conclude that the entity <span class="math inline">\(e_j\)</span> is the best friend of the feature <span class="math inline">\(\varphi\)</span>. In this case, <span class="math inline">\(\varphi\)</span> is a marker for <span class="math inline">\(e_j\)</span>. For each feature, the <code>best.friends.of.features</code>, returns the possible best friend, and the p-value for the observation provided the null model.</p>
+</div>
+<div id="friends" class="section level2">
+<h2>Friends</h2>
+<p>Sometimes, the best friend differs only a bit from the next.</p>
 </div>
 </div>
 </div>
@@ -211,29 +215,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>regulation[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(regulation)]<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="fu">runif</span>(<span class="fu">nrow</span>(regulation)<span class="sc">*</span>(<span class="fu">ncol</span>(regulation)<span class="sc">-</span><span class="dv">1</span>),<span class="fl">0.5</span>,<span class="fl">1.5</span>))</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(regulation,<span class="at">digits =</span> data.digits))</span></code></pre></div>
 <pre><code>##   TF1  TF2  TF3  TF4  TF5  TF6  TF7  TF8  TF9  TF10
-## A 0.20 1.07 1.06 1.05 1.40 1.28 0.56 0.53 1.29 1.46
-## B 0.20 0.63 1.50 1.32 0.67 0.97 1.34 0.81 0.89 0.51
-## C 0.20 1.32 1.16 1.30 0.91 0.72 1.13 1.11 1.15 1.28
-## D 0.20 1.24 1.28 1.27 0.59 0.93 1.04 0.98 1.50 1.08
-## E 0.25 0.85 0.64 1.18 1.20 1.07 1.32 0.76 1.20 0.83
-## F 0.20 0.53 1.29 1.05 0.99 1.43 1.31 1.22 1.19 0.59
-## G 0.20 1.05 0.90 0.81 0.71 1.44 0.76 1.23 0.91 1.34
-## H 0.20 0.83 0.89 1.10 1.18 0.91 1.48 1.24 1.05 1.20
-## I 0.20 0.70 0.54 1.09 1.39 1.10 1.27 0.90 0.74 0.95
-## J 0.20 1.05 0.77 1.23 0.78 0.72 0.50 0.93 0.51 0.72</code></pre>
+## A 0.20 0.88 0.92 1.10 1.28 0.80 0.62 1.39 0.97 1.46
+## B 0.20 0.60 1.19 1.16 1.10 1.03 1.00 1.01 0.78 0.51
+## C 0.20 0.81 0.65 0.59 0.61 1.10 1.00 1.00 0.99 0.95
+## D 0.20 1.39 0.70 1.33 1.13 0.63 0.84 0.79 1.06 1.36
+## E 0.25 1.39 0.82 1.19 0.61 1.01 1.29 0.72 0.77 1.17
+## F 0.20 0.81 0.55 1.06 1.31 1.19 1.41 1.33 0.97 0.74
+## G 0.20 0.70 0.80 0.98 1.49 1.33 0.85 0.52 1.39 1.19
+## H 0.20 1.05 1.35 0.89 0.74 1.37 0.86 0.87 0.67 0.64
+## I 0.20 0.51 1.33 1.43 0.77 0.87 0.71 0.73 1.44 0.95
+## J 0.20 0.69 0.61 1.26 0.98 1.17 0.99 0.80 1.40 1.03</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>friends<span class="ot">&lt;-</span><span class="fu">best.friends.of.features</span>(regulation)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(friends,<span class="at">digits =</span> p.val.digits))</span></code></pre></div>
 <pre><code>##    feature friend p.value feature.name friend.name
-## 1        1      5  1.0000            A         TF5
+## 1        1      8  1.0000            A         TF8
 ## 2        2      3  1.0000            B         TF3
-## 3        3      2  0.3487            C         TF2
-## 4        4      9  0.3487            D         TF9
-## 5        5      1  0.1074            E         TF1
-## 6        6      3  1.0000            F         TF3
-## 7        7      6  0.3487            G         TF6
-## 8        8      7  1.0000            H         TF7
-## 9        9      5  0.1074            I         TF5
-## 10      10      4  0.3487            J         TF4</code></pre>
+## 3        3      7  1.0000            C         TF7
+## 4        4      2  1.0000            D         TF2
+## 5        5      1  1.0000            E         TF1
+## 6        6      7  0.3487            F         TF7
+## 7        7      5  0.3487            G         TF5
+## 8        8      3  1.0000            H         TF3
+## 9        9      4  1.0000            I         TF4
+## 10      10      9  0.3487            J         TF9</code></pre>
 </div>
 <div id="toy-example-2" class="section level3">
 <h3>Toy example 2</h3>
