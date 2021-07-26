@@ -29,19 +29,21 @@ vignette: >
 
 There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about other persons. And, if one sees Augustus, it makes sense to infer to see friends(s) of Augustus also. Lets's try to translate it to staistical inferences.
 
-Suppose we have set of entities $E$ and a set of features $F$, and there is a numeric measure of how a feature relates to an entity $A\left(f_i,e_j\right)$ for each pair $(f_i,e_j) : f_i \in F, e_j \in E$. The higher is $A\left(f_i,e_j\right)$ value is, the more $f_i$ relates to $e_j$. If the sets $E$ and $F$ are the same, $A\left(f_i,e_j\right)$ describes the relation between the elements of the same set, and the friendship terminology emerges naturally from this symmetric case. Still, the friendship relation itself is asymmetric: a friend cares about Augustus, while Augustus does not. Let's start with asymmetric setup, $F \ne E$.
+Suppose we have set of entities $E$ and a set of features $F$, and there is a numeric measure of how a feature relates to an entity $A\left(f_i,e_j\right)$ for each pair $(f_i,e_j) : f_i \in F, e_j \in E$. The higher is $A\left(f_i,e_j\right)$ value is, the more $f_i$ relates to $e_j$. If the sets $E$ and $F$ are the same, $A\left(f_i,e_j\right)$ describes the relation between the elements of the same set; the friendship terminology emerges naturally from this symmetric case. Still, the friendship relation itself is asymmetric: a friend cares about Augustus, while Augustus does not. Let's start with asymmetric setup, $F \ne E$.
 
-Let's speak about genes and TF's. Suppose, we look at a gene and we want to define the TF that is the gene's best friend. The na&iuml;ve idea is to look for the TF that is the strongest for the gene ($A(gene,TF)$ is maximal among all TFs). Still, it's possible that this TF strongly interact with all genes. Sometimes, it is what we want to find, but now we want to answer other question: what TF is the most specific regulator for gene G. The gene is the best friend to this TF.
+An example of an asymmenric setup ($E \neq F$) that is easy to think about is a set of genes as entities and their regulation by transcription factors (TF's) as features. The matrix shows the strength of the regulation. We look at a TF and we want to know whether a gene is its friend, i.e. whether the gene is specifically sensitive to the regulation by the TF. The na&iuml;ve idea is to look for a gene that is the most sensitive for the TF. Still, it's possible that this gene strongly interact with all the TFs. Sometimes, it is what we want to find, but now we want to answer another question: what gene G is the most specific regulation downstream for the TF and is the specificity enough to say that G is the best friend for the TF?
 
 ## Best friends
 
-For every entity $\epsilon \in E$ let's rank all the features $A\left(f,\epsilon \right), f \in F$. The ranking is acsending, so rank 1 is for the maximal value. Let's normalise the ranks, dividing by $\left|F\right|$, and let's denote the resulting value as $r\left(f,\epsilon \right)$. All the normalised rank values $r\left(f,\epsilon \right)$ (let's refer to them as ranks) are in $\left[0,1\right]$. Let's look at the ranks of one selected feature $\varphi$ in different entities, $r\left( \varphi, e_j \right), e_j \in E$. If all the relations are at random (null hypothesis), the values $r\left( \varphi, e_j \right)$ are independently and uniformly distributed in  $\left[0,1\right]$. If an entity $e_j$ is friendly for the feature $\varphi$, the corresponding $r\left( \varphi, e_j  \right)$ is to be larger than the values for all other entitites $r\left( \varphi, e_m  \right), m \ne j$, and the difference is to be unexpectedly large for the null hypothesis. A friend of Augustus cares about Augustus more than about other persons. Let's take the difference between the mininal and the minimal of the remainder ranks (the best-after-the best) as the observation for feature $\varphi$. It characterise the differnce between the best (minimal) rank and all the others. U-statistics allows us to estimate the p-value for the observation, if it is low, to conclude that the entity $e_j$ is the best friend of the feature $\varphi$. In this case, $\varphi$ is a marker for $e_j$. For each feature, the `best.friends.of.features`, returns the possible best friend, and the p-value for the observation provided the null model. 
+For every entity $\epsilon$ let's rank all the features $f$ by the $A\left( f,\epsilon \right)$ value. The ranking is acsending, so rank 1 is for the maximal value. Let's normalise the ranks by dividing by $\left|F\right|$, and let's denote the resulting value as $r\left(f,\epsilon \right)$. All the values (let's refer to them as ranks) are in $\left[0,1\right]$. Let's look at the ranks of one selected feature $\varphi$ in different entities, $r\left( \varphi, e_j \right), e_j \in E$. If all the relations are at random (null hypothesis), the values $r\left( \varphi, e_j \right)$ are independently and uniformly distributed in  $\left[0,1\right]$. If an entity $e_j$ is friendly for the feature $\varphi$, the corresponding $r\left( \varphi, e_j  \right)$ is to be larger than the values for all other entitites $r\left( \varphi, e_m  \right), m \ne j$, and the difference is to be unexpectedly large for the null hypothesis. A friend of Augustus cares about Augustus more than about other persons. Let's take the difference between the mininal and the minimal of the remainder ranks (the best-after-the best) as the observation for feature $\varphi$. It characterise the differnce between the best (minimal) rank and all the others. U-statistics allows us to estimate the p-value for the observation, if it is low, to conclude that the entity $e_j$ is the best friend of the feature $\varphi$. In this case, $\varphi$ is a marker for $e_j$. For each feature, the `best.friends.of.features`, returns the possible best friend, and the p-value for the observation provided the null model. 
 
 ## Friends
 
 The `best.friends.of.features` works great if the feature  $\varphi$ has only one best friend. What happens if there are more than one and they almost equally freindly to  $\varphi$. The difference between the best and the best-after-the-best is very small, and if fits the null hypothesis really well. But, if we go on looking at sequential differences in the ordering of ranks $r\left( \varphi, e_j  \right), e_j \in E$, we can find an unexpectegly high difference on one of the steps. Lets's denote the increasingly ordered  $r\left( \varphi, e_j  \right)$ as  $\left< \varphi, e_{j_i}  \right>$. 
 
 Sometimes, the best friend differs only a bit from the next.
+
+## Code and examples in R
 
 ```{r source, echo=FALSE}
 if (!suppressWarnings(require('best.friends.of')))
@@ -60,11 +62,10 @@ p.val.digits=4
 ```
 </div>
 
-## Code and examples in R
 
 ### Toy example 1
 
-And now, let's prepare a simple example. We have five genes (A,B,C,D,E) and three TFs (TF1,TF2,TF3). The strength of the regulation is shown by the matrix. 
+And now, let's prepare a simple example. We have ten TFs (TF1, TF2, ..) and ten genes (A,B,...) The strength of the regulation is shown by the matrix. 
 
 ```{r}
 genes<-10
@@ -92,12 +93,19 @@ So, we have the exmple relation matrix:
 noquote(format(regulation,digits = data.digits))
 ```
 
-Applying the function to our example.
+Searching for the best friends for each feature:
 
 ```{r}
 friends<-best.friends.of.features(regulation)
 noquote(format(friends,digits = p.val.digits))
 ```
+
+Searching for the all possible friend function to our example.
+```{r}
+all.friends<-friends.of.features(regulation)
+noquote(all.friends)
+```
+
 
 Add some randomness:
 ```{r}
