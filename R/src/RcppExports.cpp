@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // rank_diff_and_p_for_the_best
 NumericVector rank_diff_and_p_for_the_best(NumericVector x);
-RcppExport SEXP _best_friends_of_rank_diff_and_p_for_the_best(SEXP xSEXP) {
+RcppExport SEXP _best_friends_rank_diff_and_p_for_the_best(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -18,7 +18,7 @@ END_RCPP
 }
 // rank_diff_and_p_for_the_best_n
 List rank_diff_and_p_for_the_best_n(NumericVector x, int n);
-RcppExport SEXP _best_friends_of_rank_diff_and_p_for_the_best_n(SEXP xSEXP, SEXP nSEXP) {
+RcppExport SEXP _best_friends_rank_diff_and_p_for_the_best_n(SEXP xSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -30,12 +30,12 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_best_friends_of_rank_diff_and_p_for_the_best", (DL_FUNC) &_best_friends_of_rank_diff_and_p_for_the_best, 1},
-    {"_best_friends_of_rank_diff_and_p_for_the_best_n", (DL_FUNC) &_best_friends_of_rank_diff_and_p_for_the_best_n, 2},
+    {"_best_friends_rank_diff_and_p_for_the_best", (DL_FUNC) &_best_friends_rank_diff_and_p_for_the_best, 1},
+    {"_best_friends_rank_diff_and_p_for_the_best_n", (DL_FUNC) &_best_friends_rank_diff_and_p_for_the_best_n, 2},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_best_friends_of(DllInfo *dll) {
+RcppExport void R_init_best_friends(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

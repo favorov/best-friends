@@ -47,9 +47,9 @@ best.friends.test<-function(relation,distance_like=FALSE){
 #' @return \code{data.frame} with 4 columns: friend entity index, uncorrected p-value for the pair, feature name, friend name 
 #' Best friend has the highest order, the worst has the lowest
 #' @export
-friends.of.features<-function(relation,distance_like=FALSE,friends.number=-1){
+friends.test<-function(relation,distance_like=FALSE,friends.number=-1){
   dims<-dim(relation)
-	if(-1==friends_num){friends.number=dims[2]}
+	if(-1==friends.number){friends.number=dims[2]}
   order<-ifelse(distance_like,1,-1)
   #if relation is distance_like, we will order in ascending
   #if nor, descending. 

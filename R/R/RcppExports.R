@@ -10,7 +10,7 @@
 #' 
 #' @return a vector of: index of the best and the p-value (it is the the_next_value-the_best_value^n)
 rank_diff_and_p_for_the_best <- function(x) {
-    .Call('_best_friends_of_rank_diff_and_p_for_the_best', PACKAGE = 'best.friends.of', x)
+    .Call('_best_friends_rank_diff_and_p_for_the_best', PACKAGE = 'best.friends', x)
 }
 
 #' Estimating the p-value for n entities that are potentially the best friend of a feature from a vestor of normalised ranks of the feature for different entities.
@@ -22,6 +22,6 @@ rank_diff_and_p_for_the_best <- function(x) {
 #'
 #' @return a vector of: index of the best and the p-value (it is the the_next_value-the_best_value^n)
 rank_diff_and_p_for_the_best_n <- function(x, n = -1L) {
-    .Call('_best_friends_of_rank_diff_and_p_for_the_best_n', PACKAGE = 'best.friends.of', x, n)
+    .Call('_best_friends_rank_diff_and_p_for_the_best_n', PACKAGE = 'best.friends', x, n)
 }
 

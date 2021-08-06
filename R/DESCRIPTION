@@ -1,14 +1,15 @@
-Package: best.friends.of
+Package: best.friends
 Type: Package
-Title: Best Friends of (someone) package
-Version: 0.2.5
+Title: We look for communities that are friends of elements. 
+Version: 0.3
 Date: 2021-04-08
 Encoding: UTF-8
 Author@R: c( person("Alexander","Favorov",email = "favorov@sensi.org"),
+	c( person("Vera","Mukhima",email = "atgc@vigg.ru"),
     person("Vasily","Ramensky", email="ramensky@gmail.com "),
     person("Andrey","A.","Mironov", email="mironov@bioinf.fbb.msu.ru ")
     )
-Author: Alexander Favorov, Vasily Ramensky, Andrey A. Mironov
+Author: Alexander Favorov, Vera Mukhina, Vasily Ramensky, Andrey A. Mironov
 Maintainer: Alexander Favorov <favorov@sensi.org>
 Description: We have some similarity of interaction measure for pairs of instnces, e.q. genes and regulators.
     We want to know what genes are the specifially best friends for selected regulators and vice versa.
@@ -18,7 +19,7 @@ Depends: R (>= 3.0.0)
 biocViews: Annotation, Genetics, StatisticalMethod, Bioinformatics
 URL: https://github.com/favorov/gene.friends/pkg
 VignetteBuilder: knitr
-Packaged: 2021-04-08 05:05:05 EST; favorov
+Packaged: 2021-08-08 05:05:05 EST; favorov
 Imports: Rcpp (>= 1.0.5)
 LinkingTo: Rcpp
 Roxygen: list(markdown = TRUE)
