@@ -201,17 +201,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Searching for the best friends for each feature:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>friends<span class="ot">&lt;-</span><span class="fu">best.friends.test</span>(regulation)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(friends,<span class="at">digits =</span> p.val.digits))</span></code></pre></div>
-<pre><code>##    element friend  p.value element.name friend.name
-## 1        1      2 1.000000            A         TF2
-## 2        2      2 1.000000            B         TF2
-## 3        3      2 1.000000            C         TF2
-## 4        4      2 1.000000            D         TF2
-## 5        5      1 0.002533            E         TF1
-## 6        6      2 1.000000            F         TF2
-## 7        7      2 1.000000            G         TF2
-## 8        8      2 1.000000            H         TF2
-## 9        9      2 1.000000            I         TF2
-## 10      10      2 1.000000            J         TF2</code></pre>
+<pre><code>##    element friend   p.value element.name friend.name
+## 1        1      2 1.0000000            A         TF2
+## 2        2      2 1.0000000            B         TF2
+## 3        3      2 1.0000000            C         TF2
+## 4        4      2 1.0000000            D         TF2
+## 5        5      1 0.0009766            E         TF1
+## 6        6      2 1.0000000            F         TF2
+## 7        7      2 1.0000000            G         TF2
+## 8        8      2 1.0000000            H         TF2
+## 9        9      2 1.0000000            I         TF2
+## 10      10      2 1.0000000            J         TF2</code></pre>
 <p>Searching for the all possible friend function to our example.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>all.friends<span class="ot">&lt;-</span><span class="fu">friends.test</span>(regulation)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(all.friends)</span></code></pre></div>
@@ -229,17 +229,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## J    2    3    4    5    6    7    8    9   10     1
 ## 
 ## $pvals
-##          [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]      [,9]       [,10]
-## A 1.000000000    1    1    1    1    1    1    1 0.5987369 0.006046618
-## B 1.000000000    1    1    1    1    1    1    1 0.5987369 0.006046618
-## C 1.000000000    1    1    1    1    1    1    1 0.5987369 0.006046618
-## D 1.000000000    1    1    1    1    1    1    1 0.5987369 0.006046618
-## E 0.002532952    1    1    1    1    1    1    1 1.0000000 0.002532952
-## F 1.000000000    1    1    1    1    1    1    1 0.5987369 0.006046618
-## G 1.000000000    1    1    1    1    1    1    1 0.5987369 0.006046618
-## H 1.000000000    1    1    1    1    1    1    1 0.5987369 0.006046618
-## I 1.000000000    1    1    1    1    1    1    1 0.5987369 0.006046618
-## J 1.000000000    1    1    1    1    1    1    1 0.5987369 0.006046618</code></pre>
+##           [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]      [,9]        [,10]
+## A 1.0000000000    1    1    1    1    1    1    1 0.5646303 0.0028007539
+## B 1.0000000000    1    1    1    1    1    1    1 0.5646303 0.0028007539
+## C 1.0000000000    1    1    1    1    1    1    1 0.5646303 0.0028007539
+## D 1.0000000000    1    1    1    1    1    1    1 0.5646303 0.0028007539
+## E 0.0009765625    1    1    1    1    1    1    1 1.0000000 0.0009765625
+## F 1.0000000000    1    1    1    1    1    1    1 0.5646303 0.0028007539
+## G 1.0000000000    1    1    1    1    1    1    1 0.5646303 0.0028007539
+## H 1.0000000000    1    1    1    1    1    1    1 0.5646303 0.0028007539
+## I 1.0000000000    1    1    1    1    1    1    1 0.5646303 0.0028007539
+## J 1.0000000000    1    1    1    1    1    1    1 0.5646303 0.0028007539</code></pre>
 <p>Add some randomness:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>regulation[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(regulation)]<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="fu">runif</span>(<span class="fu">nrow</span>(regulation)<span class="sc">*</span>(<span class="fu">ncol</span>(regulation)<span class="sc">-</span><span class="dv">1</span>),<span class="fl">0.5</span>,<span class="fl">1.5</span>))</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(regulation,<span class="at">digits =</span> data.digits))</span></code></pre></div>
@@ -257,16 +257,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>friends<span class="ot">&lt;-</span><span class="fu">best.friends.test</span>(regulation)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(friends,<span class="at">digits =</span> p.val.digits))</span></code></pre></div>
 <pre><code>##    element friend p.value element.name friend.name
-## 1        1      6  0.3487            A         TF6
-## 2        2      9  0.3487            B         TF9
-## 3        3      9  0.1074            C         TF9
-## 4        4      5  1.0000            D         TF5
-## 5        5      1  0.3487            E         TF1
-## 6        6      2  1.0000            F         TF2
-## 7        7     10  0.1074            G        TF10
-## 8        8      3  1.0000            H         TF3
-## 9        9      4  0.3487            I         TF4
-## 10      10      9  0.3487            J         TF9</code></pre>
+## 1        1      6 0.30795            A         TF6
+## 2        2      9 0.30795            B         TF9
+## 3        3      9 0.08101            C         TF9
+## 4        4      5 1.00000            D         TF5
+## 5        5      1 0.30795            E         TF1
+## 6        6      2 1.00000            F         TF2
+## 7        7     10 0.08101            G        TF10
+## 8        8      3 1.00000            H         TF3
+## 9        9      4 0.30795            I         TF4
+## 10      10      9 0.30795            J         TF9</code></pre>
 </div>
 <div id="toy-example-2" class="section level3">
 <h3>Toy example 2</h3>
