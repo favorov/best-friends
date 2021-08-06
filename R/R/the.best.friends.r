@@ -44,7 +44,7 @@ best.friends.test<-function(relation,distance_like=FALSE){
 #' @inheritParams best.friends.test
 #' @param friends.number number of entities we consider for each feature; the default -1 means all; if friends.number is 1, 
 #' the call do essentialy the same as the best.friends.test call
-#' @return \code{data.frame} with 4 columns: friend entity index, uncorrected p-value for the pair, feature name, friend name 
+#' @return \code{data.frame} with 4 columns: friend community index, uncorrected p-value for the pair, feature name, friend name 
 #' Best friend has the highest order, the worst has the lowest
 #' @export
 friends.test<-function(relation,distance_like=FALSE,friends.number=-1){
@@ -63,11 +63,8 @@ friends.test<-function(relation,distance_like=FALSE,friends.number=-1){
                                             na.last=T,order=order)
                        }
   )
-  #if(!distance_like) {
-  #  feature.ranks <- dims[1]+1 - feature.ranks
-  #}
   element.ranks<-element.ranks/dims[1]
-  #we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
+  #we applied ranking column-by-column (community-by-community); A's were ranked in each row,
   unlistres<-unlist(t(apply(element.ranks,1,rank_diff_and_p_for_the_best_n,n=friends.number)))
   res<-list()
 	res$friends<-matrix(unlistres[seq(1,length(unlistres),2)],ncol = friends.number, nrow=dims[1], byrow = TRUE)
