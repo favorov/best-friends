@@ -55,7 +55,7 @@ if (!suppressWarnings(require('best.friends')))
 		library("devtools")
 	}
 	install_github('favorov/gene-friends/pkg/R')
-	library(best.friends.of)
+	library(best.friends)
 }
 data.digits=2
 p.val.digits=4
@@ -96,13 +96,13 @@ noquote(format(regulation,digits = data.digits))
 Searching for the best friends for each feature:
 
 ```{r}
-friends<-best.friends.of.features(regulation)
+friends<-best.friends.test(regulation)
 noquote(format(friends,digits = p.val.digits))
 ```
 
 Searching for the all possible friend function to our example.
 ```{r}
-all.friends<-friends.of.features(regulation)
+all.friends<-friends.test(regulation)
 noquote(all.friends)
 ```
 
@@ -114,7 +114,7 @@ noquote(format(regulation,digits = data.digits))
 ```
 
 ```{r}
-friends<-best.friends.of.features(regulation)
+friends<-best.friends.test(regulation)
 noquote(format(friends,digits = p.val.digits))
 
 ```
