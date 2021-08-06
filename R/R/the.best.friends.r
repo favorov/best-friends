@@ -25,7 +25,7 @@ best.friends.test<-function(relation,distance_like=FALSE){
                                na.last=T,order=order)
           }
   )
-	element.ranks<-element.ranks/dims[1]
+	element.ranks<-(element.ranks-1)/(dims[1]-1)
 	#we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
 	res<-t(apply(element.ranks,1,rank_diff_and_p_for_the_best))
 	rn<-rownames(relation); if (length(rn)==0) {as.character(1:dim(relation)[1])} 
@@ -60,7 +60,8 @@ friends.test<-function(relation,distance_like=FALSE,friends.number=-1){
                                             na.last=T,order=order)
                        }
   )
-  element.ranks<-element.ranks/dims[1]
+	element.ranks<-(element.ranks-1)/(dims[1]-1)
+  #element.ranks<-element.ranks/dims[1]
   #we applied ranking column-by-column (community-by-community); A's were ranked in each row,
   unlistres<-unlist(t(apply(element.ranks,1,rank_diff_and_p_for_the_best_n,n=friends.number)))
   res<-list()
