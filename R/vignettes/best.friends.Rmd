@@ -5,8 +5,8 @@ output: rmarkdown::html_vignette
 vignette: >
  %\VignetteEngine{knitr::knitr}
  %\VignetteIndexEntry{Best friends: what entity is selected by a feature?}
- %\VignetteIndexEntry{best.friends.of}
  %\VignetteIndexEntry{best.friends}
+ %\VignetteIndexEntry{best.friends.of}
  %\VignetteIndexEntry{best-friends-of}
  %\VignetteIndexEntry{best-friends}
  %\VignetteEncoding{UTF-8}
@@ -46,7 +46,7 @@ Sometimes, the best friend differs only a bit from the next.
 ## Code and examples in R
 
 ```{r source, echo=FALSE}
-if (!suppressWarnings(require('best.friends.of')))
+if (!suppressWarnings(require('best.friends')))
 {
 	if (!suppressWarnings(require('devtools')))
 	{
