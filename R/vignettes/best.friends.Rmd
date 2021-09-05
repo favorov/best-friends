@@ -1,10 +1,10 @@
 ---
-title: "Best friends: what entity is selected by a feature?"
+title: "Best friends: what community is friendly to this element? Is it actually friendly?"
 output: rmarkdown::html_vignette
 
 vignette: >
  %\VignetteEngine{knitr::knitr}
- %\VignetteIndexEntry{Best friends: what entity is selected by a feature?}
+ %\VignetteIndexEntry{Best friends: what community is friendly to this element? Is it actually friendly?}
  %\VignetteIndexEntry{best.friends}
  %\VignetteIndexEntry{best.friends.of}
  %\VignetteIndexEntry{best-friends-of}
@@ -29,9 +29,11 @@ vignette: >
 
 There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about other persons. And, if one sees Augustus, it makes sense to infer to see friends(s) of Augustus also. Lets's try to translate it to staistical inferences.
 
-Suppose we have set of entities $E$ and a set of features $F$, and there is a numeric measure of how a feature relates to an entity $A\left(f_i,e_j\right)$ for each pair $(f_i,e_j) : f_i \in F, e_j \in E$. The higher is $A\left(f_i,e_j\right)$ value is, the more $f_i$ relates to $e_j$. If the sets $E$ and $F$ are the same, $A\left(f_i,e_j\right)$ describes the relation between the elements of the same set; the friendship terminology emerges naturally from this symmetric case. Still, the friendship relation itself is asymmetric: a friend cares about Augustus, while Augustus does not. Let's start with asymmetric setup, $F \ne E$.
+Suppose we have set of elements $E$ and a set of communities $C$ of this elements with some fuzzy membership, e.g. there is a numeric measure of how an element is represented in a community $A\left(e_i,c_j\right)$ for each pair $(e_i,c_j) : e_i \in E\ ;\ c_j \in C$. The higher is $A\left(e_i,c_j\right)$ value is, the more $e_i$ is involved $c_j$. The absence of the element in the community is shown by the value that is minimal for the commumity. 
 
-An example of an asymmenric setup ($E \neq F$) that is easy to think about is a set of genes as entities and their regulation by transcription factors (TF's) as features. The matrix shows the strength of the regulation. We look at a TF and we want to know whether a gene is its friend, i.e. whether the gene is specifically sensitive to the regulation by the TF. The na&iuml;ve idea is to look for a gene that is the most sensitive for the TF. Still, it's possible that this gene strongly interact with all the TFs. Sometimes, it is what we want to find, but now we want to answer another question: what gene G is the most specific regulation downstream for the TF and is the specificity enough to say that G is the best friend for the TF?
+A good [example](#toyTF) that is easy to think about is: genes are elements and their regulation by transcription factors (TF's) form communities, and $A$ shows the strength of the regulation. We look at a TF and we want to know whether a gene is its friend, i.e. whether the gene is specifically sensitive to the regulation by the TF. The na&iuml;ve idea is to look for a gene that is the most sensitive for the TF. Still, it's possible that this gene strongly interact with all the TFs. Sometimes, it is what we want to find, but now we want to answer another question: what gene G is the most specific regulation downstream for the TF and is the specificity enough to say that G is the best friend for the TF?
+
+Sometimes, the commiuities emerges from the same set of elements, e.g. the $c_i$ is a set of neighbours of $e_i$ in some graph. In this case we can represent $A\left(c_i,e_j\right)$ as $A\left(e_i,e_j\right)$. In the example, $A$ is a weighted adjacency matrix of this graph. The friendship terminology emerges naturally from this case. The friendship relation itself is asymmetric: a friend cares about Augustus, while Augustus does not.
 
 ## Best friends
 
@@ -63,7 +65,7 @@ p.val.digits=4
 </div>
 
 
-### Toy example 1
+### <a name="toyTF"></a> Toy example 1
 
 And now, let's prepare a simple example. We have ten TFs (TF1, TF2, ..) and ten genes (A,B,...) The strength of the regulation is shown by the matrix. 
 
