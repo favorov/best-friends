@@ -31,9 +31,9 @@ There is a simple intuition of what does it mean to be a friend. A friend of Aug
 
 Suppose we have set of elements $E$ and a set of communities $C$ of this elements with some fuzzy membership, e.g. there is a numeric measure of how an element is represented in a community $A\left(e_i,c_j\right)$ for each pair $(e_i,c_j) : e_i \in E\ ;\ c_j \in C$. The higher is $A\left(e_i,c_j\right)$ value is, the more $e_i$ is involved $c_j$. The absence of the element in the community is shown by the value that is minimal for the commumity. 
 
-A good [example](#toyTF) that is easy to think about is: genes are elements and their regulation by transcription factors (TF's) form communities, and $A$ shows the strength of the regulation. We look at a TF and we want to know whether a gene is its friend, i.e. whether the gene is specifically sensitive to the regulation by the TF. The na&iuml;ve idea is to look for a gene that is the most sensitive for the TF. Still, it's possible that this gene strongly interact with all the TFs. Sometimes, it is what we want to find, but now we want to answer another question: what gene G is the most specific regulation downstream for the TF and is the specificity enough to say that G is the best friend for the TF?
+A good [example](#toyTF) that is easy to think about is: genes are elements and their regulation by transcription factors (TF's) form communities, and $A$ shows the strength of the regulation. We look at a gene and we want to know whether a TF is its friend, i.e. whether the TF specifically regulates the gene. The na&iuml;ve idea is to look for a TF that the gene is the most sensitive for. Still, it's possible that this TF is the strongest for the most of the genes. Sometimes, it is what we want to find, but now we want to answer other questions, namely, what TF is the most specific factor for the gene and is the specificity enough to say that is does not look like a random outcome?
 
-Sometimes, the commiuities emerges from the same set of elements, e.g. the $c_i$ is a set of neighbours of $e_i$ in some graph. In this case we can represent $A\left(c_i,e_j\right)$ as $A\left(e_i,e_j\right)$. In the example, $A$ is a weighted adjacency matrix of this graph. The friendship terminology emerges naturally from this case. The friendship relation itself is asymmetric: a friend cares about Augustus, while Augustus does not.
+Sometimes, the communities are in in one-to-one relation with the elements, e.g. [each $c_i$ is a set of neighbours of $e_i$ in some graph](#toynet). For this example, $A$ is a weighted adjacency matrix of this graph. The friendship terminology emerges naturally from this case. The friendship relation itself is asymmetric: a friend cares about Augustus, while Augustus does not.
 
 ## Best friends
 
@@ -136,7 +136,7 @@ mmm[6,]<-c(2,0.9 ,0.4 )
 mmm[7,]<-c(.7,0.1 ,11 )
 ```
 
-### Toy example 3
+### <a name="toynet"></a> Toy example 3
 
 ![Toy network example](green-6.png)
 
