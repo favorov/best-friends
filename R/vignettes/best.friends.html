@@ -144,7 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span style="float:right">SI AUGUSTUM VIDEAT AMICOS EIUS VIDEATI</span></p>
 <div id="section" class="section level2">
 <h2></h2>
-<p>07 Sep 2021</p>
+<p>09 Sep 2021</p>
 <!-- cache is off, we save all the necessary things in Rda -->
 <div style="line-height: 1.5em;">
 <p>There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about other persons. And, if one sees Augustus, it makes sense to infer to see friends(s) of Augustus also. Lets’s try to translate it to staistical inferences.</p>
@@ -153,7 +153,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Sometimes, the communities are in in one-to-one relation with the elements, e.g. <a href="#toynet">each <span class="math inline">\(c\)</span> is a set of neighbours of <span class="math inline">\(e\)</span> in some graph</a>. For this example, <span class="math inline">\(A\)</span> is a weighted adjacency matrix of this graph. The friendship terminology emerges naturally from this case. The friendship relation itself is asymmetric: a friend cares about Augustus, while Augustus does not.</p>
 <div id="best-friends" class="section level2">
 <h2>Best friends</h2>
-<p>First, For every community <span class="math inline">\(\varsigma, \varsigma \in C\)</span> let’s rank all the elements <span class="math inline">\(e\)</span> by the <span class="math inline">\(A\left(e, \varsigma \right)\)</span> value. The ranking is acsending, so rank 1 is for the maximal value. Let’s map the ranks to <span class="math inline">\(\left[0,1\right]\)</span> and let’s denote the resulting values as <span class="math inline">\(r\left(e,\varsigma \right)\)</span> and refer to them as to ranks. Now, for every element <span class="math inline">\(\epsilon\)</span> let’s order all its ranks <span class="math inline">\(r \left( \epsilon , c \right)\)</span> in different communities. The ordered values <span class="math inline">\(r \left(e,c_i \right ),1 \le i \le |C|\)</span> increase with <span class="math inline">\(i\)</span> for each <span class="math inline">\(e\)</span>, the first is the best. If all the relations are at random (null hypothesis), the values <span class="math inline">\(r\left( \varphi, e \right)\)</span> are independently and uniformly distributed in <span class="math inline">\(\left[0,1\right]\)</span>. If an entity <span class="math inline">\(e\)</span> is friendly for the feature <span class="math inline">\(\varphi\)</span>, the corresponding <span class="math inline">\(r\left( \varphi, e \right)\)</span> is to be larger than the values for all other entitites <span class="math inline">\(r\left( \varphi, e_m \right), m \ne j\)</span>, and the difference is to be unexpectedly large for the null hypothesis. A friend of Augustus cares about Augustus more than about other persons. Let’s take the difference between the mininal and the minimal of the remainder ranks (the best-after-the best) as the observation for feature <span class="math inline">\(\varphi\)</span>. It characterise the differnce between the best (minimal) rank and all the others. U-statistics allows us to estimate the p-value for the observation, if it is low, to conclude that the entity <span class="math inline">\(e\)</span> is the best friend of the feature <span class="math inline">\(\varphi\)</span>. In this case, <span class="math inline">\(\varphi\)</span> is a marker for <span class="math inline">\(e\)</span>. For each feature, the <code>best.friends.of.features</code>, returns the possible best friend, and the p-value for the observation provided the null model.</p>
+<p>How does the friendship of a community to one of the elements looks like in terms of the <span class="math inline">\(A\)</span> values? The rank of the element in the friendly community is to be higher than in other communities and the difference is to be very unlikely to be obtained by chance.</p>
+<p>For every community <span class="math inline">\(\varsigma, \varsigma \in C\)</span> let’s rank all the elements <span class="math inline">\(e\)</span> by the <span class="math inline">\(A\left(e, \varsigma \right)\)</span> value. The ranking is acsending, so rank 1 is for the maximal value. Let’s map the ranks to <span class="math inline">\(\left[0,1\right]\)</span> and let’s denote the resulting values as <span class="math inline">\(r\left(e,\varsigma \right)\)</span>. Then, for every element <span class="math inline">\(\epsilon\)</span> let’s increasingly order all the communities by the <span class="math inline">\(r \left( \epsilon , c \right)\)</span> value. Let’s denote the <span class="math inline">\(i\)</span>-th community in the ordering for <span class="math inline">\(\epsilon\)</span> as <span class="math inline">\(c_i\left(\epsilon \right)\)</span>. The ordered values are <span class="math inline">\(r\left(\epsilon , c_i\left(\epsilon \right ) \right )\)</span>.</p>
+<p>Obviuosly, if the element <span class="math inline">\(\epsilon\)</span> has a best friend among the communities, it is <span class="math inline">\(c_1\left(\epsilon \right)\)</span>. If all the relations are at random (null hypothesis), the values <span class="math inline">\(r\left( \varphi, e \right)\)</span> are independently and uniformly distributed in <span class="math inline">\(\left[0,1\right]\)</span>. If an entity <span class="math inline">\(e\)</span> is friendly for the feature <span class="math inline">\(\varphi\)</span>, the corresponding <span class="math inline">\(r\left( \varphi, e \right)\)</span> is to be larger than the values for all other entitites <span class="math inline">\(r\left( \varphi, e_m \right), m \ne j\)</span>, and the difference is to be unexpectedly large for the null hypothesis. A friend of Augustus cares about Augustus more than about other persons. Let’s take the difference between the mininal and the minimal of the remainder ranks (the best-after-the best) as the observation for feature <span class="math inline">\(\varphi\)</span>. It characterise the differnce between the best (minimal) rank and all the others. U-statistics allows us to estimate the p-value for the observation, if it is low, to conclude that the entity <span class="math inline">\(e\)</span> is the best friend of the feature <span class="math inline">\(\varphi\)</span>. In this case, <span class="math inline">\(\varphi\)</span> is a marker for <span class="math inline">\(e\)</span>. For each feature, the <code>best.friends.of.features</code>, returns the possible best friend, and the p-value for the observation provided the null model.</p>
 </div>
 <div id="friends" class="section level2">
 <h2>Friends</h2>
@@ -245,29 +247,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>regulation[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(regulation)]<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="fu">runif</span>(<span class="fu">nrow</span>(regulation)<span class="sc">*</span>(<span class="fu">ncol</span>(regulation)<span class="sc">-</span><span class="dv">1</span>),<span class="fl">0.5</span>,<span class="fl">1.5</span>))</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(regulation,<span class="at">digits =</span> data.digits))</span></code></pre></div>
 <pre><code>##   TF1  TF2  TF3  TF4  TF5  TF6  TF7  TF8  TF9  TF10
-## A 0.20 0.60 1.46 0.70 1.25 1.07 1.34 0.87 1.11 1.35
-## B 0.20 0.55 1.02 1.12 0.68 1.44 0.58 0.96 0.71 0.75
-## C 0.20 1.32 0.88 1.36 1.38 0.71 1.38 1.09 1.06 0.67
-## D 0.20 0.70 0.97 0.95 0.87 0.71 1.36 0.86 1.03 0.54
-## E 0.25 1.42 1.46 1.31 1.06 0.57 1.36 0.64 1.31 1.03
-## F 0.20 1.48 0.67 1.32 1.18 0.58 0.69 0.84 0.61 0.68
-## G 0.20 0.57 0.60 1.39 0.75 1.26 0.96 0.70 0.55 1.12
-## H 0.20 1.40 1.47 1.13 0.81 1.43 0.57 1.29 0.66 1.28
-## I 0.20 1.03 0.60 1.30 1.08 1.28 1.14 0.63 1.07 1.22
-## J 0.20 0.58 1.36 1.33 1.19 1.30 1.46 1.49 1.08 0.57</code></pre>
+## A 0.20 0.95 1.26 1.10 1.45 1.37 0.65 0.95 0.93 0.96
+## B 0.20 0.68 1.37 0.74 1.14 1.07 1.25 1.35 1.27 0.86
+## C 0.20 0.90 1.36 1.05 1.02 0.94 1.45 1.36 1.30 1.19
+## D 0.20 1.42 1.37 1.14 0.99 1.23 1.31 0.69 1.19 0.51
+## E 0.25 1.17 0.70 1.27 1.19 1.33 1.21 1.14 0.84 0.59
+## F 0.20 0.89 0.66 1.00 1.20 1.01 0.75 1.32 0.84 1.31
+## G 0.20 1.32 1.19 1.21 0.67 1.27 0.90 0.56 0.59 0.78
+## H 0.20 1.37 1.38 1.40 0.65 1.48 0.54 1.19 0.67 0.73
+## I 0.20 1.13 0.98 1.10 0.88 1.34 1.22 0.51 0.76 1.35
+## J 0.20 0.99 0.70 1.18 1.28 1.44 0.88 1.21 0.56 0.91</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>friends<span class="ot">&lt;-</span><span class="fu">best.friends.test</span>(regulation)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(friends,<span class="at">digits =</span> p.val.digits))</span></code></pre></div>
 <pre><code>##    element friend p.value element.name friend.name
-## 1        1     10 0.30795            A        TF10
-## 2        2      6 0.01734            B         TF6
-## 3        3      5 0.30795            C         TF5
-## 4        4      7 0.01734            D         TF7
-## 5        5      1 1.00000            E         TF1
-## 6        6      2 0.01734            F         TF2
-## 7        7      4 0.01734            G         TF4
-## 8        8      3 0.30795            H         TF3
-## 9        9     10 0.30795            I        TF10
-## 10      10      7 1.00000            J         TF7</code></pre>
+## 1        1      5 0.08101            A         TF5
+## 2        2      8 1.00000            B         TF8
+## 3        3      7 1.00000            C         TF7
+## 4        4      2 0.30795            D         TF2
+## 5        5      1 0.30795            E         TF1
+## 6        6     10 0.30795            F        TF10
+## 7        7      2 1.00000            G         TF2
+## 8        8      3 1.00000            H         TF3
+## 9        9     10 0.01734            I        TF10
+## 10      10      5 1.00000            J         TF5</code></pre>
 </div>
 <div id="toy-example-2" class="section level3">
 <h3>Toy example 2</h3>
