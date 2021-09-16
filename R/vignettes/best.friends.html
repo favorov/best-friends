@@ -144,7 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span style="float:right">SI AUGUSTUM VIDEAT AMICOS EIUS VIDEATI</span></p>
 <div id="section" class="section level2">
 <h2></h2>
-<p>14 Sep 2021</p>
+<p>15 Sep 2021</p>
 <!-- cache is off, we save all the necessary things in Rda -->
 <div style="line-height: 1.5em;">
 <p>There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about other persons. And, if one sees Augustus, it makes sense to infer to see friends(s) of Augustus also. Lets’s try to translate it to staistical inferences.</p>
@@ -159,8 +159,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="friends" class="section level2">
 <h2>Friends</h2>
-<p>The <code>best.friends.of.features</code> works great if the feature <span class="math inline">\(\varphi\)</span> has only one best friend. What happens if there are more than one and they almost equally freindly to <span class="math inline">\(\varphi\)</span>. The difference between the best and the best-after-the-best is very small, and if fits the null hypothesis really well. But, if we go on looking at sequential differences in the ordering of ranks <span class="math inline">\(r\left( \varphi, e_j \right), e_j \in E\)</span>, we can find an unexpectegly high difference on one of the steps. Lets’s denote the increasingly ordered <span class="math inline">\(r\left( \varphi, e_j \right)\)</span> as <span class="math inline">\(\left&lt; \varphi, e_{j_i} \right&gt;\)</span>.</p>
-<p>Sometimes, the best friend differs only a bit from the next.</p>
+<p>The <code>best.friends.of</code> approach works great if the element <span class="math inline">\(\epsilon\)</span> has only one friendly community, all others are much more neutral about <span class="math inline">\(\epsilon\)</span>. What happens if there are more than one friendly communities, asnd the remainder is neutral for <span class="math inline">\(\epsilon\)</span> again. The difference between the best and the best-after-the-best is very small, and if fits the null hypothesis really well. But, if we go on looking at sequential differences <span class="math inline">\(t_j= r\left(\epsilon , c_{j+1}\left(\epsilon \right ) \right ) - r\left(\epsilon , c_j\left(\epsilon \right ) \right )\)</span>, one od them, that is the gap between frindly communities and neutral communities, can be unexpectedly high.</p>
 </div>
 <div id="code-and-examples-in-r" class="section level2">
 <h2>Code and examples in R</h2>
@@ -247,29 +246,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>regulation[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(regulation)]<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="fu">runif</span>(<span class="fu">nrow</span>(regulation)<span class="sc">*</span>(<span class="fu">ncol</span>(regulation)<span class="sc">-</span><span class="dv">1</span>),<span class="fl">0.5</span>,<span class="fl">1.5</span>))</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(regulation,<span class="at">digits =</span> data.digits))</span></code></pre></div>
 <pre><code>##   TF1  TF2  TF3  TF4  TF5  TF6  TF7  TF8  TF9  TF10
-## A 0.20 1.48 1.31 1.48 1.38 0.51 0.77 0.71 0.97 0.90
-## B 0.20 0.54 0.66 1.27 1.20 0.76 1.14 0.85 1.41 1.28
-## C 0.20 1.17 0.72 1.27 1.30 0.97 0.77 0.55 0.67 0.83
-## D 0.20 0.96 1.03 1.48 1.16 0.55 0.68 0.74 1.38 1.37
-## E 0.25 0.80 0.67 0.88 0.51 0.65 0.85 1.43 1.12 1.28
-## F 0.20 0.76 0.83 0.86 0.84 0.72 0.68 1.19 1.36 0.84
-## G 0.20 1.25 1.27 1.13 0.85 1.11 0.85 1.33 1.31 0.95
-## H 0.20 1.37 1.27 1.50 1.36 1.08 0.63 1.04 1.39 1.21
-## I 0.20 1.23 0.53 0.74 0.83 0.92 0.69 1.20 1.43 0.65
-## J 0.20 0.56 0.93 1.27 0.70 1.34 1.49 0.75 0.59 0.86</code></pre>
+## A 0.20 1.41 1.25 0.54 0.62 0.51 1.35 0.95 1.08 1.38
+## B 0.20 0.74 1.12 1.15 0.97 0.66 1.41 1.37 1.33 1.45
+## C 0.20 0.90 0.89 1.45 0.80 0.55 1.22 1.43 1.01 0.57
+## D 0.20 1.21 1.39 1.04 1.28 1.08 1.23 1.19 0.86 1.28
+## E 0.25 1.38 0.54 1.30 1.37 0.97 1.46 1.03 0.91 0.97
+## F 0.20 1.24 1.48 1.22 1.47 0.57 0.94 0.59 1.17 1.40
+## G 0.20 1.14 1.43 1.31 1.13 0.55 1.34 0.72 0.58 0.76
+## H 0.20 1.00 1.17 1.13 1.21 1.37 1.36 1.20 0.67 1.13
+## I 0.20 1.30 0.92 0.89 1.31 1.16 0.68 0.59 0.61 0.75
+## J 0.20 1.46 1.04 1.05 1.01 0.79 0.64 0.78 0.96 0.87</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>friends<span class="ot">&lt;-</span><span class="fu">best.friends.test</span>(regulation)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(friends,<span class="at">digits =</span> p.val.digits))</span></code></pre></div>
-<pre><code>##    element friend p.value element.name friend.name
-## 1        1      2 1.00000            A         TF2
-## 2        2      7 1.00000            B         TF7
-## 3        3      5 0.30795            C         TF5
-## 4        4     10 0.08101            D        TF10
-## 5        5      1 1.00000            E         TF1
-## 6        6      8 0.30795            F         TF8
-## 7        7      3 1.00000            G         TF3
-## 8        8      4 0.30795            H         TF4
-## 9        9      9 0.08101            I         TF9
-## 10      10      6 1.00000            J         TF6</code></pre>
+<pre><code>##    element friend  p.value element.name friend.name
+## 1        1      2 0.307946            A         TF2
+## 2        2      9 1.000000            B         TF9
+## 3        3      4 1.000000            C         TF4
+## 4        4      3 1.000000            D         TF3
+## 5        5      1 1.000000            E         TF1
+## 6        6      3 1.000000            F         TF3
+## 7        7      3 1.000000            G         TF3
+## 8        8      6 0.081013            H         TF6
+## 9        9      6 0.307946            I         TF6
+## 10      10      2 0.002801            J         TF2</code></pre>
 </div>
 <div id="toy-example-2" class="section level3">
 <h3>Toy example 2</h3>

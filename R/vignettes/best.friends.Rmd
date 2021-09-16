@@ -45,9 +45,7 @@ Obviuosly, if the element $\epsilon$ has a best friend among the communities, th
 
 ## Friends
 
-The `best.friends.of.features` works great if the feature  $\varphi$ has only one best friend. What happens if there are more than one and they almost equally freindly to  $\varphi$. The difference between the best and the best-after-the-best is very small, and if fits the null hypothesis really well. But, if we go on looking at sequential differences in the ordering of ranks $r\left( \varphi, e_j  \right), e_j \in E$, we can find an unexpectegly high difference on one of the steps. Lets's denote the increasingly ordered  $r\left( \varphi, e_j  \right)$ as  $\left< \varphi, e_{j_i}  \right>$. 
-
-Sometimes, the best friend differs only a bit from the next.
+The `best.friends.of` approach works great if the element $\epsilon$ has only one friendly community, all others are much more neutral about $\epsilon$. What happens if there are more than one friendly communities, asnd the remainder is neutral for $\epsilon$ again. The difference between the best and the best-after-the-best is very small, and if fits the null hypothesis really well. But, if we go on looking at sequential differences  $t_j= r\left(\epsilon , c_{j+1}\left(\epsilon \right ) \right ) - r\left(\epsilon , c_j\left(\epsilon \right ) \right )$, one od them, that is the gap between frindly communities and neutral communities, can be unexpectedly high.
 
 ## Code and examples in R
 
