@@ -144,7 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span style="float:right">SI AUGUSTUM VIDEAT AMICOS EIUS VIDEATI</span></p>
 <div id="section" class="section level2">
 <h2></h2>
-<p>15 Sep 2021</p>
+<p>18 Sep 2021</p>
 <!-- cache is off, we save all the necessary things in Rda -->
 <div style="line-height: 1.5em;">
 <p>There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about other persons. And, if one sees Augustus, it makes sense to infer to see friends(s) of Augustus also. Lets’s try to translate it to staistical inferences.</p>
@@ -153,13 +153,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Sometimes, the communities are in in one-to-one relation with the elements, e.g. <a href="#toynet">each <span class="math inline">\(c\)</span> is a set of neighbours of <span class="math inline">\(e\)</span> in some graph</a>. For this example, <span class="math inline">\(A\)</span> is a weighted adjacency matrix of this graph. The friendship terminology emerges naturally from this case. The friendship relation itself is asymmetric: a friend cares about Augustus, while Augustus does not.</p>
 <div id="best-friends" class="section level2">
 <h2>Best friends</h2>
-<p>How does the friendship of a community to one of the elements looks like in terms of the <span class="math inline">\(A\)</span> values? The rank of the element in the friendly community is to be higher than in other communities and the difference is to be very unlikely to be obtained by chance.</p>
-<p>For every community <span class="math inline">\(\varsigma\)</span> let’s rank all the elements <span class="math inline">\(e\)</span> by the <span class="math inline">\(A\left(e, \varsigma \right)\)</span> value. The ranking is acsending, so rank 1 is for the maximal value. Let’s map the ranks to <span class="math inline">\(\left[0,1\right]\)</span> and let’s denote the resulting values as <span class="math inline">\(r\left(e,\varsigma \right)\)</span>. Then, for every element <span class="math inline">\(\epsilon\)</span> let’s increasingly order all the communities by the <span class="math inline">\(r \left( \epsilon , c \right)\)</span> value. Let’s denote the <span class="math inline">\(i\)</span>-th community in the ordering for <span class="math inline">\(\epsilon\)</span> as <span class="math inline">\(c_i\left(\epsilon \right)\)</span>. The ordered values are <span class="math inline">\(r\left(\epsilon , c_i\left(\epsilon \right ) \right )\)</span>.</p>
+<p>How does the friendship of a community to one of the elements looks like in terms of the <span class="math inline">\(A\)</span> values? The rank of the element in the friendly community is to be higher than in other communities and the difference is to be very unlikely to be obtained by chance. <a href="https://www.frontiersin.org/articles/10.3389/fgene.2016.00024/full" class="uri">https://www.frontiersin.org/articles/10.3389/fgene.2016.00024/full</a> For every community <span class="math inline">\(\varsigma\)</span> let’s rank all the elements <span class="math inline">\(e\)</span> by the <span class="math inline">\(A\left(e, \varsigma \right)\)</span> value. The ranking is acsending, so rank 1 is for the maximal value. Let’s map the ranks to <span class="math inline">\(\left[0,1\right]\)</span> and let’s denote the resulting values as <span class="math inline">\(r\left(e,\varsigma \right)\)</span>. Then, for every element <span class="math inline">\(\epsilon\)</span> let’s increasingly order all the communities by the <span class="math inline">\(r \left( \epsilon , c \right)\)</span> value. Let’s denote the <span class="math inline">\(i\)</span>-th community in the ordering for <span class="math inline">\(\epsilon\)</span> as <span class="math inline">\(c_i\left(\epsilon \right)\)</span>. The ordered values are <span class="math inline">\(r\left(\epsilon , c_i\left(\epsilon \right ) \right )\)</span>.</p>
 <p>Obviuosly, if the element <span class="math inline">\(\epsilon\)</span> has a best friend among the communities, the friend is <span class="math inline">\(c_1\left(\epsilon \right)\)</span>. A friend of Augustus cares about Augustus more than about other persons. Let’s note that <span class="math inline">\(c_1\left(\epsilon \right)\)</span> is defined for any element <span class="math inline">\(\epsilon\)</span>, it is just <span class="math inline">\(argmin_c \left( r \left( \epsilon, c \right) \right)\)</span>. To test whether <span class="math inline">\(c_1\left(\epsilon \right)\)</span> is the really the best friend of <span class="math inline">\(\epsilon\)</span>, let’s use the difference <span class="math inline">\(t= r\left(\epsilon , c_2\left(\epsilon \right ) \right ) - r\left(\epsilon , c_1\left(\epsilon \right ) \right )\)</span> between the best rank and the next as a test statitics. Generally, the larger is the difference, the less probable it is to get the value by chance. The “by chance” null model that all the relations are random numbers, and each community has its own distribution. If the null model holds, the ranks <span class="math inline">\(r\left( \epsilon, c \right)\)</span> of the same element <span class="math inline">\(\epsilon\)</span> in different communities <span class="math inline">\(c\)</span> are distributed independently and identical. As far as they are normalised ranks, they are also uniformly distributed in <span class="math inline">\(\left[0,1\right]\)</span>. U-statistics allows us to estimate the p-value for the value of <span class="math inline">\(t\)</span>. The uncorrected p-value is <span class="math inline">\(\left(1-t\right)^{\left|C\right|}\)</span>. If the p-value after the correction for multiple (actually, <span class="math inline">\(\left| E \right|\)</span>) hypothesis, <span class="math inline">\(c\)</span> is a marker for <span class="math inline">\(\varepsilon\)</span>. For each element, the <code>best.friends.of</code> function, returns the possible best friend, and the uncorrected p-value for the observation provided the null model.</p>
 </div>
 <div id="friends" class="section level2">
 <h2>Friends</h2>
-<p>The <code>best.friends.of</code> approach works great if the element <span class="math inline">\(\epsilon\)</span> has only one friendly community, all others are much more neutral about <span class="math inline">\(\epsilon\)</span>. What happens if there are more than one friendly communities, asnd the remainder is neutral for <span class="math inline">\(\epsilon\)</span> again. The difference between the best and the best-after-the-best is very small, and if fits the null hypothesis really well. But, if we go on looking at sequential differences <span class="math inline">\(t_j= r\left(\epsilon , c_{j+1}\left(\epsilon \right ) \right ) - r\left(\epsilon , c_j\left(\epsilon \right ) \right )\)</span>, one od them, that is the gap between frindly communities and neutral communities, can be unexpectedly high.</p>
+<p>The <code>best.friends.of</code> approach works great if the element <span class="math inline">\(\epsilon\)</span> has only one friendly community, all others are much more neutral about <span class="math inline">\(\epsilon\)</span>. What happens if there are more than one friendly community, and the remainder is neutral for <span class="math inline">\(\epsilon\)</span>. The difference between the best and the best-after-the-best is very small, and if fits the null hypothesis really well. But, if we go on looking at sequential differences <span class="math inline">\(t_j= r\left(\epsilon , c_{j+1}\left(\epsilon \right ) \right ) - r\left(\epsilon , c_j\left(\epsilon \right ) \right )\)</span>, one od them, that is the gap between frindly communities and neutral communities, can be unexpectedly high. The p-value for this case is the same, e.g. <span class="math inline">\(\left(1-t_j\right)^{\left|C\right|}\)</span>. The number of hypothesis to correct for is $| E | | C-1 | $.</p>
 </div>
 <div id="code-and-examples-in-r" class="section level2">
 <h2>Code and examples in R</h2>
@@ -167,7 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="toy-example-1" class="section level3">
 <h3><a name="toyTF"></a> Toy example 1</h3>
-<p>And now, let’s prepare a simple example. We have ten TFs (TF1, TF2, ..) and ten genes (A,B,…) The strength of the regulation is shown by the matrix.</p>
+<p>And now, let’s prepare a simple example. We have ten TFs (TF1, TF2, ..) and ten genes (A,B,…) The strength of the regulation is shown by the matrix. The elements are genes, the communities are derived from their regulation by TFs.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>genes<span class="ot">&lt;-</span><span class="dv">10</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>gene.names<span class="ot">&lt;-</span>LETTERS[<span class="fu">seq</span>( <span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> genes )]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>regulation<span class="ot">=</span><span class="fu">matrix</span>(</span>
@@ -187,7 +186,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>TF.names<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&#39;TF1&#39;</span>,<span class="st">&#39;TF2&#39;</span>,<span class="st">&#39;TF3&#39;</span>,<span class="st">&#39;TF4&#39;</span>,<span class="st">&#39;TF5&#39;</span>,<span class="st">&#39;TF6&#39;</span>,<span class="st">&#39;TF7&#39;</span>,<span class="st">&#39;TF8&#39;</span>,<span class="st">&#39;TF9&#39;</span>,<span class="st">&#39;TF10&#39;</span>)</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(regulation)<span class="ot">&lt;-</span>gene.names</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(regulation)<span class="ot">&lt;-</span>TF.names</span></code></pre></div>
-<p>So, we have the exmple relation matrix:</p>
+<p>So we prepared the relation matrix.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(regulation,<span class="at">digits =</span> data.digits))</span></code></pre></div>
 <pre><code>##   TF1  TF2  TF3  TF4  TF5  TF6  TF7  TF8  TF9  TF10
 ## A 0.20 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
@@ -200,7 +199,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## H 0.20 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
 ## I 0.20 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
 ## J 0.20 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00</code></pre>
-<p>Searching for the best friends for each feature:</p>
+<p>Elements (genes) are rows, communities (TFs) are columns, it is consistent with <span class="math inline">\(A\left(e,c\right)\)</span> notation.</p>
+<p>Searching for the best friend TF for each gene:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>friends<span class="ot">&lt;-</span><span class="fu">best.friends.test</span>(regulation)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(friends,<span class="at">digits =</span> p.val.digits))</span></code></pre></div>
 <pre><code>##    element friend   p.value element.name friend.name
@@ -214,7 +214,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8        8      2 1.0000000            H         TF2
 ## 9        9      2 1.0000000            I         TF2
 ## 10      10      2 1.0000000            J         TF2</code></pre>
-<p>Searching for the all possible friend function to our example.</p>
+<p>Only gene E (the fifth) has a reliable best friend, and it is TF1. It is what we could see in the relation matrix, so what we calculate here is consistent with the intuition.</p>
+<p>Let’s search for the all possible friends for all genes.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>all.friends<span class="ot">&lt;-</span><span class="fu">friends.test</span>(regulation)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(all.friends)</span></code></pre></div>
 <pre><code>## $friends
@@ -246,29 +247,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>regulation[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(regulation)]<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="fu">runif</span>(<span class="fu">nrow</span>(regulation)<span class="sc">*</span>(<span class="fu">ncol</span>(regulation)<span class="sc">-</span><span class="dv">1</span>),<span class="fl">0.5</span>,<span class="fl">1.5</span>))</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(regulation,<span class="at">digits =</span> data.digits))</span></code></pre></div>
 <pre><code>##   TF1  TF2  TF3  TF4  TF5  TF6  TF7  TF8  TF9  TF10
-## A 0.20 1.41 1.25 0.54 0.62 0.51 1.35 0.95 1.08 1.38
-## B 0.20 0.74 1.12 1.15 0.97 0.66 1.41 1.37 1.33 1.45
-## C 0.20 0.90 0.89 1.45 0.80 0.55 1.22 1.43 1.01 0.57
-## D 0.20 1.21 1.39 1.04 1.28 1.08 1.23 1.19 0.86 1.28
-## E 0.25 1.38 0.54 1.30 1.37 0.97 1.46 1.03 0.91 0.97
-## F 0.20 1.24 1.48 1.22 1.47 0.57 0.94 0.59 1.17 1.40
-## G 0.20 1.14 1.43 1.31 1.13 0.55 1.34 0.72 0.58 0.76
-## H 0.20 1.00 1.17 1.13 1.21 1.37 1.36 1.20 0.67 1.13
-## I 0.20 1.30 0.92 0.89 1.31 1.16 0.68 0.59 0.61 0.75
-## J 0.20 1.46 1.04 1.05 1.01 0.79 0.64 0.78 0.96 0.87</code></pre>
+## A 0.20 0.52 1.48 1.37 1.30 0.91 1.42 0.58 1.19 0.65
+## B 0.20 1.30 0.89 0.65 1.21 0.69 1.42 1.38 1.29 1.47
+## C 0.20 0.58 1.04 0.97 0.56 1.35 0.93 0.88 1.13 0.81
+## D 0.20 0.60 0.90 0.89 0.93 1.50 0.95 0.91 0.82 1.32
+## E 0.25 0.97 0.74 1.14 1.19 0.68 0.57 0.99 1.47 0.84
+## F 0.20 0.70 1.19 0.59 1.01 1.29 0.74 0.76 1.18 0.55
+## G 0.20 1.28 0.69 1.37 1.21 1.28 1.00 1.07 0.81 0.97
+## H 0.20 0.90 1.27 1.38 1.30 1.17 0.80 0.57 0.58 0.51
+## I 0.20 0.76 0.99 0.87 0.98 0.96 1.18 0.99 0.64 1.20
+## J 0.20 0.54 0.67 0.96 0.51 0.61 1.44 1.10 1.26 1.03</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>friends<span class="ot">&lt;-</span><span class="fu">best.friends.test</span>(regulation)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(friends,<span class="at">digits =</span> p.val.digits))</span></code></pre></div>
-<pre><code>##    element friend  p.value element.name friend.name
-## 1        1      2 0.307946            A         TF2
-## 2        2      9 1.000000            B         TF9
-## 3        3      4 1.000000            C         TF4
-## 4        4      3 1.000000            D         TF3
-## 5        5      1 1.000000            E         TF1
-## 6        6      3 1.000000            F         TF3
-## 7        7      3 1.000000            G         TF3
-## 8        8      6 0.081013            H         TF6
-## 9        9      6 0.307946            I         TF6
-## 10      10      2 0.002801            J         TF2</code></pre>
+<pre><code>##    element friend p.value element.name friend.name
+## 1        1      3 0.30795            A         TF3
+## 2        2      2 1.00000            B         TF2
+## 3        3      6 0.08101            C         TF6
+## 4        4      6 0.30795            D         TF6
+## 5        5      1 1.00000            E         TF1
+## 6        6      3 1.00000            F         TF3
+## 7        7      2 0.30795            G         TF2
+## 8        8      4 1.00000            H         TF4
+## 9        9     10 0.30795            I        TF10
+## 10      10      7 0.30795            J         TF7</code></pre>
 </div>
 <div id="toy-example-2" class="section level3">
 <h3>Toy example 2</h3>
