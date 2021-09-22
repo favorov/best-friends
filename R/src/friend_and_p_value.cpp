@@ -64,7 +64,7 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int n=-1) {
 	//sequential means by value rather than by index in x 
 	//normalised means the rank values are between 0 and 1
 	//thay are provided by the x
-	//we look anly at n best ranks (values of the vector)
+	//we look only at n best ranks (values of the vector)
 	//the best here means the least
 	//if n=-1 (default) we look over all the values and return n difference p-values, including the 1-worst 
 	//return list of n elements. Each elemant is a pair of 1-based coordinate in x and the corresponding p-value
