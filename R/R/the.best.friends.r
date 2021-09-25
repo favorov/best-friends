@@ -53,6 +53,7 @@ friends.test<-function(relation,distance_like=FALSE,friends.number=-1){
 		stop("best.friends.test requires both dimetions of the relation matrix to be more than 1")
 	}
 	if(-1==friends.number){friends.number=dims[2]}
+	#default number of friends
   order<-ifelse(distance_like,1,-1)
   #if relation is distance_like, we will order in ascending
   #if nor, descending. 
@@ -68,7 +69,7 @@ friends.test<-function(relation,distance_like=FALSE,friends.number=-1){
   )
 	rownames(element.ranks)<-rownames(relation)
   res<-list()
-  res$ranks<-element.ranks
+  res$element.ranks<-element.ranks
 	element.ranks<-(element.ranks-1)/(dims[1]-1)
 	#element.ranks<-element.ranks/dims[1]
   #we applied ranking column-by-column (community-by-community); A's were ranked in each row,
