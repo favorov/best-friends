@@ -66,11 +66,13 @@ friends.test<-function(relation,distance_like=FALSE,friends.number=-1){
                                             na.last=T,order=order)
                        }
   )
+	rownames(element.ranks)<-rownames(relation)
+  res<-list()
+  res$ranks<-element.ranks
 	element.ranks<-(element.ranks-1)/(dims[1]-1)
-  #element.ranks<-element.ranks/dims[1]
+	#element.ranks<-element.ranks/dims[1]
   #we applied ranking column-by-column (community-by-community); A's were ranked in each row,
   unlistres<-unlist(t(apply(element.ranks,1,rank_diff_and_p_for_the_best_n,n=friends.number)))
-  res<-list()
 	res$friends<-matrix(unlistres[seq(1,length(unlistres),2)],ncol = friends.number, nrow=dims[1], byrow = TRUE)
 	res$pvals<-matrix(unlistres[seq(2,length(unlistres),2)],ncol = friends.number, nrow=dims[1],byrow = TRUE)
 	rownames(res$friends)<-rownames(relation)
