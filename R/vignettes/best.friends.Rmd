@@ -45,7 +45,7 @@ Obviuosly, if the element $\epsilon$ has a best friend among the communities, th
 
 ## Friends
 
-The `best.friends.of` approach works great if the element $\epsilon$ has only one friendly community, all others are much more neutral about $\epsilon$. What happens if there are more than one friendly community, and the remainder is neutral for $\epsilon$. The difference between the best and the best-after-the-best is very small, and if fits the null hypothesis really well. But, if we go on looking at sequential differences  $t_j= r\left(\epsilon , c_{j+1}\left(\epsilon \right ) \right ) - r\left(\epsilon , c_j\left(\epsilon \right ) \right )$, one od them, that is the gap between frindly communities and neutral communities, can be unexpectedly high. The p-value for this case is the same, e.g.  $\left(1-t_j\right)^{\left|C\right|}$. The number of hypothesis to correct for is  $\left| E \right| \times \left| C-1 \right| $.
+The `best.friends.of` approach works great if the element $\epsilon$ has only one friendly community, all others are much more neutral about $\epsilon$. What happens if there are more than one friendly community, and the remainder is neutral for $\epsilon$. The difference between the best and the best-after-the-best is very small, and if fits the null hypothesis really well. But, if we go on looking at sequential differences  $t_j= r\left(\epsilon , c_{j+1}\left(\epsilon \right ) \right ) - r\left(\epsilon , c_j\left(\epsilon \right ) \right )$, one of them, that is the gap between friendly communities and neutral communities, can be unexpectedly high. For the worst rank of the element (it has number |C| in the ranking),  $t_{|C|}= 1. - r\left(\epsilon , c_{|C|}\left(\epsilon \right ) \right )$. The p-value for each of these $t$ values is the same, e.g.  $\left(1-t_j\right)^{\left|C\right|}$. The number of hypothesis to correct for is  $\left| E \right| \times \left| C \right| $.
 
 ## Code and examples in R
 
@@ -114,18 +114,32 @@ all.friends<-friends.test(regulation)
 noquote(all.friends)
 ```
 
+Again, only gene E (the fifth) has a reliable best friend, and it is TF1. 
+It is interesting to see that the tenht (worst) rank of E is unexpectedly far away from 1 (the right column). It means that E is generally higher in all the communities than by random. Actually, any normalisation would show the same. It is a good as sanity check.
 
-Add some randomness:
+Add some randomness to the equal columns:
 ```{r}
 regulation[,2:ncol(regulation)]<-rep(runif(nrow(regulation)*(ncol(regulation)-1),0.5,1.5))
 noquote(format(regulation,digits = data.digits))
 ```
+
+And, let's search for best friends again:
 
 ```{r}
 friends<-best.friends.test(regulation)
 noquote(format(friends,digits = p.val.digits))
 
 ```
+And, for all friends:
+
+
+```{r}
+all.friends<-friends.test(regulation)
+noquote(all.friends)
+```
+
+
+
 
 ### Toy example 2
 
