@@ -115,10 +115,11 @@ noquote(all.friends)
 ```
 
 Again, only gene E (the fifth) has a reliable best friend, and it is TF1. 
-It is interesting to see that the tenht (worst) rank of E is unexpectedly far away from 1 (the right column). It means that E is generally higher in all the communities than by random. Actually, any normalisation would show the same. It is a good as sanity check.
+It is interesting to see that the tenth (worst) rank of E is unexpectedly far away from 1 (the right column). It means that E is generally higher in all the communities than by random. Actually, any normalisation would show the same. It is a good as sanity check.
 
 Add some randomness to the equal columns:
 ```{r}
+set.seed(42)
 regulation[,2:ncol(regulation)]<-rep(runif(nrow(regulation)*(ncol(regulation)-1),0.5,1.5))
 noquote(format(regulation,digits = data.digits))
 ```
@@ -167,9 +168,28 @@ rownames(connections)<-names
 colnames(connections)<-names
 connections[,'red']<-5
 connections['red',]<-5
+connections['orange','red']<-0
+connections['red','orange']<-0
 connections['blue','orange']<-3
 connections['orange','blue']<-3
 connections['purple','blue']<-1
 connections['blue','purple']<-1
 diag(connections)=NA
+noquote(format(connections,digits = data.digits))
 ```
+And, let's search for best friends again:
+
+```{r}
+friends<-best.friends.test(connections)
+noquote(format(friends,digits = p.val.digits))
+
+```
+And, for all friends:
+
+
+```{r}
+all.friends<-friends.test(connections)
+noquote(all.friends)
+```
+
+
