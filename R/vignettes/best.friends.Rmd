@@ -115,12 +115,13 @@ noquote(all.friends)
 ```
 
 Again, only gene E (the fifth) has a reliable best friend, and it is TF1. 
-It is interesting to see that the tenth (worst) rank of E is unexpectedly far away from 1 (the right column). It means that E is generally higher in all the communities than by random. Actually, any normalisation would show the same. It is a good as sanity check.
+It is interesting to see that the tenth (worst) rank of all the genes is unexpectedly far away from 1 (the right column). It is an effect of ties, the worst ranks of all the genes but E but E are 5.5 and E is 6.
 
 Add some randomness to the equal columns:
 ```{r}
 set.seed(42)
-regulation[,2:ncol(regulation)]<-rep(runif(nrow(regulation)*(ncol(regulation)-1),0.5,1.5))
+#regulation[,2:ncol(regulation)]<-rep(runif(nrow(regulation)*(ncol(regulation)-1),0.5,1.5))
+regulation<-jitter(regulation,factor=0.0001)
 noquote(format(regulation,digits = data.digits))
 ```
 
@@ -139,6 +140,7 @@ all.friends<-friends.test(regulation)
 noquote(all.friends)
 ```
 
+Almost all effects disappears. There is some week signal for gene E is for {TF1,TF9,TF7,TF10}.
 
 
 

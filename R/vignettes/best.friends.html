@@ -144,7 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span style="float:right">SI AUGUSTUM VIDEAT AMICOS EIUS VIDEATI</span></p>
 <div id="section" class="section level2">
 <h2></h2>
-<p>27 Sep 2021</p>
+<p>28 Sep 2021</p>
 <!-- cache is off, we save all the necessary things in Rda -->
 <div style="line-height: 1.5em;">
 <p>There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about other persons. And, if one sees Augustus, it makes sense to infer to see friends(s) of Augustus also. Lets’s try to translate it to staistical inferences.</p>
@@ -256,88 +256,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## H 1.0000000000    1    1    1    1    1    1    1 0.5646303 0.0028007539
 ## I 1.0000000000    1    1    1    1    1    1    1 0.5646303 0.0028007539
 ## J 1.0000000000    1    1    1    1    1    1    1 0.5646303 0.0028007539</code></pre>
-<p>Again, only gene E (the fifth) has a reliable best friend, and it is TF1. It is interesting to see that the tenth (worst) rank of E is unexpectedly far away from 1 (the right column). It means that E is generally higher in all the communities than by random. Actually, any normalisation would show the same. It is a good as sanity check.</p>
+<p>Again, only gene E (the fifth) has a reliable best friend, and it is TF1. It is interesting to see that the tenth (worst) rank of all the genes is unexpectedly far away from 1 (the right column). It is an effect of ties, the worst ranks of all the genes but E but E are 5.5 and E is 6.</p>
 <p>Add some randomness to the equal columns:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>regulation[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(regulation)]<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="fu">runif</span>(<span class="fu">nrow</span>(regulation)<span class="sc">*</span>(<span class="fu">ncol</span>(regulation)<span class="sc">-</span><span class="dv">1</span>),<span class="fl">0.5</span>,<span class="fl">1.5</span>))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(regulation,<span class="at">digits =</span> data.digits))</span></code></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#regulation[,2:ncol(regulation)]&lt;-rep(runif(nrow(regulation)*(ncol(regulation)-1),0.5,1.5))</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>regulation<span class="ot">&lt;-</span><span class="fu">jitter</span>(regulation,<span class="at">factor=</span><span class="fl">0.0001</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(regulation,<span class="at">digits =</span> data.digits))</span></code></pre></div>
 <pre><code>##   TF1  TF2  TF3  TF4  TF5  TF6  TF7  TF8  TF9  TF10
-## A 0.20 1.41 0.96 1.40 1.24 0.88 0.83 1.18 0.54 1.08
-## B 0.20 1.44 1.22 0.64 1.31 0.94 0.85 1.48 0.64 0.66
-## C 0.20 0.79 1.43 1.49 0.89 0.54 0.90 1.26 0.72 0.86
-## D 0.20 1.33 0.76 1.45 1.19 1.47 1.28 1.07 0.98 1.15
-## E 0.25 1.14 0.96 0.58 0.50 0.93 0.54 1.35 0.70 1.28
-## F 0.20 1.02 1.44 1.01 1.33 1.46 1.25 0.69 1.22 1.06
-## G 0.20 1.24 1.48 0.89 0.51 1.39 1.18 0.77 0.51 0.73
-## H 0.20 0.63 0.62 1.41 0.71 1.14 0.67 1.33 0.88 0.59
-## I 0.20 1.16 0.97 0.95 1.41 1.47 0.76 1.19 1.01 0.59
-## J 0.20 1.21 1.06 1.34 1.11 1.12 1.01 0.74 0.50 0.81</code></pre>
+## A 0.20 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+## B 0.20 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+## C 0.20 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+## D 0.20 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+## E 0.25 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+## F 0.20 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+## G 0.20 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+## H 0.20 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+## I 0.20 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+## J 0.20 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00</code></pre>
 <p>And, let’s search for best friends again:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>friends<span class="ot">&lt;-</span><span class="fu">best.friends.test</span>(regulation)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(<span class="fu">format</span>(friends,<span class="at">digits =</span> p.val.digits))</span></code></pre></div>
 <pre><code>##    element friend p.value element.name friend.name
-## 1        1      2 0.30795            A         TF2
-## 2        2      2 1.00000            B         TF2
-## 3        3      4 0.08101            C         TF4
-## 4        4      6 1.00000            D         TF6
+## 1        1      1 1.00000            A         TF1
+## 2        2      7 0.30795            B         TF7
+## 3        3      3 0.08101            C         TF3
+## 4        4      5 1.00000            D         TF5
 ## 5        5      1 1.00000            E         TF1
-## 6        6      9 0.30795            F         TF9
-## 7        7      3 0.08101            G         TF3
-## 8        8      4 1.00000            H         TF4
-## 9        9      5 0.30795            I         TF5
-## 10      10      7 0.30795            J         TF7</code></pre>
+## 6        6      8 0.30795            F         TF8
+## 7        7      2 0.08101            G         TF2
+## 8        8      3 1.00000            H         TF3
+## 9        9      4 0.30795            I         TF4
+## 10      10      6 0.30795            J         TF6</code></pre>
 <p>And, for all friends:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>all.friends<span class="ot">&lt;-</span><span class="fu">friends.test</span>(regulation)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noquote</span>(all.friends)</span></code></pre></div>
 <pre><code>## $element.ranks
 ##   TF1 TF2 TF3 TF4 TF5 TF6 TF7 TF8 TF9 TF10
-## A   6   2   8   4   4   9   7   6   8    3
-## B   6   1   4   9   3   7   6   1   7    8
-## C   6   9   3   1   7  10   5   4   5    5
-## D   6   3   9   2   5   1   1   7   3    2
-## E   1   7   7  10  10   8  10   2   6    1
-## F   6   8   2   6   2   3   2  10   1    4
-## G   6   4   1   8   9   4   3   8   9    7
-## H   6  10  10   3   8   5   9   3   4    9
-## I   6   6   6   7   1   2   8   5   2   10
-## J   6   5   5   5   6   6   4   9  10    6
+## A   3   8   4   4   9   7   6   8   3    5
+## B   2   4   9   3   7   6   1   7   8   10
+## C   9   3   1   7  10   5   4   5   5    9
+## D   4   9   2   5   1   1   7   3   2    1
+## E   1   7  10  10   8  10   2   6   1    2
+## F   8   2   6   2   3   2  10   1   4    4
+## G   5   1   8   9   4   3   8   9   7    8
+## H  10  10   3   8   5   9   3   4   9    7
+## I   7   6   7   1   2   8   5   2  10    3
+## J   6   5   5   6   6   4   9  10   6    6
 ## 
 ## $friends
 ##   [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
-## A TF2  TF10 TF4  TF5  TF1  TF8  TF7  TF3  TF9  TF6  
-## B TF2  TF8  TF5  TF3  TF1  TF7  TF6  TF9  TF10 TF4  
-## C TF4  TF3  TF8  TF7  TF9  TF10 TF1  TF5  TF2  TF6  
-## D TF6  TF7  TF4  TF10 TF2  TF9  TF5  TF1  TF8  TF3  
-## E TF1  TF10 TF8  TF9  TF2  TF3  TF6  TF4  TF5  TF7  
-## F TF9  TF3  TF5  TF7  TF6  TF10 TF1  TF4  TF2  TF8  
-## G TF3  TF7  TF2  TF6  TF1  TF10 TF4  TF8  TF5  TF9  
-## H TF4  TF8  TF9  TF6  TF1  TF5  TF7  TF10 TF2  TF3  
-## I TF5  TF6  TF9  TF8  TF1  TF2  TF3  TF4  TF7  TF10 
-## J TF7  TF2  TF3  TF4  TF1  TF5  TF6  TF10 TF8  TF9  
+## A TF1  TF9  TF3  TF4  TF10 TF7  TF6  TF2  TF8  TF5  
+## B TF7  TF1  TF4  TF2  TF6  TF5  TF8  TF9  TF3  TF10 
+## C TF3  TF2  TF7  TF6  TF8  TF9  TF4  TF1  TF10 TF5  
+## D TF5  TF6  TF10 TF3  TF9  TF8  TF1  TF4  TF7  TF2  
+## E TF1  TF9  TF7  TF10 TF8  TF2  TF5  TF3  TF4  TF6  
+## F TF8  TF2  TF4  TF6  TF5  TF9  TF10 TF3  TF1  TF7  
+## G TF2  TF6  TF5  TF1  TF9  TF3  TF7  TF10 TF4  TF8  
+## H TF3  TF7  TF8  TF5  TF10 TF4  TF6  TF9  TF1  TF2  
+## I TF4  TF5  TF8  TF10 TF7  TF2  TF1  TF3  TF6  TF9  
+## J TF6  TF2  TF3  TF1  TF4  TF5  TF9  TF10 TF7  TF8  
 ## 
 ## $pvals
-##         [,1]       [,2]        [,3]       [,4]       [,5]       [,6]       [,7]
-## A 0.30794615 0.30794615 1.000000000 0.08101311 1.00000000 0.30794615 0.30794615
-## B 1.00000000 0.08101311 0.307946148 0.08101311 1.00000000 0.30794615 1.00000000
-## C 0.08101311 0.30794615 0.307946148 1.00000000 1.00000000 0.30794615 0.30794615
-## D 1.00000000 0.30794615 1.000000000 0.30794615 1.00000000 0.08101311 0.30794615
-## E 1.00000000 0.30794615 0.002800754 0.30794615 1.00000000 0.30794615 0.08101311
-## F 0.30794615 1.00000000 1.000000000 0.30794615 0.30794615 0.08101311 1.00000000
-## G 0.08101311 0.30794615 1.000000000 0.08101311 0.30794615 0.30794615 1.00000000
-## H 1.00000000 0.30794615 0.307946148 0.30794615 0.08101311 0.30794615 1.00000000
-## I 0.30794615 1.00000000 0.017341530 0.30794615 1.00000000 1.00000000 0.30794615
-## J 0.30794615 1.00000000 1.000000000 0.30794615 1.00000000 1.00000000 1.00000000
+##         [,1]      [,2]      [,3]        [,4]      [,5]       [,6]       [,7]
+## A 1.00000000 0.3079461 1.0000000 0.307946148 0.3079461 0.30794615 0.30794615
+## B 0.30794615 0.3079461 0.3079461 0.081013110 0.3079461 1.00000000 0.30794615
+## C 0.08101311 0.3079461 0.3079461 1.000000000 1.0000000 0.08101311 0.08101311
+## D 1.00000000 1.0000000 0.3079461 1.000000000 0.3079461 0.30794615 0.30794615
+## E 1.00000000 0.3079461 1.0000000 0.002800754 0.3079461 0.30794615 0.08101311
+## F 0.30794615 1.0000000 1.0000000 0.307946148 0.3079461 1.00000000 0.08101311
+## G 0.08101311 0.3079461 0.3079461 0.081013110 0.3079461 1.00000000 1.00000000
+## H 1.00000000 0.3079461 0.3079461 0.081013110 0.3079461 0.30794615 1.00000000
+## I 0.30794615 1.0000000 0.3079461 0.081013110 0.3079461 0.30794615 1.00000000
+## J 0.30794615 1.0000000 0.3079461 1.000000000 1.0000000 1.00000000 1.00000000
 ##         [,8]       [,9]     [,10]
 ## A 1.00000000 0.30794615 0.3079461
-## B 0.30794615 0.30794615 0.3079461
-## C 0.08101311 0.30794615 1.0000000
-## D 0.30794615 0.08101311 0.3079461
+## B 0.30794615 0.30794615 1.0000000
+## C 1.00000000 0.30794615 1.0000000
+## D 0.08101311 0.08101311 0.3079461
 ## E 1.00000000 1.00000000 1.0000000
 ## F 0.08101311 0.08101311 1.0000000
 ## G 0.30794615 1.00000000 0.3079461
 ## H 0.30794615 1.00000000 1.0000000
 ## I 0.30794615 0.08101311 1.0000000
 ## J 0.01734153 0.30794615 1.0000000</code></pre>
+<p>Almost all effects disappears. Some week signal for gene E is for {TF1,TF9,TF7,TF10}.</p>
 </div>
 <div id="toy-example-2" class="section level3">
 <h3>Toy example 2</h3>
