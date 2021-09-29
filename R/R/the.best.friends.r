@@ -28,7 +28,7 @@ best.friends.test<-function(relation,distance_like=FALSE){
                                na.last=T,order=order)
           }
   )
-	element.ranks<-(element.ranks-1)/(dims[1]-1)
+	element.ranks<-(element.ranks-1)/(dims[1])
 	#we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
 	res<-t(apply(element.ranks,1,rank_diff_and_p_for_the_best))
 	rn<-rownames(relation); if (length(rn)==0) {as.character(1:dim(relation)[1])} 
@@ -44,8 +44,10 @@ best.friends.test<-function(relation,distance_like=FALSE){
 #' @inheritParams best.friends.test
 #' @param friends.number number of entities we consider for each feature; the default -1 means all; if friends.number is 1, 
 #' the call do essentialy the same as the best.friends.test call
-#' @return \code{data.frame} with 4 columns: friend community index, uncorrected p-value for the pair, feature name, friend name 
-#' Best friend has the highest order, the worst has the lowest
+#' @return a list with 4 elemants, each is a mtrix with the same dimetions as the \code{relation}. 
+#' \code{element.ranks} are the ranks of elemants in the communities; 
+#' \code{friends} is the ranked-by-friendship-to-the-elemant list of friendly communilies, best friend first; 
+#' \code{pvals} cotatins p-values for the corresponding split of the \code{friends} row to friends and others; 
 #' @export
 friends.test<-function(relation,distance_like=FALSE,friends.number=-1){
   dims<-dim(relation)
@@ -70,7 +72,7 @@ friends.test<-function(relation,distance_like=FALSE,friends.number=-1){
 	rownames(element.ranks)<-rownames(relation)
   res<-list()
   res$element.ranks<-element.ranks
-	element.ranks<-(element.ranks-1)/(dims[1]-1)
+	element.ranks<-(element.ranks-1)/(dims[1])
 	#element.ranks<-element.ranks/dims[1]
   #we applied ranking column-by-column (community-by-community); A's were ranked in each row,
   unlistres<-unlist(t(apply(element.ranks,1,rank_diff_and_p_for_the_best_n,n=friends.number)))
