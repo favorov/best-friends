@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // rank_diff_and_p_for_the_best
 NumericVector rank_diff_and_p_for_the_best(NumericVector x);
 RcppExport SEXP _best_friends_rank_diff_and_p_for_the_best(SEXP xSEXP) {

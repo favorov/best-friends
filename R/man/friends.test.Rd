@@ -15,8 +15,10 @@ friends.test(relation, distance_like = FALSE, friends.number = -1)
 the call do essentialy the same as the best.friends.test call}
 }
 \value{
-\code{data.frame} with 4 columns: friend entity index, uncorrected p-value for the pair, feature name, friend name
-Best friend has the highest order, the worst has the lowest
+a list with 4 elemants, each is a mtrix with the same dimetions as the \code{relation}.
+\code{element.ranks} are the ranks of elemants in the communities;
+\code{friends} is the ranked-by-friendship-to-the-elemant list of friendly communilies, best friend first;
+\code{pvals} cotatins p-values for the corresponding split of the \code{friends} row to friends and others;
 }
 \description{
 We have what can to be friends (communities) as columns and we have what they can befriends of (features) as rows.
