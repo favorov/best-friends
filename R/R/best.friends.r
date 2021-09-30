@@ -20,7 +20,7 @@
 #' @name best.friends
 #' @importFrom utils packageDescription
 #' @importFrom data.table frankv
-#' @useDynLib best.friends, .registration=TRUE
+#' @useDynLib best.friends, .registration = TRUE
 #' @importFrom Rcpp evalCpp
 # these two are Rcpp - specific ivocations
 NULL
