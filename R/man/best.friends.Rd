@@ -18,7 +18,7 @@ We say that the community is a friend (or best friend) of an element if it prefe
 }
 \section{best.friends functions}{
 
-\link{best.friend.test} takes the elements x communities matrix, and for each element provides the community that is the potential best friend of the element and the corresponding p-value. The p-value is about the null hypothesis that the difference between the best and the next ranks of the element in communities a result of randomess. If p-value is low and the null is rejected, the community is the best friend of the element and the element is the community marker.
+\link{best.friends.test} takes the elements x communities matrix, and for each element provides the community that is the potential best friend of the element and the corresponding p-value. The p-value is about the null hypothesis that the difference between the best and the next ranks of the element in communities a result of randomess. If p-value is low and the null is rejected, the community is the best friend of the element and the element is the community marker.
 
 \link{friends.test} does the same, but it considers n (possibly, all) the communities as potential friends for each member, and p-values are generated for each element+community pair. The p-values tests the null hyposthesis that claims that the differnce of the elements's ranks in this community and in the next-by-member-rank-of-the-element community is by random. If p-value is low and the null is rejected, the element reliably separates the comumities.
 }

@@ -3,4 +3,6 @@
 export(best.friends.test)
 export(friends.test)
 importFrom(Rcpp,evalCpp)
-useDynLib(best.friends)
+importFrom(data.table,frankv)
+importFrom(utils,packageDescription)
+useDynLib(best.friends, .registration=TRUE)

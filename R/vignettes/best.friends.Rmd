@@ -10,6 +10,7 @@ vignette: >
  %\VignetteIndexEntry{best-friends-of}
  %\VignetteIndexEntry{best-friends}
  %\VignetteEncoding{UTF-8}
+ %\VignetteDepends{devtools}
 
 
 ---
