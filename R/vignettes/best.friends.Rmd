@@ -13,6 +13,7 @@ vignette: >
  %\VignetteDepends{devtools}
 
 
+
 ---
 
 [SI AUGUSTUM VIDEAT AMICOS EIUS VIDEATI]{style="float:right"}
@@ -22,6 +23,7 @@ vignette: >
 `r format(Sys.Date(), "%d %b %Y")` 
 
 `r library(knitr)`
+`r library(markdown)`
 `r options(width=80,keep.source=TRUE)`
 `r opts_chunk$set(echo=T,message=F,cache=F,warning=F)`
 <!-- cache is off, we save all the necessary things in Rda -->
@@ -59,7 +61,7 @@ if (!suppressWarnings(require('best.friends')))
 		biocLite("devtools")
 		library("devtools")
 	}
-	install_github('favorov/gene-friends/pkg/R')
+	install_github('favorov/best-friends/R@devel')
 	library(best.friends)
 }
 data.digits=2
