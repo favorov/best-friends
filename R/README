@@ -13,3 +13,6 @@ We want to define the (specific) best friends ranking for each someone.
 Possibly, n is the number of the features we know, so we test each for being
 the worst of best friends.
 0.2.5 - documentation updated, vignette added
+0.3.0 - names changed, documntation updated
+0.99.0 - we changed the terminology to elements+communities, 
+added the friends test, prepared a vignette
