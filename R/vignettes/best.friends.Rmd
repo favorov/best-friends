@@ -3,7 +3,8 @@ title: "Best friends: what community is friendly to this element? Is it actually
 output: rmarkdown::html_vignette
 
 vignette: >
- %\VignetteEngine{rmarkdown::render}
+
+ %\VignetteEngine{knitr::rmarkdown}
  %\VignetteIndexEntry{Best friends: what community is friendly to this element? Is it actually friendly?}
  %\VignetteIndexEntry{best.friends}
  %\VignetteIndexEntry{best.friends.of}
