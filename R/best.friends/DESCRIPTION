@@ -4,7 +4,7 @@ Title: We look for communities that are friendly for the elements
 Version: 0.99.1
 Date: 2021-09-29
 Encoding: UTF-8
-Author@R: c( 
+Authors@R: c( 
       person("Alexander","Favorov", email = "favorov@sensi.org", role=c("aut","cre")),
 	    person("Vera","Mukhina",email = "atgc@vigg.ru",role=c("ctb")),
       person("Vasily","Ramensky", email="ramensky@gmail.com",role=c("aut","ctb")),
