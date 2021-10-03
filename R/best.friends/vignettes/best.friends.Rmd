@@ -26,7 +26,7 @@ vignette: >
 `r library(knitr)`
 `r library(markdown)`
 `r options(width=80,keep.source=TRUE)`
-`r opts_chunk$set(echo=T,message=F,cache=F,warning=F)`
+`r opts_chunk$set(echo=TRUE,message=FALSE,cache=FALSE,warning=FALSE)`
 <!-- cache is off, we save all the necessary things in Rda -->
 
 <div style="line-height: 1.5em;">
@@ -62,7 +62,7 @@ if (!suppressWarnings(require('best.friends')))
 		biocLite("devtools")
 		library("devtools")
 	}
-	install_github('favorov/best-friends/R')
+	install_github('favorov/best-friends/R/best-friends')
 	library(best.friends)
 }
 data.digits=2
