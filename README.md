@@ -4,4 +4,3 @@ Looking for significant pairs of a feature and an entitty so, that the entity is
 
 Subscrtibe to the user's group: best-gene-friends+subscribe@googlegroups.com
 
-The R package is at R folder: install\_github("favorov/best-friends/R") 
