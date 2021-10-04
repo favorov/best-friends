@@ -25,7 +25,7 @@ best.friends.test<-function(relation,distance_like=FALSE){
   element.ranks<-apply(relation,2, 
           function(x){
             data.table::frankv(x,ties.method='average',
-                               na.last=T,order=order)
+                               na.last=TRUE,order=order)
           }
   )
 	element.ranks<-(element.ranks-1)/(dims[1])
@@ -33,7 +33,12 @@ best.friends.test<-function(relation,distance_like=FALSE){
 	res<-t(apply(element.ranks,1,rank_diff_and_p_for_the_best))
 	rn<-rownames(relation); if (length(rn)==0) {as.character(1:dim(relation)[1])} 
 	cn<-rownames(relation); if (length(cn)==0) {as.character(1:dim(relation)[2])} 
-	data.frame(element=1:dims[1],friend=as.integer(res[,1]),p.value=res[,2],element.name=rownames(relation),friend.name=colnames(relation)[as.integer(res[,1])])
+	data.frame(
+	  element=1:dims[1],
+	  friend=as.integer(res[,1]),
+	  p.value=res[,2],
+	  element.name=rownames(relation),
+	  friend.name=colnames(relation)[as.integer(res[,1])])
 }
 
 #'
@@ -64,10 +69,10 @@ friends.test<-function(relation,distance_like=FALSE,friends.number=-1){
   # if distance_like holds, the least is the best (first)
   #and order==1 (ascending) 
   element.ranks<-apply(relation,2, 
-                       function(x){
-                         data.table::frankv(x,ties.method='average',
-                                            na.last=T,order=order)
-                       }
+    function(x){
+      data.table::frankv(x,ties.method='average',
+      na.last=TRUE,order=order)
+    }
   )
 	rownames(element.ranks)<-rownames(relation)
   res<-list()
@@ -76,10 +81,11 @@ friends.test<-function(relation,distance_like=FALSE,friends.number=-1){
 	#element.ranks<-element.ranks/dims[1]
   #we applied ranking column-by-column (community-by-community); A's were ranked in each row,
   unlistres<-unlist(t(apply(element.ranks,1,rank_diff_and_p_for_the_best_n,n=friends.number)))
-	res$friends<-matrix(colnames(relation)[unlistres[seq(1,length(unlistres),2)]],ncol = friends.number, nrow=dims[1], byrow = TRUE)
+	res$friends<-matrix(
+	  colnames(relation)[unlistres[seq(1,length(unlistres),2)]],ncol = friends.number, nrow=dims[1], byrow = TRUE
+  )
 	res$pvals<-matrix(unlistres[seq(2,length(unlistres),2)],ncol = friends.number, nrow=dims[1],byrow = TRUE)
 	rownames(res$friends)<-rownames(relation)
 	rownames(res$pvals)<-rownames(relation)
 	res
-  #data.frame(friend=as.integer(res[,1]),p.value=res[,2],feature.name=rownames(relation),friend.name=colnames(relation)[as.integer(res[,1])])
 }
