@@ -22,11 +22,11 @@ best.friends.test<-function(relation,distance_like=FALSE){
   order<-ifelse(distance_like,1,-1)
   # if distance_like holds, the least is the best (first)
   #and order==1 (ascending) 
-  element.ranks<-apply(relation,2, 
-          function(x){
-            data.table::frankv(x,ties.method='average',
-                               na.last=TRUE,order=order)
-          }
+  element.ranks<-apply(relation,2,
+		function(x){
+			data.table::frankv(x,ties.method='average',
+			na.last=TRUE,order=order)
+		}
   )
 	element.ranks<-(element.ranks-1)/(dims[1])
 	#we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
@@ -34,8 +34,8 @@ best.friends.test<-function(relation,distance_like=FALSE){
 	rn<-rownames(relation); if (length(rn)==0) {as.character(1:dim(relation)[1])} 
 	cn<-rownames(relation); if (length(cn)==0) {as.character(1:dim(relation)[2])} 
 	data.frame(
-	  element=1:dims[1],
-	  friend=as.integer(res[,1]),
+		element=seq(dims[1]),
+		friend=as.integer(res[,1]),
 	  p.value=res[,2],
 	  element.name=rownames(relation),
 	  friend.name=colnames(relation)[as.integer(res[,1])])
