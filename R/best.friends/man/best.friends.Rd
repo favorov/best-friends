@@ -23,3 +23,26 @@ We say that the community is a friend (or best friend) of an element if it prefe
 \link{friends.test} does the same, but it considers n (possibly, all) the communities as potential friends for each member, and p-values are generated for each element+community pair. The p-values tests the null hyposthesis that claims that the differnce of the elements's ranks in this community and in the next-by-member-rank-of-the-element community is by random. If p-value is low and the null is rejected, the element reliably separates the comumities.
 }
 
+\examples{
+genes<-10
+regulation=matrix(
+  c(0.2, 0.2, 0.2, 0.2, 0.25, rep(0.2,genes-5),
+    rep(1, genes),
+    rep(1, genes),
+    rep(1, genes),
+    rep(1, genes),
+    rep(1, genes),
+    rep(1, genes),
+    rep(1, genes),
+    rep(1, genes),
+    rep(1, genes)
+  ),
+  ncol=10,byrow=FALSE
+)
+gene.names<-LETTERS[seq( from = 1, to = genes )]
+TF.names<-c('TF1','TF2','TF3','TF4','TF5','TF6','TF7','TF8','TF9','TF10')
+rownames(regulation)<-gene.names
+colnames(regulation)<-TF.names
+bfriends<-best.friends.test(regulation)
+friends<-friends.test(regulation)
+}

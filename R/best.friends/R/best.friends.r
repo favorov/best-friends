@@ -23,4 +23,26 @@
 #' @useDynLib best.friends, .registration = TRUE
 #' @importFrom Rcpp evalCpp
 # these two are Rcpp - specific ivocations
+#' @examples
+#' genes<-10
+#' regulation=matrix(
+#'   c(0.2, 0.2, 0.2, 0.2, 0.25, rep(0.2,genes-5),
+#'     rep(1, genes),
+#'     rep(1, genes),
+#'     rep(1, genes),
+#'     rep(1, genes),
+#'     rep(1, genes),
+#'     rep(1, genes),
+#'     rep(1, genes),
+#'     rep(1, genes),
+#'     rep(1, genes)
+#'   ),
+#'   ncol=10,byrow=FALSE
+#' )
+#' gene.names<-LETTERS[seq( from = 1, to = genes )]
+#' TF.names<-c('TF1','TF2','TF3','TF4','TF5','TF6','TF7','TF8','TF9','TF10')
+#' rownames(regulation)<-gene.names
+#' colnames(regulation)<-TF.names
+#' bfriends<-best.friends.test(regulation)
+#' friends<-friends.test(regulation)
 NULL

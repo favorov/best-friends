@@ -9,17 +9,41 @@ friends.test(relation, distance_like = FALSE, friends.number = -1)
 \arguments{
 \item{relation}{is the elements*communities matrix of the relations between features and the entities}
 
-\item{distance_like}{the default is \code{FALSE} and it shows that the relation values are not like distance, i.e. the better relation is shown by the lagrer value; if the relation is, on the contrary, distance-like, and 0 is the best, the value is \code{TRUE}.}
+\item{distance_like}{the default is \code{FALSE} and it shows that the relation values are not like distance,
+i.e. the better relation is shown by the lagrer value; if the relation is, on the contrary, distance-like,
+and 0 is the best, the value is \code{TRUE}.}
 
-\item{friends.number}{number of entities we consider for each feature; the default -1 means all; if friends.number is 1,
-the call do essentialy the same as the best.friends.test call}
+\item{friends.number}{number of entities we consider for each feature; the default -1 means all;
+if friends.number is 1, the call does essentially the same as the best.friends.test call}
 }
 \value{
-a list with 4 elemants, each is a mtrix with the same dimetions as the \code{relation}.
+a list with 4 elements, each is a matrix with the same dimetions as the \code{relation}.
 \code{element.ranks} are the ranks of elemants in the communities;
-\code{friends} is the ranked-by-friendship-to-the-elemant list of friendly communilies, best friend first;
-\code{pvals} cotatins p-values for the corresponding split of the \code{friends} row to friends and others;
+\code{friends} is the ranked-by-friendship-to-the-element list of friendly communities, best friend first;
+\code{pvals} contains p-values for the corresponding split of the \code{friends} row to friends and others.
 }
 \description{
 We have what can to be friends (communities) as columns and we have what they can befriends of (features) as rows.
+}
+\examples{
+genes<-10
+regulation=matrix(
+  c(0.2, 0.2, 0.2, 0.2, 0.25, rep(0.2,genes-5),
+    rep(1, genes),
+    rep(1, genes),
+    rep(1, genes),
+    rep(1, genes),
+    rep(1, genes),
+    rep(1, genes),
+    rep(1, genes),
+    rep(1, genes),
+    rep(1, genes)
+  ),
+  ncol=10,byrow=FALSE
+)
+gene.names<-LETTERS[seq( from = 1, to = genes )]
+TF.names<-c('TF1','TF2','TF3','TF4','TF5','TF6','TF7','TF8','TF9','TF10')
+rownames(regulation)<-gene.names
+colnames(regulation)<-TF.names
+friends<-friends.test(regulation)
 }
