@@ -25,6 +25,7 @@ vignette: >
 
 `r library(knitr)`
 `r library(markdown)`
+`r library(best.friends)`
 `r options(width=80,keep.source=TRUE)`
 `r opts_chunk$set(echo=TRUE,message=FALSE,cache=FALSE,warning=FALSE)`
 <!-- cache is off, we save all the necessary things in Rda -->
@@ -54,17 +55,6 @@ The `best.friends.of` approach works great if the element $\epsilon$ has only on
 ## Code and examples in R
 
 ```{r source, echo=FALSE}
-if (!suppressWarnings(require('best.friends')))
-{
-	if (!suppressWarnings(require('devtools')))
-	{
-		source("http://bioconductor.org/biocLite.R")
-		biocLite("devtools")
-		library("devtools")
-	}
-	install_github('favorov/best-friends/R/best-friends')
-	library(best.friends)
-}
 data.digits=2
 p.val.digits=4
 ```
