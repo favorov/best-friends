@@ -1,8 +1,8 @@
 Package: best.friends
 Type: Package
 Title: We look for communities that are friendly for the elements 
-Version: 0.99.1
-Date: 2021-09-29
+Version: 0.99.2
+Date: 2021-10-04
 Encoding: UTF-8
 Authors@R: c( 
       person("Alexander","Favorov", email = "favorov@sensi.org", role=c("aut","cre")),
@@ -19,7 +19,7 @@ biocViews: Annotation, Genetics, StatisticalMethod
 URL: https://github.com/favorov/best-friends/R/best-friends/
 Suggests: knitr, rmarkdown, devtools, markdown, BiocStyle
 VignetteBuilder: knitr
-Packaged: 2021-10-08 05:05:05 EST; favorov
+Packaged: 2021-10-04 05:05:05 EST; favorov
 Imports: Rcpp (>= 1.0.5), utils, data.table
 LinkingTo: Rcpp
 Roxygen: list(markdown = TRUE)
