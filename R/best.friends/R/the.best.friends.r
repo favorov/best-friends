@@ -31,14 +31,14 @@ best.friends.test<-function(relation,distance_like=FALSE){
 	element.ranks<-(element.ranks-1)/(dims[1])
 	#we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
 	res<-t(apply(element.ranks,1,rank_diff_and_p_for_the_best))
-	rn<-rownames(relation); if (length(rn)==0) {as.character(1:dim(relation)[1])} 
-	cn<-rownames(relation); if (length(cn)==0) {as.character(1:dim(relation)[2])} 
+	rn<-rownames(relation); if (length(rn)==0) {as.character(seq(dims[1]))} 
+	cn<-colnames(relation); if (length(cn)==0) {as.character(seq(dims[2]))} 
 	data.frame(
 		element=seq(dims[1]),
 		friend=as.integer(res[,1]),
 	  p.value=res[,2],
-	  element.name=rownames(relation),
-	  friend.name=colnames(relation)[as.integer(res[,1])])
+	  element.name=rn,
+	  friend.name=cn[as.integer(res[,1])])
 }
 
 #'
