@@ -1,8 +1,11 @@
-We start it as a package just to easy install to R.
-The idea is: we have drivers, their downstreams and 
-relations as rectangular matrix of numbers.
+best.friends test R implemantation
+===
+
+This is R implementaion of the gest.briends test.
+The idea is: we have N elements and M comminities and 
+relations described as NxM matrix.
 The stronger is the realtion, the higher is the number.
-We want to define the (specific) best friends ranking for each someone.  
+For each elemant, we wnat to know the most friendly community.  
 
 0.0.1 - initial version
 0.1.1 - p-value calculated 
@@ -17,3 +20,4 @@ the worst of best friends.
 0.99.0 - we changed the terminology to elements+communities, 
 added the friends test, prepared a vignette
 0.99.1 - devtools::check passed with one note 
+0.99.3 - devtools::check passed with no notes or errors 
