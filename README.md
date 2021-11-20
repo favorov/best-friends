@@ -1,8 +1,17 @@
 best-friends
 ============
-Looking for significant pairs of a feature and an entitty so, that the entity is significantly selected by the feature. In other words, the entity cares about the feature more than other entities and - thus - it is the feature's best friend.
 
-The R package is at favorov/best-friends/R/best.friends.
+This is an implementation of the gest.briends test.
+
+The idea is: we have N elements and M communities and 
+relations described as NxM matrix.
+The stronger is the relation, the higher is the number.
+For each element, we wnat to know the most friendly community.  
+
+The R package is at favorov/best-friends/R/best.friends.  
+
+Fresh copy of R package without editing history (BioC submission) is at 
+favorov/best.friends   
 
 Subscribe to the user's group: best-gene-friends+subscribe@googlegroups.com
 
