@@ -32,9 +32,9 @@ vignette: >
 
 <div style="line-height: 1.5em;">
 
-There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about other persons. And, if one sees Augustus, it makes sense to infer to see friends(s) of Augustus also. Lets's try to translate it to staistical inferences.
+There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about other persons. And, if one sees Augustus, it makes sense to infer to see friends(s) of Augustus also. Lets's try to translate it to statistical inferences.
 
-Suppose we have set of elements $E$ and a set of communities $C$ of this elements with some fuzzy membership, e.g. there is a numeric measure of how an element is represented in a community $A\left(e,c\right)$ for each pair $(e,c): e \in E, c \in C$. The higher is $A\left(e,c\right)$ value is, the more element $e$ is involved in community $c$. The absence of the element in the community is shown by the value that is minimal for the commumity. 
+Suppose we have set of elements $E$ and a set of communities $C$ of this elements with some fuzzy membership, e.g. there is a numeric measure of how an element is represented in a community $A\left(e,c\right)$ for each pair $(e,c): e \in E, c \in C$. The higher the $A\left(e,c\right)$ value is, the more the element $e$ is involved in the community $c$. The absence of the element in the community is shown by the value that is minimal for the community. 
 
 A good [example](#toyTF) that is easy to think about is: genes are elements and their regulation by transcription factors (TF's) form communities, and $A$ shows the strength of the regulation. We look at a gene and we want to know whether a TF is its friend, i.e. whether the TF specifically regulates the gene. The na&iuml;ve idea is to look for a TF that the gene is the most sensitive for. Still, it's possible that this TF is the strongest for the most of the genes. Sometimes, it is what we want to find, but now we want to answer other questions, namely, what TF is the most specific factor for the gene and is the specificity enough to say that is does not look like a random outcome?
 
