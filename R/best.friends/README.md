@@ -20,3 +20,4 @@ the worst of best friends.
 0.99.0 - we changed the terminology to elements+communities, added the friends test, prepared a vignette.  
 0.99.1 - devtools::check passed with one note.  
 0.99.3 - devtools::check passed with no notes or errors.   
+0.99.4 - the vingnette is fixed and improved.   
