@@ -32,25 +32,36 @@ vignette: >
 
 <div style="line-height: 1.5em;">
 
-There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about other persons. And, if one sees Augustus, it makes sense to infer to see friends(s) of Augustus also. Lets's try to translate it to statistical inferences.
+There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about other persons. And, if one sees Augustus, it makes sense to infer to see friends(s) of Augustus also. Let's try to translate it to statistical inferences.
 
-Suppose we have set of elements $E$ and a set of communities $C$ of this elements with some fuzzy membership, e.g. there is a numeric measure of how an element is represented in a community $A\left(e,c\right)$ for each pair $(e,c): e \in E, c \in C$. The higher the $A\left(e,c\right)$ value is, the more the element $e$ is involved in the community $c$. The absence of the element in the community is shown by the value that is minimal for the community. 
+Suppose we have set of elements $E$ and a set of communities $C$ of this elements with some fuzzy membership, e.g. there is a numeric measure of how an element is represented in a community $A\left(e,c\right)$ for each pair $(e,c): e \in E, c \in C$. The higher the y value is, the more the element $e$ is involved in the community $c$. The absence of the element in the community is shown by the value that is minimal for the community. 
 
-A good [example](#toyTF) that is easy to think about is: genes are elements and their regulation by transcription factors (TF's) form communities, and $A$ shows the strength of the regulation. We look at a gene and we want to know whether a TF is its friend, i.e. whether the TF specifically regulates the gene. The na&iuml;ve idea is to look for a TF that the gene is the most sensitive for. Still, it's possible that this TF is the strongest for the most of the genes. Sometimes, it is what we want to find, but now we want to answer other questions, namely, what TF is the most specific factor for the gene and is the specificity enough to say that is does not look like a random outcome?
+Here are some examples of what the element and what the community could be. 
+
+        Example                           Element $e$       Community $c$                     $A\left(e,c\right)$
+--------------------------------------   -------------   ----------------------------------  ----------------------------
+[gene regulation by TFs](#toyTF)          gene            genes under the TF regulation       strength of regulation
+[transctironal correlations](#toynet)     gene            genes coexpressed with a gene       transcription correlation
+fuzzy clustering                          object          cluster                             object weight in cluster
+transcription decomposition               transcript      transcription pattern               transcript's load in pattern
+--------------------------------------   -------------   ----------------------------------  ----------------------------
+
+Let's think about the first example. We look at a gene and we want to know whether a TF (transcription factor) is its friend, i.e. whether the TF specifically regulates the gene. The na&iuml;ve idea is to look for a TF that the gene is the most sensitive for. Still, it's possible that this TF is the strongest for the most of the genes. Sometimes, it is what we want to find, but now we want to answer other questions, namely, what TF is the most specific factor for the gene and is the specificity enough to say that is does not look like a random outcome?
 
 Sometimes, the communities are in in one-to-one relation with the elements, e.g. [each $c$ is a set of neighbours of $e$ in some graph](#toynet). For this example, $A$ is a weighted adjacency matrix of this graph. The friendship terminology emerges naturally from this case. The friendship relation itself is asymmetric: a friend cares about Augustus, while Augustus does not.
 
 ## Best friends
 
 How does the friendship of a community to one of the elements looks like in terms of the $A$ values? The rank of the element in the friendly community is to be higher than in other communities and the difference is to be very unlikely to be obtained by chance.
-https://www.frontiersin.org/articles/10.3389/fgene.2016.00024/full
-For every community $\varsigma$ let's rank all the elements $e$ by the $A\left(e, \varsigma \right)$ value. The ranking is acsending, so rank 1 is for the maximal value. Let's map the ranks to  $\left[0,1\right]$ and let's denote the resulting values as $r\left(e,\varsigma \right)$. Then, for every element $\epsilon$ let's increasingly order all the communities by the $r \left( \epsilon , c \right)$ value. Let's denote the $i$-th community in the ordering for $\epsilon$ as $c_i\left(\epsilon \right)$. The ordered values are $r\left(\epsilon , c_i\left(\epsilon \right ) \right )$. 
+For every community $\varsigma$ let's rank all the elements $e$ by the $A\left(e, \varsigma \right)$ value. The ranking is ascending: rank 1 is for the maximal value. Let's map the ranks to  $\left[0,1\right]$ and let's denote the resulting values as $r\left(e,\varsigma \right)$. Then, for every element $\epsilon$ let's increasingly order all the communities by the $r \left( \epsilon , c \right)$ value. Let's denote the $i$-th community in the ordering for $\epsilon$ as $c_i\left(\epsilon \right)$. The ordered values are $r\left(\epsilon , c_i\left(\epsilon \right ) \right )$. 
 
-Obviuosly, if the element $\epsilon$ has a best friend among the communities, the friend is $c_1\left(\epsilon \right)$. A friend of Augustus cares about Augustus more than about other persons. Let's note that $c_1\left(\epsilon \right)$ is defined for any element $\epsilon$, it is just $argmin_c \left( r \left( \epsilon, c \right) \right)$. To test whether $c_1\left(\epsilon \right)$ is the really the best friend of $\epsilon$, let's use the difference $t= r\left(\epsilon , c_2\left(\epsilon \right ) \right ) - r\left(\epsilon , c_1\left(\epsilon \right ) \right )$ between the best rank and the next as a test statitics. Generally, the larger is the difference, the less probable it is to get the value by chance. The "by chance" null model that all the relations are random numbers, and each community has its own distribution. If the null model holds, the ranks  $r\left( \epsilon, c \right)$ of the same element $\epsilon$ in different communities $c$  are distributed independently and identical. As far as they are normalised ranks, they are also uniformly distributed in $\left[0,1\right]$. U-statistics allows us to estimate the p-value for the value of $t$. The uncorrected p-value is $\left(1-t\right)^{\left|C\right|}$. If the p-value after the correction for multiple (actually, $\left| E \right|$) hypothesis, $c$ is a marker for $\varepsilon$. For each element, the `best.friends.of` function, returns the possible best friend, and the uncorrected p-value for the observation provided the null model. 
+Obviously, if the element $\epsilon$ has a best friend among the communities, the friend is $c_1\left(\epsilon \right)$. A friend of Augustus cares about Augustus more than about other persons. Let's note that $c_1\left(\epsilon \right)$ is defined for any element $\epsilon$, it is just $argmin_c \left( r \left( \epsilon, c \right) \right)$. To test whether $c_1\left(\epsilon \right)$ is the really the best friend of $\epsilon$, let's use the difference $t= r\left(\epsilon , c_2\left(\epsilon \right ) \right ) - r\left(\epsilon , c_1\left(\epsilon \right ) \right )$ between the best rank and the next as a test statistics. Generally, the larger is the difference, the less probable it is to get the value by chance. The "by chance" null model that all the relations are random numbers, and each community has its own distribution. If the null model holds, the ranks  $r\left( \epsilon, c \right)$ of the same element $\epsilon$ in different communities $c$  are distributed independently and identical. They are normalised ranks, so each of them is uniformly distributed in $\left[0,1\right]$. We estimate the p-value for the difference of the best and the next of these uniformely i.i.d. values to be not less than $t$ analytically (the preprint is coming soon). The uncorrected p-value is $\left(1-t\right)^{\left|C\right|}$. If the p-value after the correction for multiple (actually, $\left|E\right|$) hypotheses, the community $c_1$ is the best friend for the element $\varepsilon$. In tis case, we also can say that $\varepsilon$ is a marker for $c_1$.  
+
+For each element, the `best.friends.of` function returns the possible best friend and the corresponding uncorrected p-value for the observation provided the null model. 
 
 ## Friends
 
-The `best.friends.of` approach works great if the element $\epsilon$ has only one friendly community, all others are much more neutral about $\epsilon$. What happens if there are more than one friendly community, and the remainder is neutral for $\epsilon$. The difference between the best and the best-after-the-best is very small, and if fits the null hypothesis really well. But, if we go on looking at sequential differences  $t_j= r\left(\epsilon , c_{j+1}\left(\epsilon \right ) \right ) - r\left(\epsilon , c_j\left(\epsilon \right ) \right )$, one of them, that is the gap between friendly communities and neutral communities, can be unexpectedly high. For the worst rank of the element (it has number |C| in the ranking),  $t_{|C|}= 1. - r\left(\epsilon , c_{|C|}\left(\epsilon \right ) \right )$. The p-value for each of these $t$ values is the same, e.g.  $\left(1-t_j\right)^{\left|C\right|}$. The number of hypothesis to correct for is  $\left| E \right| \times \left| C \right| $.
+The `best.friends.of` approach works great if the element $\epsilon$ has only one friendly community, while all the others are much more neutral about $\epsilon$. What happens if there are more than one friendly community, and the remainder is neutral for $\epsilon$. The difference between the best and the best-after-the-best is very small, and if fits the null hypothesis really well. But, if we go on looking at sequential differences  $t_j= r\left(\epsilon , c_{j+1}\left(\epsilon \right ) \right ) - r\left(\epsilon , c_j\left(\epsilon \right ) \right )$, one of them, that is the gap between friendly communities and neutral communities, can be unexpectedly high. For the worst rank of the element (it has number |C| in the ranking),  $t_{|C|}= 1 - r\left(\epsilon , c_{|C|}\left(\epsilon \right ) \right )$. The p-value for each of these $t$ values is the same, e.g. $\left(1-t_j\right)^{\left|C\right|}$. The number of hypotheses to correct for is $\left|E\right|\left|C\right|$.
 
 ## Code and examples in R
 
@@ -109,7 +120,7 @@ TF.names<-c('TF1','TF2','TF3','TF4','TF5','TF6','TF7','TF8','TF9','TF10')
 rownames(regulation)<-gene.names
 colnames(regulation)<-TF.names
 ```
-So we prepared the relation matrix.
+So, we prepared the relation matrix.
 
 ```{r}
 noquote(format(regulation,digits = data.digits))
@@ -156,8 +167,7 @@ all.friends<-friends.test(regulation)
 noquote(all.friends)
 ```
 
-Almost all effects disappears. There is some week signal for gene E is for {TF1,TF9,TF7,TF10} (uncorrected p-value=0.006).
-
+Almost all the effects disappear. There is some week signal for gene E is for {TF1,TF9,TF7,TF10} (uncorrected p-value=0.006).
 
 
 
@@ -165,7 +175,7 @@ Almost all effects disappears. There is some week signal for gene E is for {TF1,
 
 ![Toy network example](green-6.png)
 
-Let's write the graph on the picture by its weigthed adjacency matrix. The diagolnal elemant are NAs.
+Let's represent the graph on the picture by its weighted adjacency matrix. The diagonal elements are NAs.
 
 ```{r}
 connections<-matrix(nrow = 10,ncol=10,0)
@@ -190,7 +200,7 @@ friends<-best.friends.test(connections)
 noquote(format(friends,digits = p.val.digits))
 
 ```
-blue is the best friend of orange (uncorrected p-value=0.013).
+the blue is the best friend for the orange (uncorrected p-value=0.013).
 
 All friends test:
 
@@ -198,5 +208,5 @@ All friends test:
 all.friends<-friends.test(connections)
 noquote(all.friends)
 ```
-The same friendship: blue is the best friend of orande. And, also all the node but red are better friends for orange than red ((uncorrected p-value=0.03))
+The same friendship: the blue is the best friend for the orange. All the nodes but the red are better friends for the the orange than the red is ((uncorrected p-value=0.03)).
 
