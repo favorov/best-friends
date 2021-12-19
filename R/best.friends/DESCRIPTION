@@ -16,7 +16,7 @@ License: Artistic-2.0
 LazyLoad: yes
 Depends: R (>= 3.0.0)
 biocViews: Annotation, Genetics, StatisticalMethod
-URL: https://github.com/favorov/best-friends/R/best-friends/
+URL: https://github.com/favorov/best.friends
 Suggests: knitr, rmarkdown, devtools, markdown, BiocStyle
 VignetteBuilder: knitr
 Packaged: 2021-12-17 15:05:05 EST; favorov
