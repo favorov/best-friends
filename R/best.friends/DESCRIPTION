@@ -2,7 +2,7 @@ Package: best.friends
 Type: Package
 Title: We look for communities that are friendly for the elements 
 Version: 0.99.4
-Date: 2021-12-17
+Date: 2021-12-20
 Encoding: UTF-8
 Authors@R: c( 
       person("Alexander","Favorov", email = "favorov@sensi.org", role=c("aut","cre")),
