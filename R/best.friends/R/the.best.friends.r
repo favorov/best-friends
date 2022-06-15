@@ -63,10 +63,10 @@ best.friends.test<-function(relation,distance_like=FALSE){
 	rn<-rownames(relation); if (length(rn)==0) {as.character(seq(dims[1]))} 
 	cn<-colnames(relation); if (length(cn)==0) {as.character(seq(dims[2]))} 
 	data.frame(
-		element=seq(dims[1]),
+		tag=seq(dims[1]),
 		friend=as.integer(res[,1]),
 	  p.value=res[,2],
-	  element.name=rn,
+	  tag.name=rn,
 	  friend.name=cn[as.integer(res[,1])])
 }
 
@@ -79,8 +79,8 @@ best.friends.test<-function(relation,distance_like=FALSE){
 #' @param friends.number number of entities we consider for each feature; the default -1 means all;
 #' if friends.number is 1, the call does essentially the same as the best.friends.test call
 #' @return a list with 4 elements, each is a matrix with the same dimetions as the \code{relation}. 
-#' \code{element.ranks} are the ranks of elemants in the communities; 
-#' \code{friends} is the ranked-by-friendship-to-the-element list of friendly communities, best friend first; 
+#' \code{tag.ranks} are the ranks of attention-to-tags inside the clouds; 
+#' \code{friends} is the ranked-by-friendship-to-the-tag list of friendly clouds, best friend first; 
 #' \code{pvals} contains p-values for the corresponding split of the \code{friends} row to friends and others.
 #' @examples
 #' genes<-10

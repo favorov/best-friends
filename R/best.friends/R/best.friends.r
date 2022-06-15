@@ -1,6 +1,6 @@
-#' best.friends: A package that describe wheteher a community is a best friend (or one of the best friends) for its member. 
+#' best.friends: A package that describe wheteher a cloud is a best friend (or one of the best friends) for a tag. 
 #'
-#' We have a set of clouds and a set of tags and the relation of each tag and each cloud (attention that the cloud pays to the tag) is represented by a real value. 
+#' We have a set of clouds and a set of tags and the attemtion that cloud pays to each tag is represented by a real value. THe attention actually can be any type of relation measure, e.g. fuzzy membership.
 #' The absence of a relation is supposed to be represented by the smallest value, naturally, it is 0 and all the attentionvalues are are positive (not required). 
 #' The attention values is a TxC matrix.
 #' 
@@ -12,10 +12,10 @@
 #'
 #' @section best.friends functions:
 #' [best.friends.test] takes the tags x clouds attention matrix, and for each tag provides the cloud that is the potential best friend of the tag (actually, the most friendly cloud) and the corresponding p-value. 
-#' The p-value is the null hypothesis that for each cloud, the attention levels for all tags are i.i.d. values (the distrubution can be differennt for different tags). The statistics we use is the difference of friendness between the most friendly cloud and the next. If p-value is low and the null is rejected, the community is the best friend of the element and the element is the community marker.
+#' The p-value is the null hypothesis that for each cloud, the attention levels for all tags are i.i.d. values (the distrubution can be differennt for different tags). The statistics we use is the difference of friendness between the most friendly cloud and the next. If p-value is low and the null is rejected, the cloud is the best friend of the tag and the tag is a marker for the cloud.
 #'
 #'
-#' [friends.test] does the same, but it considers n (possibly, all) the communities as potential friends for each member, and p-values are generated for each element+community pair. The p-values tests the null hyposthesis that claims that the differnce of the elements's ranks in this community and in the next-by-member-rank-of-the-element community is by random. If p-value is low and the null is rejected, the element reliably separates the comumities.
+#' [friends.test] does the same, but it considers n (possibly, all) the clouds as potential friends for each tag, and p-values are generated for each tag+cloud pair. The p-values tests the null hyposthesis that claims that the differnce of the cloud's rank of attention to the tag and in the next-by-attention-rank-for-the-tag is by random. If p-value is low and the null is rejected, the tag reliably separates the clouds, all freindly (e.g. this and more friendly) clouds are tag's friends, others are not. The tag is maker for all its friends.
 #'
 #' @docType package
 #' @name best.friends
