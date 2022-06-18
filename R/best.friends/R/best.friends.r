@@ -1,8 +1,9 @@
-#' best.friends: A package that describe wheteher a cloud is a best friend (or one of the best friends) for a tag. 
+#' best.friends: A package that describe whether a cloud is a best friend (or one of the best friends) for a tag.  
 #'
-#' We have a set of clouds and a set of tags and the attemtion that cloud pays to each tag is represented by a real value. THe attention actually can be any type of relation measure, e.g. fuzzy membership.
-#' The absence of a relation is supposed to be represented by the smallest value, naturally, it is 0 and all the attentionvalues are are positive (not required). 
-#' The attention values is a TxC matrix.
+#' We have a set C of clouds (e.g. imagine word/term/tag clouds, https://en.wikipedia.org/wiki/Tag_cloud)) and a set T of tags. Each tag can be related to each cloud, and the strength of the relation varies from one (tag,cloud) pair to another. We refer to the relation strength as the attention that a cloud pays to a tag. The attention that each cloud pays to each tag is represented by a real value. THe attention actually can be any type of relation measure, e.g. fuzzy membership. The absence of a relation is supposed to be represented by the smallest value, naturally, it is 0 and all the attention values are are positive (not required). The attention values is a |T|x|C| matrix.
+#'
+#' The tag-cloud-attention metaphor allows to represent a lot of applications in bioinformatics and statistics. The examples are gene patterns (cloud) and genes (tags) loads (attention) in the patterns; fuzzy sets (clouds, their elemants (tags) and the inclusion degree (attention)
+#'
 #' 
 #' We want to identify pairs of a tag and a cloud that specifically prefers the tag.
 #' We say that the cloud is friendly to the tag. The simplest: suppose that only one cloud pays attention to our tag. 
