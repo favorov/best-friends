@@ -1,5 +1,5 @@
-#best.friends library
-#A. Favorov, V. Mukhina, V. Ramensky, A. Mironov (c) 2014-2021
+#best.friends package
+#A. Favorov, A. Suvorikova, V. Mukhina, V. Ramensky, A. Mironov (c) 2014-2022
 #'
 #'
 #' best.friends.test
