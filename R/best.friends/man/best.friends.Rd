@@ -3,24 +3,29 @@
 \docType{package}
 \name{best.friends}
 \alias{best.friends}
-\title{best.friends: A package that describe wheteher a community is a best friend (or one of the best friends) for its member.}
+\title{best.friends: A package that describe whether a cloud is a best friend (or one of the best friends) for a tag.}
 \description{
-We have a list of intersecting communities, and the membership of all the elements is represened by real value.
-It can be a fuzzy inclusion or, maybe, different status of members in a  communities. The absence of a relation (E is not a member of C at all)
-is supposed to be represented by the smallest value, naturally, it is 0 and all the memberships are positive.
-The membership is a ExC matrix.
+We have a set C of clouds (e.g. imagine a set of word/term/tag clouds, https://en.wikipedia.org/wiki/Tag_cloud)) and a set T of tags. Each tag can be related to each cloud, and the strength of the relation varies from one (tag,cloud) pair to another. We refer to the relation strength as the attention that a cloud pays to a tag. The attention that each cloud pays to each tag is represented by a real value. THe attention actually can be any type of relation measure, e.g. fuzzy membership. The absence of the attention is supposed to be represented by the smallest value, naturally, it is 0 and all the attention values are are positive (not required). The attention values is is a $|T|x|C|$ matrix $A$.
 }
 \details{
-We want to find the community that specifically prefers an element.
-We say that the community are  friendly to the elements. The simplest: suppose an element that is mebmer of only one community.
-The member is a marker for the community (if we see him, all the community is around) and the community is friendly to him (all others do not like him).
-We say that the community is a friend (or best friend) of an element if it prefers the element more than other commities do and the difference is unlikely to be at random.
+The tag-cloud-attention metaphor allows to represent a lot of applications in bioinformatics and statistics. The examples are gene patterns (cloud) and genes (tags) loads (attention) in the patterns; fuzzy sets (clouds, their elemants (tags) and the inclusion degree (attention); weighted graph vertices (tags) and each vertex neibourhood (cloud), here the attention is the weght of the edge.
+
+Now, the question. For each tag, we want to identify the cloud(s) that specifically prefer(s) the tag. We say that such a cloud is a friend (ot the best friend if it ia the only) for the tag. The simplest example: imagine that only one cloud pays attention to our tag.
+
+To identify the friends(s), first, for each cloud, we rank all the tags by the attention the cloud pays to the tag. The ranking the decreasing, the first is the best. In other words, We create the rank matrix $R$ of the same $|T|x|C|$ size, and each element is the correpsponding attention's rank inside inside the column of the attention matrix. We normalise the values to be in $\link{0,1}$ by dividing by $|T|$ and we refer to the normalised ranks as $r$ matrix. Now, for each tag, we define the degree of friendliness of a cloud for this tag, by ranking the tag's row in $r_{i,j}=r(t_i,c_j)$ matrix. The most friendly cloud $c_{(1)}(t_i)$ is the cloud with the minimal value of $R_{ij}$, the next is $c_{(2)}(t_i)$, etc, etc.
+
+If a cloud is best friend, it is to be the most friendly cloud for the tag, but it is not enough. In any ranking, there is a fisrst element, and we want to estimate the probability to observe what we observe by random. THe null-hypothesis we use to picture a random setup is that in any column of $A$ all the elements are i.i.d., or, in other word, tha attentions that a cloud pays to all the tags are indepentently sampled from the same distribution. The distributions can differ from cloud to cloud.
+The statistics we use to test whether the most friendly cloud for the tag $t_i$ is really the best friend is the difference $t$ between the values $r(t_i,c_{(2)}(t_i))$ and $r(t_i,c_{(1)}(t_i))$, in other words, between the next-after-the-best and the best values $r$ for the tag $t_i$. We estimate the probablity (p-value) to observe this difference as $<=t$ given the null-hypothesis proposition. If p-value is amll enough, we reject the null, and claim that the friendliness of the cloud $c_{(1)}(t_i)$ is umlikely to observe by random and so we refer to it as the best friend of $t_i$. In this case, $t_i$ is a marker of its best friend cloud $c_{(1)}(t_i)$.
+
+For a similar test that splits all the clouds into $m$ friends of the tag and the remaining $|C|-k$ clouds uses the difference  $r(t_i,c_{(m+1)}(t_i))$ and $r(t_i,c_{(m)}(t_i))$. If we obtain the p-value that is small enough, we claim that the clouds $c_{(1)}(t_i)$..$c_{(m)}(t_i)$ are frinds of $t_i$ and $t_i$ is their marker.
+
+See our arxiv paper for details.
 }
 \section{best.friends functions}{
 
-\link{best.friends.test} takes the elements x communities matrix, and for each element provides the community that is the potential best friend of the element and the corresponding p-value. The p-value is about the null hypothesis that the difference between the best and the next ranks of the element in communities a result of randomess. If p-value is low and the null is rejected, the community is the best friend of the element and the element is the community marker.
+\link{best.friends.test} takes the  $|T|x|C|$ attention matrix, and for each tag it finds the most friendly cloud and the corresponding p-value.
 
-\link{friends.test} does the same, but it considers n (possibly, all) the communities as potential friends for each member, and p-values are generated for each element+community pair. The p-values tests the null hyposthesis that claims that the differnce of the elements's ranks in this community and in the next-by-member-rank-of-the-element community is by random. If p-value is low and the null is rejected, the element reliably separates the comumities.
+\link{friends.test} does the same, but it considers more than one clouds as potential friends for each tag, and p-values are generated for each pair of the tag and the possible $m$ (number of friend clouds). If p-value is low and the null is rejected, the tag reliably separates the clouds: $m$ most friendly to $t_i$ clouds are real friends of the tag, others are not. The tag is the marker for all its friends.
 }
 
 \examples{

@@ -18,8 +18,8 @@ if friends.number is 1, the call does essentially the same as the best.friends.t
 }
 \value{
 a list with 4 elements, each is a matrix with the same dimetions as the \code{relation}.
-\code{element.ranks} are the ranks of elemants in the communities;
-\code{friends} is the ranked-by-friendship-to-the-element list of friendly communities, best friend first;
+\code{tag.ranks} are the ranks of attention-to-tags inside the clouds;
+\code{friends} is the ranked-by-friendship-to-the-tag list of friendly clouds, best friend first;
 \code{pvals} contains p-values for the corresponding split of the \code{friends} row to friends and others.
 }
 \description{
