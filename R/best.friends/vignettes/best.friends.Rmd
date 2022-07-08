@@ -38,7 +38,7 @@ Suppose we have set of tags $E$ and a set of clouds $C$ of this tags, and each c
 
 Here are some examples of what the tag and what the cloud could be. 
 
-        Example                           Tag $e$       Cloud $c$                     $A\left(e,c\right)$
+        Example                           Tag $e$         Cloud $c$                           $A\left(e,c\right)$
 --------------------------------------   -------------   ----------------------------------  ----------------------------
 [gene regulation by TFs](#toyTF)          gene            genes under the TF regulation       strength of regulation
 [transctironal correlations](#toynet)     gene            genes coexpressed with a gene       transcription correlation
