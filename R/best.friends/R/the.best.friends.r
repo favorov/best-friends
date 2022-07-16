@@ -4,9 +4,19 @@
 #'
 #' best.friends.test
 #'
-#' We have what can to be friends (communities) as columns and we have what they can befriends of (features) as rows.
-#` matrix where in each column and row there is a value of how strong the raw is related to this column.
-#' @param relation is the elements*communities matrix of the relations between features and the entities
+#'
+#' We have a set C of clouds (e.g. imagine a set of word/term/tag clouds, https://en.wikipedia.org/wiki/Tag_cloud)) and a set T of tags. Each tag can be related to each cloud, and the strength of the relation varies from one (tag,cloud) pair to another. We refer to the relation strength as the attention that a cloud pays to a tag. The attention that each cloud pays to each tag is represented by a real value. THe attention actually can be any type of relation measure, e.g. fuzzy membership. The absence of the attention is supposed to be represented by the smallest value, naturally, it is 0 and all the attention values are are positive (not required). The attention values is is a $|T|x|C|$ matrix $A$.
+#'
+#' The tag-cloud-attention metaphor allows to represent a lot of applications in bioinformatics and statistics. The examples are gene patterns (cloud) and genes (tags) loads (attention) in the patterns; fuzzy sets (clouds, their elemants (tags) and the inclusion degree (attention); weighted graph vertices (tags) and each vertex neibourhood (cloud), here the attention is the weght of the edge. 
+#'
+#' Now, the question. For each tag, we want to identify the cloud(s) that specifically prefer(s) the tag. We say that such a cloud is a friend (ot the best friend if it ia the only) for the tag. The simplest example: imagine that only one cloud pays attention to our tag. 
+#'
+#' To identify the friends(s), first, for each cloud, we rank all the tags by the attention the cloud pays to the tag. The ranking the decreasing, the first is the best. In other words, We create the rank matrix $R$ of the same $|T|x|C|$ size, and each element is the correpsponding attention's rank inside inside the column of the attention matrix. We normalise the values to be in $[0,1]$ by dividing by $|T|$ and we refer to the normalised ranks as $r$ matrix. Now, for each tag, we define the degree of friendliness of a cloud for this tag, by ranking the tag's row in $r_{i,j}=r(t_i,c_j)$ matrix. The most friendly cloud $c_{(1)}(t_i)$ is the cloud with the minimal value of $R_{ij}$, the next is $c_{(2)}(t_i)$, etc, etc.    
+#'
+#' If a cloud is best friend, it is to be the most friendly cloud for the tag, but it is not enough. In any ranking, there is a fisrst element, and we want to estimate the probability to observe what we observe by random. THe null-hypothesis we use to picture a random setup is that in any column of $A$ all the elements are i.i.d., or, in other word, tha attentions that a cloud pays to all the tags are indepentently sampled from the same distribution. The distributions can differ from cloud to cloud. 
+#' The statistics we use to test whether the most friendly cloud for the tag $t_i$ is really the best friend is the difference $t$ between the values $r(t_i,c_{(2)}(t_i))$ and $r(t_i,c_{(1)}(t_i))$, in other words, between the next-after-the-best and the best values $r$ for the tag $t_i$. We estimate the probablity (p-value) to observe this difference as $<=t$ given the null-hypothesis proposition. If p-value is amll enough, we reject the null, and claim that the friendliness of the cloud $c_{(1)}(t_i)$ is umlikely to observe by random and so we refer to it as the best friend of $t_i$. In this case, $t_i$ is a marker of its best friend cloud $c_{(1)}(t_i)$.
+#'
+#' @param attention is the elements*communities matrix of the relations between features and the entities
 #' @param distance_like the default is \code{FALSE} and it shows that the relation values are not like distance, 
 #' i.e. the better relation is shown by the lagrer value; if the relation is, on the contrary, distance-like, 
 #' and 0 is the best, the value is \code{TRUE}.
@@ -39,7 +49,7 @@
 #' colnames(regulation)<-TF.names
 #' bestfriends<-best.friends.test(regulation)
 #' @export
-best.friends.test<-function(relation,distance_like=FALSE){
+best.friends.test<-function(attention,distance_like=FALSE){
   dims<-dim(relation)
 	if(min(dims)<2){
 		stop("best.friends.test requires both dimetions of the relation matrix to be more than 1")
@@ -72,6 +82,19 @@ best.friends.test<-function(relation,distance_like=FALSE){
 
 #'
 #' friends.test
+#'
+#' We have a set C of clouds (e.g. imagine a set of word/term/tag clouds, https://en.wikipedia.org/wiki/Tag_cloud)) and a set T of tags. Each tag can be related to each cloud, and the strength of the relation varies from one (tag,cloud) pair to another. We refer to the relation strength as the attention that a cloud pays to a tag. The attention that each cloud pays to each tag is represented by a real value. THe attention actually can be any type of relation measure, e.g. fuzzy membership. The absence of the attention is supposed to be represented by the smallest value, naturally, it is 0 and all the attention values are are positive (not required). The attention values is is a $|T|x|C|$ matrix $A$.
+#'
+#' The tag-cloud-attention metaphor allows to represent a lot of applications in bioinformatics and statistics. The examples are gene patterns (cloud) and genes (tags) loads (attention) in the patterns; fuzzy sets (clouds, their elemants (tags) and the inclusion degree (attention); weighted graph vertices (tags) and each vertex neibourhood (cloud), here the attention is the weght of the edge. 
+#'
+#' Now, the question. For each tag, we want to identify the cloud(s) that specifically prefer(s) the tag. We say that such a cloud is a friend (ot the best friend if it ia the only) for the tag. The simplest example: imagine that only one cloud pays attention to our tag. 
+#'
+#' To identify the friends(s), first, for each cloud, we rank all the tags by the attention the cloud pays to the tag. The ranking the decreasing, the first is the best. In other words, We create the rank matrix $R$ of the same $|T|x|C|$ size, and each element is the correpsponding attention's rank inside inside the column of the attention matrix. We normalise the values to be in $[0,1]$ by dividing by $|T|$ and we refer to the normalised ranks as $r$ matrix. Now, for each tag, we define the degree of friendliness of a cloud for this tag, by ranking the tag's row in $r_{i,j}=r(t_i,c_j)$ matrix. The most friendly cloud $c_{(1)}(t_i)$ is the cloud with the minimal value of $R_{ij}$, the next is $c_{(2)}(t_i)$, etc, etc.    
+#'
+#' If a cloud is best friend, it is to be the most friendly cloud for the tag, but it is not enough. In any ranking, there is a fisrst element, and we want to estimate the probability to observe what we observe by random. THe null-hypothesis we use to picture a random setup is that in any column of $A$ all the elements are i.i.d., or, in other word, tha attentions that a cloud pays to all the tags are indepentently sampled from the same distribution. The distributions can differ from cloud to cloud. 
+#' The statistics we use to test whether the most friendly cloud for the tag $t_i$ is really the best friend is the difference $t$ between the values $r(t_i,c_{(2)}(t_i))$ and $r(t_i,c_{(1)}(t_i))$, in other words, between the next-after-the-best and the best values $r$ for the tag $t_i$. We estimate the probablity (p-value) to observe this difference as $<=t$ given the null-hypothesis proposition. If p-value is amll enough, we reject the null, and claim that the friendliness of the cloud $c_{(1)}(t_i)$ is umlikely to observe by random and so we refer to it as the best friend of $t_i$. In this case, $t_i$ is a marker of its best friend cloud $c_{(1)}(t_i)$.
+#'
+#' For a similar test that splits all the clouds into $m$ friends of the tag and the remaining $|C|-k$ clouds uses the difference  $r(t_i,c_{(m+1)}(t_i))$ and $r(t_i,c_{(m)}(t_i))$. If we obtain the p-value that is small enough, we claim that the clouds $c_{(1)}(t_i)$..$c_{(m)}(t_i)$ are frinds of $t_i$ and $t_i$ is their marker.
 #'
 #' We have what can to be friends (communities) as columns and we have what they can befriends of (features) as rows.
 #` matrix where in each column and row there is a value of how strong the raw is related to this column.
