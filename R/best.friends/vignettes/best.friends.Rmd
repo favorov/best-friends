@@ -36,13 +36,13 @@ vignette: >
 
 We have a set C of clouds (e.g. imagine a set of word/term/tag clouds, https://en.wikipedia.org/wiki/Tag_cloud)) and a set T of tags. Each tag can be related to each cloud, and the strength of the relation varies from one (tag,cloud) pair to another. We refer to the relation strength as the attention that a cloud pays to a tag. The attention that each cloud pays to each tag is represented by a real value. The attention actually can be any type of relation measure, e.g. fuzzy membership. The absence of the attention is supposed to be represented by the smallest value, naturally, it is 0 and all the attention values are are positive (not required). The attention values is is a $|T|x|C|$ matrix $A$.
 
-The tag-cloud-attention metaphor allows to represent a lot of applications in bioinformatics and statistics. The examples are gene patterns (cloud) and genes (tags) loads (attention) in the patterns; fuzzy sets (clouds, their elements (tags) and the inclusion degree (attention); weighted graph vertices (tags) and each vertex neighbourhood (cloud), here the attention is the weight of the edge. 
+The tag-cloud-attention metaphor allows to represent a lot of applications in bioinformatics and statistics. The examples are gene patterns (cloud) and genes (tags) loads (attention) in the patterns; fuzzy sets (clouds, their elements (tags) and the inclusion degree (attention); weighted graph vertices (tags) and each vertex neighbourhood (cloud), here the attention is the weight of the edge.
 
-Now, the question. For each tag, we want to identify the cloud(s) that specifically prefer(s) the tag. We say that such a cloud is a friend (or the best friend if it is the only) for the tag. The simplest example: imagine that only one cloud pays attention to our tag. 
+Now, the question. For each tag, we want to identify the cloud(s) that specifically prefer(s) the tag. We say that such a cloud is a friend (or the best friend if it is the only) for the tag. The simplest example: imagine that only one cloud pays attention to our tag.
 
-To identify the friends(s), first, for each cloud, we rank all the tags by the attention the cloud pays to the tag. The ranking the decreasing, the first is the best. In other words, We create the rank matrix $R$ of the same $|T|x|C|$ size, and each element is the corresponding attention's rank inside inside the column of the attention matrix. We normalise the values to be in $[0,1]$ by dividing by $|T|$ and we refer to the normalised ranks as $r$ matrix. Now, for each tag, we define the degree of friendliness of a cloud for this tag, by ranking the tag's row in $r_{i,j}=r(t_i,c_j)$ matrix. The most friendly cloud $c_{(1)}(t_i)$ is the cloud with the minimal value of $R_{ij}$, the next is $c_{(2)}(t_i)$, etc, etc.    
+To identify the friends(s), first, for each cloud, we rank all the tags by the attention the cloud pays to the tag. The ranking the decreasing, the first is the best. In other words, We create the rank matrix $R$ of the same $|T|x|C|$ size, and each element is the corresponding attention's rank inside inside the column of the attention matrix. We normalise the values to be in $[0,1]$ by dividing by $|T|$ and we refer to the normalised ranks as $r$ matrix. Now, for each tag, we define the degree of friendliness of a cloud for this tag, by ranking the tag's row in $r_{i,j}=r(t_i,c_j)$ matrix. The most friendly cloud $c_{(1)}(t_i)$ is the cloud with the minimal value of $R_{ij}$, the next is $c_{(2)}(t_i)$, etc, etc.
 
-If a cloud is best friend, it is to be the most friendly cloud for the tag, but it is not enough. In any ranking, there is a first element, and we want to estimate the probability to observe what we observe by random. The null-hypothesis we use to picture a random setup is that in any column of $A$ all the elements are i.i.d., or, in other word, the attentions that a cloud pays to all the tags are independently sampled from the same distribution. The distributions can differ from cloud to cloud. 
+If a cloud is best friend, it is to be the most friendly cloud for the tag, but it is not enough. In any ranking, there is a first element, and we want to estimate the probability to observe what we observe by random. The null-hypothesis we use to picture a random setup is that in any column of $A$ all the elements are i.i.d., or, in other word, the attentions that a cloud pays to all the tags are independently sampled from the same distribution. The distributions can differ from cloud to cloud.
 The statistics we use to test whether the most friendly cloud for the tag $t_i$ is really the best friend is the difference $t$ between the values $r(t_i,c_{(2)}(t_i))$ and $r(t_i,c_{(1)}(t_i))$, in other words, between the next-after-the-best and the best values $r$ for the tag $t_i$. We estimate the probability (p-value) to observe this difference as $<=t$ given the null-hypothesis proposition. If p-value is small enough, we reject the null, and claim that the friendliness of the cloud $c_{(1)}(t_i)$ is unlikely to observe by random and so we refer to it as the best friend of $t_i$. In this case, $t_i$ is a marker of its best friend cloud $c_{(1)}(t_i)$.
 
 For a similar test that splits all the clouds into $m$ friends of the tag and the remaining $|C|-k$ clouds uses the difference  $r(t_i,c_{(m+1)}(t_i))$ and $r(t_i,c_{(m)}(t_i))$. If we obtain the p-value that is small enough, we claim that the clouds $c_{(1)}(t_i)$..$c_{(m)}(t_i)$ are friends of $t_i$ and $t_i$ is their marker.
@@ -52,9 +52,9 @@ For a similar test that splits all the clouds into $m$ friends of the tag and th
 
 There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about other persons. And, if one sees Augustus, it makes sense to infer to see friends(s) of Augustus also. Let's try to translate it to statistical inferences.
 
-Suppose we have set of tags $E$ and a set of clouds $C$ of this tags, and each cloud pays more or less atention to each tag and there is a numeric measure of how a cloud is attentive to the tag $\mu\left(t,c\right)$ for each pair $(e,c): e \in E, c \in C$. The higher the y value is, the more the tag $e$ is involved in the cloud $c$. The absence of the tag in the cloud is shown by the value that is minimal for the cloud. 
+Suppose we have set of tags $E$ and a set of clouds $C$ of this tags, and each cloud pays more or less atention to each tag and there is a numeric measure of how a cloud is attentive to the tag $\mu\left(t,c\right)$ for each pair $(e,c): e \in E, c \in C$. The higher the y value is, the more the tag $e$ is involved in the cloud $c$. The absence of the tag in the cloud is shown by the value that is minimal for the cloud.
 
-Here are some examples of what the tag and what the cloud could be. 
+Here are some examples of what the tag and what the cloud could be.
 
         Example                           Tag $e$         Cloud $c$                           $A\left(e,c\right)$
 --------------------------------------   -------------   ----------------------------------  ----------------------------
@@ -71,11 +71,11 @@ Sometimes, the clouds are in in one-to-one relation with the tags, e.g. [each $c
 ## Best friends
 
 How does the friendship of a cloud to one of the tags looks like in terms of the $A$ values? The rank of the tag in the friendly cloud is to be higher than in other clouds and the difference is to be very unlikely to be obtained by chance.
-For every cloud $\varsigma$ let's rank all the tags $e$ by the $A\left(e, \varsigma \right)$ value. The ranking is ascending: rank 1 is for the maximal value. Let's map the ranks to  $\left[0,1\right]$ and let's denote the resulting values as $r\left(e,\varsigma \right)$. Then, for every tag $\epsilon$ let's increasingly order all the clouds by the $r \left( \epsilon , c \right)$ value. Let's denote the $i$-th cloud in the ordering for $\epsilon$ as $c_i\left(\epsilon \right)$. The ordered values are $r\left(\epsilon , c_i\left(\epsilon \right ) \right )$. 
+For every cloud $\varsigma$ let's rank all the tags $e$ by the $A\left(e, \varsigma \right)$ value. The ranking is ascending: rank 1 is for the maximal value. Let's map the ranks to  $\left[0,1\right]$ and let's denote the resulting values as $r\left(e,\varsigma \right)$. Then, for every tag $\epsilon$ let's increasingly order all the clouds by the $r \left( \epsilon , c \right)$ value. Let's denote the $i$-th cloud in the ordering for $\epsilon$ as $c_i\left(\epsilon \right)$. The ordered values are $r\left(\epsilon , c_i\left(\epsilon \right ) \right )$.
 
-Obviously, if the tag $\epsilon$ has a best friend among the clouds, the friend is $c_1\left(\epsilon \right)$. A friend of Augustus cares about Augustus more than about other persons. Let's note that $c_1\left(\epsilon \right)$ is defined for any tag $\epsilon$, it is just $argmin_c \left( r \left( \epsilon, c \right) \right)$. To test whether $c_1\left(\epsilon \right)$ is the really the best friend of $\epsilon$, let's use the difference $t= r\left(\epsilon , c_2\left(\epsilon \right ) \right ) - r\left(\epsilon , c_1\left(\epsilon \right ) \right )$ between the best rank and the next as a test statistics. Generally, the larger is the difference, the less probable it is to get the value by chance. The "by chance" null model that all the relations are random numbers, and each cloud has its own distribution. If the null model holds, the ranks  $r\left( \epsilon, c \right)$ of the same tag $\epsilon$ in different clouds $c$  are distributed independently and identical. They are normalised ranks, so each of them is uniformly distributed in $\left[0,1\right]$. We estimate the p-value for the difference of the best and the next of these uniformely i.i.d. values to be not less than $t$ analytically (the preprint is coming soon). The uncorrected p-value is $\left(1-t\right)^{\left|C\right|}$. If the p-value after the correction for multiple (actually, $\left|E\right|$) hypotheses, the cloud $c_1$ is the best friend for the tag $\varepsilon$. In tis case, we also can say that $\varepsilon$ is a marker for $c_1$.  
+Obviously, if the tag $\epsilon$ has a best friend among the clouds, the friend is $c_1\left(\epsilon \right)$. A friend of Augustus cares about Augustus more than about other persons. Let's note that $c_1\left(\epsilon \right)$ is defined for any tag $\epsilon$, it is just $argmin_c \left( r \left( \epsilon, c \right) \right)$. To test whether $c_1\left(\epsilon \right)$ is the really the best friend of $\epsilon$, let's use the difference $t= r\left(\epsilon , c_2\left(\epsilon \right ) \right ) - r\left(\epsilon , c_1\left(\epsilon \right ) \right )$ between the best rank and the next as a test statistics. Generally, the larger is the difference, the less probable it is to get the value by chance. The "by chance" null model that all the relations are random numbers, and each cloud has its own distribution. If the null model holds, the ranks  $r\left( \epsilon, c \right)$ of the same tag $\epsilon$ in different clouds $c$  are distributed independently and identical. They are normalised ranks, so each of them is uniformly distributed in $\left[0,1\right]$. We estimate the p-value for the difference of the best and the next of these uniformely i.i.d. values to be not less than $t$ analytically (the preprint is coming soon). The uncorrected p-value is $\left(1-t\right)^{\left|C\right|}$. If the p-value after the correction for multiple (actually, $\left|E\right|$) hypotheses, the cloud $c_1$ is the best friend for the tag $\varepsilon$. In tis case, we also can say that $\varepsilon$ is a marker for $c_1$.
 
-For each tag, the `best.friends.of` function returns the possible best friend and the corresponding uncorrected p-value for the observation provided the null model. 
+For each tag, the `best.friends.of` function returns the possible best friend and the corresponding uncorrected p-value for the observation provided the null model.
 
 ## Friends
 
@@ -115,7 +115,7 @@ Cloud 2 is the best friend of tag 3, and it is the only result with p-value less
 
 ### <a name="toyTF"></a> Toy regulation example
 
-Let's return to the regulation example. We have ten TFs (TF1, TF2, ..) and ten genes (A,B,...) The strength of the regulation is shown by the matrix. The tags are genes, the clouds are derived from their regulation by TFs.  
+Let's return to the regulation example. We have ten TFs (TF1, TF2, ..) and ten genes (A,B,...) The strength of the regulation is shown by the matrix. The tags are genes, the clouds are derived from their regulation by TFs.
 
 ```{r}
 genes<-10
@@ -143,7 +143,7 @@ So, we prepared the relation matrix.
 ```{r}
 noquote(format(regulation,digits = data.digits))
 ```
-Tags (genes) are rows, clouds (TFs) are columns, it is consistent with $A\left(e,c\right)$ notation. 
+Tags (genes) are rows, clouds (TFs) are columns, it is consistent with $A\left(e,c\right)$ notation.
 
 Searching for the best friend TF for each gene:
 
@@ -160,7 +160,7 @@ all.friends<-friends.test(regulation)
 noquote(all.friends)
 ```
 
-Again, only gene E (the fifth) has a reliable best friend, and it is TF1. 
+Again, only gene E (the fifth) has a reliable best friend, and it is TF1.
 It is interesting to see that the tenth (worst) rank of all the genes is unexpectedly far away from 1 (the right column). It is an effect of ties, the worst ranks of all the genes but E but E are 5.5 and E is 6.
 
 Add some randomness to the equal columns:
@@ -189,7 +189,7 @@ Almost all the effects disappear. There is some week signal for gene E is for {T
 
 
 
-### <a name="toynet"></a> Toy net example 
+### <a name="toynet"></a> Toy net example
 
 ![Toy network example](green-6.png)
 
