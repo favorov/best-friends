@@ -3,10 +3,8 @@ best-friends
 
 This is an implementation of the gest.briends test.
 
-The idea is: we have N elements and M communities and 
-relations described as NxM matrix.
-The stronger is the relation, the higher is the number.
-For each element, we wnat to know the most friendly community.  
+The idea is: we have N tags and K clouds and their relation (attention from clound to tags) described as NxK matrix.
+The stronger is the relation, the higher is the number. Here we propose statistical test whether the most friendly comunity of a tag is a real best friend of the tag.  
 
 The R package is at favorov/best-friends/R/best.friends.  
 
