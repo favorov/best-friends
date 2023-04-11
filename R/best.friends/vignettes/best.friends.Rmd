@@ -52,11 +52,11 @@ For a similar test that splits all the clouds into $m$ friends of the tag and th
 
 There is a simple intuition of what does it mean to be a friend. A friend of Augustus cares about Augustus more than about other persons. And, if one sees Augustus, it makes sense to infer to see friends(s) of Augustus also. Let's try to translate it to statistical inferences.
 
-Suppose we have set of tags $E$ and a set of clouds $C$ of this tags, and each cloud pays more or less atention to each tag and there is a numeric measure of how a cloud is attentive to the tag $\mu\left(t,c\right)$ for each pair $(e,c): e \in E, c \in C$. The higher the y value is, the more the tag $e$ is involved in the cloud $c$. The absence of the tag in the cloud is shown by the value that is minimal for the cloud.
+Suppose we have set of tags $T$ and a set of clouds $C$, and each cloud pays more or less atention to each tag and there is a numeric measure of how a cloud is attentive to the tag $\mu\left(t,c\right)$ for each pair $(t,c): t \in T, c \in C$. The higher the y value is, the more the tag $t$ is of value for the cloud $c$. The absence of the tag in the cloud is shown by the value that is minimal for the cloud.
 
 Here are some examples of what the tag and what the cloud could be.
 
-        Example                           Tag $e$         Cloud $c$                           $A\left(e,c\right)$
+        Example                           Tag $t$         Cloud $c$                           $A\left(t,c\right)$
 --------------------------------------   -------------   ----------------------------------  ----------------------------
 [gene regulation by TFs](#toyTF)          gene            genes under the TF regulation       strength of regulation
 [transctironal correlations](#toynet)     gene            genes coexpressed with a gene       transcription correlation
@@ -66,7 +66,7 @@ transcription decomposition               transcript      transcription pattern 
 
 Let's think about the first example. We look at a gene and we want to know whether a TF (transcription factor) is its friend, i.e. whether the TF specifically regulates the gene. The na&iuml;ve idea is to look for a TF that the gene is the most sensitive for. Still, it's possible that this TF is the strongest for the most of the genes. Sometimes, it is what we want to find, but now we want to answer other questions, namely, what TF is the most specific factor for the gene and is the specificity enough to say that is does not look like a random outcome?
 
-Sometimes, the clouds are in in one-to-one relation with the tags, e.g. [each $c$ is a set of neighbours of $e$ in some graph](#toynet). For this example, $A$ is a weighted adjacency matrix of this graph. The friendship terminology emerges naturally from this case. The friendship relation itself is asymmetric: a friend cares about Augustus, while Augustus does not.
+Sometimes, the clouds are in in one-to-one relation with the tags, e.g. [each $c$ is a set of neighbours of $t$ in some graph](#toynet). For this example, $A$ is a weighted adjacency matrix of this graph and it is symmetric. This symmetric case is a very specific case. Still, even for symmetric $A$, friendship relation itself is asymmetric: a friend cares about Augustus, while Augustus does not.
 
 ## Best friends
 

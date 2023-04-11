@@ -16,17 +16,17 @@
 #' If a cloud is best friend, it is to be the most friendly cloud for the tag, but it is not enough. In any ranking, there is a first element, and we want to estimate the probability to observe what we observe by random. The null-hypothesis we use to picture a random setup is that in any column of $A$ all the elements are i.i.d., or, in other word, the attentions that a cloud pays to all the tags are indepentently sampled from the same distribution. The distributions can differ from cloud to cloud. 
 #' The statistics we use to test whether the most friendly cloud for the tag $t_i$ is really the best friend is the difference $t$ between the values $r(t_i,c_{(2)}(t_i))$ and $r(t_i,c_{(1)}(t_i))$, in other words, between the next-after-the-best and the best values $r$ for the tag $t_i$. We estimate the probablity (p-value) to observe this difference as $<=t$ given the null-hypothesis proposition. If p-value is small enough, we reject the null, and claim that the friendliness of the cloud $c_{(1)}(t_i)$ is unlikely to observe by random and so we refer to it as the best friend of $t_i$. In this case, $t_i$ is a marker of its best friend cloud $c_{(1)}(t_i)$.
 #'
-#' @param attention is the elements*communities matrix of the relations between features and the entities
+#' @param attention is the tags*clouds matrix of the relations between tags and the clouds
 #' @param distance_like the default is \code{FALSE} and it shows that the relation values are not like distance, 
 #' i.e. the better relation is shown by the lagrer value; if the relation is, on the contrary, distance-like, 
 #' and 0 is the best, the value is \code{TRUE}.
-#' @return \code{data.frame} with 5 columns: element index, 
-#' the index of the community that is a putative best friend of the element, 
+#' @return \code{data.frame} with 5 columns: tag index, 
+#' the index of the cloud that is a putative best friend of the element, 
 #' uncorrected p-value for the pair, 
-#' element name, 
+#' tag name, 
 #' friend name. 
 #' The small (after multiple hypothesis correction we are to do) p-value 
-#' indicates that the community is really the best friend of the element.
+#' indicates that the cloud is really the best friend of the tag.
 #' @examples
 #' genes<-10
 #' regulation=matrix(
@@ -96,10 +96,10 @@ best.friends.test<-function(attention,distance_like=FALSE){
 #'
 #' For a similar test that splits all the clouds into $m$ friends of the tag and the remaining $|C|-k$ clouds uses the difference  $r(t_i,c_{(m+1)}(t_i))$ and $r(t_i,c_{(m)}(t_i))$. If we obtain the p-value that is small enough, we claim that the clouds $c_{(1)}(t_i)$..$c_{(m)}(t_i)$ are friends of $t_i$ and $t_i$ is their marker.
 #'
-#' We have what can to be friends (communities) as columns and we have what they can befriends of (features) as rows.
+#' We have what can to be friends (clouds) as columns and we have what they can be friends of (tags) as rows.
 #` matrix where in each column and row there is a value of how strong the raw is related to this column.
 #' @inheritParams best.friends.test
-#' @param friends.number number of entities we consider for each feature; the default -1 means all;
+#' @param friends.number number of entities we consider for each tags; the default -1 means all;
 #' if friends.number is 1, the call does essentially the same as the best.friends.test call
 #' @return a list with 4 elements, each is a matrix with the same dimetions as the \code{relation}. 
 #' \code{tag.ranks} are the ranks of attention-to-tags inside the clouds; 

@@ -1,5 +1,5 @@
 #best.friends package
-#A. Favorov, A. Suvorikova, V. Mukhina, V. Ramensky, A. Mironov (c) 2014-2022
+#A. Favorov, A. Suvorikova, V. Mukhina, V. Ramensky, A. Mironov (c) 2014-2023
 #' best.friends: A package that describe whether a cloud is a best friend (or one of the best friends) for a tag.
 #'
 #' We have a set C of clouds (e.g. imagine a set of word/term/tag clouds, https://en.wikipedia.org/wiki/Tag_cloud)) and a set T of tags. Each tag can be related to each cloud, and the strength of the relation varies from one (tag,cloud) pair to another. We refer to the relation strength as the attention that a cloud pays to a tag. The attention that each cloud pays to each tag is represented by a real value. The attention actually can be any type of relation measure, e.g. fuzzy membership. The absence of the attention is supposed to be represented by the smallest value, naturally, it is 0 and all the attention values are are positive (not required). The attention values is is a $|T|x|C|$ matrix $A$.
