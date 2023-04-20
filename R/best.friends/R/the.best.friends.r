@@ -49,7 +49,7 @@
 #' colnames(regulation)<-TF.names
 #' bestfriends<-best.friends.test(regulation)
 #' @export
-best.friends.test<-function(attention,distance_like=FALSE){
+best.friends.test<-function(attention,distance_like=FALSE,neglect_diagonal=FALSE){
   dims<-dim(attention)
 	if(min(dims)<2){
 		stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
@@ -57,7 +57,12 @@ best.friends.test<-function(attention,distance_like=FALSE){
   #if attention is distance_like, we will order in ascending
   #if nor, descending. 
   #E.g., the least ranks are the 
-  #most close attentions 
+  #most close attentions
+  if (neglect_diagonal && (dims[1]!=dims[2])) {
+    warning("neglect_diagonal can work only for square attention matrix")
+    neglect_diagonal<-FALSE
+  }
+
   order<-ifelse(distance_like,1,-1)
   # if distance_like holds, the least is the best (first)
   #and order==1 (ascending) 
