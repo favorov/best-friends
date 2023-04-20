@@ -22,4 +22,4 @@ the worst of best friends.
 0.99.3 - devtools::check passed with no notes or errors.   
 0.99.4 - the vingnette is fixed and improved.   
 0.99.5 - trigger re-check, the maiilist error fixed.   
-0.99.6 - Documentation updated to match the manuscript; non-diagonal options added. 
+0.99.6 - Documentation updated; non-diagonal options added. 

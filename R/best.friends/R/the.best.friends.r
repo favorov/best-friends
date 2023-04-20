@@ -50,18 +50,18 @@
 #' bestfriends<-best.friends.test(regulation)
 #' @export
 best.friends.test<-function(attention,distance_like=FALSE){
-  dims<-dim(relation)
+  dims<-dim(attention)
 	if(min(dims)<2){
-		stop("best.friends.test requires both dimetions of the relation matrix to be more than 1")
+		stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
 	}
-  #if relation is distance_like, we will order in ascending
+  #if attention is distance_like, we will order in ascending
   #if nor, descending. 
   #E.g., the least ranks are the 
-  #most close relations 
+  #most close attentions 
   order<-ifelse(distance_like,1,-1)
   # if distance_like holds, the least is the best (first)
   #and order==1 (ascending) 
-  element.ranks<-apply(relation,2,
+  element.ranks<-apply(attention,2,
 		function(x){
 			data.table::frankv(x,ties.method='average',
 			na.last=TRUE,order=order)
@@ -70,8 +70,8 @@ best.friends.test<-function(attention,distance_like=FALSE){
 	element.ranks<-(element.ranks-1)/(dims[1])
 	#we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
 	res<-t(apply(element.ranks,1,rank_diff_and_p_for_the_best))
-	rn<-rownames(relation); if (length(rn)==0) {as.character(seq(dims[1]))} 
-	cn<-colnames(relation); if (length(cn)==0) {as.character(seq(dims[2]))} 
+	rn<-rownames(attention); if (length(rn)==0) {as.character(seq(dims[1]))} 
+	cn<-colnames(attention); if (length(cn)==0) {as.character(seq(dims[2]))} 
 	data.frame(
 		tag=seq(dims[1]),
 		friend=as.integer(res[,1]),
@@ -83,7 +83,7 @@ best.friends.test<-function(attention,distance_like=FALSE){
 #'
 #' friends.test
 #'
-#' We have a set C of clouds (e.g. imagine a set of word/term/tag clouds, https://en.wikipedia.org/wiki/Tag_cloud)) and a set T of tags. Each tag can be related to each cloud, and the strength of the relation varies from one (tag,cloud) pair to another. We refer to the relation strength as the attention that a cloud pays to a tag. The attention that each cloud pays to each tag is represented by a real value. The attention actually can be any type of relation measure, e.g. fuzzy membership. The absence of the attention is supposed to be represented by the smallest value, naturally, it is 0 and all the attention values are are positive (not required). The attention values is is a $|T|x|C|$ matrix $A$.
+#' We have a set C of clouds (e.g. imagine a set of word/term/tag clouds, https://en.wikipedia.org/wiki/Tag_cloud)) and a set T of tags. Each tag can be related to each cloud, and the strength of the attention varies from one (tag,cloud) pair to another. We refer to the attention strength as the attention that a cloud pays to a tag. The attention that each cloud pays to each tag is represented by a real value. The attention actually can be any type of attention measure, e.g. fuzzy membership. The absence of the attention is supposed to be represented by the smallest value, naturally, it is 0 and all the attention values are are positive (not required). The attention values is is a $|T|x|C|$ matrix $A$.
 #'
 #' The tag-cloud-attention metaphor allows to represent a lot of applications in bioinformatics and statistics. The examples are gene patterns (cloud) and genes (tags) loads (attention) in the patterns; fuzzy sets (clouds, their elements (tags) and the inclusion degree (attention); weighted graph vertices (tags) and each vertex neibourhood (cloud), here the attention is the weight of the edge. 
 #'
@@ -101,7 +101,7 @@ best.friends.test<-function(attention,distance_like=FALSE){
 #' @inheritParams best.friends.test
 #' @param friends.number number of entities we consider for each tags; the default -1 means all;
 #' if friends.number is 1, the call does essentially the same as the best.friends.test call
-#' @return a list with 4 elements, each is a matrix with the same dimetions as the \code{relation}. 
+#' @return a list with 4 elements, each is a matrix with the same dimetions as the \code{attention}. 
 #' \code{tag.ranks} are the ranks of attention-to-tags inside the clouds; 
 #' \code{friends} is the ranked-by-friendship-to-the-tag list of friendly clouds, best friend first; 
 #' \code{pvals} contains p-values for the corresponding split of the \code{friends} row to friends and others.
@@ -127,27 +127,27 @@ best.friends.test<-function(attention,distance_like=FALSE){
 #' colnames(regulation)<-TF.names
 #' friends<-friends.test(regulation)
 #' @export
-friends.test<-function(relation,distance_like=FALSE,friends.number=-1){
-  dims<-dim(relation)
+friends.test<-function(attention,distance_like=FALSE,friends.number=-1){
+  dims<-dim(attention)
 	if(min(dims)<2){
-		stop("best.friends.test requires both dimetions of the relation matrix to be more than 1")
+		stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
 	}
 	if(-1==friends.number){friends.number=dims[2]}
 	#default number of friends
   order<-ifelse(distance_like,1,-1)
-  #if relation is distance_like, we will order in ascending
+  #if attention is distance_like, we will order in ascending
   #if nor, descending. 
   #E.g., the least ranks are the 
-  #most close relations
+  #most close attentions
   # if distance_like holds, the least is the best (first)
   #and order==1 (ascending) 
-  element.ranks<-apply(relation,2, 
+  element.ranks<-apply(attention,2, 
     function(x){
       data.table::frankv(x,ties.method='average',
       na.last=TRUE,order=order)
     }
   )
-	rownames(element.ranks)<-rownames(relation)
+	rownames(element.ranks)<-rownames(attention)
   res<-list()
   res$element.ranks<-element.ranks
 	element.ranks<-(element.ranks-1)/(dims[1])
@@ -155,10 +155,10 @@ friends.test<-function(relation,distance_like=FALSE,friends.number=-1){
   #we applied ranking column-by-column (community-by-community); A's were ranked in each row,
   unlistres<-unlist(t(apply(element.ranks,1,rank_diff_and_p_for_the_best_n,n=friends.number)))
 	res$friends<-matrix(
-	  colnames(relation)[unlistres[seq(1,length(unlistres),2)]],ncol = friends.number, nrow=dims[1], byrow = TRUE
+	  colnames(attention)[unlistres[seq(1,length(unlistres),2)]],ncol = friends.number, nrow=dims[1], byrow = TRUE
   )
 	res$pvals<-matrix(unlistres[seq(2,length(unlistres),2)],ncol = friends.number, nrow=dims[1],byrow = TRUE)
-	rownames(res$friends)<-rownames(relation)
-	rownames(res$pvals)<-rownames(relation)
+	rownames(res$friends)<-rownames(attention)
+	rownames(res$pvals)<-rownames(attention)
 	res
 }

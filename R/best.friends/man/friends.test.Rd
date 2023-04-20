@@ -4,9 +4,11 @@
 \alias{friends.test}
 \title{friends.test}
 \usage{
-friends.test(relation, distance_like = FALSE, friends.number = -1)
+friends.test(attention, distance_like = FALSE, friends.number = -1)
 }
 \arguments{
+\item{attention}{is the tags*clouds matrix of the relations between tags and the clouds}
+
 \item{distance_like}{the default is \code{FALSE} and it shows that the relation values are not like distance,
 i.e. the better relation is shown by the lagrer value; if the relation is, on the contrary, distance-like,
 and 0 is the best, the value is \code{TRUE}.}
@@ -15,13 +17,13 @@ and 0 is the best, the value is \code{TRUE}.}
 if friends.number is 1, the call does essentially the same as the best.friends.test call}
 }
 \value{
-a list with 4 elements, each is a matrix with the same dimetions as the \code{relation}.
+a list with 4 elements, each is a matrix with the same dimetions as the \code{attention}.
 \code{tag.ranks} are the ranks of attention-to-tags inside the clouds;
 \code{friends} is the ranked-by-friendship-to-the-tag list of friendly clouds, best friend first;
 \code{pvals} contains p-values for the corresponding split of the \code{friends} row to friends and others.
 }
 \description{
-We have a set C of clouds (e.g. imagine a set of word/term/tag clouds, https://en.wikipedia.org/wiki/Tag_cloud)) and a set T of tags. Each tag can be related to each cloud, and the strength of the relation varies from one (tag,cloud) pair to another. We refer to the relation strength as the attention that a cloud pays to a tag. The attention that each cloud pays to each tag is represented by a real value. The attention actually can be any type of relation measure, e.g. fuzzy membership. The absence of the attention is supposed to be represented by the smallest value, naturally, it is 0 and all the attention values are are positive (not required). The attention values is is a $|T|x|C|$ matrix $A$.
+We have a set C of clouds (e.g. imagine a set of word/term/tag clouds, https://en.wikipedia.org/wiki/Tag_cloud)) and a set T of tags. Each tag can be related to each cloud, and the strength of the attention varies from one (tag,cloud) pair to another. We refer to the attention strength as the attention that a cloud pays to a tag. The attention that each cloud pays to each tag is represented by a real value. The attention actually can be any type of attention measure, e.g. fuzzy membership. The absence of the attention is supposed to be represented by the smallest value, naturally, it is 0 and all the attention values are are positive (not required). The attention values is is a $|T|x|C|$ matrix $A$.
 }
 \details{
 The tag-cloud-attention metaphor allows to represent a lot of applications in bioinformatics and statistics. The examples are gene patterns (cloud) and genes (tags) loads (attention) in the patterns; fuzzy sets (clouds, their elements (tags) and the inclusion degree (attention); weighted graph vertices (tags) and each vertex neibourhood (cloud), here the attention is the weight of the edge.
