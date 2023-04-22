@@ -4,7 +4,7 @@
 \alias{best.friends.test}
 \title{best.friends.test}
 \usage{
-best.friends.test(attention, distance_like = FALSE)
+best.friends.test(attention, distance_like = FALSE, neglect_diagonal = FALSE)
 }
 \arguments{
 \item{attention}{is the tags*clouds matrix of the relations between tags and the clouds}
@@ -12,6 +12,9 @@ best.friends.test(attention, distance_like = FALSE)
 \item{distance_like}{the default is \code{FALSE} and it shows that the relation values are not like distance,
 i.e. the better relation is shown by the lagrer value; if the relation is, on the contrary, distance-like,
 and 0 is the best, the value is \code{TRUE}.}
+
+\item{neglect_diagonal}{in the case of square attention matrix, the diagonal sometimes is either uninformative or it carries some specific values. In each of these cases,
+the diagonal elements are excluded from the ranking and from the statistics by setting this parameter TRUE. The default is FALSE.}
 }
 \value{
 \code{data.frame} with 5 columns: tag index,

@@ -20,6 +20,8 @@
 #' @param distance_like the default is \code{FALSE} and it shows that the relation values are not like distance, 
 #' i.e. the better relation is shown by the lagrer value; if the relation is, on the contrary, distance-like, 
 #' and 0 is the best, the value is \code{TRUE}.
+#' @param neglect_diagonal in the case of square attention matrix, the diagonal sometimes is either uninformative or it carries some specific values. In each of these cases, 
+#' the diagonal elements are excluded from the ranking and from the statistics by setting this parameter TRUE. The default is FALSE. 
 #' @return \code{data.frame} with 5 columns: tag index, 
 #' the index of the cloud that is a putative best friend of the element, 
 #' uncorrected p-value for the pair, 
@@ -58,9 +60,14 @@ best.friends.test<-function(attention,distance_like=FALSE,neglect_diagonal=FALSE
   #if nor, descending. 
   #E.g., the least ranks are the 
   #most close attentions
-  if (neglect_diagonal && (dims[1]!=dims[2])) {
-    warning("neglect_diagonal can work only for square attention matrix")
-    neglect_diagonal<-FALSE
+  if (neglect_diagonal){ 
+    if(dims[1]==dims[2]) {
+      diag(attention)<-NA
+    } 
+    else {
+      warning("neglect_diagonal can work only for square attention matrix")
+      neglect_diagonal<-FALSE
+    }
   }
 
   order<-ifelse(distance_like,1,-1)
