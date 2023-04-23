@@ -4,7 +4,12 @@
 \alias{friends.test}
 \title{friends.test}
 \usage{
-friends.test(attention, distance_like = FALSE, friends.number = -1)
+friends.test(
+  attention,
+  distance_like = FALSE,
+  friends.number = -1,
+  neglect_diagonal = FALSE
+)
 }
 \arguments{
 \item{attention}{is the tags*clouds matrix of the relations between tags and the clouds}
@@ -15,6 +20,9 @@ and 0 is the best, the value is \code{TRUE}.}
 
 \item{friends.number}{number of entities we consider for each tags; the default -1 means all;
 if friends.number is 1, the call does essentially the same as the best.friends.test call}
+
+\item{neglect_diagonal}{in the case of square attention matrix, the diagonal sometimes is either uninformative or it carries some specific values. In each of these cases,
+the diagonal elements are excluded from the ranking and from the statistics by setting this parameter TRUE. The default is FALSE.}
 }
 \value{
 a list with 4 elements, each is a matrix with the same dimetions as the \code{attention}.

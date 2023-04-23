@@ -79,7 +79,7 @@ best.friends.test<-function(attention,distance_like=FALSE,neglect_diagonal=FALSE
 			na.last=TRUE,order=order)
 		}
   )
-	element.ranks<-(element.ranks-1)/(dims[1])
+	element.ranks<-(element.ranks-1-as.integer(neglect_diagonal))/(dims[1]-as.integer(neglect_diagonal))
 	#we applied ranking column-by-column (entity-by-entity); A's were ranked in each row,
 	res<-t(apply(element.ranks,1,rank_diff_and_p_for_the_best))
 	rn<-rownames(attention); if (length(rn)==0) {as.character(seq(dims[1]))} 
@@ -139,13 +139,26 @@ best.friends.test<-function(attention,distance_like=FALSE,neglect_diagonal=FALSE
 #' colnames(regulation)<-TF.names
 #' friends<-friends.test(regulation)
 #' @export
-friends.test<-function(attention,distance_like=FALSE,friends.number=-1){
+friends.test<-function(attention,distance_like=FALSE,friends.number=-1,neglect_diagonal=FALSE){
   dims<-dim(attention)
 	if(min(dims)<2){
 		stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
 	}
-	if(-1==friends.number){friends.number=dims[2]}
-	#default number of friends
+  if (neglect_diagonal){ 
+    if(dims[1]==dims[2]) {
+      diag(attention)<-NA
+    } 
+    else {
+      warning("neglect_diagonal can work only for square attention matrix")
+      neglect_diagonal<-FALSE
+    }
+  }
+  default.friends.number=dims[2]-as.integer(neglect_diagonal)
+  #default number of friends; if we neglect diagonal, it decreases by 1
+	if(friends.number<=0 || friends.number > default.friends.number){
+	  friends.number=default.friends.number
+	} 
+
   order<-ifelse(distance_like,1,-1)
   #if attention is distance_like, we will order in ascending
   #if nor, descending. 
