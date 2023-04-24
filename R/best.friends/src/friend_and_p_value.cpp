@@ -6,7 +6,7 @@ using namespace std;
 using namespace Rcpp;
 
 ///' Estimating the p-value for the putative entity that is the best friend of a feature from a vestor of normalised ranks of the feature for different entities.
-///' The putative friend is that with the the best (mininal) rank in the list.
+///' The putative friend is that with the the best (minimal) rank in the list.
 ///' The corresponding p-value is the difference of the next and the best to power of the size of the list of entities
 ///' next here means the next by rank rather than by index in x
 ///'
@@ -19,8 +19,10 @@ NumericVector rank_diff_and_p_for_the_best(NumericVector x) {
 	//we are to find the difference of the best and the next; 
 	//we know that all values are between 0 and 1
 	//best and next are the smallest and the next
-	//returns pair (R vector) of 1-based coord of the best and the p-value
-	int len = x.size(), i;
+	//returns pair (R vector) of 1-based coordinate of the best and the p-value
+	//@param x is where we look for the best and the next
+	//
+	int len = x.size(), i, nclouds=len;
 	double bestind=1.;
 	double best = 1.1, next=1.1;
 	if (len==0) {
@@ -30,6 +32,10 @@ NumericVector rank_diff_and_p_for_the_best(NumericVector x) {
 		return (NumericVector::create(1,x[0])); //one member - we return 1-(1-val)**len = val for pval and 1 for coord
 	}
 	for(i = 0; i < len; i++) {
+		if (NA_REAL==x[i]) {
+			nclouds--; //NA comes from the neglected diagonal
+			continue;
+		}
 		if (x[i]<best) {
 			next=best;
 			best=x[i];
@@ -42,7 +48,7 @@ NumericVector rank_diff_and_p_for_the_best(NumericVector x) {
 			next=x[i];
 		}
 	};
-	return (NumericVector::create(bestind,pow(1.-next+best,len)));
+	return (NumericVector::create(bestind,pow(1.-next+best,nclouds)));
 }
 
 
@@ -71,7 +77,7 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int n=-1) {
 	//if n=-1 (default) we look over all the values and return n difference p-values, including the 1-worst 
 	//return list of n elements. Each element is a pair of 1-based coordinate in x and the corresponding p-value
 	//p-value is (next_value - this_value)**len
-	int len = x.size(), i;
+	int len = x.size(), i, nclouds = len;
 	List Res=List::create();
 	if (n<=0) {n=len;} //proceed strange value of n
 	if (n>len) {n=len;}
@@ -87,6 +93,10 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int n=-1) {
 	unsigned int sortercapacity = unsigned(min(len,n+1));
 	//we need one more value than n to know the next for the n-th; if n==len, there are only n values and the next for n-th is 1.
 	for(i = 0; i < len; i++) {
+		if (NA_REAL==x[i]) {
+			nclouds--; //NA comes from the neglected diagonal
+			continue;
+		}
 		double val=x[i];
 		if ( sorter.size() < sortercapacity) 
 			sorter.push(rank_pair(val,i+1)); //coord is 1-based
@@ -101,13 +111,13 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int n=-1) {
 		}
 	};
 	double next=1.;
-	if (n<len) { //we have the next for n-th on top, it is the largest, and we get it
+	if (n<nclouds) { //we have the next for n-th on top, it is the largest, and we get it
 		next=sorter.top().first;
 		sorter.pop();
 	}
 	while (!sorter.empty()) {
 		rank_pair current=sorter.top();
-		Res.push_front(NumericVector::create(current.second,pow(1.-next+current.first,len)));
+		Res.push_front(NumericVector::create(current.second,pow(1.-next+current.first,nclouds)));
 		next=current.first;
 		sorter.pop();
 	}
