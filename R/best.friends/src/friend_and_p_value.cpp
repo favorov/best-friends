@@ -84,10 +84,7 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int n=-1) {
 	if (len==0 || n==0) {
 		return (Res); //empty vector -- emplty list
 	}
-	if (len==1) {
-		Res.push_front(NumericVector::create(1,x[0]));  //one member - we return 1-(1-val)**len = val for pval and 1 for coord
-		return (Res);
-	}
+
 
 	pqt sorter;
 	unsigned int sortercapacity = unsigned(min(len,n+1));
@@ -110,6 +107,10 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int n=-1) {
 			}
 		}
 	};
+	if (nclouds==1) {
+	  Res.push_front(NumericVector::create(1,x[0]));  //one member - we return 1-(1-val)**len = val for pval and 1 for coord
+	  return (Res);
+	}
 	double next=1.;
 	if (n<nclouds) { //we have the next for n-th on top, it is the largest, and we get it
 		next=sorter.top().first;
