@@ -28,9 +28,6 @@ NumericVector rank_diff_and_p_for_the_best(NumericVector x) {
 	if (len==0) {
 		return (NumericVector::create()); //empty vector -- empty list
 	}
-	if (len==1) {
-		return (NumericVector::create(1,x[0])); //one member - we return 1-(1-val)**len = val for pval and 1 for coord
-	}
 	for(i = 0; i < len; i++) {
 		if (NA_REAL==x[i]) {
 			nclouds--; //NA comes from the neglected diagonal
@@ -48,6 +45,9 @@ NumericVector rank_diff_and_p_for_the_best(NumericVector x) {
 			next=x[i];
 		}
 	};
+	if (nclouds==1) {
+		return (NumericVector::create(1,best)); //one member - we return 1-(1-val)**len = val for pval and 1 for coord
+	}
 	return (NumericVector::create(bestind,pow(1.-next+best,nclouds)));
 }
 
