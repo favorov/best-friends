@@ -1,5 +1,5 @@
 #best.friends package
-#A. Favorov, A. Suvorikova, V. Mukhina, V. Ramensky, A. Mironov (c) 2014-2022
+#A. Suvorikova, V. Mukhina, V. Ramensky, A. Mironov, A. Favorov (c) 2014-2023
 #'
 #'
 #' best.friends.test
@@ -80,7 +80,7 @@ best.friends.test<-function(attention,distance_like=FALSE,neglect_diagonal=FALSE
 		}
   )
 	#we applied ranking column-by-column (cloud-by-cloud)
-	element.ranks<-(element.ranks-1)/(dims[1]-as.integer(neglect_diagonal))
+	element.ranks<-(element.ranks-.5)/(dims[1]-as.integer(neglect_diagonal))
 	#and mapped the ranks into [0..#tags] (or [0..#tags] is neglect_diagonal)
   if (neglect_diagonal){diag(element.ranks)<-NA}
 	#we reapply NA to the diagonal -- it will be used not to see at in the C++ u statistics calculation
@@ -185,7 +185,7 @@ friends.test<-function(attention,distance_like=FALSE,friends.number=-1,neglect_d
   #there a no other source on NA's in element.ranks
 	res<-list()
   res$element.ranks<-element.ranks
-	element.ranks<-(element.ranks-1)/(dims[1]-as.integer(neglect_diagonal))
+	element.ranks<-(element.ranks-.5)/(dims[1]-as.integer(neglect_diagonal))
   unlistres<-unlist(t(apply(element.ranks,1,rank_diff_and_p_for_the_best_n,n=friends.number)))
 	res$friends<-matrix(
 	  colnames(attention)[unlistres[seq(1,length(unlistres),2)]],ncol = friends.number, nrow=dims[1], byrow = TRUE
