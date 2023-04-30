@@ -74,7 +74,7 @@ Moreover, the gene may have several nonzero loads, but all of them but one are r
 
 \paragraph{Model} The bipartite graph naturally fits this model. To generalise the example, we will refer to genes as \textit{{\tag}s}, to expression patterns, as \textit{{\cloud}s}, and to any load as \textit{attention}. The sketch below illustrates the setting.
 
-![The bipartite graph picture shows only edges with nonzero values](bipartite.jpg)
+![The bipartite graph picture shows only edges with nonzero values](bipartite.jpg){width=50%}
 
 To be more specific, we are given a set of clouds $C = \{c_1, \dots, c_k\}$, and a set of tags $T = \{t_1, \dots, t_n\}$.
 Each tag $t \in T$ and cloud $c \in C$ are related by the attention $A(t, c)$, that the cloud pays to the tag. The strength of attention varies from $0$ to infinity, $A(t, c)\ge 0$. 
