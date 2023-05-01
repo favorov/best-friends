@@ -73,7 +73,7 @@ For a similar test that splits all the clouds into $m$ friends of the tag and th
 
 This option of the test is realised as the `best.friends` function.
 
-Both functions have `neglect.diagonal` parameter; the boolean is to be set to `TRUE` for a specific case, when $k==n$ and the diagonal af the $A$ matrix is not supposed to carry any information, e.g. see the last examle in the table.
+Both functions have `neglect.diagonal` parameter; the boolean is to be set to `TRUE` for a specific case, when $k = n$ and the diagonal af the $A$ matrix is not supposed to carry any information, e.g. see the last examle in the table.
 
 Please see our manuscript [] for more details.
 
