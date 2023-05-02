@@ -24,3 +24,4 @@ the worst of best friends.
 0.99.5 - trigger re-check, the mail list error fixed.
 0.99.6 - Documentation updated; non-diagonal options added. 
 0.99.61 - Changing rank normalisation scheme.
+0.99.62 - The math in rd is \eqn{}
