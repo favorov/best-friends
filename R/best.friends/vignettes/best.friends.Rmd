@@ -1,20 +1,11 @@
 ---
 title: "Best friends: what cloud is friendly to this tag? Is it actually friendly?"
 output: rmarkdown::html_vignette
-
 vignette: >
-
- %\VignetteEngine{knitr::rmarkdown}
  %\VignetteIndexEntry{Best friends: what cloud is friendly to this tag? Is it actually friendly?}
- %\VignetteIndexEntry{best.friends}
- %\VignetteIndexEntry{best.friends.of}
- %\VignetteIndexEntry{best-friends-of}
- %\VignetteIndexEntry{best-friends}
+ %\VignetteEngine{knitr::rmarkdown}
  %\VignetteEncoding{UTF-8}
  %\VignetteDepends{devtools}
-
-
-
 ---
 
 [SI AUGUSTUM VIDEAT AMICOS EIUS VIDEATI]{style="float:right"}
