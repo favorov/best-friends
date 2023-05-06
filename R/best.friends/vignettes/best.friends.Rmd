@@ -215,3 +215,7 @@ noquote(all.friends)
 ```
 The same friendship: the blue is the best friend for the orange. All the nodes but the red are better friends for the the orange than the red is ((uncorrected p-value=0.03)).
 
+Session info to match stadadrds:
+```{r}
+sessionInfo()
+```
