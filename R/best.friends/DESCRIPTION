@@ -5,18 +5,19 @@ Version: 0.99.62
 Date: 2023-05-01
 Encoding: UTF-8
 Authors@R: c(
-	    person("Alexandra","Suvorikova",email = "a.suvorikova@gmail.com",role=c("aut","ctb")),
-	    person("Vera","Mukhina",email = "atgc@vigg.ru",role=c("aut","ctb")),
+      person("Alexandra","Suvorikova",email = "a.suvorikova@gmail.com",role=c("aut","ctb")),
+      person("Vera","Mukhina",email = "atgc@vigg.ru",role=c("aut","ctb")),
       person("Vasily","Ramensky", email="ramensky@gmail.com",role=c("aut","ctb")),
       person("Andrey A.","Mironov", email="mironov@bioinf.fbb.msu.ru",role=c("aut","ctb")),
-      person("Alexander","Favorov", email = "favorov@sensi.org", role=c("aut","cre"))
+      person("Alexander","Favorov", email = "favorov@sensi.org", role=c("aut","cre"),
+                 comment=c(ORCID="0000-0003-2595-1091"))
     )
 Description: We have some similarity of interaction measure for pairs of instnces, e.q. genes and regulators.
     We want to know what genes are the specifially best friends for selected regulators and vice versa.
 License: Artistic-2.0
 LazyLoad: yes
 Depends: R (>= 3.0.0)
-biocViews: Annotation, Genetics, StatisticalMethod
+biocViews: Annotation, StatisticalMethod
 URL: https://github.com/favorov/best-friends
 Suggests: knitr, rmarkdown, devtools, markdown, BiocStyle
 VignetteBuilder: knitr
