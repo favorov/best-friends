@@ -31,7 +31,7 @@
 #' indicates that the cloud is really the best friend of the tag.
 #' @examples
 #' genes<-10
-#' regulation=matrix(
+#' regulation<-matrix(
 #'   c(0.2, 0.2, 0.2, 0.2, 0.25, rep(0.2,genes-5),
 #'     rep(1, genes),
 #'     rep(1, genes),
@@ -52,49 +52,50 @@
 #' bestfriends<-best.friends.test(regulation)
 #' @export
 best.friends.test<-function(attention,distance_like=FALSE,neglect_diagonal=FALSE){
-  dims<-dim(attention)
-	if(min(dims)<2){
-		stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
-	}
-  #if attention is distance_like, we will order in ascending
-  #if nor, descending. 
-  #E.g., the least ranks are the 
-  #most close attentions
-  if (neglect_diagonal){ 
-    if(dims[1]==dims[2]) {
-      diag(attention)<-NA
-    } 
-    else {
-      warning("neglect_diagonal can work only for square attention matrix")
-      neglect_diagonal<-FALSE
+    dims<-dim(attention)
+    if(min(dims)<2){
+        stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
     }
-  }
-
-  order<-ifelse(distance_like,1,-1)
-  # if distance_like holds, the least is the best (first)
-  #and order==1 (ascending) 
-  element.ranks<-apply(attention,2,
-		function(x){
-			data.table::frankv(x,ties.method='average',
-			na.last=TRUE,order=order)
-		}
-  )
-	#we applied ranking column-by-column (cloud-by-cloud)
-	element.ranks<-(element.ranks-.5)/(dims[1]-as.integer(neglect_diagonal))
-	#and mapped the ranks into [0..#tags] (or [0..#tags] is neglect_diagonal)
-  if (neglect_diagonal){diag(element.ranks)<-NA}
-	#we reapply NA to the diagonal -- it will be used not to see at in the C++ u statistics calculation
-	#it also signals C++ that there are |C|-1 values rather that |C|
-  #there a no other source on NA's in element.ranks
-	res<-t(apply(element.ranks,1,rank_diff_and_p_for_the_best))
-	rn<-rownames(attention); if (length(rn)==0) {as.character(seq(dims[1]))} 
-	cn<-colnames(attention); if (length(cn)==0) {as.character(seq(dims[2]))} 
-	data.frame(
-		tag=seq(dims[1]),
-		friend=as.integer(res[,1]),
-	  p.value=res[,2],
-	  tag.name=rn,
-	  friend.name=cn[as.integer(res[,1])])
+    #if attention is distance_like, we will order in ascending
+    #if nor, descending. 
+    #E.g., the least ranks are the 
+    #most close attentions
+    if (neglect_diagonal){ 
+        if(dims[1]==dims[2]) {
+            diag(attention)<-NA
+        } 
+        else {
+            warning("neglect_diagonal can work only for square attention matrix")
+            neglect_diagonal<-FALSE
+        }
+    }
+    
+    order<-ifelse(distance_like,1,-1)
+    # if distance_like holds, the least is the best (first)
+    #and order==1 (ascending) 
+    element.ranks<-apply(attention,2,
+                         function(x){
+                             data.table::frankv(x,ties.method='average',
+                                                na.last=TRUE,order=order)
+                         }
+    )
+    #we applied ranking column-by-column (cloud-by-cloud)
+    element.ranks<-(element.ranks-.5)/(dims[1]-as.integer(neglect_diagonal))
+    #and mapped the ranks into [0..#tags] (or [0..#tags] is neglect_diagonal)
+    if (neglect_diagonal){diag(element.ranks)<-NA}
+    #we reapply NA to the diagonal -- it will be used not to see at in the C++ u statistics calculation
+    #it also signals C++ that there are |C|-1 values rather that |C|
+    #there a no other source on NA's in element.ranks
+    res<-t(apply(element.ranks,1,rank_diff_and_p_for_the_best))
+    rn<-rownames(attention); if (length(rn)==0) {as.character(seq(dims[1]))} 
+    cn<-colnames(attention); if (length(cn)==0) {as.character(seq(dims[2]))} 
+    data.frame(
+        tag=seq(dims[1]),
+        friend=as.integer(res[,1]),
+        p.value=res[,2],
+        tag.name=rn,
+        friend.name=cn[as.integer(res[,1])]
+    )
 }
 
 #'
@@ -124,19 +125,19 @@ best.friends.test<-function(attention,distance_like=FALSE,neglect_diagonal=FALSE
 #' \code{pvals} contains p-values for the corresponding split of the \code{friends} row to friends and others.
 #' @examples
 #' genes<-10
-#' regulation=matrix(
-#'   c(0.2, 0.2, 0.2, 0.2, 0.25, rep(0.2,genes-5),
-#'     rep(1, genes),
-#'     rep(1, genes),
-#'     rep(1, genes),
-#'     rep(1, genes),
-#'     rep(1, genes),
-#'     rep(1, genes),
-#'     rep(1, genes),
-#'     rep(1, genes),
-#'     rep(1, genes)
-#'   ),
-#'   ncol=10,byrow=FALSE
+#' regulation<-matrix(
+#'     c(0.2, 0.2, 0.2, 0.2, 0.25, rep(0.2,genes-5),
+#'         rep(1, genes),
+#'         rep(1, genes),
+#'         rep(1, genes),
+#'         rep(1, genes),
+#'         rep(1, genes),
+#'         rep(1, genes),
+#'         rep(1, genes),
+#'         rep(1, genes),
+#'         rep(1, genes)
+#'      ),
+#'     ncol=10,byrow=FALSE
 #' )
 #' gene.names<-LETTERS[seq( from = 1, to = genes )]
 #' TF.names<-c('TF1','TF2','TF3','TF4','TF5','TF6','TF7','TF8','TF9','TF10')
@@ -145,53 +146,53 @@ best.friends.test<-function(attention,distance_like=FALSE,neglect_diagonal=FALSE
 #' friends<-friends.test(regulation)
 #' @export
 friends.test<-function(attention,distance_like=FALSE,friends.number=-1,neglect_diagonal=FALSE){
-  dims<-dim(attention)
-	if(min(dims)<2){
-		stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
-	}
-  if (neglect_diagonal){ 
-    if(dims[1]==dims[2]) {
-      diag(attention)<-NA
+    dims<-dim(attention)
+    if(min(dims)<2){
+        stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
+    }
+    if (neglect_diagonal){ 
+        if(dims[1]==dims[2]) {
+            diag(attention)<-NA
+        } 
+        else {
+            warning("neglect_diagonal can work only for square attention matrix")
+            neglect_diagonal<-FALSE
+        }
+    }
+    default.friends.number <- dims[2]-as.integer(neglect_diagonal)
+    #default number of friends; if we neglect diagonal, it decreases by 1
+    if(friends.number<=0 || friends.number > default.friends.number){
+        friends.number <- default.friends.number
     } 
-    else {
-      warning("neglect_diagonal can work only for square attention matrix")
-      neglect_diagonal<-FALSE
-    }
-  }
-  default.friends.number=dims[2]-as.integer(neglect_diagonal)
-  #default number of friends; if we neglect diagonal, it decreases by 1
-	if(friends.number<=0 || friends.number > default.friends.number){
-	  friends.number=default.friends.number
-	} 
-
-  order<-ifelse(distance_like,1,-1)
-  #if attention is distance_like, we will order in ascending
-  #if nor, descending. 
-  #E.g., the least ranks are the 
-  #most close attentions
-  # if distance_like holds, the least is the best (first)
-  #and order==1 (ascending) 
-  element.ranks<-apply(attention,2, 
-    function(x){
-      data.table::frankv(x,ties.method='average',
-      na.last=TRUE,order=order)
-    }
-  )
-	#we applied ranking column-by-column (cloud-by-cloud)
-	rownames(element.ranks)<-rownames(attention)
-  if (neglect_diagonal){diag(element.ranks)<-NA}
-	#we reapply NA to the diagonal -- it will be used not to see at in the C++ u statistics calculation
-	#it also signals C++ that there are |C|-1 values rather that |C|
-  #there a no other source on NA's in element.ranks
-	res<-list()
-  res$element.ranks<-element.ranks
-	element.ranks<-(element.ranks-.5)/(dims[1]-as.integer(neglect_diagonal))
-  unlistres<-unlist(t(apply(element.ranks,1,rank_diff_and_p_for_the_best_n,n=friends.number)))
-	res$friends<-matrix(
-	  colnames(attention)[unlistres[seq(1,length(unlistres),2)]],ncol = friends.number, nrow=dims[1], byrow = TRUE
-  )
-	res$pvals<-matrix(unlistres[seq(2,length(unlistres),2)],ncol = friends.number, nrow=dims[1],byrow = TRUE)
-	rownames(res$friends)<-rownames(attention)
-	rownames(res$pvals)<-rownames(attention)
-	res
+    
+    order<-ifelse(distance_like,1,-1)
+    #if attention is distance_like, we will order in ascending
+    #if nor, descending. 
+    #E.g., the least ranks are the 
+    #most close attentions
+    # if distance_like holds, the least is the best (first)
+    #and order==1 (ascending) 
+    element.ranks<-apply(attention,2, 
+                         function(x){
+                             data.table::frankv(x,ties.method='average',
+                                                na.last=TRUE,order=order)
+                         }
+    )
+    #we applied ranking column-by-column (cloud-by-cloud)
+    rownames(element.ranks)<-rownames(attention)
+    if (neglect_diagonal){diag(element.ranks)<-NA}
+    #we reapply NA to the diagonal -- it will be used not to see at in the C++ u statistics calculation
+    #it also signals C++ that there are |C|-1 values rather that |C|
+    #there a no other source on NA's in element.ranks
+    res<-list()
+    res$element.ranks<-element.ranks
+    element.ranks<-(element.ranks-.5)/(dims[1]-as.integer(neglect_diagonal))
+    unlistres<-unlist(t(apply(element.ranks,1,rank_diff_and_p_for_the_best_n,n=friends.number)))
+    res$friends<-matrix(
+        colnames(attention)[unlistres[seq(1,length(unlistres),2)]],ncol = friends.number, nrow=dims[1], byrow = TRUE
+    )
+    res$pvals<-matrix(unlistres[seq(2,length(unlistres),2)],ncol = friends.number, nrow=dims[1],byrow = TRUE)
+    rownames(res$friends)<-rownames(attention)
+    rownames(res$pvals)<-rownames(attention)
+    res
 }
