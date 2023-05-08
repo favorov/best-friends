@@ -1,7 +1,7 @@
 best.friends test R implementation
 ===
 
-This is R implementation of the gest.briends test.
+This is R implementation of the best.briends test.
 The idea is: we have N elements and M communities and 
 relations described as NxM matrix.
 The stronger is the relation, the higher is the number.
@@ -24,4 +24,4 @@ the worst of best friends.
 0.99.5 - trigger re-check, the mail list error fixed.
 0.99.6 - Documentation updated; non-diagonal options added. 
 0.99.61 - Changing rank normalisation scheme.
-0.99.62 - The math in rd is \eqn{}
+0.99.62 - The math in rd is \eqn{}. NOTES from biocheck.
