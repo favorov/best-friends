@@ -25,3 +25,4 @@ the worst of best friends.
 0.99.6 - Documentation updated; non-diagonal options added. 
 0.99.61 - Changing rank normalisation scheme.
 0.99.62 - The math in rd is \eqn{}. NOTES from biocheck.
+0.99.63 - Switched to tag + collection termnology
