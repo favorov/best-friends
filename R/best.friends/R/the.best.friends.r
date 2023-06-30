@@ -112,14 +112,14 @@ best.friends.test<-function(attention,distance_like=FALSE,neglect_diagonal=FALSE
 #' If a collection is best friend, it is to be the most friendly cloud for the tag, but it is not enough. In any ranking, there is a first element, and we want to estimate the probability to observe what we observe by random. The null-hypothesis we use to picture a random setup is that in any column of \eqn{A} all the elements are i.i.d., or, in other word, the attentions that a cloud pays to all the tags are independently sampled from the same distribution. The distributions can differ from cloud to cloud. 
 #' The statistics we use to test whether the most friendly collection for the tag \eqn{t_i} is really the best friend is the difference \eqn{t} between the values \eqn{r(t_i,c_{(2)}(t_i))} and \eqn{r(t_i,c_{(1)}(t_i))}, in other words, between the next-after-the-best and the best values \eqn{r} for the tag \eqn{t_i}. We estimate the probability (p-value) to observe this difference as \eqn{<=t} given the null-hypothesis proposition. If p-value is small enough, we reject the null, and claim that the friendliness of the cloud \eqn{c_{(1)}(t_i)} is unlikely to observe by random and so we refer to it as the best friend of \eqn{t_i}. In this case, \eqn{t_i} is a marker of its best friend cloud \eqn{c_{(1)}(t_i)}.
 #'
-#' For a similar test that splits all the collections into \eqn{m} friends of the tag and the remaining \eqn{|C|-k} clouds uses the difference  \eqn{r(t_i,c_{(m+1)}(t_i))} and \eqn{r(t_i,c_{(m)}(t_i))}. If we obtain the p-value that is small enough, we claim that the clouds \eqn{c_{(1)}(t_i)}..\eqn{c_{(m)}(t_i)} are friends of \eqn{t_i} and \eqn{t_i} is their marker.
+#' For a similar test that splits all the collections into \eqn{m} friends of the tag and the remaining \eqn{|C|-m} clouds uses the difference  \eqn{r(t_i,c_{(m+1)}(t_i))} and \eqn{r(t_i,c_{(m)}(t_i))}. If we obtain the p-value that is small enough, we claim that the clouds \eqn{c_{(1)}(t_i)}..\eqn{c_{(m)}(t_i)} are friends of \eqn{t_i} and \eqn{t_i} is their marker.
 #'
 #' We have what can to be friends (collections) as columns and we have what they can be friends of (tags) as rows.
 #` matrix where in each column and row there is a value of how strong the raw is related to this column.
 #' @inheritParams best.friends.test
 #' @param friends.number number of entities we consider for each tags; the default -1 means all;
 #' if friends.number is 1, the call does essentially the same as the best.friends.test call
-#' @return a list with 4 elements, each is a matrix with the same dimetions as the \code{attention}. 
+#' @return a list with 3 elements, first is a matrix of  the same \eqn{|T| x |C|} dimensions as the \code{attention}, other two are \eqn{|T| x (|C|-1)}. 
 #' \code{tag.ranks} are the ranks of attention-to-tags inside the collections; 
 #' \code{friends} is the ranked-by-friendship-to-the-tag list of friendly collections, best friend first; 
 #' \code{pvals} contains p-values for the corresponding split of the \code{friends} row to friends and others.
