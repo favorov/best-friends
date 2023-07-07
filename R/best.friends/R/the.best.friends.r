@@ -159,7 +159,8 @@ friends.test<-function(attention,distance_like=FALSE,friends.number=-1,neglect_d
             neglect_diagonal<-FALSE
         }
     }
-    default.friends.number <- dims[2]-as.integer(neglect_diagonal)
+    default.friends.number <- dims[2]-1-as.integer(neglect_diagonal)
+    #there are |C|-1 maximal (default) number friends for general case
     #default number of friends; if we neglect diagonal, it decreases by 1
     if(friends.number<=0 || friends.number > default.friends.number){
         friends.number <- default.friends.number
