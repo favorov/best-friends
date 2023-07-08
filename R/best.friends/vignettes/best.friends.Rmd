@@ -172,7 +172,7 @@ all.friends<-friends.test(regulation)
 noquote(all.friends)
 ```
 
-Almost all the effects disappear. There is some week signal for gene E is for {TF1,TF9,TF7,TF10} (uncorrected p-value=0.006).
+Almost all the effects disappear. There is some week signal for gene E is for {TF1,TF9,TF7,TF10} (uncorrected p-value=`r all.friends$pvals[5,4]`).
 
 
 
@@ -205,7 +205,7 @@ friends<-best.friends.test(connections,neglect_diagonal = TRUE)
 noquote(format(friends,digits = p.val.digits))
 
 ```
-the blue is the best friend for the orange (uncorrected p-value=0.013).
+the blue is the best friend for the orange (uncorrected p-value=`r noquote(format(friends$p.value[4],,digits = p.val.digits))`).
 
 All friends test:
 
@@ -213,7 +213,7 @@ All friends test:
 all.friends<-friends.test(connections,neglect_diagonal = TRUE)
 noquote(all.friends)
 ```
-The same friendship: the blue is the best friend for the orange. All the nodes but the red are better friends for the the orange than the red is ((uncorrected p-value=0.03)).
+The same friendship: the blue is the best friend for the orange. All the nodes but the red are better friends for the the orange than the red is ((uncorrected p-value=`r all.friends$pvals[5,4]`)).
 
 Session info to match stadadrds:
 ```{r}
