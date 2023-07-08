@@ -114,18 +114,15 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int max_num_friends=-1) {
 	  Res.push_front(NumericVector::create(1,x[0]));  //one member - we return 1-(1-val)**len = val for pval and 1 for coord
 	  return (Res);
 	}
-	double next=10; //the value cannot be from the ranks, it is >1
-	if (max_num_friends<ncollections-1) { //we have the next for n-th on top, it is the largest, and we get it
-		next=sorter.top().first;
-		sorter.pop();
-	}
+	//we have the next for max_num_friends-th on top, 
+	//it is the largest, and we get it
+    double next=sorter.top().first;
+	sorter.pop();
 	while (!sorter.empty()) {
-		rank_pair current=sorter.top();
-		if (next<=1.) {
-		  Res.push_front(NumericVector::create(current.second,pow(1.-next+current.first,ncollections)));
-		} //we do not want to see the comparison with the initializing  value of next in the results
-		next=current.first;
-		sorter.pop();
+	  rank_pair current=sorter.top();
+	  Res.push_front(NumericVector::create(current.second,pow(1.-next+current.first,ncollections)));
+	  next=current.first;
+	  sorter.pop();
 	}
 	return (Res);
 }
