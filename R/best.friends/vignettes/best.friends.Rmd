@@ -8,7 +8,7 @@ vignette: >
  %\VignetteDepends{devtools}
 ---
 
-[SI AUGUSTUM VIDEAT AMICOS EIUS VIDEATI]{style="float:right"}
+[SI AUGUSTUS CERNATUR, CERNANTUR QOUQUE AMICI]{style="float:right"}
 
 ##
 
@@ -83,7 +83,7 @@ Let's start with something supersimple.
 ```{r}
 relation<-matrix(ncol = 3,nrow=7)
 rownames(relation)<-c("Tag1","Tag2","Tag3","Tag4","Tag5","Tag6","Tag7")
-colnames(relation)<-c("Cloud1","Cloud2","Cloud3")
+colnames(relation)<-c("Collection1","Collection2","Collection3")
 relation[1,]<-c(0.2,0.1,0.3)
 relation[2,]<-c(2,3,1)
 relation[3,]<-c(0.1, 6 ,0.05 )
@@ -98,7 +98,7 @@ Let's run the best friends test.
 friends<-best.friends.test(relation)
 noquote(format(friends,digits = p.val.digits))
 ```
-Cloud 2 is the best friend of tag 3, and it is the only result with p-value less than 0.05. Makes sense. Tag 3 is the best in the collection 2, while it is the worst in other two clouds.
+Cloud 2 is the best friend of tag 3, and it is the only result with p-value less than 0.05. Makes sense. Tag 3 is the best for the collection 2, while it is the worst for other two collections.
 
 ### <a name="toyTF"></a> Toy regulation example
 
@@ -130,7 +130,7 @@ So, we prepared the relation matrix.
 ```{r}
 noquote(format(regulation,digits = data.digits))
 ```
-Tags (genes) are rows, collections (TFs) are columns, it is consistent with $A\left(e,c\right)$ notation.
+Tags (genes) are rows, collections (TFs) are columns, it is consistent with $A\left(t,c\right)$ notation.
 
 Searching for the best friend TF for each gene:
 
