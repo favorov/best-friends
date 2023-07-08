@@ -188,6 +188,7 @@ friends.test<-function(attention,distance_like=FALSE,friends.number=-1,neglect_d
     res<-list()
     res$element.ranks<-element.ranks
     element.ranks<-(element.ranks-.5)/(dims[1]-as.integer(neglect_diagonal))
+    #the denominator is tha range of ranks, so it is 1 larger than the number of possible friends
     unlistres<-unlist(t(apply(element.ranks,1,rank_diff_and_p_for_the_best_n,n=friends.number)))
     res$friends<-matrix(
         colnames(attention)[unlistres[seq(1,length(unlistres),2)]],ncol = friends.number, nrow=dims[1], byrow = TRUE
