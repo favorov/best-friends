@@ -5,7 +5,7 @@ rank_diff_and_p_for_the_best <- function(x) {
     .Call(`_best_friends_rank_diff_and_p_for_the_best`, x)
 }
 
-rank_diff_and_p_for_the_best_n <- function(x, n = -1L) {
-    .Call(`_best_friends_rank_diff_and_p_for_the_best_n`, x, n)
+rank_diff_and_p_for_the_best_n <- function(x, max_num_friends = -1L) {
+    .Call(`_best_friends_rank_diff_and_p_for_the_best_n`, x, max_num_friends)
 }
 

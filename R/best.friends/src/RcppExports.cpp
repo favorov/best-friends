@@ -22,14 +22,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // rank_diff_and_p_for_the_best_n
-List rank_diff_and_p_for_the_best_n(NumericVector x, int n);
-RcppExport SEXP _best_friends_rank_diff_and_p_for_the_best_n(SEXP xSEXP, SEXP nSEXP) {
+List rank_diff_and_p_for_the_best_n(NumericVector x, int max_num_friends);
+RcppExport SEXP _best_friends_rank_diff_and_p_for_the_best_n(SEXP xSEXP, SEXP max_num_friendsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    rcpp_result_gen = Rcpp::wrap(rank_diff_and_p_for_the_best_n(x, n));
+    Rcpp::traits::input_parameter< int >::type max_num_friends(max_num_friendsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rank_diff_and_p_for_the_best_n(x, max_num_friends));
     return rcpp_result_gen;
 END_RCPP
 }
