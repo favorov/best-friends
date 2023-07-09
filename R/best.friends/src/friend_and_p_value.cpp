@@ -29,7 +29,7 @@ NumericVector rank_diff_and_p_for_the_best(NumericVector x) {
 		return (NumericVector::create()); //empty vector -- empty list
 	}
 	for(i = 0; i < len; i++) {
-		if (NA_REAL==x[i]) {
+		if (isnan(x[i])) {
 			ncollections--; //NA comes from the neglected diagonal
 			continue;
 		}
@@ -93,7 +93,7 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int max_num_friends=-1) {
 	unsigned int sortercapacity = unsigned(max_num_friends+1);
 	//we need one more slots than max_num_friends to know the next for the max_num_friends-th; 
 	for(i = 0; i < len; i++) {
-		if (NA_REAL==x[i]) {
+		if (isnan(x[i])) {
 			ncollections--; //NA comes from the neglected diagonal
 			continue;
 		}
