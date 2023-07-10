@@ -116,10 +116,16 @@ List rank_diff_and_p_for_the_best_n(NumericVector x,int max_num_friends=-1) {
 	}
 	//we have the next for max_num_friends-th on top, 
 	//it is the largest, and we get it
-    double next=sorter.top().first;
+	rank_pair current=sorter.top();
 	sorter.pop();
+  double next=current.first;
+	Res.push_front(NumericVector::create(current.second,1.));
+	//we actually put only the number of the collection with 
+	//the worst rank of the tag
+	//the p-value 1. is not supposed to be used, 
+	//it is just to complete the pair
 	while (!sorter.empty()) {
-	  rank_pair current=sorter.top();
+	  current=sorter.top();
 	  Res.push_front(NumericVector::create(current.second,pow(1.-next+current.first,ncollections)));
 	  next=current.first;
 	  sorter.pop();
