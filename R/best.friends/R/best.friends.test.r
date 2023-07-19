@@ -15,6 +15,7 @@
 #' The statistics we use to test whether the most friendly collection for the tag \eqn{t_i} is really the best friend is the difference \eqn{t} between the values \eqn{r(t_i,c_{(2)}(t_i))} and \eqn{r(t_i,c_{(1)}(t_i))}, in other words, between the next-after-the-best and the best values \eqn{r} for the tag \eqn{t_i}. We estimate the probablity (p-value) to observe this difference as \eqn{<=t} given the null-hypothesis proposition. If p-value is small enough, we reject the null, and claim that the friendliness of the cloud \eqn{c_{(1)}(t_i)} is unlikely to observe by random and so we refer to it as the best friend of \eqn{t_i}. In this case, \eqn{t_i} is a marker of its best friend cloud \eqn{c_{(1)}(t_i)}.
 #'
 #' @param attention is the tags*collections matrix of the relations between tags and the clouds
+#' @param tag.ranks the value of [tag.ranks] call. \code{best.friends.test(attenion)} and \code{best.friends.test(tag.ranks=tag.ranks(attenion)} return the same, as well as \code{friends.test(attenion)} and \code{friends.test(tag.ranks=tag.ranks(attenion)} The goal is to calculate tag.ranks only once if multiple calls of friends tests happen for the same attention matrix.
 #' @param distance_like the default is \code{FALSE} and it shows that the relation values are not like distance, 
 #' i.e. the better relation is shown by the lagrer value; if the relation is, on the contrary, distance-like, 
 #' and 0 is the best, the value is \code{TRUE}.

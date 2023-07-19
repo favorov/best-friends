@@ -22,10 +22,8 @@
 #' and 0 is the best, the value is \code{TRUE}.
 #' @param neglect_diagonal in the case of square attention matrix, the diagonal sometimes is either uninformative or it carries some specific values. In each of these cases, 
 #' the diagonal elements are excluded from the ranking and from the statistics by setting this parameter TRUE. The default is FALSE. 
-#' @return The matrix of ranks, the size is the same as that of the attention matrix.
+#' @return The matrix of ranks of attention to tags from collections. The size is the same as that of the attention matrix.
 #' collection. 
-#' The small (after multiple hypothesis correction we are to do) p-value 
-#' indicates that the collection is really the best friend of the tag.
 #' @examples
 #' genes<-10
 #' regulation<-matrix(
@@ -49,10 +47,10 @@
 #' ranks<-tag.ranks(regulation)
 #' bestfriends<-best.friends.test(regulation)
 #' @export
-best.friends.test<-function(attention,distance_like=FALSE,neglect_diagonal=FALSE){
+tag.ranks<-function(attention,distance_like=FALSE,neglect_diagonal=FALSE){
     dims<-dim(attention)
     if(min(dims)<2){
-        stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
+        stop("tag.ranks requires both dimensions of the attention matrix to be more than 1")
     }
     #if attention is distance_like, we will order in ascending
     #if nor, descending. 
@@ -78,20 +76,4 @@ best.friends.test<-function(attention,distance_like=FALSE,neglect_diagonal=FALSE
                          }
     )
     #we applied ranking column-by-column (collection-by-cloud)
-    tag.ranks<-(tag.ranks-.5)/(dims[1]-as.integer(neglect_diagonal))
-    #and mapped the ranks into [0..#tags] (or [0..#tags] is neglect_diagonal)
-    if (neglect_diagonal){diag(tag.ranks)<-NA}
-    #we reapply NA to the diagonal -- it will be used not to see at in the C++ u statistics calculation
-    #it also signals C++ that there are |C|-1 values rather that |C|
-    #there a no other source on NA's in tag.ranks
-    res<-t(apply(tag.ranks,1,rank_diff_and_p_for_the_best))
-    rn<-rownames(attention); if (length(rn)==0) {as.character(seq(dims[1]))} 
-    cn<-colnames(attention); if (length(cn)==0) {as.character(seq(dims[2]))} 
-    data.frame(
-        tag.index=seq(dims[1]),
-        collection.index=as.integer(res[,1]),
-        p.value=res[,2],
-        tag=rn,
-        collection=cn[as.integer(res[,1])]
-    )
 }
