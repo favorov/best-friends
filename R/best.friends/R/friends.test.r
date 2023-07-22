@@ -49,8 +49,8 @@ friends.test<-function(attention=NULL,ranks.of.tags=NULL,distance_like=FALSE,fri
   if (! is.null(ranks.of.tags)) {
     if(!is.null(attention)){
       warning("ranks.of.tags is given, the attention matrix is omited")
-      dims<-dim(ranks.of.tags)
     }
+    dims<-dim(ranks.of.tags)
   } else {
     dims<-dim(attention)
     if(min(dims)<2){
@@ -79,25 +79,25 @@ friends.test<-function(attention=NULL,ranks.of.tags=NULL,distance_like=FALSE,fri
     #most close attentions
     # if distance_like holds, the least is the best (first)
     #and order==1 (ascending) 
-    tag.ranks<-apply(attention,2, 
+    ranks.of.tags<-apply(attention,2, 
                      function(x){
                        data.table::frankv(x,ties.method='average',
                                           na.last=TRUE,order=order)
                      }
     )
     #we applied ranking column-by-column (collection-by-cloud)
-    rownames(tag.ranks)<-rownames(attention)
+    rownames(ranks.of.tags)<-rownames(attention)
+    colnames(ranks.of.tags)<-colnames(attention)
   }
-  if (neglect_diagonal){diag(tag.ranks)<-NA}
+  if (neglect_diagonal){diag(ranks.of.tags)<-NA}
   #we reapply NA to the diagonal -- it will be used not to see at in the C++ u statistics calculation
   #it also signals C++ that there are |C|-1 values rather that |C|
-  #there a no other source on NA's in tag.ranks
+  #there a no other source on NA's in ranks.of.tags
   res<-list()
-  #res$tag.ranks<-tag.ranks
-  tag.ranks<-(tag.ranks-.5)/(dims[1]-as.integer(neglect_diagonal))
+  ranks.of.tags<-(ranks.of.tags-.5)/(dims[1]-as.integer(neglect_diagonal))
   #the denominator is the range of ranks, so it is 1 larger than the number of possible friends
   unlistres<-
-    unlist(t(apply(tag.ranks,1,rank_diff_and_p_for_the_best_n,max_num_friends=friends.number)))
+    unlist(t(apply(ranks.of.tags,1,rank_diff_and_p_for_the_best_n,max_num_friends=friends.number)))
   res$collections<-matrix(
     colnames(attention)[
       unlistres[seq(1,length(unlistres),2)]
@@ -109,7 +109,7 @@ friends.test<-function(attention=NULL,ranks.of.tags=NULL,distance_like=FALSE,fri
     unlistres[seq(2,length(unlistres),2)],
     ncol = friends.number+1, nrow=dims[1],byrow = TRUE
   )[,1:friends.number]
-  rownames(res$collections)<-rownames(attention)
-  rownames(res$pvals)<-rownames(attention)
+  rownames(res$collections)<-rownames(ranks.of.tags)
+  rownames(res$pvals)<-rownames(ranks.of.tags)
   res
 }

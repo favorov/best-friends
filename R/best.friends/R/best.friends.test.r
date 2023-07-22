@@ -51,55 +51,57 @@
 #' bestfriends<-best.friends.test(regulation)
 #' @export
 best.friends.test<-function(attention=NULL,ranks.of.tags=NULL,distance_like=FALSE,neglect_diagonal=FALSE){
-    if (! is.null(ranks.of.tags)) {
-      if(!is.null(attention)){
-        warning("ranks.of.tags is given, the attention matrix is omited")
-        dims<-dim(ranks.of.tags)
-      }
-    } else {
-      dims<-dim(attention)
-      if(min(dims)<2){
-        stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
-      }
-      #if attention is distance_like, we will order in ascending
-      #if nor, descending. 
-      #E.g., the least ranks are the 
-      #most close attentions
-      if (neglect_diagonal){ 
-        if(dims[1]==dims[2]) {
-          diag(attention)<-NA
-        } 
-        else {
-          warning("neglect_diagonal can work only for square attention matrix")
-          neglect_diagonal<-FALSE
-        }
-      }
-      
-      order<-ifelse(distance_like,1,-1)
-      # if distance_like holds, the least is the best (first)
-      #and order==1 (ascending) 
-      tag.ranks<-apply(attention,2,
-                       function(x){
-                         data.table::frankv(x,ties.method='average',
-                                            na.last=TRUE,order=order)
-                       }
-      )
+  if (! is.null(ranks.of.tags)) {
+    if(!is.null(attention)){
+      warning("ranks.of.tags is given, the attention matrix is omited")
     }
-    #we applied ranking column-by-column (collection-by-cloud)
-    tag.ranks<-(tag.ranks-.5)/(dims[1]-as.integer(neglect_diagonal))
-    #and mapped the ranks into [0..#tags] (or [0..#tags] is neglect_diagonal)
-    if (neglect_diagonal){diag(tag.ranks)<-NA}
-    #we reapply NA to the diagonal -- it will be used not to see at in the C++ u statistics calculation
-    #it also signals C++ that there are |C|-1 values rather that |C|
-    #there a no other source on NA's in tag.ranks
-    res<-t(apply(tag.ranks,1,rank_diff_and_p_for_the_best))
-    rn<-rownames(attention); if (length(rn)==0) {as.character(seq(dims[1]))} 
-    cn<-colnames(attention); if (length(cn)==0) {as.character(seq(dims[2]))} 
-    data.frame(
-        tag.index=seq(dims[1]),
-        collection.index=as.integer(res[,1]),
-        p.value=res[,2],
-        tag=rn,
-        collection=cn[as.integer(res[,1])]
+    dims<-dim(ranks.of.tags)
+  } else {
+    dims<-dim(attention)
+    if(min(dims)<2){
+      stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
+    }
+    #if attention is distance_like, we will order in ascending
+    #if nor, descending. 
+    #E.g., the least ranks are the 
+    #most close attentions
+    if (neglect_diagonal){ 
+      if(dims[1]==dims[2]) {
+        diag(attention)<-NA
+      } 
+      else {
+        warning("neglect_diagonal can work only for square attention matrix")
+        neglect_diagonal<-FALSE
+      }
+    }
+    
+    order<-ifelse(distance_like,1,-1)
+    # if distance_like holds, the least is the best (first)
+    #and order==1 (ascending) 
+    ranks.of.tags<-apply(attention,2,
+                         function(x){
+                           data.table::frankv(x,ties.method='average',
+                                              na.last=TRUE,order=order)
+                         }
     )
+    rownames(ranks.of.tags)<-rownames(attention)
+    colnames(ranks.of.tags)<-colnames(attention)
+  }
+  #we applied ranking column-by-column (collection-by-cloud)
+  ranks.of.tags<<-(ranks.of.tags-.5)/(dims[1]-as.integer(neglect_diagonal))
+  #and mapped the ranks into [0..#tags] (or [0..#tags] is neglect_diagonal)
+  if (neglect_diagonal){diag(ranks.of.tags)<-NA}
+  #we reapply NA to the diagonal -- it will be used not to see at in the C++ u statistics calculation
+  #it also signals C++ that there are |C|-1 values rather that |C|
+  #there a no other source on NA's in tag.ranks
+  res<-t(apply(ranks.of.tags,1,rank_diff_and_p_for_the_best))
+  rn<-rownames(ranks.of.tags); if (length(rn)==0) {rn<-as.character(seq(dims[1]))} 
+  cn<-colnames(ranks.of.tags); if (length(cn)==0) {cn<-as.character(seq(dims[2]))} 
+  data.frame(
+    tag.index=seq(dims[1]),
+    collection.index=as.integer(res[,1]),
+    p.value=res[,2],
+    tag=rn,
+    collection=cn[as.integer(res[,1])]
+  )
 }
