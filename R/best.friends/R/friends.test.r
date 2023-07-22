@@ -45,42 +45,49 @@
 #' colnames(regulation)<-TF.names
 #' friends<-friends.test(regulation)
 #' @export
-friends.test<-function(attention,distance_like=FALSE,friends.number=-1,neglect_diagonal=FALSE){
-  dims<-dim(attention)
-  if(min(dims)<2){
-    stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
-  }
-  if (neglect_diagonal){ 
-    if(dims[1]==dims[2]) {
-      diag(attention)<-NA
-    } 
-    else {
-      warning("neglect_diagonal can work only for square attention matrix")
-      neglect_diagonal<-FALSE
+friends.test<-function(attention=NULL,ranks.of.tags=NULL,distance_like=FALSE,friends.number=-1,neglect_diagonal=FALSE){
+  if (! is.null(ranks.of.tags)) {
+    if(!is.null(attention)){
+      warning("ranks.of.tags is given, the attention matrix is omited")
+      dims<-dim(ranks.of.tags)
     }
+  } else {
+    dims<-dim(attention)
+    if(min(dims)<2){
+      stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
+    }
+    if (neglect_diagonal){ 
+      if(dims[1]==dims[2]) {
+        diag(attention)<-NA
+      } 
+      else {
+        warning("neglect_diagonal can work only for square attention matrix")
+        neglect_diagonal<-FALSE
+      }
+    }
+    default.friends.number <- dims[2]-1-as.integer(neglect_diagonal)
+    #there are |C|-1 maximal (default) number friends for general case
+    #default number of friends; if we neglect diagonal, it decreases by 1
+    if(friends.number<=0 || friends.number > default.friends.number){
+      friends.number <- default.friends.number
+    } 
+    
+    order<-ifelse(distance_like,1,-1)
+    #if attention is distance_like, we will order in ascending
+    #if nor, descending. 
+    #E.g., the least ranks are the 
+    #most close attentions
+    # if distance_like holds, the least is the best (first)
+    #and order==1 (ascending) 
+    tag.ranks<-apply(attention,2, 
+                     function(x){
+                       data.table::frankv(x,ties.method='average',
+                                          na.last=TRUE,order=order)
+                     }
+    )
+    #we applied ranking column-by-column (collection-by-cloud)
+    rownames(tag.ranks)<-rownames(attention)
   }
-  default.friends.number <- dims[2]-1-as.integer(neglect_diagonal)
-  #there are |C|-1 maximal (default) number friends for general case
-  #default number of friends; if we neglect diagonal, it decreases by 1
-  if(friends.number<=0 || friends.number > default.friends.number){
-    friends.number <- default.friends.number
-  } 
-  
-  order<-ifelse(distance_like,1,-1)
-  #if attention is distance_like, we will order in ascending
-  #if nor, descending. 
-  #E.g., the least ranks are the 
-  #most close attentions
-  # if distance_like holds, the least is the best (first)
-  #and order==1 (ascending) 
-  tag.ranks<-apply(attention,2, 
-                   function(x){
-                     data.table::frankv(x,ties.method='average',
-                                        na.last=TRUE,order=order)
-                   }
-  )
-  #we applied ranking column-by-column (collection-by-cloud)
-  rownames(tag.ranks)<-rownames(attention)
   if (neglect_diagonal){diag(tag.ranks)<-NA}
   #we reapply NA to the diagonal -- it will be used not to see at in the C++ u statistics calculation
   #it also signals C++ that there are |C|-1 values rather that |C|

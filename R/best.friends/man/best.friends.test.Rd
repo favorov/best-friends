@@ -4,10 +4,17 @@
 \alias{best.friends.test}
 \title{best.friends.test}
 \usage{
-best.friends.test(attention, distance_like = FALSE, neglect_diagonal = FALSE)
+best.friends.test(
+  attention = NULL,
+  ranks.of.tags = NULL,
+  distance_like = FALSE,
+  neglect_diagonal = FALSE
+)
 }
 \arguments{
 \item{attention}{is the tags*collections matrix of the relations between tags and the clouds}
+
+\item{ranks.of.tags}{the value of \link{tag.ranks} call. \code{best.friends.test(attenion)} and \code{best.friends.test(ranks.of.tags=tag.ranks(attenion)} return the same, as well as \code{friends.test(attenion)} and \code{friends.test(tag.ranks=tag.ranks(attenion)} The goal is to calculate tag.ranks only once if multiple calls of friends tests happen for the same attention matrix.}
 
 \item{distance_like}{the default is \code{FALSE} and it shows that the relation values are not like distance,
 i.e. the better relation is shown by the lagrer value; if the relation is, on the contrary, distance-like,

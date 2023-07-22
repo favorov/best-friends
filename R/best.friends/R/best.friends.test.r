@@ -54,7 +54,9 @@ best.friends.test<-function(attention=NULL,ranks.of.tags=NULL,distance_like=FALS
     if (! is.null(ranks.of.tags)) {
       if(!is.null(attention)){
         warning("ranks.of.tags is given, the attention matrix is omited")
+        dims<-dim(ranks.of.tags)
       }
+    } else {
       dims<-dim(attention)
       if(min(dims)<2){
         stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
@@ -82,7 +84,7 @@ best.friends.test<-function(attention=NULL,ranks.of.tags=NULL,distance_like=FALS
                                             na.last=TRUE,order=order)
                        }
       )
-    } else {dims<-dim(ranks.of.tags)}
+    }
     #we applied ranking column-by-column (collection-by-cloud)
     tag.ranks<-(tag.ranks-.5)/(dims[1]-as.integer(neglect_diagonal))
     #and mapped the ranks into [0..#tags] (or [0..#tags] is neglect_diagonal)
