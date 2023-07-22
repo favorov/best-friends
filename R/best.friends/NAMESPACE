@@ -2,6 +2,7 @@
 
 export(best.friends.test)
 export(friends.test)
+export(tag.ranks)
 importFrom(Rcpp,evalCpp)
 importFrom(data.table,frankv)
 importFrom(utils,packageDescription)
