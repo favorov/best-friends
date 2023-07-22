@@ -19,9 +19,8 @@
 #' @inheritParams best.friends.test
 #' @param friends.number number of entities we consider for each tags; the default -1 means all;
 #' if friends.number is 1, the call does essentially the same as the best.friends.test call
-#' @return a list with 3 tags, first and second are matrices of  the same \eqn{|T| x |C|} dimensions as the \code{attention}, the third is \eqn{|T| x (|C|-1)}. 
-#' if friends.number is some \eqn{F:1<=F<|C|-1}, the dimensions are \eqn{|T| x (F+!)} and \eqn{|T| x F}
-#' \code{tag.ranks} are the ranks of attention to tags inside the collections; 
+#' @return a list with 2 matrices, first is \eqn{|T| x |C|} dimensions (as the \code{attention}), the second is \eqn{|T| x (|C|-1)}. 
+#' if \code{friends.number} is some \eqn{F:1<=F<|C|-1}, the dimensions are \eqn{|T| x (F+1)} and \eqn{|T| x F}
 #' \code{collections} for each tag, the the collections are ranked by the importance of the tag, best friend first; 
 #' \code{pvals} contains p-values for the corresponding split of the \code{collections} row to friends and others.
 #' @examples
@@ -87,7 +86,7 @@ friends.test<-function(attention,distance_like=FALSE,friends.number=-1,neglect_d
   #it also signals C++ that there are |C|-1 values rather that |C|
   #there a no other source on NA's in tag.ranks
   res<-list()
-  res$tag.ranks<-tag.ranks
+  #res$tag.ranks<-tag.ranks
   tag.ranks<-(tag.ranks-.5)/(dims[1]-as.integer(neglect_diagonal))
   #the denominator is the range of ranks, so it is 1 larger than the number of possible friends
   unlistres<-

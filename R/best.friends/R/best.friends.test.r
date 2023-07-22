@@ -15,7 +15,7 @@
 #' The statistics we use to test whether the most friendly collection for the tag \eqn{t_i} is really the best friend is the difference \eqn{t} between the values \eqn{r(t_i,c_{(2)}(t_i))} and \eqn{r(t_i,c_{(1)}(t_i))}, in other words, between the next-after-the-best and the best values \eqn{r} for the tag \eqn{t_i}. We estimate the probablity (p-value) to observe this difference as \eqn{<=t} given the null-hypothesis proposition. If p-value is small enough, we reject the null, and claim that the friendliness of the cloud \eqn{c_{(1)}(t_i)} is unlikely to observe by random and so we refer to it as the best friend of \eqn{t_i}. In this case, \eqn{t_i} is a marker of its best friend cloud \eqn{c_{(1)}(t_i)}.
 #'
 #' @param attention is the tags*collections matrix of the relations between tags and the clouds
-#' @param tag.ranks the value of [tag.ranks] call. \code{best.friends.test(attenion)} and \code{best.friends.test(tag.ranks=tag.ranks(attenion)} return the same, as well as \code{friends.test(attenion)} and \code{friends.test(tag.ranks=tag.ranks(attenion)} The goal is to calculate tag.ranks only once if multiple calls of friends tests happen for the same attention matrix.
+#' @param ranks.of.tags the value of [tag.ranks] call. \code{best.friends.test(attenion)} and \code{best.friends.test(ranks.of.tags=tag.ranks(attenion)} return the same, as well as \code{friends.test(attenion)} and \code{friends.test(tag.ranks=tag.ranks(attenion)} The goal is to calculate tag.ranks only once if multiple calls of friends tests happen for the same attention matrix.
 #' @param distance_like the default is \code{FALSE} and it shows that the relation values are not like distance, 
 #' i.e. the better relation is shown by the lagrer value; if the relation is, on the contrary, distance-like, 
 #' and 0 is the best, the value is \code{TRUE}.
@@ -50,34 +50,39 @@
 #' colnames(regulation)<-TF.names
 #' bestfriends<-best.friends.test(regulation)
 #' @export
-best.friends.test<-function(attention,distance_like=FALSE,neglect_diagonal=FALSE){
-    dims<-dim(attention)
-    if(min(dims)<2){
+best.friends.test<-function(attention=NULL,ranks.of.tags=NULL,distance_like=FALSE,neglect_diagonal=FALSE){
+    if (! is.null(ranks.of.tags)) {
+      if(!is.null(attention)){
+        warning("ranks.of.tags is given, the attention matrix is omited")
+      }
+      dims<-dim(attention)
+      if(min(dims)<2){
         stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
-    }
-    #if attention is distance_like, we will order in ascending
-    #if nor, descending. 
-    #E.g., the least ranks are the 
-    #most close attentions
-    if (neglect_diagonal){ 
+      }
+      #if attention is distance_like, we will order in ascending
+      #if nor, descending. 
+      #E.g., the least ranks are the 
+      #most close attentions
+      if (neglect_diagonal){ 
         if(dims[1]==dims[2]) {
-            diag(attention)<-NA
+          diag(attention)<-NA
         } 
         else {
-            warning("neglect_diagonal can work only for square attention matrix")
-            neglect_diagonal<-FALSE
+          warning("neglect_diagonal can work only for square attention matrix")
+          neglect_diagonal<-FALSE
         }
-    }
-    
-    order<-ifelse(distance_like,1,-1)
-    # if distance_like holds, the least is the best (first)
-    #and order==1 (ascending) 
-    tag.ranks<-apply(attention,2,
-                         function(x){
-                             data.table::frankv(x,ties.method='average',
-                                                na.last=TRUE,order=order)
-                         }
-    )
+      }
+      
+      order<-ifelse(distance_like,1,-1)
+      # if distance_like holds, the least is the best (first)
+      #and order==1 (ascending) 
+      tag.ranks<-apply(attention,2,
+                       function(x){
+                         data.table::frankv(x,ties.method='average',
+                                            na.last=TRUE,order=order)
+                       }
+      )
+    } else {dims<-dim(ranks.of.tags)}
     #we applied ranking column-by-column (collection-by-cloud)
     tag.ranks<-(tag.ranks-.5)/(dims[1]-as.integer(neglect_diagonal))
     #and mapped the ranks into [0..#tags] (or [0..#tags] is neglect_diagonal)

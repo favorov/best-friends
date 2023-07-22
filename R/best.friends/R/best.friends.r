@@ -19,17 +19,19 @@
 #' See our arxiv paper for details.
 #'
 #' @section best.friends functions:
-#' [best.friends.test] takes the   attention matrix, and for each tag it finds the most friendly collection and the corresponding p-value. 
+#' [best.friends.test] takes the attention matrix, and for each tag it finds the most friendly collection and the corresponding p-value. 
 #'
 #' [friends.test] does the same, but it considers more than one collections as potential friends for each tag, and p-values are generated for each pair of the tag and the possible  (number of friend clouds). If p-value is low and the null is rejected, the tag reliably separates the clouds: \eqn{m} most friendly to \eqn{t_i} clouds are real friends of the tag, others are not. The tag is the marker for all its friends.
 #'
+#' [tag.ranks] is a common part of both of them, is makes the ranking of tags inside collections. It can be called separately is the calling program supposes to call the friend methods more than once.
+#' 
 #' @docType package
 #' @name best.friends
 #' @importFrom utils packageDescription
 #' @importFrom data.table frankv
 #' @useDynLib best.friends, .registration = TRUE
 #' @importFrom Rcpp evalCpp
-# these two are Rcpp - specific ivocations
+# these two are Rcpp - specific i invocations
 #' @examples
 #' genes<-10
 #' regulation=matrix(

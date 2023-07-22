@@ -76,4 +76,7 @@ tag.ranks<-function(attention,distance_like=FALSE,neglect_diagonal=FALSE){
                          }
     )
     #we applied ranking column-by-column (collection-by-cloud)
+    rownames(tag.ranks)<-rownames(attention)
+    if (neglect_diagonal){diag(tag.ranks)<-NA}
+    tag.ranks
 }
