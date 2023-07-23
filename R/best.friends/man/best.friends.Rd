@@ -18,7 +18,7 @@ If a collection is best friend, it is to be the most friendly cloud for the tag,
 
 The statistics we use to test whether the most friendly collection for the tag  is really the best friend is the difference \eqn{t} between the values \eqn{r(t_i,c_{(2)}(t_i))} and \eqn{r(t_i,c_{(1)}(t_i))}, in other words, between the next-after-the-best and the best values \eqn{r} for the tag \eqn{t_i}. We estimate the probability (p-value) to observe this difference as \eqn{<=t} given the null-hypothesis proposition. If p-value is small enough, we reject the null, and claim that the friendliness of the cloud \eqn{c_{(1)}(t_i)} is unlikely to observe by random and so we refer to it as the best friend of \eqn{t_i}. In this case, \eqn{t_i} is a marker of its best friend cloud \eqn{c_{(1)}(t_i)}.
 
-For a similar test that splits all the collections into  friends of the tag and the remaining \eqn{|C|-k} clouds uses the difference  \eqn{r(t_i,c_{(m+1)}(t_i))} and \eqn{r(t_i,c_{(m)}(t_i))}. If we obtain the p-value that is small enough, we claim that the clouds \eqn{c_{(1)}(t_i)}..\eqn{c_{(m)}(t_i)} are friends of \eqn{t_i} and \eqn{t_i} is their marker.
+For a similar test that splits all the collections into \eqn{k} friends of the tag and the remaining \eqn{|C|-k} clouds uses the difference  \eqn{r(t_i,c_{(m+1)}(t_i))} and \eqn{r(t_i,c_{(m)}(t_i))}. If we obtain the p-value that is small enough, we claim that the clouds \eqn{c_{(1)}(t_i)}..\eqn{c_{(m)}(t_i)} are friends of \eqn{t_i} and \eqn{t_i} is their marker.
 
 See our arxiv paper for details.
 }

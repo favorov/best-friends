@@ -1,5 +1,6 @@
 #best.friends package
 #A. Suvorikova, V. Mukhina, V. Ramensky, A. Mironov, A. Favorov (c) 2014-2023
+#'
 #' best.friends: A package that describe whether a collection is a best friend (or one of the best friends) for a tag.
 #'
 #' We have a set C of collections (e.g. imagine a set of word/term/tag clouds, https://en.wikipedia.org/wiki/Tag_cloud)) and a set T of tags. Each tag can be related to each cloud, and the strength of the relation varies from one (tag,cloud) pair to another. We refer to the relation strength as the attention that a cloud pays to a tag. The attention that each cloud pays to each tag is represented by a real value. The attention actually can be any type of relation measure, e.g. fuzzy membership. The absence of the attention is supposed to be represented by the smallest value, naturally, it is 0 and all the attention values are are positive (not required). The attention values is is a \eqn{|T|x|C|} matrix \eqn{A}.
@@ -14,7 +15,7 @@
 #'
 #' The statistics we use to test whether the most friendly collection for the tag  is really the best friend is the difference \eqn{t} between the values \eqn{r(t_i,c_{(2)}(t_i))} and \eqn{r(t_i,c_{(1)}(t_i))}, in other words, between the next-after-the-best and the best values \eqn{r} for the tag \eqn{t_i}. We estimate the probability (p-value) to observe this difference as \eqn{<=t} given the null-hypothesis proposition. If p-value is small enough, we reject the null, and claim that the friendliness of the cloud \eqn{c_{(1)}(t_i)} is unlikely to observe by random and so we refer to it as the best friend of \eqn{t_i}. In this case, \eqn{t_i} is a marker of its best friend cloud \eqn{c_{(1)}(t_i)}.
 #'
-#' For a similar test that splits all the collections into  friends of the tag and the remaining \eqn{|C|-k} clouds uses the difference  \eqn{r(t_i,c_{(m+1)}(t_i))} and \eqn{r(t_i,c_{(m)}(t_i))}. If we obtain the p-value that is small enough, we claim that the clouds \eqn{c_{(1)}(t_i)}..\eqn{c_{(m)}(t_i)} are friends of \eqn{t_i} and \eqn{t_i} is their marker.
+#' For a similar test that splits all the collections into \eqn{k} friends of the tag and the remaining \eqn{|C|-k} clouds uses the difference  \eqn{r(t_i,c_{(m+1)}(t_i))} and \eqn{r(t_i,c_{(m)}(t_i))}. If we obtain the p-value that is small enough, we claim that the clouds \eqn{c_{(1)}(t_i)}..\eqn{c_{(m)}(t_i)} are friends of \eqn{t_i} and \eqn{t_i} is their marker.
 #'
 #' See our arxiv paper for details.
 #'
