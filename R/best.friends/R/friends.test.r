@@ -65,13 +65,7 @@ friends.test<-function(attention=NULL,ranks.of.tags=NULL,distance_like=FALSE,fri
         neglect_diagonal<-FALSE
       }
     }
-    default.friends.number <- dims[2]-1-as.integer(neglect_diagonal)
-    #there are |C|-1 maximal (default) number friends for general case
-    #default number of friends; if we neglect diagonal, it decreases by 1
-    if(friends.number<=0 || friends.number > default.friends.number){
-      friends.number <- default.friends.number
-    } 
-    
+
     order<-ifelse(distance_like,1,-1)
     #if attention is distance_like, we will order in ascending
     #if nor, descending. 
@@ -89,22 +83,35 @@ friends.test<-function(attention=NULL,ranks.of.tags=NULL,distance_like=FALSE,fri
     rownames(ranks.of.tags)<-rownames(attention)
     colnames(ranks.of.tags)<-colnames(attention)
   }
-  if (neglect_diagonal){diag(ranks.of.tags)<-NA}
   #we reapply NA to the diagonal -- it will be used not to see at in the C++ u statistics calculation
   #it also signals C++ that there are |C|-1 values rather that |C|
   #there a no other source on NA's in ranks.of.tags
+  if (neglect_diagonal){diag(ranks.of.tags)<-NA}
+  #here, rownames(ranks.of.tags) are the tag names, either by attention parsing of by parameter
+  #here, colnames(ranks.of.tags) are the collection names, either by attention parsing of by parameter
+  #we write something not to have them empty whatever
+  if (length(rownames(ranks.of.tags))==0) {rownames(ranks.of.tags)<-as.character(seq(dims[1]))} 
+  if (length(colnames(ranks.of.tags))==0) {colnames(ranks.of.tags)<-as.character(seq(dims[2]))} 
   res<-list()
-  ranks.of.tags<-(ranks.of.tags-.5)/(dims[1]-as.integer(neglect_diagonal))
   #the denominator is the range of ranks, so it is 1 larger than the number of possible friends
+  ranks.of.tags<-(ranks.of.tags-.5)/(dims[1]-as.integer(neglect_diagonal))
+  #there are |C|-1 maximal (default) number friends for general case
+  #default number of friends; if we neglect diagonal, it decreases by 1
+  default.friends.number <- dims[2]-1-as.integer(neglect_diagonal)
+  if(friends.number<=0 || friends.number > default.friends.number){
+    friends.number <- default.friends.number
+  } 
+  #the result "unlistres" contains collection names in even positions and p-values in odd
   unlistres<-
     unlist(t(apply(ranks.of.tags,1,rank_diff_and_p_for_the_best_n,max_num_friends=friends.number)))
+
   res$collections<-matrix(
-    colnames(attention)[
+    colnames(ranks.of.tags)[
       unlistres[seq(1,length(unlistres),2)]
     ],
     ncol = friends.number+1, nrow=dims[1], byrow = TRUE
   )
-  #we show one more collection than the friends.number is to know what we separete from
+  #we show one more collection than the friends.number is to know what we separate from
   res$pvals<-matrix(
     unlistres[seq(2,length(unlistres),2)],
     ncol = friends.number+1, nrow=dims[1],byrow = TRUE

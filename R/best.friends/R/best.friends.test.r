@@ -95,6 +95,9 @@ best.friends.test<-function(attention=NULL,ranks.of.tags=NULL,distance_like=FALS
   #it also signals C++ that there are |C|-1 values rather that |C|
   #there a no other source on NA's in tag.ranks
   res<-t(apply(ranks.of.tags,1,rank_diff_and_p_for_the_best))
+  #here, rownames(ranks.of.tags) are the tag names, either by attention parsing of by parameter
+  #here, colnames(ranks.of.tags) are the collection names, either by attention parsing of by parameter
+  #we write something not to have them empty whatever
   rn<-rownames(ranks.of.tags); if (length(rn)==0) {rn<-as.character(seq(dims[1]))} 
   cn<-colnames(ranks.of.tags); if (length(cn)==0) {cn<-as.character(seq(dims[2]))} 
   data.frame(
