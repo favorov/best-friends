@@ -2,6 +2,8 @@
 #'
 #' best.friends.test
 #'
+#' Takes the attention matrix, and for each tag finds the most friendly collection and the corresponding p-value. See [best.friends] documentation for details.
+#'
 #' @param attention is the tags*collections matrix of the relations between tags and the clouds
 #' @param ranks.of.tags the value of [tag.ranks] call. \code{best.friends.test(attenion)} and \code{best.friends.test(ranks.of.tags=tag.ranks(attenion)} return the same, as well as \code{friends.test(attenion)} and \code{friends.test(tag.ranks=tag.ranks(attenion)} The goal is to calculate tag.ranks only once if multiple calls of friends tests happen for the same attention matrix.
 #' @param distance_like the default is \code{FALSE} and it shows that the relation values are not like distance, 

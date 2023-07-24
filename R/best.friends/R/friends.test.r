@@ -1,5 +1,7 @@
 #'
 #' friends.test
+#' 
+#' Takes the attention matrix, and for each tag considers more than one collections as potential friends for each tag, and p-values are generated for each pair of the tag and the possible  (number of friend clouds). If p-value is low and the null is rejected, the tag reliably separates the clouds: \eqn{m} most friendly to \eqn{t_i} clouds are real friends of the tag, others are not. The tag is the marker for all its friends.
 #'
 #' @inheritParams best.friends.test
 #' @param friends.number number of entities we consider for each tags; the default -1 means all;

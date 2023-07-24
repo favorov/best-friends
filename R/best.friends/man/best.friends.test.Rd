@@ -33,7 +33,7 @@ The small (after multiple hypothesis correction we are to do) p-value
 indicates that the collection is really the best friend of the tag.
 }
 \description{
-best.friends.test
+takes the attention matrix, and for each tag it finds the most friendly collection and the corresponding p-value. See \link{best.briends} documentation for details.
 }
 \examples{
 genes<-10
