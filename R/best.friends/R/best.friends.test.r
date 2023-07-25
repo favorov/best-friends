@@ -2,15 +2,28 @@
 #'
 #' best.friends.test
 #'
-#' Takes the attention matrix, and for each tag finds the most friendly collection and the corresponding p-value. See [best.friends] documentation for details.
+#' Given the attention matrix for each tag, identifies the most friendly collection 
+#' and assesses the corresponding p-value.
+#' 
+#' If p-value is low and the null is rejected, the collection is the best friend for the tag
+#' and the tag is the marker of the collection.
+#'  
+#' See [best.friends] documentation for details.
 #'
 #' @param attention is the tags*collections matrix of the relations between tags and the clouds
-#' @param ranks.of.tags the value of [tag.ranks] call. \code{best.friends.test(attenion)} and \code{best.friends.test(ranks.of.tags=tag.ranks(attenion)} return the same, as well as \code{friends.test(attenion)} and \code{friends.test(tag.ranks=tag.ranks(attenion)} The goal is to calculate tag.ranks only once if multiple calls of friends tests happen for the same attention matrix.
-#' @param distance_like the default is \code{FALSE} and it shows that the relation values are not like distance, 
-#' i.e. the better relation is shown by the lagrer value; if the relation is, on the contrary, distance-like, 
-#' and 0 is the best, the value is \code{TRUE}.
-#' @param neglect_diagonal in the case of square attention matrix, the diagonal sometimes is either uninformative or it carries some specific values. In each of these cases, 
-#' the diagonal elements are excluded from the ranking and from the statistics by setting this parameter TRUE. The default is FALSE. 
+#' @param ranks.of.tags the value of [tag.ranks] call. 
+#' \code{best.friends.test(attenion)} and \code{best.friends.test(ranks.of.tags=tag.ranks(attenion)} 
+#' return the same, as well as 
+#' \code{friends.test(attenion)} and \code{friends.test(tag.ranks=tag.ranks(attenion)}.
+#' The goal is to calculate tag.ranks only once if multiple calls of friends tests 
+#' happen for the same attention matrix.
+#' @param distance_like the default is \code{FALSE} and it shows that the relation values are 
+#' not like distance, i.e. the better relation is shown by the larger value; 
+#' if the relation is, on the contrary, distance-like, and 0 is the best, the value is \code{TRUE}.
+#' @param neglect_diagonal in the case of square attention matrix, the diagonal sometimes is either 
+#' uninformative or it carries some specific values. In each of these cases, 
+#' the diagonal elements are excluded from the ranking and from the statistics 
+#' by setting this parameter TRUE. The default is FALSE. 
 #' @return \code{data.frame} with 5 columns: tag index, 
 #' the index of the collection that is a putative best friend of the tag, 
 #' uncorrected p-value for the pair, 

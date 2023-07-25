@@ -14,14 +14,21 @@ best.friends.test(
 \arguments{
 \item{attention}{is the tags*collections matrix of the relations between tags and the clouds}
 
-\item{ranks.of.tags}{the value of \link{tag.ranks} call. \code{best.friends.test(attenion)} and \code{best.friends.test(ranks.of.tags=tag.ranks(attenion)} return the same, as well as \code{friends.test(attenion)} and \code{friends.test(tag.ranks=tag.ranks(attenion)} The goal is to calculate tag.ranks only once if multiple calls of friends tests happen for the same attention matrix.}
+\item{ranks.of.tags}{the value of \link{tag.ranks} call.
+\code{best.friends.test(attenion)} and \code{best.friends.test(ranks.of.tags=tag.ranks(attenion)}
+return the same, as well as
+\code{friends.test(attenion)} and \code{friends.test(tag.ranks=tag.ranks(attenion)}.
+The goal is to calculate tag.ranks only once if multiple calls of friends tests
+happen for the same attention matrix.}
 
-\item{distance_like}{the default is \code{FALSE} and it shows that the relation values are not like distance,
-i.e. the better relation is shown by the lagrer value; if the relation is, on the contrary, distance-like,
-and 0 is the best, the value is \code{TRUE}.}
+\item{distance_like}{the default is \code{FALSE} and it shows that the relation values are
+not like distance, i.e. the better relation is shown by the larger value;
+if the relation is, on the contrary, distance-like, and 0 is the best, the value is \code{TRUE}.}
 
-\item{neglect_diagonal}{in the case of square attention matrix, the diagonal sometimes is either uninformative or it carries some specific values. In each of these cases,
-the diagonal elements are excluded from the ranking and from the statistics by setting this parameter TRUE. The default is FALSE.}
+\item{neglect_diagonal}{in the case of square attention matrix, the diagonal sometimes is either
+uninformative or it carries some specific values. In each of these cases,
+the diagonal elements are excluded from the ranking and from the statistics
+by setting this parameter TRUE. The default is FALSE.}
 }
 \value{
 \code{data.frame} with 5 columns: tag index,
@@ -33,7 +40,14 @@ The small (after multiple hypothesis correction we are to do) p-value
 indicates that the collection is really the best friend of the tag.
 }
 \description{
-takes the attention matrix, and for each tag it finds the most friendly collection and the corresponding p-value. See \link{best.briends} documentation for details.
+Given the attention matrix for each tag, identifies the most friendly collection
+and assesses the corresponding p-value.
+}
+\details{
+If p-value is low and the null is rejected, the collection is the best friend for the tag
+and the tag is the marker of the collection.
+
+See \link{best.friends} documentation for details.
 }
 \examples{
 genes<-10

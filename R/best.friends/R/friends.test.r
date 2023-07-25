@@ -1,13 +1,20 @@
 #'
 #' friends.test
 #' 
-#' Takes the attention matrix, and for each tag considers more than one collections as potential friends for each tag, and p-values are generated for each pair of the tag and the possible  (number of friend clouds). If p-value is low and the null is rejected, the tag reliably separates the clouds: \eqn{m} most friendly to \eqn{t_i} clouds are real friends of the tag, others are not. The tag is the marker for all its friends.
+#' Given the attention matrix for each tag and each possible slit of the collections into 
+#' set of the friends for the tag and the remainder set, assess the p-values for the split.
+#' 
+#' If p-value is low and the null is rejected, the tag reliably separates the clouds: 
+#' \eqn{m} more friendly to \eqn{t_i} clouds are real friends of the tag, others are not. 
+#' The tag is the marker for all its friends.
+#' 
+#' #' See [best.friends] documentation for details.
 #'
 #' @inheritParams best.friends.test
 #' @param friends.number number of entities we consider for each tags; the default -1 means all;
 #' if friends.number is 1, the call does essentially the same as the best.friends.test call
-#' @return a list with 2 matrices, first is \eqn{|T| x |C|} dimensions (as the \code{attention}), the second is \eqn{|T| x (|C|-1)}. 
-#' if \code{friends.number} is some \eqn{F:1<=F<|C|-1}, the dimensions are \eqn{|T| x (F+1)} and \eqn{|T| x F}
+#' @return a list with 2 matrices, first is \eqn{|T| x |C|} dimensions (as the \code{attention}), the second is \eqn{|T| \times (|C|-1)}. 
+#' if \code{friends.number} is some \eqn{F:1<=F<|C|-1}, the dimensions are \eqn{|T| \times (F+1)} and \eqn{|T| \times F}
 #' \code{collections} for each tag, the the collections are ranked by the importance of the tag, best friend first; 
 #' \code{pvals} contains p-values for the corresponding split of the \code{collections} row to friends and others.
 #' @examples

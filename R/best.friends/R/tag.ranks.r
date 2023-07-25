@@ -2,12 +2,14 @@
 #'
 #' tag.ranks
 #'
-#' @param attention is the tags*collections matrix of the relations between tags and the clouds
-#' @param distance_like the default is \code{FALSE} and it shows that the relation values are not like distance, 
-#' i.e. the better relation is shown by the lagrer value; if the relation is, on the contrary, distance-like, 
-#' and 0 is the best, the value is \code{TRUE}.
-#' @param neglect_diagonal in the case of square attention matrix, the diagonal sometimes is either uninformative or it carries some specific values. In each of these cases, 
-#' the diagonal elements are excluded from the ranking and from the statistics by setting this parameter TRUE. The default is FALSE. 
+#' @param attention is the \eqn{|T| \times |C|} matrix of the relations between tags and the clouds.
+#' @param distance_like the default is \code{FALSE} and it shows that the relation values are 
+#' not like distance, i.e. the better relation is shown by the larger value; 
+#' if the relation is, on the contrary, distance-like, and 0 is the best, the value is \code{TRUE}.
+#' @param neglect_diagonal in the case of square attention matrix, the diagonal sometimes is either 
+#' uninformative or it carries some specific values. In each of these cases, 
+#' the diagonal elements are excluded from the ranking and from the statistics 
+#' by setting this parameter TRUE. The default is FALSE. 
 #' @return The matrix of ranks of attention to tags from collections. The size is the same as that of the attention matrix.
 #' collection. 
 #' @examples

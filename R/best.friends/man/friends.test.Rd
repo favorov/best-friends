@@ -15,26 +15,41 @@ friends.test(
 \arguments{
 \item{attention}{is the tags*collections matrix of the relations between tags and the clouds}
 
-\item{ranks.of.tags}{the value of \link{tag.ranks} call. \code{best.friends.test(attenion)} and \code{best.friends.test(ranks.of.tags=tag.ranks(attenion)} return the same, as well as \code{friends.test(attenion)} and \code{friends.test(tag.ranks=tag.ranks(attenion)} The goal is to calculate tag.ranks only once if multiple calls of friends tests happen for the same attention matrix.}
+\item{ranks.of.tags}{the value of \link{tag.ranks} call.
+\code{best.friends.test(attenion)} and \code{best.friends.test(ranks.of.tags=tag.ranks(attenion)}
+return the same, as well as
+\code{friends.test(attenion)} and \code{friends.test(tag.ranks=tag.ranks(attenion)}.
+The goal is to calculate tag.ranks only once if multiple calls of friends tests
+happen for the same attention matrix.}
 
-\item{distance_like}{the default is \code{FALSE} and it shows that the relation values are not like distance,
-i.e. the better relation is shown by the lagrer value; if the relation is, on the contrary, distance-like,
-and 0 is the best, the value is \code{TRUE}.}
+\item{distance_like}{the default is \code{FALSE} and it shows that the relation values are
+not like distance, i.e. the better relation is shown by the larger value;
+if the relation is, on the contrary, distance-like, and 0 is the best, the value is \code{TRUE}.}
 
 \item{friends.number}{number of entities we consider for each tags; the default -1 means all;
 if friends.number is 1, the call does essentially the same as the best.friends.test call}
 
-\item{neglect_diagonal}{in the case of square attention matrix, the diagonal sometimes is either uninformative or it carries some specific values. In each of these cases,
-the diagonal elements are excluded from the ranking and from the statistics by setting this parameter TRUE. The default is FALSE.}
+\item{neglect_diagonal}{in the case of square attention matrix, the diagonal sometimes is either
+uninformative or it carries some specific values. In each of these cases,
+the diagonal elements are excluded from the ranking and from the statistics
+by setting this parameter TRUE. The default is FALSE.}
 }
 \value{
-a list with 2 matrices, first is \eqn{|T| x |C|} dimensions (as the \code{attention}), the second is \eqn{|T| x (|C|-1)}.
-if \code{friends.number} is some \eqn{F:1<=F<|C|-1}, the dimensions are \eqn{|T| x (F+1)} and \eqn{|T| x F}
+a list with 2 matrices, first is \eqn{|T| x |C|} dimensions (as the \code{attention}), the second is \eqn{|T| \times (|C|-1)}.
+if \code{friends.number} is some \eqn{F:1<=F<|C|-1}, the dimensions are \eqn{|T| \times (F+1)} and \eqn{|T| \times F}
 \code{collections} for each tag, the the collections are ranked by the importance of the tag, best friend first;
 \code{pvals} contains p-values for the corresponding split of the \code{collections} row to friends and others.
 }
 \description{
-friends.test
+Given the attention matrix for each tag and each possible slit of the collections into
+set of the friends for the tag and the remainder set, assess the p-values for the split.
+}
+\details{
+If p-value is low and the null is rejected, the tag reliably separates the clouds:
+\eqn{m} more friendly to \eqn{t_i} clouds are real friends of the tag, others are not.
+The tag is the marker for all its friends.
+
+#' See \link{best.friends} documentation for details.
 }
 \examples{
 genes<-10
