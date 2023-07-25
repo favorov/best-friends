@@ -25,6 +25,6 @@ the worst of best friends.
 0.99.6 - Documentation updated; non-diagonal options added. 
 0.99.61 - Changing rank normalisation scheme.
 0.99.62 - The math in rd is \eqn{}. NOTES from biocheck.
-0.99.63 - Switched to tag + collection termnology
+0.99.63 - Switched to tag + collection terminlogy
 0.99.64 - friends.test output is dimensions is |T|x|C| for ranks, |T|x|C-1| for p-values and putative friends
-0.99.65 - create separate function for the firest ranking, friends.test does not return the ranks any more; documentatio is updated again
+0.99.65 - create separate function for the first ranking, friends.test does not return the ranks any more; documentatio is updated again
