@@ -1,5 +1,5 @@
 #'
-#' discrete.friends.test
+#' discrete.friends.test.p
 #' 
 #' Given the attention matrix for each tag and each possible slit of the collections into 
 #' set of the friends for the tag and the remainder set, assess the p-values for the split.
@@ -10,4 +10,12 @@
 #' 
 #' See [best.friends] documentation for details.
 #' 
-#' p(q) = \frac{\binom{k}{l}}{n^k}\sum^{n-1-q}_{v_l = 0} \left[(v_l + 1)^{l} - v^l_l \right] \left[ (n-q-v_l)^{k-l} - (n-1-q-v_l)^{k-l}\right].
+#' discrete.friends.test.p calculates exact p-value, all the ranks in input are integers
+#' 
+#' p(q) = \frac{\binom{k}{l}}{n^k}\sum^{n-1-q}_{v_l = 0} \left[(v_l + 1)^{l} - {v_l}^l \right] \left[ (n-q-v_l)^{k-l} - (n-1-q-v_l)^{k-l}\right].
+#' @param k description
+#' @param l description
+#' @param n description
+#' @param l description
+#' @param q description
+#' @param v_l description
