@@ -11,6 +11,12 @@
 #' See [best.friends] documentation for details.
 #' 
 #' p(q) = \frac{\binom{k}{l}}{n^k}\sum^{n-1-q}_{v_l = 0} \left[(v_l + 1)^{l} - v^l_l \right] \left[ (n-q-v_l)^{k-l} - (n-1-q-v_l)^{k-l}\right].
+#' @param k description
+#' @param l description
+#' @param n description
+#' @param l description
+#' @param q description
+#' @param v_l description
 # v это ранги этого тэга
 # v_l - это l_й по порядку ранг, начиная с l=0 
 # (v_0 это самый лучший/самый маленький)
