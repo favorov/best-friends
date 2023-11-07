@@ -8,7 +8,7 @@
 #' \eqn{m} more friendly to \eqn{t_i} clouds are real friends of the tag, others are not. 
 #' The tag is the marker for all its friends.
 #' 
-#' See [best.friends] documentation for details.
+#' #' See [best.friends] documentation for details.
 #'
 #' @inheritParams best.friends.test
 #' @param friends.number number of entities we consider for each tags; the default -1 means all;
