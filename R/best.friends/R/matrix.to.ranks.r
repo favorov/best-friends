@@ -4,13 +4,9 @@
 #' Given the (\code{attention}) \eqn{|T| \times |C|} matrix, convert it to matrix of descending ranks of tags(rows) in collections (columns). 
 #' #' See [best.friends] documentation for details.
 #' @param attention original attention matrix
-#' @param distance_like if \code{TRUE}, ranks are ascending (the smaller is the better). Default is \code{FALSE}
-#' @param neglect_diagonal
+#' @param distance_like if \code{TRUE}, ranks are ascending (the smaller is the better). Default is \code{FALSE}.
+#' @param neglect_diagonal if square matrix, and the diagonal does not make sense, we \code{NA} it and our ranks are in \eqn{[1 .. |T|-1]}. Default is \code{FALSE}.
 #' @return a \eqn{|T| x |C|} matrix of integer ranks in \eqn{[1 .. |T|]} (or, \eqn{[1 .. |T|-1]} if neglect_diagonal).
-#' a list with 2 matrices, first is \eqn{|T| x |C|} dimensions (as the \code{attention}), the second is \eqn{|T| \times (|C|-1)}. 
-#' if \code{friends.number} is some \eqn{F:1<=F<|C|-1}, the dimensions are \eqn{|T| \times (F+1)} and \eqn{|T| \times F}
-#' \code{collections} for each tag, the the collections are ranked by the importance of the tag, best friend first; 
-#' \code{pvals} contains p-values for the corresponding split of the \code{collections} row to friends and others.
 #' @examples
 #' genes<-10
 #' regulation<-matrix(
@@ -33,10 +29,8 @@
 #' colnames(regulation)<-TF.names
 #' TF.ranks<-matrix.to.ranks(regulation)
 #' @export
-tag.unif.ks.test<-function(
+matrix.to.rankst<-function(
     attention=NULL,
-    tag.to.test=NULL,
-    ranks.of.tags=NULL,
     distance_like=FALSE,
     neglect_diagonal=FALSE){
   if (! is.null(ranks.of.tags)) {
