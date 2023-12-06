@@ -29,19 +29,13 @@
 #' colnames(regulation)<-TF.names
 #' TF.ranks<-matrix.to.ranks(regulation)
 #' @export
-matrix.to.rankst<-function(
+matrix.to.ranks<-function(
     attention=NULL,
     distance_like=FALSE,
     neglect_diagonal=FALSE){
-  if (! is.null(ranks.of.tags)) {
-    if(!is.null(attention)){
-      warning("ranks.of.tags is given, the attention matrix is omited")
-    }
-    dims<-dim(ranks.of.tags)
-  } else {
     dims<-dim(attention)
     if(min(dims)<2){
-      stop("best.friends.test requires both dimetions of the attention matrix to be more than 1")
+      stop("The best.friends requires both dimetions of the attention matrix to be more than 1")
     }
     if (neglect_diagonal){ 
       if(dims[1]==dims[2]) {
