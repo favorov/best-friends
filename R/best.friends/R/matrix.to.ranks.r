@@ -1,13 +1,13 @@
 #'
-#' tag.unif.ks.test
+#' matrix.to.ranks
 #' 
-#' Given the attention matrix, for each tag test whther its ranks in different collections are distributed uniformely.
-#' 
-#' If p-value is low and the null is rejected, we will find whether the tag separated the clouds by [tag.split.collections]: 
-#' 
+#' Given the (\code{attention}) \eqn{|T| \times |C|} matrix, convert it to matrix of descending ranks of tags(rows) in collections (columns). 
 #' #' See [best.friends] documentation for details.
-#'
-#' @return a list with 2 matrices, first is \eqn{|T| x |C|} dimensions (as the \code{attention}), the second is \eqn{|T| \times (|C|-1)}. 
+#' @param attention original attention matrix
+#' @param distance_like if \code{TRUE}, ranks are ascending (the smaller is the better). Default is \code{FALSE}
+#' @param neglect_diagonal
+#' @return a \eqn{|T| x |C|} matrix of integer ranks in \eqn{[1 .. |T|]} (or, \eqn{[1 .. |T|-1]} if neglect_diagonal).
+#' a list with 2 matrices, first is \eqn{|T| x |C|} dimensions (as the \code{attention}), the second is \eqn{|T| \times (|C|-1)}. 
 #' if \code{friends.number} is some \eqn{F:1<=F<|C|-1}, the dimensions are \eqn{|T| \times (F+1)} and \eqn{|T| \times F}
 #' \code{collections} for each tag, the the collections are ranked by the importance of the tag, best friend first; 
 #' \code{pvals} contains p-values for the corresponding split of the \code{collections} row to friends and others.
@@ -31,7 +31,7 @@
 #' TF.names<-c('TF1','TF2','TF3','TF4','TF5','TF6','TF7','TF8','TF9','TF10')
 #' rownames(regulation)<-gene.names
 #' colnames(regulation)<-TF.names
-#' tag.unif.ks<-friends.test(regulation)
+#' TF.ranks<-matrix.to.ranks(regulation)
 #' @export
 tag.unif.ks.test<-function(
     attention=NULL,
