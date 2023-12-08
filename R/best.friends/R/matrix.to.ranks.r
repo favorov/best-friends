@@ -68,4 +68,6 @@ matrix.to.ranks<-function(
   #it also signals C++ that there are |C|-1 values rather that |C|
   #there a no other source on NA's in ranks.of.tags
   if (neglect_diagonal){diag(ranks.of.tags)<-NA}
+  ranks.of.tags
+}
   
