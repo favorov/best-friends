@@ -1,10 +1,10 @@
 #'
 #' tag.unif.ks.test
 #' 
-#' Given the attention matrix, for each tag test whther its ranks in different collections are distributed uniformely.
-#' 
+#' returns p-value for unifirmity of the ranks (they are in \eqn{1 .. N}) vector
 #' #' See [best.friends] documentation for details.
-#'
+#' 
+#' @param ranks vector of ranks of a tag in different collections
 #' @return p-value for the KS test comparing the ranks distribution with uniform
 #'
 #' @examples
