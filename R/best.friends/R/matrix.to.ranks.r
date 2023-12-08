@@ -33,37 +33,36 @@ matrix.to.ranks<-function(
     attention=NULL,
     distance_like=FALSE,
     neglect_diagonal=FALSE){
-    dims<-dim(attention)
-    if(min(dims)<2){
-      stop("The best.friends requires both dimetions of the attention matrix to be more than 1")
-    }
-    if (neglect_diagonal){ 
-      if(dims[1]==dims[2]) {
-        diag(attention)<-NA
-      } 
-      else {
-        warning("neglect_diagonal can work only for square attention matrix")
-        neglect_diagonal<-FALSE
-      }
-    }
-    
-    order<-ifelse(distance_like,1,-1)
-    #if attention is distance_like, we will order in ascending
-    #if nor, descending. 
-    #E.g., the least ranks are the 
-    #most close attentions
-    # if distance_like holds, the least is the best (first)
-    #and order==1 (ascending) 
-    ranks.of.tags<-apply(attention,2, 
-                         function(x){
-                           data.table::frankv(x,ties.method='average',
-                                              na.last=TRUE,order=order)
-                         }
-    )
-    #we applied ranking column-by-column (collection-by-cloud)
-    rownames(ranks.of.tags)<-rownames(attention)
-    colnames(ranks.of.tags)<-colnames(attention)
+  dims<-dim(attention)
+  if(min(dims)<2){
+    stop("The best.friends requires both dimetions of the attention matrix to be more than 1")
   }
+  if (neglect_diagonal){ 
+    if(dims[1]==dims[2]) {
+      diag(attention)<-NA
+    } 
+    else {
+      warning("neglect_diagonal can work only for square attention matrix")
+      neglect_diagonal<-FALSE
+    }
+  }
+  
+  order<-ifelse(distance_like,1,-1)
+  #if attention is distance_like, we will order in ascending
+  #if nor, descending. 
+  #E.g., the least ranks are the 
+  #most close attentions
+  # if distance_like holds, the least is the best (first)
+  #and order==1 (ascending) 
+  ranks.of.tags<-apply(attention,2, 
+                       function(x){
+                         data.table::frankv(x,ties.method='random',
+                                            na.last=TRUE,order=order)
+                       }
+  )
+  #we applied ranking column-by-column (collection-by-cloud)
+  rownames(ranks.of.tags)<-rownames(attention)
+  colnames(ranks.of.tags)<-colnames(attention)
   #we reapply NA to the diagonal -- it will be used not to see at in the C++ u statistics calculation
   #it also signals C++ that there are |C|-1 values rather that |C|
   #there a no other source on NA's in ranks.of.tags
