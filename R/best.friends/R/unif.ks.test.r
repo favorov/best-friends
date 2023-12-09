@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' example(tag.int.ranks)
-#' ks.p.vals<-apply(TF.ranks,2,tag.int.ranks,genes)
+#' ks.p.vals<-apply(TF.ranks,1,"unif.ks.test",maxrank=genes)
 #' @export
 unif.ks.test<-function(ranks,maxrank){
   res<-ks.test(ranks,"punif",min = 1,max=maxrank)
