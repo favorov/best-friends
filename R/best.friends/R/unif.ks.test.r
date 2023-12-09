@@ -1,17 +1,17 @@
 #'
-#' tag.unif.ks.test
+#' unif.ks.test
 #' 
-#' returns p-value for unifirmity of the ranks (they are in \eqn{1 .. N}) vector
+#' returns p-value for uniformity of the ranks (they are in \eqn{1 .. N}) vector
 #' #' See [best.friends] documentation for details.
 #' 
 #' @param ranks vector of ranks of a tag in different collections
 #' @return p-value for the KS test comparing the ranks distribution with uniform
 #'
 #' @examples
-#' example(matrix.to.ranks)
+#' example(tag.int.ranks)
 #' apply
 #' @export
-tag.unif.ks.test<-function(
+unif.ks.test<-function(
     attention=NULL,
     tag.to.test=NULL,
     ranks.of.tags=NULL,

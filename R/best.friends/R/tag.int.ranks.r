@@ -1,5 +1,5 @@
 #'
-#' matrix.to.ranks
+#' tag.int.ranks
 #' 
 #' Given the (\code{attention}) \eqn{|T| \times |C|} matrix, convert it to matrix of descending ranks of tags(rows) in collections (columns). 
 #' #' See [best.friends] documentation for details.
@@ -29,7 +29,7 @@
 #' colnames(regulation)<-TF.names
 #' TF.ranks<-matrix.to.ranks(regulation)
 #' @export
-matrix.to.ranks<-function(
+tag.int.ranks<-function(
     attention=NULL,
     distance_like=FALSE,
     neglect_diagonal=FALSE){
