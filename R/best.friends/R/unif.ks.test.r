@@ -5,7 +5,7 @@
 #' #' See [best.friends] documentation for details.
 #' 
 #' @param ranks vector of ranks of a tag in different collections, \eqn{1 .. N})
-#' @papram maxrank \eqn{N}
+#' @param maxrank \eqn{N}
 #' @return p-value for the KS test comparing the ranks distribution with uniform
 #'
 #' @examples
