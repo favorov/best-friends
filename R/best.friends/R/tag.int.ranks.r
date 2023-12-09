@@ -27,7 +27,7 @@
 #' TF.names<-c('TF1','TF2','TF3','TF4','TF5','TF6','TF7','TF8','TF9','TF10')
 #' rownames(regulation)<-gene.names
 #' colnames(regulation)<-TF.names
-#' TF.ranks<-matrix.to.ranks(regulation)
+#' TF.ranks<-tag.int.ranks(regulation)
 #' @export
 tag.int.ranks<-function(
     attention=NULL,
