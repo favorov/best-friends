@@ -8,25 +8,21 @@
 #' @param neglect_diagonal if square matrix, and the diagonal does not make sense, we \code{NA} it and our ranks are in \eqn{[1 .. |T|-1]}. Default is \code{FALSE}.
 #' @return a \eqn{|T| x |C|} matrix of integer ranks in \eqn{[1 .. |T|]} (or, \eqn{[1 .. |T|-1]} if neglect_diagonal).
 #' @examples
-#' genes<-10
-#' regulation<-matrix(
-#'     c(0.2, 0.2, 0.2, 0.2, 0.25, rep(0.2,genes-5),
-#'         rep(1, genes),
-#'         rep(1, genes),
-#'         rep(1, genes),
-#'         rep(1, genes),
-#'         rep(1, genes),
-#'         rep(1, genes),
-#'         rep(1, genes),
-#'         rep(1, genes),
-#'         rep(1, genes)
-#'      ),
-#'     ncol=10,byrow=FALSE
+#' genes.no<-100
+#' TFs.no<-50
+#' gene.names<-
+#'   paste0("gene_",as.character(seq( from = 1, to = genes.no )))
+#' TF.names<-
+#'   paste0("TF_",as.character(seq( from = 1, to = TFs.no )))   
+#' regulation<-matrix(rep(1,TFs.no*genes.no),
+#'     ncol=TFs.no,byrow=FALSE
 #' )
-#' gene.names<-LETTERS[seq( from = 1, to = genes )]
-#' TF.names<-c('TF1','TF2','TF3','TF4','TF5','TF6','TF7','TF8','TF9','TF10')
+#' #we fill it with ones, now let's fill the regulation of gene 42 
+#' #by the first 1/2 TFs  with 2
+#' regulation[42,seq(1,TFs.no/2)]=2
 #' rownames(regulation)<-gene.names
 #' colnames(regulation)<-TF.names
+#' 
 #' TF.ranks<-tag.int.ranks(regulation)
 #' @export
 tag.int.ranks<-function(

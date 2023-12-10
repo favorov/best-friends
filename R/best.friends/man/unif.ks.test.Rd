@@ -4,12 +4,10 @@
 \alias{unif.ks.test}
 \title{unif.ks.test}
 \usage{
-unif.ks.test(ranks, maxrank)
+unif.ks.test(ranks)
 }
 \arguments{
 \item{ranks}{vector of ranks of a tag in different collections, \eqn{1 .. N})}
-
-\item{maxrank}{\eqn{N}}
 }
 \value{
 p-value for the KS test comparing the ranks distribution with uniform
@@ -20,5 +18,5 @@ returns p-value for uniformity of the ranks (they are in \eqn{1 .. N}) vector
 }
 \examples{
 example(tag.int.ranks)
-ks.p.vals<-apply(TF.ranks,1,"unif.ks.test",maxrank=genes)
+ks.p.vals<-apply(TF.ranks,1,"unif.ks.test")
 }

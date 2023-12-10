@@ -5,14 +5,13 @@
 #' #' See [best.friends] documentation for details.
 #' 
 #' @param ranks vector of ranks of a tag in different collections, \eqn{1 .. N})
-#' @param maxrank \eqn{N}
 #' @return p-value for the KS test comparing the ranks distribution with uniform
 #'
 #' @examples
 #' example(tag.int.ranks)
-#' ks.p.vals<-apply(TF.ranks,1,"unif.ks.test",maxrank=genes)
+#' ks.p.vals<-apply(TF.ranks,1,"unif.ks.test")
 #' @export
-unif.ks.test<-function(ranks,maxrank){
+unif.ks.test<-function(ranks){
   jranks<-jitter(ranks)
   res<-ks.test(jranks,"punif",min = min(jranks),max=max(jranks))
   res$p.value
