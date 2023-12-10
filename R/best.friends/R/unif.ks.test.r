@@ -13,6 +13,6 @@
 #' ks.p.vals<-apply(TF.ranks,1,"unif.ks.test",maxrank=genes)
 #' @export
 unif.ks.test<-function(ranks,maxrank){
-  res<-ks.test(ranks,"punif",min = 1,max=maxrank)
+  res<-ks.test(jitter(ranks),"punif",min = 1,max=maxrank)
   res$p.value
 }
