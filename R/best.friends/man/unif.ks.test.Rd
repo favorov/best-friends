@@ -20,5 +20,5 @@ returns p-value for uniformity of the ranks (they are in \eqn{1 .. N}) vector
 }
 \examples{
 example(tag.int.ranks)
-ks.p.vals<-apply(TF.ranks,2,tag.int.ranks,genes)
+ks.p.vals<-apply(TF.ranks,1,"unif.ks.test",maxrank=genes)
 }
