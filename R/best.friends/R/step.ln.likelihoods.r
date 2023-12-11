@@ -7,3 +7,7 @@
 #' example(tag.int.ranks)
 #' steps<-step.ln.likelihoods(TF.ranks[42,],genes.no)
 #' @export
+step.ln.likelihoods<-function(ranks,tags.no){
+  lnlikls<-rep(0,tags.no+1)
+  lnlikls
+}
