@@ -3,11 +3,13 @@
 #'
 #' @param ranks vector of ranks of a tag in different collections
 #' @param tags.no number of tags, i.e. maximal rank 
-#' @returns the ln of the likelihood of the ranks for each step position in \eqn{1 .. max(ranks)+1}; the last is for uniform, non-step case
+#' @returns list of two values: ln.likelihoods contains the ln of the likelihood of the ranks for each split (step) position into (this or less) and (greater than this) for \eqn{1 .. tags.no-1} the last (\eqn{tag.np)} element is for is for uniform, non-step case; $k_1 contains k_1 (number of values on the left of the step) for each split
+#' @example
 #' example(tag.int.ranks)
 #' steps<-step.ln.likelihoods(TF.ranks[42,],genes.no)
 #' @export
 step.ln.likelihoods<-function(ranks,tags.no){
-  lnlikls<-rep(0,tags.no+1)
+  lnlikls<-rep(0,tags.no)
+  for (l1 in 1:tags.no)
   lnlikls
 }
