@@ -10,6 +10,14 @@
 #' @export
 step.ln.likelihoods<-function(ranks,tags.no){
   lnlikls<-rep(0,tags.no)
-  for (l1 in 1:tags.no)
+  k1.by.l1<-rep(0,tags.no)
+  k1<-0
+  for (l1 in 1:tags.no){
+    if(ranks[k1+1]>=l1)
+    {
+      k1<=k1+1      
+    }#l1 has hit next rank value
+    
+  }
   lnlikls
 }
