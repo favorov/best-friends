@@ -2,8 +2,7 @@
 % Please edit documentation in R/step.ln.likelihoods.r
 \name{step.ln.likelihoods}
 \alias{step.ln.likelihoods}
-\title{fit possible bi-uniform step models for a set of ranks
-#' See \link{best.friends} documentation for details.}
+\title{step.ln.likelihoods}
 \usage{
 step.ln.likelihoods(ranks, tags.no)
 }
@@ -17,7 +16,7 @@ list of two values: ln.likelihoods contains the ln of the likelihood of the rank
 }
 \description{
 fit possible bi-uniform step models for a set of ranks
-#' See \link{best.friends} documentation for details.
+See \link{best.friends} documentation for details.
 }
 \examples{
 example(tag.int.ranks)

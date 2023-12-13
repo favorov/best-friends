@@ -1,5 +1,8 @@
+#' 
+#' step.ln.likelihoods
+#' 
 #' fit possible bi-uniform step models for a set of ranks
-#' #' See [best.friends] documentation for details.
+#' See [best.friends] documentation for details.
 #'
 #' @param ranks vector of ranks of a tag in different collections
 #' @param tags.no number of tags, i.e. maximal rank 
