@@ -2,6 +2,7 @@
 
 export(best.friends.test)
 export(friends.test)
+export(step.ln.likelihoods)
 export(tag.int.ranks)
 export(tag.ranks)
 export(unif.ks.test)
