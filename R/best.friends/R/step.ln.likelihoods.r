@@ -16,10 +16,12 @@ step.ln.likelihoods<-function(ranks,tags.no){
   k1.by.l1<-rep(0,tags.no)
   k<-length(ranks)
   k1<-0
-  for (l1 in 1:tags.no-1){
-    if(ranks[k1+1]>=l1)
+  for (l1 in 1:(tags.no-1)){
+    print(paste(l1,k1,k))
+    print(ranks[k1])
+    while (ranks[k1+1]<=l1)
     {
-      k1<=k1+1      
+      k1<-k1+1      
     }#l1 has hit next rank value
     k1.by.l1[l1]<-k1
     p1<-k1/k
@@ -33,5 +35,6 @@ step.ln.likelihoods<-function(ranks,tags.no){
     }
   }
   ln.likelihoods[tags.no]<-k*log(1/k)
+  k1.by.l1[tags.no]<-k
   list(ln.likelihoods=ln.likelihoods,k1.by.l1=k1.by.l1)
 }
