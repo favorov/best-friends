@@ -27,4 +27,5 @@ the worst of best friends.
 0.99.62 - The math in rd is \eqn{}. NOTES from biocheck.
 0.99.63 - Switched to tag + collection terminlogy
 0.99.64 - friends.test output is dimensions is |T|x|C| for ranks, |T|x|C-1| for p-values and putative friends
-0.99.65 - create separate function for the first ranking, friends.test does not return the ranks any more; documentatio is updated again
+0.99.65 - create separate function for the first ranking, friends.test does not return the ranks any more; documentation is updated again
+0.99.7 - new functions appear for ks test of uniformity  of ranks of a tag in different collections and for the likelihood of a step in the ranks (thanks to A. KRoshnin and A. Suvorikova).
