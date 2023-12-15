@@ -27,7 +27,6 @@ step.ln.likelihoods<-function(ranks,tags.no){
     }#l1 has hit next rank value
     k1.by.l1[l1]<-k1
     p1<-k1/k
-    cat(p1,"\n")
     if(p1>0){
       ln.likelihoods[l1]<-
         ln.likelihoods[l1]+k1*log(p1/l1)
