@@ -19,7 +19,7 @@ the ln of the likelihood of the ranks for each step position in \eqn{1 .. max(ra
 example(tag.int.ranks)
 steps<-step.ln.likelihoods(TF.ranks\link{42,},genes.no)
 
-list of three values: ln.likelihoods contains the ln of the likelihood of the ranks for each split (step) position into (this or less) and (greater than this) for \eqn{1 .. tags.no-1} the last (\eqn{tag.np)} element is for is for uniform, non-step case; $k1.by.l1 contains k_1 (number of values on the left of the step) for each split; col.order is the order of ranks
+list of three values: \code{ln.likelihoods} contains the ln of the likelihood of the ranks for each split (step) position into (this or less) and (greater than this) for \eqn{1 .. tags.no-1} the last (\eqn{tag.np)} element is for is for uniform, non-step case; \code{k1.by.l1} contains k_1 (number of values on the left of the step) for each split; \code{col.order} is the order of ranks
 }
 \description{
 fit possible bi-uniform step models for a set of ranks
