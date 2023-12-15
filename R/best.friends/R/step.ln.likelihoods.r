@@ -21,12 +21,8 @@ step.ln.likelihoods<-function(ranks,tags.no){
   k1<-0
   #l1==tags_no is "no step"
   for (l1 in 1:(tags.no-1)){
-    print(paste(l1,k1,k))
-    print(ranks[k1])
     while (k1<k && ranks[k1+1]<=l1)
     {
-      cat(",,,",k1," -> ")
-      cat(ranks[k1+1],"\n")
       k1<-k1+1      
     }#l1 has hit next rank value
     k1.by.l1[l1]<-k1
