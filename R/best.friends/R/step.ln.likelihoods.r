@@ -46,6 +46,13 @@ step.ln.likelihoods<-function(ranks,tags.no){
   
   best.step.rank<-which.max(ln.likelihoods[1:tags.no-1])
   
+  #maybe it is an alien plug, maybe not,
+  #still we need it now
+  while (k1.by.l1[best.step.rank)==tags.no) 
+  {
+    best.step.rank<-best.step.rank-1
+  } 
+  
   population.on.left<-k1.by.l1[best.step.rank]
   
   col.on.left<-col.order[1:population.on.left]
