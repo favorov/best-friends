@@ -48,7 +48,8 @@ step.ln.likelihoods<-function(ranks,tags.no){
   
   #maybe it is an alien plug, maybe not,
   #still we need it now
-  if (k1.by.l1[best.step.rank]==tags.no) 
+  if (k1.by.l1[best.step.rank]==tags.no && 
+      k1.by.l1[best.step.rank-1]>0) 
   {
     best.step.rank<-best.step.rank-1
   } 
