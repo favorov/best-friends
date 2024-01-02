@@ -15,9 +15,9 @@ step.ln.likelihoods(ranks, tags.no)
 a list of three values: \cr
 \code{ln.likelihoods} contains the ln of the likelihood of the ranks for each split (step) rank value into (this or less) and (greater than this) for \eqn{1 .. tags.no-1} the last (\eqn{tag.no)} element is for is for uniform, non-step case;\cr
 \code{k1.by.l1} contains k_1 (number of values on the left of the step) for each split;\cr
-\code{col.order} is the order of ranks in, collection-by-collection
-\code{best.step.rank} is the rank value that makes the best step
-\code{col.on.left} is the vector of the collections on the left of the best step (including the step value)
+\code{col.order} is the order of ranks in, collection-by-collection\cr
+\code{best.step.rank} is the rank value that makes the best step\cr
+\code{col.on.left} is the vector of the collections on the left of the best step (including the step value)\cr
 \code{col.on.right} is vector of those on the right
 }
 \description{
