@@ -6,7 +6,13 @@
 #'
 #' @param ranks vector of ranks of a tag in different collections
 #' @param tags.no number of tags, i.e. maximal rank 
-#' @return a list of three values: \cr \code{ln.likelihoods} contains the ln of the likelihood of the ranks for each split (step) rank value into (this or less) and (greater than this) for \eqn{1 .. tags.no-1} the last (\eqn{tag.no)} element is for is for uniform, non-step case;\cr \code{k1.by.l1} contains k_1 (number of values on the left of the step) for each split;\cr \code{col.order} is the order of ranks
+#' @return a list of three values: \cr
+#' \code{ln.likelihoods} contains the ln of the likelihood of the ranks for each split (step) rank value into (this or less) and (greater than this) for \eqn{1 .. tags.no-1} the last (\eqn{tag.no)} element is for is for uniform, non-step case;\cr
+#' \code{k1.by.l1} contains k_1 (number of values on the left of the step) for each split;\cr
+#' \code{col.order} is the order of ranks in, collection-by-collection
+#' \code{best.step.rank} is the rank value that makes the best step
+#' \code{col.on.left} is the vector of the collections on the left of the best step (including the step value)
+#' \code{col.on.right} is vector of those on the right
 #' @examples
 #' example(tag.int.ranks)
 #' steps<-step.ln.likelihoods(TF.ranks[42,],genes.no)
@@ -37,5 +43,19 @@ step.ln.likelihoods<-function(ranks,tags.no){
   }
   ln.likelihoods[tags.no]<-k*log(1/k)
   k1.by.l1[tags.no]<-k
-  list(ln.likelihoods=ln.likelihoods,k1.by.l1=k1.by.l1,col.order=col.order)
+  
+  best.step.rank<-which.max(ln.likelihoods[1:tags.no-1])
+  
+  population.on.left<-k1.by.l1[best.step.rank]
+  
+  col.on.left<-col.order[1:population.on.left]
+  col.on.right<-col.order[population.on.left+1,length(col.order)]
+  
+  
+  list(ln.likelihoods=ln.likelihoods,
+       k1.by.l1=k1.by.l1,
+       col.order=col.order,
+       best.step.rank=best.step.rank,
+       col.on.left=col.on.left,
+       col.on.right=col.on.right)
 }
