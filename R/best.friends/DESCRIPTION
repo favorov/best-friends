@@ -1,8 +1,8 @@
 Package: best.friends
 Type: Package
 Title: We look for collections that are friendly for the tags 
-Version: 0.99.7
-Date: 2023-12-15
+Version: 0.99.8
+Date: 2024-01-01
 Encoding: UTF-8
 Authors@R: c(
       person("Alexandra","Suvorikova",email = "a.suvorikova@gmail.com",role=c("aut","ctb")),
@@ -20,7 +20,7 @@ biocViews: Annotation, StatisticalMethod
 URL: https://github.com/favorov/best-friends
 Suggests: knitr, rmarkdown, devtools, markdown, BiocStyle
 VignetteBuilder: knitr
-Packaged: 2023-12-15 2:30:05 EST; favorov
+Packaged: 2024-01-01 2:30:05 EST; favorov
 Imports: Rcpp (>= 1.0.5), utils, data.table
 LinkingTo: Rcpp
 Roxygen: list(markdown = TRUE)
