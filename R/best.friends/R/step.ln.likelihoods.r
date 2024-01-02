@@ -48,21 +48,21 @@ step.ln.likelihoods<-function(ranks,tags.no){
   
   #maybe it is an alien plug, maybe not,
   #still we need it now
-  #if (k1.by.l1[best.step.rank]==tags.no && 
-  #    best.step.rank>1 &&
-  #    k1.by.l1[best.step.rank-1]>0) 
-  #{
-  #  best.step.rank<-best.step.rank-1
-  #} 
+  if (k1.by.l1[best.step.rank]==k && 
+      best.step.rank>1 &&
+      k1.by.l1[best.step.rank-1]>0) 
+  {
+    best.step.rank<-best.step.rank-1
+  } 
   
   population.on.left<-k1.by.l1[best.step.rank]
   #alternative plug
-  if(population.on.left==tags.no){
-    population.on.left<-population.on.left-1
-  }
+  #if(population.on.left==tags.no){
+  #  population.on.left<-population.on.left-1
+  #}
   
   col.on.left<-col.order[1:population.on.left]
-  col.on.right<-col.order[(population.on.left+1):length(col.order)]
+  col.on.right<-col.order[(population.on.left+1):k)]
   
   
   list(ln.likelihoods=ln.likelihoods,
