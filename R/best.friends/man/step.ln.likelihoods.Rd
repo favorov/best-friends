@@ -12,7 +12,7 @@ step.ln.likelihoods(ranks, tags.no)
 \item{tags.no}{number of tags, i.e. maximal rank}
 }
 \value{
-list of three values: \code{ln.likelihoods} contains the ln of the likelihood of the ranks for each split (step) position into (this or less) and (greater than this) for \eqn{1 .. tags.no-1} the last (\eqn{tag.np)} element is for is for uniform, non-step case; \code{k1.by.l1} contains k_1 (number of values on the left of the step) for each split; \code{col.order} is the order of ranks
+list of three values: \cr \code{ln.likelihoods} contains the ln of the likelihood of the ranks for each split (step) rank value into (this or less) and (greater than this) for \eqn{1 .. tags.no-1} the last (\eqn{tag.no)} element is for is for uniform, non-step case;\cr \code{k1.by.l1} contains k_1 (number of values on the left of the step) for each split;\cr \code{col.order} is the order of ranks
 }
 \description{
 fit possible bi-uniform step models for a set of ranks
