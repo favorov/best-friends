@@ -58,7 +58,7 @@ step.ln.likelihoods<-function(ranks,tags.no){
   population.on.left<-k1.by.l1[best.step.rank]
   #alternative plug
   if(population.on.left==tags.no){
-    population.on.left=population.on.left-1
+    population.on.left<-population.on.left-1
   }
   
   col.on.left<-col.order[1:population.on.left]
