@@ -70,5 +70,6 @@ step.ln.likelihoods<-function(ranks,tags.no){
        col.order=col.order,
        best.step.rank=best.step.rank,
        col.on.left=col.on.left,
-       col.on.right=col.on.right)
+       col.on.right=col.on.right,
+       population.on.left=population.on.left)
 }
