@@ -62,7 +62,7 @@ step.ln.likelihoods<-function(ranks,tags.no){
   #}
   
   col.on.left<-col.order[1:population.on.left]
-  col.on.right<-col.order[(population.on.left+1):k)]
+  col.on.right<-col.order[(population.on.left+1):k]
   
   
   list(ln.likelihoods=ln.likelihoods,
