@@ -49,7 +49,7 @@ step.ln.likelihoods<-function(ranks,tags.no){
   population.on.left<-k1.by.l1[best.step.rank]
   
   col.on.left<-col.order[1:population.on.left]
-  col.on.right<-col.order[population.on.left+1:length(col.order)]
+  col.on.right<-col.order[(population.on.left+1):length(col.order)]
   
   
   list(ln.likelihoods=ln.likelihoods,
