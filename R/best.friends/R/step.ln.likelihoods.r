@@ -14,7 +14,6 @@
 step.ln.likelihoods<-function(ranks,tags.no){
   col.order<-order(ranks)
   ranks<-ranks[col.order]
-  print(ranks)
   ln.likelihoods<-rep(0,tags.no)
   k1.by.l1<-rep(0,tags.no)
   k<-length(ranks)
