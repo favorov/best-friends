@@ -48,7 +48,7 @@ step.ln.likelihoods<-function(ranks,tags.no){
   
   #maybe it is an alien plug, maybe not,
   #still we need it now
-  while (k1.by.l1[best.step.rank)==tags.no) 
+  while (k1.by.l1[best.step.rank]==tags.no) 
   {
     best.step.rank<-best.step.rank-1
   } 
