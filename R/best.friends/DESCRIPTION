@@ -1,8 +1,8 @@
 Package: best.friends
 Type: Package
 Title: We look for collections that are friendly for the tags 
-Version: 0.99.8
-Date: 2024-01-01
+Version: 0.99.9
+Date: 2024-02-24
 Encoding: UTF-8
 Authors@R: c(
       person("Alexandra","Suvorikova",email = "a.suvorikova@gmail.com",role=c("aut","ctb")),
