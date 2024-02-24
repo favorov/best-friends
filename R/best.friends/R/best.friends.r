@@ -16,6 +16,7 @@
 #'
 #' @section best.friends functions:
 #' [unif.ks.test] tests uniformity of a integer vector, the uniformity correcponds to tte "no-friend" null model.
+#' 
 #' [step.ln.likelihoods] fits a integer vector with one-step model, it is for alternative, higher step contains friends. 
 #'
 #' [tag.int.ranks] is use by all above toe prepare the integer vector to test. They are ranks of attentian that a collection pays to different tags. The ranking happens inside different collections separately. The ties are resolved at random, to keep the ranks integer.
