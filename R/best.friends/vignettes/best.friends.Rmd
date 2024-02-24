@@ -56,13 +56,11 @@ weighted graph                            vertex          another vertex        
 
 \paragraph{Goal} For each tag, we want to identify the collection(s) that particularly prefer(s) the tag, if any. Then such a cloud is a friend (or the best friend if there is only one) for the tag. The simplest example: imagine that only one cloud pays attention to the tag in hand. We intend to express the meaning of the word "particularly" in this context by a statistical test.
 
-The statistics we use to test whether the most friendly collection for the tag $t_i$ is really the best friend is the difference $t$ between the values $r(t_i,c_{(2)}(t_i))$ and $r(t_i,c_{(1)}(t_i))$, in other words, between the next-after-the-best and the best values $r$ for the tag $t_i$. We estimate the probability (p-value) to observe this difference as $<=t$ given the null-hypothesis proposition. If p-value is small enough, we reject the null, and claim that the friendliness of the cloud $c_{(1)}(t_i)$ is unlikely to observe by random and so we refer to it as the best friend of $t_i$. In this case, $t_i$ is a marker of its best friend cloud $c_{(1)}(t_i)$.
+Let's denote the rank of the $i$-th tag's attention value paid by $j$-the collection inside the collection, or, in our notation, rank of $A_{ij}$ in $A_{*j}$ column, as $r(t_i,c_j)$. 
 
-For each tag, the `best.friends.of` function returns the possible best friend and the corresponding uncorrected p-value for the observation provided the null model.
+The main idea of the test is that if a tag $t_i$ is now preferred by any collection, the distribution of the ranks of the tag in all the collections $r(t_i,c_j)$ behaves like $j$  i.i.d integers that are uniformely distributed in $1..n$
 
-For a similar test that splits all the collections into $m$ friends of the tag and the remaining $|C|-k$ clouds uses the difference  $r(t_i,c_{(m+1)}(t_i))$ and $r(t_i,c_{(m)}(t_i))$. If we obtain the p-value that is small enough, we claim that the clouds $c_{(1)}(t_i)$..$c_{(m)}(t_i)$ are friends of $t_i$ and $t_i$ is their marker.
 
-This option of the test is realised as the `best.friends` function.
 
 Both functions have `neglect.diagonal` parameter; the boolean is to be set to `TRUE` for a specific case, when $k = n$ and the diagonal af the $A$ matrix is not supposed to carry any information, e.g. see the last examle in the table.
 
