@@ -10,7 +10,7 @@ Maintainer: Alexander Favorov <favorov@sensi.org>,
     Dmitrijs Lvovs <dmitrijs.lvovs@gmail.com>
 Authors@R: c(
     person("Alexandra","Suvorikova",email = "a.suvorikova@gmail.com",role=c("aut","ctb")),
-    person("Dmitrijs","Lvovs",email = "dmitrijs.lvovs@gmail.com",role=c("aut","cre")),
+    person("Dmitrijs","Lvovs",email = "dmitrijs.lvovs@gmail.com",role=c("aut","ctb")),
     person("Vera","Mukhina",email = "atgc@vigg.ru",role=c("aut","ctb")),
     person("Vasily","Ramensky", email="ramensky@gmail.com",role=c("aut","ctb")),
     person("Andrey A.","Mironov", email="mironov@bioinf.fbb.msu.ru",role=c("aut","ctb")),
