@@ -21,7 +21,7 @@
 #'
 #' [tag.int.ranks] is use by all above toe prepare the integer vector to test. They are ranks of attentian that a collection pays to different tags. The ranking happens inside different collections separately. The ties are resolved at random, to keep the ranks integer.
 #' 
-#' @docType package
+#' "_PACKAGE"
 #' @name best.friends
 #' @importFrom utils packageDescription
 #' @importFrom data.table frankv
