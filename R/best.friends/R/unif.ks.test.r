@@ -6,7 +6,7 @@
 #' 
 #' @param ranks vector of ranks of a tag in different collections, \eqn{1 .. N})
 #' @return p-value for the KS test comparing the ranks distribution with uniform
-#'
+#' @importFrom stats ks.test
 #' @examples
 #' example(tag.int.ranks)
 #' ks.p.vals<-apply(TF.ranks,1,"unif.ks.test")
