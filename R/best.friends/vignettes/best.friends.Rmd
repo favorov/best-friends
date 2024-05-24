@@ -90,7 +90,7 @@ noquote(relation)
 ```
 Now, rank
 ```{r}
-tag.ranks<-tag.int.ranks(regulation)
+tag.ranks<-tag.int.ranks(relation)
 noquote(format(relation))
 ```
 Cloud 2 is the best friend of tag 3, and it is the only result with p-value less than 0.05. Makes sense. Tag 3 is the best for the collection 2, while it is the worst for other two collections.
