@@ -4,15 +4,25 @@ Title: We look for collections that are friendly for the tags
 Version: 0.99.9
 Date: 2024-02-24
 Encoding: UTF-8
+Author: Alexandra Suvorikova, Dmirtijs Lvovs, Vera Mukhina,
+    Vasily Ramensky, Andrey A. Mironov, Alexander Favorov
+Maintainer: Alexander Favorov <favorov@sensi.org>,
+    Dmitrijs Lvovs <dlvovs1@jh.edu>
 Authors@R: c(
-      person("Alexandra","Suvorikova",email = "a.suvorikova@gmail.com",role=c("aut","ctb")),
-      person("Vera","Mukhina",email = "atgc@vigg.ru",role=c("aut","ctb")),
-      person("Vasily","Ramensky", email="ramensky@gmail.com",role=c("aut","ctb")),
-      person("Andrey A.","Mironov", email="mironov@bioinf.fbb.msu.ru",role=c("aut","ctb")),
-      person("Alexander","Favorov", email = "favorov@sensi.org", role=c("aut","cre"),
-                 comment=c(ORCID="0000-0003-2595-1091"))
+    person("Alexandra","Suvorikova",email = "a.suvorikova@gmail.com",role=c("aut","ctb")),
+    person("Vera","Mukhina",email = "atgc@vigg.ru",role=c("aut","ctb")),
+    person("Vasily","Ramensky", email="ramensky@gmail.com",role=c("aut","ctb")),
+    person("Andrey A.","Mironov", email="mironov@bioinf.fbb.msu.ru",role=c("aut","ctb")),
+    person("Alexander","Favorov", email = "favorov@sensi.org", role=c("aut","cre"),
+        comment=c(ORCID="0000-0003-2595-1091"))
     )
-Description: We have tags (rows) and collections (columns) and each tag-collection pair is described by the the value of the attention (real) the collection pays to the tag. Given the attention matrix, we want to identify whether a tag seperates all the collections by the relevance of the tag for the collections. The collection, for which the tag is relevant, is the tag's friend.
+Description: We have tags (rows) and collections (columns) and each 
+    tag-collection pair is described by the the value of the attention (real) 
+    the collection pays to the tag. Given the attention matrix, 
+    we want to identify whether a tag seperates all the collections 
+    by the relevance of the tag for the collections. 
+    The collection, for which the tag is relevant, is the tag's friend.
+    The tag is the collection's marker.
 License: Artistic-2.0
 LazyLoad: yes
 Depends: R (>= 3.0.0)
@@ -21,7 +31,6 @@ URL: https://github.com/favorov/best-friends
 Suggests: knitr, rmarkdown, devtools, markdown, BiocStyle
 VignetteBuilder: knitr
 Packaged: 2024-01-01 2:30:05 EST; favorov
-Imports: Rcpp (>= 1.0.5), utils, data.table
-LinkingTo: Rcpp
+Imports: utils, data.table
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
