@@ -4,10 +4,6 @@ Title: We look for collections that are friendly for the tags
 Version: 0.99.9
 Date: 2024-02-24
 Encoding: UTF-8
-Author: Alexandra Suvorikova, Dmirtijs Lvovs, Vera Mukhina,
-    Vasily Ramensky, Andrey A. Mironov, Alexander Favorov
-Maintainer: Alexander Favorov <favorov@sensi.org>,
-    Dmitrijs Lvovs <dmitrijs.lvovs@gmail.com>
 Authors@R: c(
     person("Alexandra","Suvorikova",email = "a.suvorikova@gmail.com",role=c("aut","ctb")),
     person("Dmitrijs","Lvovs",email = "dmitrijs.lvovs@gmail.com",role=c("aut","ctb")),

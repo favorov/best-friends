@@ -28,9 +28,9 @@ Given the (\code{attention}) \eqn{|T| \times |C|} matrix, convert it to matrix o
 genes.no<-100
 TFs.no<-50
 gene.names<-
-  paste0("gene_",as.character(seq( from = 1, to = genes.no )))
+    paste0("gene_",as.character(seq( from = 1, to = genes.no )))
 TF.names<-
-  paste0("TF_",as.character(seq( from = 1, to = TFs.no )))   
+    paste0("TF_",as.character(seq( from = 1, to = TFs.no )))   
 regulation<-matrix(rep(1,TFs.no*genes.no),
     ncol=TFs.no,byrow=FALSE
 )
