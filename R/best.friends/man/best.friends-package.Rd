@@ -12,6 +12,7 @@ We have tags (rows) and collections (columns) and each tag-collection pair is de
 Useful links:
 \itemize{
   \item \url{https://github.com/favorov/best-friends}
+  \item Report bugs at \url{https://github.com/favorov/best-friends/issues}
 }
 
 }
@@ -21,6 +22,7 @@ Useful links:
 Authors:
 \itemize{
   \item Alexandra Suvorikova \email{a.suvorikova@gmail.com} [contributor]
+  \item Alexey Kroshnin \email{kroshnin@wias-berlin.de} [contributor]
   \item Dmitrijs Lvovs \email{dmitrijs.lvovs@gmail.com} [contributor]
   \item Vera Mukhina \email{atgc@vigg.ru} [contributor]
   \item Vasily Ramensky \email{ramensky@gmail.com} [contributor]
