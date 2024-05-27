@@ -1,6 +1,8 @@
-#best.friends package
-#A. Suvorikova, A. Kroshnin, D.Lvovs, V. Mukhina, V. Ramensky, A. Mironov, A. Favorov (c) 2014-2024
-#'
+#' 
+#' @keywords internal 
+"_PACKAGE"
+#' 
+#' 
 #' best.friends: A package that describe whether a collection is friendly for a tag of not 
 #'
 #' We have a set T of tags a set C of collections. Clouds pay attention to tags.
@@ -21,9 +23,7 @@
 #'
 #' [tag.int.ranks] is use by all above toe prepare the integer vector to test. They are ranks of attentian that a collection pays to different tags. The ranking happens inside different collections separately. The ties are resolved at random, to keep the ranks integer.
 #' 
-#' @keywords internal 
-#' "_PACKAGE"
-#' @name best.friends
 #' @importFrom utils packageDescription
 #' @importFrom data.table frankv
+#'
 NULL
