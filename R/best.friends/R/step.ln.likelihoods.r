@@ -25,7 +25,7 @@ step.ln.likelihoods<-function(ranks,tags.no){
   k<-length(ranks)
   k1<-0
   #l1==tags_no is "no step"
-  for (l1 in 1:(tags.no-1)){
+  for (l1 in seq_len(tags.no-1)){ #1:(tags.no-1)
     while (k1<k && ranks[k1+1]<=l1)
     {
       k1<-k1+1      
@@ -44,7 +44,7 @@ step.ln.likelihoods<-function(ranks,tags.no){
   ln.likelihoods[tags.no]<-k*log(1/k)
   k1.by.l1[tags.no]<-k
   
-  best.step.rank<-which.max(ln.likelihoods[1:tags.no-1])
+  best.step.rank<-which.max(ln.likelihoods[seq_len(tags.no-1)]) #1:tags.no-1
   
   #maybe it is an alien plug, maybe not,
   #still we need it now
@@ -61,8 +61,10 @@ step.ln.likelihoods<-function(ranks,tags.no){
   #  population.on.left<-population.on.left-1
   #}
   
-  col.on.left<-col.order[1:population.on.left]
-  col.on.right<-col.order[(population.on.left+1):k]
+  col.on.left<-col.order[1:population.on.left] 
+  #1:population.on.left
+  col.on.right<-col.order[(population.on.left+1):k] 
+  #(population.on.left+1):k
   
   
   list(ln.likelihoods=ln.likelihoods,
