@@ -23,13 +23,13 @@ Description: We have tags (rows) and collections (columns) and each
     The tag is the collection's marker.
 License: Artistic-2.0
 LazyLoad: yes
-Depends: R (>= 3.0.0)
+Depends: R (>= 4.4.0)
 biocViews: Annotation, StatisticalMethod
 URL: https://github.com/favorov/best-friends
 BugReports: https://github.com/favorov/best-friends/issues
 Suggests: knitr, rmarkdown, devtools, markdown, BiocStyle
 VignetteBuilder: knitr
-Packaged: 2024-01-01 2:30:05 EST; favorov
+Packaged: 2024-05-28 2:30:05 EST; favorov
 Imports: stats, utils, data.table
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
