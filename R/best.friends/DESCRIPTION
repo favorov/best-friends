@@ -1,7 +1,7 @@
 Package: best.friends
 Type: Package
 Title: We look for collections that are friendly for the tags 
-Version: 0.99.9
+Version: 0.99.10
 Date: 2024-02-24
 Encoding: UTF-8
 Authors@R: c(
@@ -27,7 +27,7 @@ Depends: R (>= 4.4.0)
 biocViews: Annotation, StatisticalMethod
 URL: https://github.com/favorov/best-friends
 BugReports: https://github.com/favorov/best-friends/issues
-Suggests: knitr, rmarkdown, devtools, markdown, BiocStyle
+Suggests: knitr, rmarkdown, devtools, markdown, BiocStyle, testthat
 VignetteBuilder: knitr
 Packaged: 2024-05-28 2:30:05 EST; favorov
 Imports: stats, utils, data.table
