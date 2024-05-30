@@ -1,7 +1,8 @@
 .onAttach <- function(libname, pkgname) {
     version <- packageDescription("best.friends", fields="Version")
     packageStartupMessage(paste("Welcome to best.friends, version", version,
-        "(A Primvera est\u00e1 chegando, e tu?) and stay tuned!")
+        "(A verão está chegando, e tu?) and stay tuned!")
     )
 }
-# \u00e1 is á
+# \u00E1 is á
+# \u00E3 is ã
