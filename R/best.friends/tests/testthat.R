@@ -1,4 +1,1 @@
-library(testthat)
-library(best.friends)
-
-test_check("best.friends")
+testthat::test_package("best.friends")
