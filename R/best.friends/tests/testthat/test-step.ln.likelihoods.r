@@ -7,3 +7,9 @@ test_that("step.ln.likelihoods returns expected values for known input", {
   expect_equal(result$col.on.right, c(2, 3, 4, 5))
   expect_equal(result$col.order, c(1, 2, 3, 4, 5))
 })
+
+test_that("returns error when rank is higher than tag.no", {
+  ranks <- c(1, 2, 3, 4, 6)
+  tags.no <- 5
+  expect_error(step.ln.likelihoods(ranks, tags.no))
+})
