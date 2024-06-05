@@ -21,8 +21,8 @@
 #' example(tag.int.ranks)
 #' steps<-step.ln.likelihoods(TF.ranks[42,],genes.no)
 #' @export
-step.ln.likelihoods<-function(ranks,tags.no){
-  col.order<-order(ranks)
+step.fit.ln.likelihoods<-function(ranks,tags.no){
+  collectons.order<-order(ranks)
   ranks<-ranks[col.order]
   ln.likelihoods<-rep(0,tags.no)
   k1.by.l1<-rep(0,tags.no)
@@ -48,35 +48,9 @@ step.ln.likelihoods<-function(ranks,tags.no){
   ln.likelihoods[tags.no]<-k*log(1/k)
   k1.by.l1[tags.no]<-k
   
-  best.step.rank<-which.max(ln.likelihoods[seq_len(tags.no-1)]) 
-  #1:tags.no-1
-  
-  #maybe it is an alien plug, maybe not,
-  #still we need it now
-  if (k1.by.l1[best.step.rank]==k && 
-      best.step.rank>1 &&
-      k1.by.l1[best.step.rank-1]>0) 
-  {
-    best.step.rank<-best.step.rank-1
-  } 
-  
-  population.on.left<-k1.by.l1[best.step.rank]
-  #alternative plug
-  #if(population.on.left==tags.no){
-  #  population.on.left<-population.on.left-1
-  #}
-  
-  col.on.left<-col.order[seq_len(population.on.left)] 
-  #1:population.on.left
-  col.on.right<-col.order[seq(population.on.left+1,k)] 
-  #(population.on.left+1):k
-  
-  
-  list(ln.likelihoods=ln.likelihoods,
-       k1.by.l1=k1.by.l1,
-       col.order=col.order,
-       best.step.rank=best.step.rank,
-       col.on.left=col.on.left,
-       col.on.right=col.on.right,
-       population.on.left=population.on.left)
+  list(
+    collectons.order=collectons.order,
+    ln.likelihoods=ln.likelihoods,
+    k1.by.l1=k1.by.l1
+  )
 }
