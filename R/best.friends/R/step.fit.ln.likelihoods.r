@@ -1,11 +1,20 @@
 #' 
 #' step.fit.ln.likelihoods
 #' 
-#' fit possible bi-uniform step models for a set of ranks 
-#' of the same tag in different collections. 
-#' The input ranks are integers in \eqn {1..tags.no}. 
-#' The function ranks the collections (columns) by 
-#' the rank of the tag (the \code{ranks} parameter)
+#' fits possible bi-uniform step models for a set of descending 
+#' (descending in each collection) ranks of the same tag in different collections
+#' (the \code{ranks} parameter)
+#' The input ranks are integers in \eqn{1..tags.no}. 
+#' Each of the split rank values \eqn{1 .. tags.no-1} split all the ranks 
+#' into two steps: "this or less" and "greater than this". 
+#'
+#' The function fits the step (bi-uniform) model for each
+#' integer splitting value in \eqn{1..tags.no-1}; 
+#' the splitting value is in the maximal value in the left part 
+#' of the ordering (the original ranks are descending, so best 
+#' collections are in the left part) and calculates the likelihood. 
+#' The last value with the index \eqn{tags.no} is calculated for a
+#' non-step uniform model.
 
 #' See [best.friends] documentation for details.
 #'
@@ -13,11 +22,10 @@
 #' @param tags.no number of tags, i.e. maximal rank 
 #' @return a list of three values: \cr
 #' \code{collectons.order} is the order of ranks in, collection-by-collection\cr
-#' \code{ln.likelihoods} the ln of the likelihood of the model соrresponding to each split rank value in \eqn{1 .. tags.no}
-#' \code{k1.by.l1} contains \eqn{k_1} (number of values on the left of the step) for each splitting value of the ranks in \eqn {1..tags.no};\cr
-#' Each of the split rank values \eqn{1 .. tags.no-1} split all the ranks into two steps: "this or less" and "greater than this" 
-#' and the ln-likelihood is for the fit of the two-step model.
-#' The last (\eqn{tag.no)} ln-likelihood is for a uniform, non-step model;\cr
+#' \code{ln.likelihoods} the ln of the likelihood of each of models соrresponding 
+#' to each split rank value in \eqn{1..tags.no-1} and the last, correspond to just uniform\cr
+#' \code{k1.by.l1} contains \eqn{k_1}, that is the number of rannks on the 
+#' on left of the step, including the split value, for split values \eqn {1..tags.no};\cr
 #' @examples
 #' example(tag.int.ranks)
 #' steps<-step.ln.likelihoods(TF.ranks[42,],genes.no)
