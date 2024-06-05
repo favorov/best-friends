@@ -1,7 +1,8 @@
 #' 
-#' step.ln.likelihoods
+#' best.step.fit
 #' 
-#' fit possible bi-uniform step models for a set of ranks
+#' finds the ML-best two-step model
+#' 
 #' See [best.friends] documentation for details.
 #'
 #' @param ranks vector of ranks of a tag in different collections
@@ -17,7 +18,8 @@
 #' example(tag.int.ranks)
 #' steps<-step.ln.likelihoods(TF.ranks[42,],genes.no)
 #' @export
-step.ln.likelihoods<-function(ranks,tags.no){
+best.step.fit<-function(ranks,tags.no){
+  step.models <- step.fit.ln.likelihoods(ranks,tags.no)
   col.order<-order(ranks)
   ranks<-ranks[col.order]
   ln.likelihoods<-rep(0,tags.no)
