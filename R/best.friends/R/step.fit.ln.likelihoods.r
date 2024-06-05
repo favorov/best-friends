@@ -1,7 +1,8 @@
 #' 
 #' step.fit.ln.likelihoods
 #' 
-#' fit possible bi-uniform step models for a set of ranks of the same tag in different collections. 
+#' fit possible bi-uniform step models for a set of ranks 
+#' of the same tag in different collections. 
 #' The input ranks are integers in \eqn {1..tags.no}. 
 #' The function ranks the collections (columns) by 
 #' the rank of the tag (the \code{ranks} parameter)
