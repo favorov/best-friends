@@ -29,9 +29,11 @@ best.step.fit<-function(ranks,tags.no){
   
   population.on.left<-k1.by.l1[best.step.rank]
 
-  col.on.left<-step.models$col.order[seq_len(population.on.left)] 
+  col.on.left<-step.models$result$
+    collectons.order[seq_len(population.on.left)] 
   #1:population.on.left
-  col.on.right<-step.models$col.order[seq(population.on.left+1,k)] 
+  col.on.right<-step.models$result$
+    collectons.order[seq(population.on.left+1,length(ranks))] 
   #(population.on.left+1):k
   
   
