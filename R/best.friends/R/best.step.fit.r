@@ -8,7 +8,8 @@
 #' @inheritParams step.fit.ln.likelihoods
 #' @return a list of four values: \cr
 #' \code{step.models} is return from [step.fit.ln.likelihoods] call the function start with
-#' \code{best.step.rank} is the rank value that makes the best step\cr
+#' \code{best.step.rank} is the rank value that makes the best step;
+#' it is not obligatory one on the \code{ranks} value.\cr
 #' \code{col.on.left} is the vector of the collections on the left of the best step 
 #' (including the step value)\cr
 #' \code{col.on.right} is vector of those on the right
@@ -29,11 +30,9 @@ best.step.fit<-function(ranks,tags.no){
   
   population.on.left<-k1.by.l1[best.step.rank]
 
-  col.on.left<-step.models$result$
-    collectons.order[seq_len(population.on.left)] 
+  col.on.left<-step.models$collectons.order[seq_len(population.on.left)] 
   #1:population.on.left
-  col.on.right<-step.models$result$
-    collectons.order[seq(population.on.left+1,length(ranks))] 
+  col.on.right<-step.models$collectons.order[seq(population.on.left+1,length(ranks))] 
   #(population.on.left+1):k
   
   
