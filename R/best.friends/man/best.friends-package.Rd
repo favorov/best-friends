@@ -20,6 +20,9 @@ See our arxiv paper for details.
 }
 \section{best.friends functions}{
 
+
+\link{best.friends} finds the best friends for each tag, a wrapper for the the following functions.
+
 \link{unif.ks.test} tests uniformity of a integer vector, the uniformity correcponds to tte "no-friend" null model.
 
 \link{step.fit.ln.likelihoods} fits a integer vector with one-step model, it is for alternative, higher step contains friends.

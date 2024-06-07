@@ -15,6 +15,8 @@
 #' @keywords internal
 #' @name best.friends-package
 #' @section best.friends functions:
+#' [best.friends] finds the best friends for each tag, a wrapper for the the following functions.
+#'
 #' [unif.ks.test] tests uniformity of a integer vector, the uniformity correcponds to tte "no-friend" null model.
 #'
 #' [step.fit.ln.likelihoods] fits a integer vector with one-step model, it is for alternative, higher step contains friends. 
