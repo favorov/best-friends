@@ -16,6 +16,16 @@
 #' @export
 #' 
 best.friends <- function(mat, threshold = 0.05, p.adjust.method = "BH", best.no = 1) {
+  #parameter checks
+  if(best.no < 1 || best.no > nrow(mat)) {
+    stop("best.no must be at between 1 and the number of tags.")
+  }
+  if(threshold < 0 || threshold > 1) {
+    stop("threshold must be between 0 and 1.")
+  }
+  if(is.null(dimnames(mat))) {
+    dimnames(mat) <- list(1:nrow(mat), 1:ncol(mat))
+  }
   #find tags with non-uniform ranks
   all_ranks <- tag.int.ranks(mat)
   adj_nunif_pval <- p.adjust(
@@ -40,9 +50,6 @@ best.friends <- function(mat, threshold = 0.05, p.adjust.method = "BH", best.no 
   best_friends <- all_friends[sapply(all_friends,
                                      function(x) x$population.on.left <= best.no)]
 
-  #format result as 2-column data frame
-  #res_pre <- lapply(best_friends, function(x) colnames(marker_ranks)[x$col.on.left])
-  
   res_pre <- lapply(seq_along(best_friends), function(x) {
      data.frame(
        tag=names(best_friends[x]),
