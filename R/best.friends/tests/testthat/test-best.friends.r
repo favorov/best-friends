@@ -16,6 +16,6 @@ test_that("friends are determined correctly",{
     res <- best.friends(mat, threshold = 1)
     expect_equal(res,
                 data.frame(tag=paste0("tag",1:5),
-                            collection=paste0("coll",1:5)))
+                           collection=paste0("coll",1:5)))
 
 })
