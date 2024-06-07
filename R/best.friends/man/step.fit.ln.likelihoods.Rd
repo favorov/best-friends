@@ -17,7 +17,7 @@ a list of three values: \cr
 \code{ln.likelihoods} the ln of the likelihood of each of models соrresponding
 to each split rank value in \eqn{1..tags.no-1} and the last, correspond to just uniform\cr
 \code{k1.by.l1} contains \eqn{k_1}, that is the number of ranks on the
-on left of the step, including the split value, for split values \eqn {1..tags.no};\cr
+on left of the step, including the split value, for split values \eqn{1..tags.no};\cr
 }
 \description{
 fits possible bi-uniform step models for a set of descending
