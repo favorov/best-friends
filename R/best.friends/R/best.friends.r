@@ -24,6 +24,12 @@ best.friends <- function(mat, threshold = 0.05, p.adjust.method = "BH", best.no 
 
   marker_ranks <- all_ranks[adj_nunif_pval<=threshold, ]
 
+  if(nrow(marker_ranks) == 0) {
+    message("No tags with non-uniform ranks found for given threshold.")
+    return(data.frame(tag=character(), collection=character()))
+  }
+
+
   #find friends that make tag ranks non-uniform
   tag_count <- dim(mat)[1]
 
