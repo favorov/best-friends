@@ -1,4 +1,3 @@
-#'_PACKAGE
 #'
 #' best.friends: A package that describe whether a collection is friendly for a tag of not 
 #'
@@ -14,6 +13,7 @@
 #' See our arxiv paper for details.
 #' @keywords internal
 #' @name best.friends-package
+#' @docType package
 #' @section best.friends functions:
 #' [best.friends] finds the best friends for each tag, a wrapper for the the following functions.
 #'
