@@ -29,5 +29,5 @@ See \link{best.friends} documentation for details.
 }
 \examples{
 example(tag.int.ranks)
-steps<-step.ln.likelihoods(TF.ranks[42,],genes.no)
+steps<-step.fit.ln.likelihoods(TF.ranks[42,],genes.no)
 }

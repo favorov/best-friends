@@ -12,7 +12,7 @@ best.friends(mat, threshold = 0.05, p.adjust.method = "BH", best.no = 1)
 \item{threshold}{The adjusted p-value threshold for KS test for
 non-uniformity of ranks.}
 
-\item{p.adjust.method}{Multiple testing correction method, see \link[stast]{p.adjust}.}
+\item{p.adjust.method}{Multiple testing correction method, see \link[stats]{p.adjust}.}
 
 \item{best.no}{The maximum number of friends for a tag, the default is \code{1},
 i.e. the best friend.}
@@ -25,5 +25,10 @@ friends.
 Find Tags that are best friends to Collections
 }
 \examples{
-WIP
+mat <- matrix(c(10,6,7,8,9,
+                9,10,6,7,8,
+                8,9,10,6,7,
+                7,8,9,10,6,
+                6,7,8,9,10), nrow=5, ncol=5)
+res <- best.friends(mat, threshold = 1)
 }

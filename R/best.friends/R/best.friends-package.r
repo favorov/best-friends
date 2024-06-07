@@ -1,7 +1,5 @@
-#' @keywords internal 
-"_PACKAGE"
-#' 
-#' 
+#'_PACKAGE
+#'
 #' best.friends: A package that describe whether a collection is friendly for a tag of not 
 #'
 #' We have a set T of tags a set C of collections. Clouds pay attention to tags.
@@ -14,14 +12,15 @@
 #' The simplest example: imagine that only one collection pays attention to our tag.
 #'
 #' See our arxiv paper for details.
-#'
+#' @keywords internal
+#' @name best.friends-package
 #' @section best.friends functions:
 #' [unif.ks.test] tests uniformity of a integer vector, the uniformity correcponds to tte "no-friend" null model.
-#' 
-#' [step.ln.likelihoods] fits a integer vector with one-step model, it is for alternative, higher step contains friends. 
+#'
+#' [step.fit.ln.likelihoods] fits a integer vector with one-step model, it is for alternative, higher step contains friends. 
 #'
 #' [tag.int.ranks] is use by all above toe prepare the integer vector to test. They are ranks of attentian that a collection pays to different tags. The ranking happens inside different collections separately. The ties are resolved at random, to keep the ranks integer.
-#' 
+#'
 #' @importFrom utils packageDescription
 #' @importFrom data.table frankv
 #'

@@ -6,13 +6,19 @@
 #' @param mat A matrix tags x collections of attention that a collection pays to tag.
 #' @param threshold The adjusted p-value threshold for KS test for 
 #' non-uniformity of ranks.
-#' @param p.adjust.method Multiple testing correction method, see \link[stast]{p.adjust}.
+#' @param p.adjust.method Multiple testing correction method, see \link[stats]{p.adjust}.
 #' @param best.no The maximum number of friends for a tag, the default is \code{1}, 
 #' i.e. the best friend.
 #' @return A data those of tags and collections that are markers and best friends 
 #' friends.
 #' @importFrom stats p.adjust
-#' @examples WIP
+#' @examples 
+#' mat <- matrix(c(10,6,7,8,9,
+#'                 9,10,6,7,8,
+#'                 8,9,10,6,7,
+#'                 7,8,9,10,6,
+#'                 6,7,8,9,10), nrow=5, ncol=5)
+#' res <- best.friends(mat, threshold = 1)
 #' @export
 #' 
 best.friends <- function(mat, threshold = 0.05, p.adjust.method = "BH", best.no = 1) {

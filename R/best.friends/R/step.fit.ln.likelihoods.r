@@ -22,13 +22,13 @@
 #' @param tags.no number of tags, i.e. maximal rank 
 #' @return a list of three values: \cr
 #' \code{collectons.order} is the order of ranks in, collection-by-collection\cr
-#' \code{ln.likelihoods} the ln of the likelihood of each of models соrresponding 
+#' \code{ln.likelihoods} the ln of the likelihood of each of models corresponding 
 #' to each split rank value in \eqn{1..tags.no-1} and the last, correspond to just uniform\cr
 #' \code{k1.by.l1} contains \eqn{k_1}, that is the number of ranks on the 
 #' on left of the step, including the split value, for split values \eqn{1..tags.no};\cr
 #' @examples
 #' example(tag.int.ranks)
-#' steps<-step.ln.likelihoods(TF.ranks[42,],genes.no)
+#' steps<-step.fit.ln.likelihoods(TF.ranks[42,],genes.no)
 #' @export
 step.fit.ln.likelihoods<-function(ranks,tags.no){
   if(tags.no<max(ranks)){
