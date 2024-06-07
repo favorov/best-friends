@@ -16,9 +16,9 @@ a list of four values: \cr
 \code{step.models} is return from \link{step.fit.ln.likelihoods} call the function start with
 \code{best.step.rank} is the rank value that makes the best step;
 it is not obligatory one on the \code{ranks} value.\cr
-\code{col.on.left} is the vector of the collections on the left of the best step
-(including the step value)\cr
-\code{col.on.right} is vector of those on the right
+\code{collections.on.left} is the vector of the collections on the left of the best step
+(including the step value). They are friends of the tag.\cr
+\code{collections.on.right} is vector of those on the right
 \code{population.on.left} is how many ranks are on left of split; they are friends!
 }
 \description{
