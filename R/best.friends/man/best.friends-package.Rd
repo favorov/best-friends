@@ -2,7 +2,6 @@
 % Please edit documentation in R/best.friends-package.r
 \docType{package}
 \name{best.friends-package}
-\alias{best.friends}
 \alias{best.friends-package}
 \title{best.friends: We look for collections that are friendly for the tags}
 \description{
