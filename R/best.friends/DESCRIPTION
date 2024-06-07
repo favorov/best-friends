@@ -1,8 +1,8 @@
 Package: best.friends
 Type: Package
 Title: We look for collections that are friendly for the tags 
-Version: 0.99.10
-Date: 2024-02-24
+Version: 0.99.11
+Date: 2024-06-06
 Encoding: UTF-8
 Authors@R: c(
     person("Alexandra","Suvorikova",email = "a.suvorikova@gmail.com",role=c("aut","ctb")),
@@ -29,7 +29,7 @@ URL: https://github.com/favorov/best-friends
 BugReports: https://github.com/favorov/best-friends/issues
 Suggests: knitr, rmarkdown, devtools, markdown, BiocStyle, testthat
 VignetteBuilder: knitr
-Packaged: 2024-05-28 2:30:05 EST; favorov
+Packaged: 2024-06-06 2:30:05 EST; favorov
 Imports: stats, utils, data.table
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1

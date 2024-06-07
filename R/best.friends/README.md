@@ -32,3 +32,4 @@ the worst of best friends.
 0.99.8 - added fields about the best step in the return
 0.99.9 - all the old tests (frends, best friends) are removed
 0.99.10 - unit tests started; There are only NOTES in BiocCheck::BiocCheck again
+0.99.11 - major bugfix (any uniform part is never empty now); the function that fit models and the function that finds the best are separated. 
