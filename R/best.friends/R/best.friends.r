@@ -57,10 +57,14 @@ best.friends <- function(mat, threshold = 0.05, p.adjust.method = "BH", best.no 
                                      function(x) x$population.on.left <= best.no)]
 
   res_pre <- lapply(seq_along(best_friends), function(x) {
+    tag.name <- names(best_friends[x])
+    if(best_friends[[x]]$population.on.left == 0) {
+      warning(sprintf("%s got a population.on.left==0",tag.name))
+    } else {
      data.frame(
-       tag=names(best_friends[x]),
+       tag=tag.name,
        collection=colnames(marker_ranks)[best_friends[[x]]$collections.on.left]
-     )
+     )}
   })
 
   res <- do.call(rbind, res_pre)
