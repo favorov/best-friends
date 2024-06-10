@@ -12,8 +12,7 @@
 #'
 #' See our arxiv paper for details.
 #' @keywords internal
-#' @name best.friends-package
-#' @docType package
+"_PACKAGE"
 #' @section best.friends functions:
 #' [best.friends] finds the best friends for each tag, a wrapper for the the following functions.
 #'
