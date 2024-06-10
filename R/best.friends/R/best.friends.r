@@ -63,6 +63,7 @@ best.friends <- function(attention=NULL,
     tag.name <- names(best_friends[x])
     if(best_friends[[x]]$population.on.left == 0) {
       warning(sprintf("%s got a population.on.left==0",tag.name))
+      NULL
     } else {
      data.frame(
        tag=tag.name,
