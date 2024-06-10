@@ -3,12 +3,12 @@
 #' 
 #' Find Tags that are best friends to Collections
 #' 
-#' @param mat A matrix tags x collections of attention that a collection pays to tag.
+#' @inheritParams tag.int.ranks
 #' @param threshold The adjusted p-value threshold for KS test for 
 #' non-uniformity of ranks.
 #' @param p.adjust.method Multiple testing correction method, see \link[stats]{p.adjust}.
 #' @param best.no The maximum number of friends for a tag, the default is \code{1}, 
-#' i.e. the best friend.
+#' i.e. the best friend. The string "all" means "all friends".
 #' @return A data those of tags and collections that are markers and best friends 
 #' friends.
 #' @importFrom stats p.adjust
@@ -21,7 +21,10 @@
 #' res <- best.friends(mat, threshold = 1)
 #' @export
 #' 
-best.friends <- function(mat, threshold = 0.05, p.adjust.method = "BH", best.no = 1) {
+best.friends <- function(attention=NULL,
+                         distance_like=FALSE,
+                         neglect_diagonal=FALSE, threshold = 0.05, 
+                         p.adjust.method = "BH", best.no = 1) {
   #parameter checks
   if(best.no < 1 || best.no > nrow(mat)) {
     stop("best.no must be at between 1 and the number of tags.")
