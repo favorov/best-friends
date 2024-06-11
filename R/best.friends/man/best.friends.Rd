@@ -4,10 +4,15 @@
 \alias{best.friends}
 \title{best.friends}
 \usage{
-best.friends(mat, threshold = 0.05, p.adjust.method = "BH", best.no = 1)
+best.friends(
+  attention = NULL,
+  threshold = 0.05,
+  p.adjust.method = "BH",
+  best.no = 1
+)
 }
 \arguments{
-\item{mat}{A matrix tags x collections of attention that a collection pays to tag.}
+\item{attention}{original attention matrix}
 
 \item{threshold}{The adjusted p-value threshold for KS test for
 non-uniformity of ranks.}
@@ -15,7 +20,7 @@ non-uniformity of ranks.}
 \item{p.adjust.method}{Multiple testing correction method, see \link[stats]{p.adjust}.}
 
 \item{best.no}{The maximum number of friends for a tag, the default is \code{1},
-i.e. the best friend.}
+i.e. the best friend. The string "all" means "all friends".}
 }
 \value{
 A data those of tags and collections that are markers and best friends

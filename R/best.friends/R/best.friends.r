@@ -3,7 +3,7 @@
 #' 
 #' Find Tags that are best friends to Collections
 #' 
-#' @inheritParams tag.int.ranks
+#' @param attention original attention matrix
 #' @param threshold The adjusted p-value threshold for KS test for 
 #' non-uniformity of ranks.
 #' @param p.adjust.method Multiple testing correction method, see \link[stats]{p.adjust}.
@@ -21,22 +21,24 @@
 #' res <- best.friends(mat, threshold = 1)
 #' @export
 #' 
-best.friends <- function(attention=NULL,
-                         distance_like=FALSE,
-                         neglect_diagonal=FALSE, threshold = 0.05, 
+best.friends <- function(attention=NULL, threshold = 0.05, 
                          p.adjust.method = "BH", best.no = 1) {
   #parameter checks
-  if(best.no < 1 || best.no > nrow(mat)) {
+  if (is.na(best.no) || best.no == "all" || 
+      is.null(best.no) || !as.logical(best.no)){
+    best.no > nrow(attention)
+  }
+  if(best.no < 1 || best.no > nrow(attention)) {
     stop("best.no must be at between 1 and the number of tags.")
   }
   if(threshold < 0 || threshold > 1) {
     stop("threshold must be between 0 and 1.")
   }
-  if(is.null(dimnames(mat))) {
-    dimnames(mat) <- list(1:nrow(mat), 1:ncol(mat))
+  if(is.null(dimnames(attention))) {
+    dimnames(attention) <- list(1:nrow(attention), 1:ncol(attention))
   }
   #find tags with non-uniform ranks
-  all_ranks <- tag.int.ranks(mat)
+  all_ranks <- tag.int.ranks(attention)
   adj_nunif_pval <- p.adjust(
       apply(all_ranks, 1, unif.ks.test),
       method = p.adjust.method)
@@ -50,7 +52,7 @@ best.friends <- function(attention=NULL,
 
 
   #find friends that make tag ranks non-uniform
-  tag_count <- dim(mat)[1]
+  tag_count <- dim(attention)[1]
 
   all_friends <- apply(marker_ranks, 1,
                        function(x) best.step.fit(x, tags.no = tag_count))
