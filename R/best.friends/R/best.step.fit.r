@@ -26,7 +26,13 @@ best.step.fit<-function(ranks,tags.no){
   possible.best.steps<-possible.best.steps[k1.by.l1>0 & k1.by.l1<length(ranks)]
   #we assess only the steps that have nonzero left and right sets
   
-  best.step.rank<-which.max(step.models$ln.likelihoods[possible.best.steps]) 
+  #best.step.index<-which.max(step.models$ln.likelihoods[possible.best.steps])
+  #almost; we want the last value, so:
+  possible.likelihoods<-step.models$ln.likelihoods[possible.best.steps]
+  ml<-max(possible.likelihoods)
+  best.step.index<-max(which(possible.likelihoods==ml))
+
+  best.step.rank<-possible.best.steps[best.step.index]
   
   population.on.left<-k1.by.l1[best.step.rank]
 
@@ -42,5 +48,7 @@ best.step.fit<-function(ranks,tags.no){
        best.step.rank=best.step.rank,
        collections.on.left=collections.on.left,
        collections.on.right=collections.on.right,
-       population.on.left=population.on.left)
+       population.on.left=population.on.left
+       )
 }
+
