@@ -30,10 +30,11 @@ friends.
 Find Tags that are best friends to Collections
 }
 \examples{
-mat <- matrix(c(10,6,7,8,9,
+attention <- matrix(c(10,6,7,8,9,
                 9,10,6,7,8,
                 8,9,10,6,7,
                 7,8,9,10,6,
-                6,7,8,9,10), nrow=5, ncol=5)
-res <- best.friends(mat, threshold = 1)
+                6,7,8,9,10,
+                20,0,0,0,0), nrow=6, ncol=5)
+res <- best.friends(attention, threshold = 1)
 }
