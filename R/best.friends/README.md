@@ -2,13 +2,16 @@ best.friends test R implementation
 ===
 
 This is R implementation of the best.friends test.
-The idea is: we have T tags and M collections and 
+The idea is: we have T tags and C collections and 
 collection-to-tag attention described as a |T|x|C| matrix.
 Attention is a metaphor for any relation, weight, load, etc.
-The ranks of attentions of a collection to all tags are referred 
-to as importance.
+First, we rank all attentions of a collection to all tags. 
+The ranks are referred to as importance of the tags to the collection.
+
 If a tag is important for a collection more than by chance, 
 the collection is tag's friend and the tag is the collection's marker.
+"By chance" (null model)" implies uniform distribution of the tag's 
+importance in different collections. 
 
 0.0.1 - initial version.  
 0.1.1 - p-value calculated.  
