@@ -18,7 +18,8 @@
 #'                 8,9,10,6,7,
 #'                 7,8,9,10,6,
 #'                 6,7,8,9,10,
-#'                 20,0,0,0,0), nrow=6, ncol=5)
+#'                 20,0,0,0,0), 
+#'                 nrow=6, ncol=5, byrow=TRUE)
 #' res <- best.friends(attention, threshold = 1)
 #' @export
 #' 
