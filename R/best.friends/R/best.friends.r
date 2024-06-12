@@ -45,7 +45,7 @@ best.friends <- function(attention=NULL, threshold = 0.05,
       apply(all_ranks, 1, unif.ks.test),
       method = p.adjust.method)
 
-  marker_ranks <- all_ranks[adj_nunif_pval<=threshold, ]
+  marker_ranks <- all_ranks[adj_nunif_pval<=threshold,,drop=FALSE]
 
   if(nrow(marker_ranks) == 0) {
     message("No tags with non-uniform ranks found for given threshold.")
@@ -60,20 +60,15 @@ best.friends <- function(attention=NULL, threshold = 0.05,
                        function(x) best.step.fit(x, tags.no = tag_count))
 
   #best friends are cases where a tag is a marker in only best.no collections
-  best_friends <- all_friends[sapply(all_friends,
-                                     function(x) x$population.on.left <= best.no)]
+  best_friends <- all_friends[sapply(all_friends, function(x) {
+    x$population.on.left <= best.no
+    })]
 
   res_pre <- lapply(seq_along(best_friends), function(x) {
-    tag.name <- names(best_friends[x])
-    if(best_friends[[x]]$population.on.left == 0) {
-      warning(sprintf("%s got a population.on.left==0",tag.name))
-      NULL
-    } else {
-     data.frame(
-       tag=tag.name,
+    data.frame(
+       tag=names(best_friends[x]),
        collection=colnames(marker_ranks)[best_friends[[x]]$collections.on.left]
-     )}
-  })
+     )})
 
   res <- do.call(rbind, res_pre)
 
