@@ -20,7 +20,7 @@
 #'                 6,7,8,9,10,
 #'                 20,0,0,0,0), 
 #'                 nrow=6, ncol=5, byrow=TRUE)
-#' res <- best.friends(attention, threshold = 1)
+#' res <- best.friends(attention, threshold = .25)
 #' @export
 #' 
 best.friends <- function(attention=NULL, threshold = 0.05, 
