@@ -12,7 +12,7 @@
 #' ks.p.vals<-apply(TF.ranks,1,"unif.ks.test")
 #' @export
 unif.ks.test<-function(ranks){
-  jranks<-jitter(ranks)
-  res<-ks.test(jranks,"punif",min = min(jranks),max=max(jranks))
+  jranks<-jitter(ranks,amount=0.1E-9)
+  res<-ks.test(jranks,"punif",min = min(ranks),max=max(ranks))
   res$p.value
 }
