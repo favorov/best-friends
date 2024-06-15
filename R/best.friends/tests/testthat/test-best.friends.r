@@ -6,7 +6,6 @@ test_that("no errors in simplest case",{
 })
 
 test_that("best friend is determined correctly",{
-    set.seed(3) #lucky seed that passes this test
     text <- "    coll1     coll2     coll3      coll4     coll5
             tag1 0.1765568 0.7176185 0.2121425 0.01339033 0.5995658
             tag2 0.6870228 0.9919061 0.6516738 0.38238796 0.4935413
@@ -14,8 +13,8 @@ test_that("best friend is determined correctly",{
             tag4 0.7698414 0.7774452 0.2672207 0.34034900 0.8273733
             tag5 0.0000000 0.0000000 0.0000000 0.00000000 1.0000000"
     attention <- as.matrix(read.table(text=text, header=TRUE))
-    res <- best.friends(attention, threshold = 0.1, best.no = 1)
-    expect_equivalent(res,
+    
+    expect_equivalent(best.friends(attention),
                 data.frame(tag=c("tag5"),
                            collection=c("coll5")))
 
