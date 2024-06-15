@@ -26,9 +26,10 @@
 best.friends <- function(attention=NULL, threshold = 0.05, 
                          p.adjust.method = "BH", best.no = 1) {
   #parameter checks
-  if (is.na(best.no) || best.no == "all" || 
+  if (is.na(best.no) || best.no == "all" ||
+      best.no == "al" || best.no == "a" ||
       is.null(best.no) || !as.logical(best.no)){
-    best.no > nrow(attention)
+    best.no = nrow(attention)
   }
   if(best.no < 1 || best.no > nrow(attention)) {
     stop("best.no must be at between 1 and the number of tags.")
