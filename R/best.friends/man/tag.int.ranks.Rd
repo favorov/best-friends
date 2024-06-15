@@ -22,7 +22,7 @@ a \eqn{|T| x |C|} matrix of integer ranks in \eqn{[1 .. |T|]} (or, \eqn{[1 .. |T
 }
 \description{
 Given the (\code{attention}) \eqn{|T| \times |C|} matrix, convert it to matrix of descending ranks of tags(rows) in collections (columns).
-#' See \link{best.friends} documentation for details.
+See \link{best.friends} documentation for details.
 }
 \examples{
 genes.no<-100

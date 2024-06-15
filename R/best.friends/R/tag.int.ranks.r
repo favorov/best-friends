@@ -2,7 +2,7 @@
 #' tag.int.ranks
 #' 
 #' Given the (\code{attention}) \eqn{|T| \times |C|} matrix, convert it to matrix of descending ranks of tags(rows) in collections (columns). 
-#' #' See [best.friends] documentation for details.
+#' See [best.friends] documentation for details.
 #' @param attention original attention matrix
 #' @param distance_like if \code{TRUE}, ranks are ascending (the smaller is the better). Default is \code{FALSE}.
 #' @param neglect_diagonal if square matrix, and the diagonal does not make sense, we \code{NA} it and our ranks are in \eqn{[1 .. |T|-1]}. Default is \code{FALSE}.
