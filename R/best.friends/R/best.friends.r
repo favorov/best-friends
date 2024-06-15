@@ -64,6 +64,11 @@ best.friends <- function(attention=NULL, threshold = 0.05,
   best_friends <- all_friends[sapply(all_friends, function(x) {
     x$population.on.left <= best.no
     })]
+  
+  
+  if(!length(best_friends)){
+    return(data.frame(tag=character(), collection=character()))
+  } #uf no tag passed best test, return empty frame rather than NULL
 
   res_pre <- lapply(seq_along(best_friends), function(x) {
     data.frame(
