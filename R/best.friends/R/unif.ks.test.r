@@ -13,6 +13,6 @@
 #' @export
 unif.ks.test<-function(ranks){
   jranks<-jitter(ranks,amount=0.1E-9)
-  res<-ks.test(jranks,"punif",min = min(ranks),max=max(ranks))
+  res<-ks.test(jranks,"punif",min = min(jranks),max=max(jranks))
   res$p.value
 }
