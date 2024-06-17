@@ -21,10 +21,13 @@ test_that("best friend is determined correctly",{
 })
 
 test_that("passes diagonal test",{
-    mat <- diag(nrow=5, ncol=5)
-    rownames(mat) <- paste0("tag",1:5)
-    colnames(mat) <- paste0("coll",1:5)
-    expect_equivalent(best.friends(mat, threshold = 1),
-                data.frame(tag=c("tag1","tag2","tag3","tag4","tag5"),
-                           collection=c("coll1","coll2","coll3","coll4","coll5")))
+    howmuch <- 100
+    diagon_mat <- matrix(runif(howmuch**2), nrow=howmuch)
+    diag(diagon_mat) <- rep(howmuch, howmuch)
+    rownames(diagon_mat) <- paste0("tag",1:howmuch)
+    colnames(diagon_mat) <- paste0("coll",1:howmuch)
+    res <- best.friends(diagon_mat, threshold = 1)
+    expect_equivalent(res,
+                data.frame(tag=paste0(c("tag"),1:howmuch),
+                           collection=paste0(c("coll"),1:howmuch)))
 })
