@@ -19,3 +19,12 @@ test_that("best friend is determined correctly",{
                            collection=c("coll5")))
 
 })
+
+test_that("passes diagonal test",{
+    mat <- diag(nrow=5, ncol=5)
+    rownames(mat) <- paste0("tag",1:5)
+    colnames(mat) <- paste0("coll",1:5)
+    expect_equivalent(best.friends(mat, threshold = 1),
+                data.frame(tag=c("tag1","tag2","tag3","tag4","tag5"),
+                           collection=c("coll1","coll2","coll3","coll4","coll5")))
+})
