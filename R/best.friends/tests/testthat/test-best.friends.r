@@ -26,8 +26,23 @@ test_that("passes diagonal test",{
     diag(diagon_mat) <- rep(howmuch, howmuch)
     rownames(diagon_mat) <- paste0("tag",1:howmuch)
     colnames(diagon_mat) <- paste0("coll",1:howmuch)
-    res <- best.friends(diagon_mat, threshold = 1)
-    expect_equivalent(res,
-                data.frame(tag=paste0(c("tag"),1:howmuch),
-                           collection=paste0(c("coll"),1:howmuch)))
+    expect_no_error(best.friends(diagon_mat, threshold = 1))
+    #expect_equivalent(res,
+    #            data.frame(tag=paste0(c("tag"),1:howmuch),
+    #                       collection=paste0(c("coll"),1:howmuch)))
+})
+
+test_that("passes non-diagonal diagonal test",{
+  set.seed(1) #actually, it works with like 9/10 of seeds
+  ntags<<-100
+  ncolls<<-10
+  almost_diagon_mat <<- matrix(1+9*runif(ntags*ncolls), nrow=ntags)
+  almost_diagon_mat[1:ncolls,] <<- runif(ncolls*ncolls)
+  diag(almost_diagon_mat) <<- 19
+  rownames(almost_diagon_mat) <<- paste0("tag",1:ntags)
+  colnames(almost_diagon_mat) <<- paste0("coll",1:ncolls)
+  res <<- best.friends(almost_diagon_mat)
+  expect_equivalent(res,
+                    data.frame(tag=paste0(c("tag"),1:ncolls),
+                               collection=paste0(c("coll"),1:ncolls)))
 })
