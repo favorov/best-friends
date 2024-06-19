@@ -22,6 +22,8 @@ test_that("best friend is determined correctly",{
 
 
 test_that("passes non-diagonal diagonal test",{
+  #best.friends method is not illustrated well using square diagonal matrices
+  #we will use a rectangular matrix for this test (ncolls << ntags)
   set.seed(1) #actually, it works with like 9/10 of seeds
   ntags<-100
   ncolls<-10
