@@ -61,10 +61,13 @@ best.friends <- function(attention=NULL, threshold = 0.05,
                        function(x) best.step.fit(x, tags.no = tag_count))
 
   #best friends are cases where a tag is a marker in only best.no collections
-  best_friends <- all_friends[sapply(all_friends, function(x) {
+  #best_friends <- all_friends[sapply(all_friends, function(x) {
+  #  x$population.on.left <= best.no
+  #  })]
+  #replace sapply to vapply in previous line
+  best_friends <- all_friends[vapply(all_friends, function(x) {
     x$population.on.left <= best.no
-    })]
-  
+  },logical(1))]
   
   if(!length(best_friends)){
     return(data.frame(tag=character(), collection=character()))
