@@ -29,7 +29,7 @@ best.friends <- function(attention=NULL, threshold = 0.05,
   if (is.na(best.no) || best.no == "all" ||
       best.no == "al" || best.no == "a" ||
       is.null(best.no) || !as.logical(best.no)){
-    best.no = nrow(attention)
+    best.no <- nrow(attention)
   }
   if(best.no < 1 || best.no > nrow(attention)) {
     stop("best.no must be at between 1 and the number of tags.")
@@ -38,7 +38,9 @@ best.friends <- function(attention=NULL, threshold = 0.05,
     stop("threshold must be between 0 and 1.")
   }
   if(is.null(dimnames(attention))) {
-    dimnames(attention) <- list(1:nrow(attention), 1:ncol(attention))
+    dimnames(attention) <- list(
+      seq(nrow(attention)), seq(ncol(attention))
+    )
   }
   #find tags with non-uniform ranks
   all_ranks <- tag.int.ranks(attention)
@@ -60,11 +62,11 @@ best.friends <- function(attention=NULL, threshold = 0.05,
   all_friends <- apply(marker_ranks, 1,
                        function(x) best.step.fit(x, tags.no = tag_count))
 
-  #best friends are cases where a tag is a marker in only best.no collections
-  #best_friends <- all_friends[sapply(all_friends, function(x) {
-  #  x$population.on.left <= best.no
-  #  })]
-  #replace sapply to vapply in previous line
+  #best friends are cases where a tag is a marker in 
+  #only best.no collections; we just filter to match
+  #best.no parameter here, 
+  #vapply is recommended by BioCheck as safer than sapply
+
   best_friends <- all_friends[vapply(all_friends, function(x) {
     x$population.on.left <= best.no
   },logical(1))]
