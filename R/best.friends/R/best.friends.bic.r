@@ -4,7 +4,7 @@
 #' Find Tags that are best friends to Collections
 #' 
 #' @param attention original attention matrix
-#' @param nofriends.prior The prior for a tag to have no friendly collections.
+#' @param no.friends.prior The prior for a tag to have no friendly collections.
 #' @param best.no The maximal number of friends for a tag, the default is \code{1}, 
 #' i.e. the best friend. The string "all" means "all friends". 
 #' The value $n$ means that we filter out a tag from the results is it has more 
@@ -23,26 +23,20 @@
 #' res <- best.friends(attention, threshold = .25)
 #' @export
 #' 
-best.friends <- function(attention=NULL, threshold = 0.05, 
-                         p.adjust.method = "BH", best.no = 1) {
+best.friends.bic <- function(attention=NULL, no.friends.prior=-1, best.no = 1) {
   #parameter checks
   if (is.na(best.no) || best.no == "all" ||
       best.no == "al" || best.no == "a" ||
       is.null(best.no) || !as.logical(best.no)){
     best.no <- nrow(attention)
   }
-  if(best.no < 1 || best.no > nrow(attention)) {
+  if (best.no < 1 || best.no > nrow(attention)) {
     stop("best.no must be at between 1 and the number of tags.")
   }
-  if(threshold < 0 || threshold > 1) {
-    stop("threshold must be between 0 and 1.")
+  if (no.friends.prior < 0 || no.friends.prior >1){
+    stop("best.friends.bic requires the no.friends.prior value to be explicetely provided and to be a prior.")
   }
-  if(is.null(dimnames(attention))) {
-    dimnames(attention) <- list(
-      seq(nrow(attention)), seq(ncol(attention))
-    )
-  }
-  #find tags with non-uniform ranks
+
   all_ranks <- tag.int.ranks(attention)
   adj_nunif_pval <- p.adjust(
       apply(all_ranks, 1, unif.ks.test),
