@@ -12,8 +12,8 @@
 #' it is not obligatory one on the \code{ranks} value.\cr
 #' \code{collections.on.left} is the vector of the collections on the left of the best step 
 #' (including the step value). They are friends of the tag.\cr
-#' \code{collections.on.right} is vector of those on the right
-#' \code{population.on.left} is how many ranks are on left of split; they are friends! 
+#' \code{collections.on.right} is vector of those on the right \cr
+#' \code{population.on.left} is how many ranks are on left of split; they are friends! \cr
 #' @examples
 #' example(tag.int.ranks)
 #' steps<-step.fit.ln.likelihoods(TF.ranks[42,],genes.no)
