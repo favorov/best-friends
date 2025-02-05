@@ -38,6 +38,11 @@ best.friends.bic <- function(attention=NULL, no.friends.prior=-1, best.no = 1) {
   }
 
   all_ranks <- tag.int.ranks(attention)
+  
+  
+  
+  
+  
   adj_nunif_pval <- p.adjust(
       apply(all_ranks, 1, unif.ks.test),
       method = p.adjust.method)
