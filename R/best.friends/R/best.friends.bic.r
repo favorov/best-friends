@@ -1,10 +1,10 @@
 #'
-#' best.friends
+#' best.friends.bic
 #' 
 #' Find Tags that are best friends to Collections
 #' 
 #' @param attention original attention matrix
-#' @param no.friends.prior The prior for a tag to have no friendly collections.
+#' @param non.step.prior The prior for a tag is not important enough to have no friendly collections.
 #' @param best.no The maximal number of friends for a tag, the default is \code{1}, 
 #' i.e. the best friend. The string "all" means "all friends". 
 #' The value $n$ means that we filter out a tag from the results is it has more 
@@ -23,7 +23,7 @@
 #' res <- best.friends(attention, threshold = .25)
 #' @export
 #' 
-best.friends.bic <- function(attention=NULL, no.friends.prior=-1, best.no = 1) {
+best.friends.bic <- function(attention=NULL, non.marker.prior=-1, best.no = 1) {
   #parameter checks
   if (is.na(best.no) || best.no == "all" ||
       best.no == "al" || best.no == "a" ||

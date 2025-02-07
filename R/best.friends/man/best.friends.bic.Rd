@@ -2,19 +2,19 @@
 % Please edit documentation in R/best.friends.bic.r
 \name{best.friends.bic}
 \alias{best.friends.bic}
-\title{best.friends}
+\title{best.friends.bic}
 \usage{
-best.friends.bic(attention = NULL, no.friends.prior = -1, best.no = 1)
+best.friends.bic(attention = NULL, non.marker.prior = -1, best.no = 1)
 }
 \arguments{
 \item{attention}{original attention matrix}
-
-\item{no.friends.prior}{The prior for a tag to have no friendly collections.}
 
 \item{best.no}{The maximal number of friends for a tag, the default is \code{1},
 i.e. the best friend. The string "all" means "all friends".
 The value $n$ means that we filter out a tag from the results is it has more
 than $n$ friends.}
+
+\item{non.step.prior}{The prior for a tag is not important enough to have no friendly collections.}
 }
 \value{
 A data.frame, rows are pairs of tags and collections that are markers and best friends
