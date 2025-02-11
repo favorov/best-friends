@@ -11,7 +11,6 @@
 #' than $n$ friends.
 #' @return A data.frame, rows are pairs of tags and collections that are markers and best friends 
 #' friends.
-#' @importFrom stats p.adjust
 #' @examples 
 #' attention <- matrix(c(10,6,7,8,9,
 #'                 9,10,6,7,8,
@@ -20,7 +19,7 @@
 #'                 6,7,8,9,10,
 #'                 20,0,0,0,0), 
 #'                 nrow=6, ncol=5, byrow=TRUE)
-#' res <- best.friends(attention, threshold = .25)
+#' res <- best.friends.bic(attention, non.step.prior=0.1)
 #' @export
 #' 
 best.friends.bic <- function(attention=NULL, non.marker.prior=-1, best.no = 1) {
