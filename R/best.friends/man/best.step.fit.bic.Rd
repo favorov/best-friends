@@ -36,5 +36,6 @@ See \link{best.friends} documentation for details.
 }
 \examples{
 example(tag.int.ranks)
-steps<-best.step.fit.bic(TF.ranks[42,],genes.no,0.5)
+step<-best.step.fit.bic(TF.ranks[42,],genes.no,0.5)
+nostep<-best.step.fit.bic(TF.ranks[42,],genes.no,1E-50)
 }
