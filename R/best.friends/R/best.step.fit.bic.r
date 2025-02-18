@@ -17,6 +17,9 @@
 #' (including the step value). They are friends of the tag.\cr
 #' \code{collections.on.right} is vector of those on the right \cr
 #' \code{population.on.left} is how many ranks are on left of split; they are friends! \cr
+#' if non-step uniform model wins and there are no friends,\cr 
+#' then \code{best.step.rank==tags.no}, \code{population.on.left==0},\cr
+#' all collections are listed in \code{collections.on.right} and \code{collections.on.left} is empty
 #' @examples
 #' example(tag.int.ranks)
 #' steps<-best.step.fit.bic(TF.ranks[42,],genes.no,0.5)
@@ -59,12 +62,12 @@ best.step.fit.bic<-function(ranks, tags.no, prior.to.have.friends){
     
     best.step.rank<-tags.no
     
-    population.on.left<-length(ranks) #all
+    population.on.left<-0 #all
     
-    collections.on.left<-
-      step.models$collectons.order
+    collections.on.left<-c() #empty -- no friends
+      
+    collections.on.right<-step.models$collectons.order
     #all
-    collections.on.right<-c() #empty
    }
   
   list(step.models=step.models,
