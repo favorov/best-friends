@@ -4,14 +4,14 @@
 \alias{best.step.fit.bic}
 \title{best.step.fit.bic}
 \usage{
-best.step.fit.bic(ranks, tags.no, non.step.prior = 0)
+best.step.fit.bic(ranks, tags.no, prior.to.have.friends)
 }
 \arguments{
 \item{ranks}{vector of ranks of a tag in different collections}
 
 \item{tags.no}{number of tags, i.e. maximal rank}
 
-\item{non.step.prior}{The prior for a tag is not important enough to have no friendly collections.}
+\item{prior.to.have.friends}{The prior for a tag is important enough to have friendly collections.}
 }
 \value{
 a list of four values: \cr
@@ -33,5 +33,5 @@ See \link{best.friends} documentation for details.
 }
 \examples{
 example(tag.int.ranks)
-steps<-step.fit.ln.likelihoods(TF.ranks[42,],genes.no)
+steps<-best.step.fit.bic(TF.ranks[42,],genes.no,0.5)
 }
