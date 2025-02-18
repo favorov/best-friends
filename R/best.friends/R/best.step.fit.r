@@ -16,23 +16,25 @@
 #' \code{population.on.left} is how many ranks are on left of split; they are friends! \cr
 #' @examples
 #' example(tag.int.ranks)
-#' steps<-step.fit.ln.likelihoods(TF.ranks[42,],genes.no)
+#' steps<-best.step.fit(TF.ranks[42,],genes.no)
 #' @export
 best.step.fit<-function(ranks,tags.no){
   step.models <- step.fit.ln.likelihoods(ranks,tags.no)
  
-  possible.best.steps<-seq_len(tags.no-1)
-  k1.by.l1<-step.models$k1.by.l1[possible.best.steps]
-  possible.best.steps<-possible.best.steps[k1.by.l1>0 & k1.by.l1<length(ranks)]
+  possible.step.ranks<-seq_len(tags.no-1)
+  k1.by.l1<-step.models$k1.by.l1[possible.step.ranks]
+  possible.step.ranks<-possible.step.ranks[k1.by.l1>0 & k1.by.l1<length(ranks)]
   #we assess only the steps that have nonzero left and right sets
-  
-  #best.step.index<-which.max(step.models$ln.likelihoods[possible.best.steps])
+  #best.step.index<-which.max(step.models$ln.likelihoods[possible.step_ranks])
   #almost; we want the last value, so:
-  possible.likelihoods<-step.models$ln.likelihoods[possible.best.steps]
-  ml<-max(possible.likelihoods)
-  best.step.index<-max(which(possible.likelihoods==ml))
-
-  best.step.rank<-possible.best.steps[best.step.index]
+  possible.ln.likelihoods<-
+    step.models$ln.likelihoods[possible.step.ranks]
+  max.ln.l<-max(possible.ln.likelihoods)
+  best.step.index<-max(which(possible.ln.likelihoods==max.ln.l))
+  #the index in possible.step_ranks (and possible.ln.likelihoods);
+  #we need the rank itself
+  
+  best.step.rank<-possible.step.ranks[best.step.index]
   
   population.on.left<-k1.by.l1[best.step.rank]
 
