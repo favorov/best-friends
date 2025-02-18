@@ -38,35 +38,24 @@ best.friends.bic <- function(attention=NULL, prior.to.have.friends=-1, best.no =
 
   all_ranks <- tag.int.ranks(attention)
   
-  
-  
-  
-  
-  adj_nunif_pval <- p.adjust(
-      apply(all_ranks, 1, unif.ks.test),
-      method = p.adjust.method)
+  tags.no <- dim(attention)[1]
 
-  marker_ranks <- all_ranks[adj_nunif_pval<=threshold,,drop=FALSE]
+  all_friends <- apply(all_ranks, 1,
+                       function(x) best.step.fit.bic(
+                         x, tags.no = tags.no,
+                         prior.to.have.friends=prior.to.have.friends)
+                       )
 
-  if(nrow(marker_ranks) == 0) {
-    message("No tags with non-uniform ranks found for given threshold.")
-    return(data.frame(tag=character(), collection=character()))
-  }
-
-
-  #find friends that make tag ranks non-uniform
-  tag_count <- dim(attention)[1]
-
-  all_friends <- apply(marker_ranks, 1,
-                       function(x) best.step.fit(x, tags.no = tag_count))
-
+  #here, we filer out the tags uniform model wins for
+  #we also filter to match
+  #best.no parameter here,
   #best friends are cases where a tag is a marker in 
-  #only best.no collections; we just filter to match
-  #best.no parameter here, 
+  #no more than best.no collections
+
   #vapply is recommended by BioCheck as safer than sapply
 
   best_friends <- all_friends[vapply(all_friends, function(x) {
-    x$population.on.left <= best.no
+    x$population.on.left>0 && x$population.on.left <= best.no
   },logical(1))]
   
   if(!length(best_friends)){
