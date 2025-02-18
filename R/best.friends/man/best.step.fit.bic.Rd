@@ -22,6 +22,9 @@ it is not obligatory one on the \code{ranks} value.\cr
 (including the step value). They are friends of the tag.\cr
 \code{collections.on.right} is vector of those on the right \cr
 \code{population.on.left} is how many ranks are on left of split; they are friends! \cr
+if non-step uniform model wins and there are no friends,\cr
+then \code{best.step.rank==tags.no}, \code{population.on.left==0},\cr
+all collections are listed in \code{collections.on.right} and \code{collections.on.left} is empty
 }
 \description{
 finds the ML-best step model and
