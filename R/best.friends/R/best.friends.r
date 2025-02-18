@@ -59,14 +59,14 @@ best.friends <- function(attention=NULL, threshold = 0.05,
 
 
   #find friends that make tag ranks non-uniform
-  tag_count <- dim(attention)[1]
+  tags.no <- dim(attention)[1]
 
   all_friends <- apply(marker_ranks, 1,
-                       function(x) best.step.fit(x, tags.no = tag_count))
-
+                       function(x) best.step.fit(x, tags.no = tags.no))
+  #we filter to match
+  #best.no parameter here,
   #best friends are cases where a tag is a marker in 
-  #only best.no collections; we just filter to match
-  #best.no parameter here, 
+  #no more than best.no collections
   #vapply is recommended by BioCheck as safer than sapply
 
   best_friends <- all_friends[vapply(all_friends, function(x) {
