@@ -65,7 +65,7 @@ best.friends.bic <- function(attention=NULL, prior.to.have.friends=-1, best.no =
   res_pre <- lapply(seq_along(best_friends), function(x) {
     data.frame(
        tag=names(best_friends[x]),
-       collection=colnames(marker_ranks)[best_friends[[x]]$collections.on.left]
+       collection=colnames(all_ranks)[best_friends[[x]]$collections.on.left]
      )})
 
   res <- do.call(rbind, res_pre)
