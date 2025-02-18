@@ -37,9 +37,9 @@ best.step.fit.bic<-function(ranks, tags.no, prior.to.have.friends){
   #with the uniform model posterior,
   #and here we use the prior.to.have.friends
   if (max.ln.l+
-        ln(prior.to.have.friends) >= 
+        log(prior.to.have.friends) >= 
       step.models$ln.likelihoods[tags.no]+
-        ln(1-prior.to.have.friends)) {
+        log(1-prior.to.have.friends)) {
     #if we are here, the step model won
     best.step.index<-max(which(possible.ln.likelihoods==max.ln.l))
     #the index in possible.step_ranks (and possible.ln.likelihoods);
