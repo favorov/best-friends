@@ -22,7 +22,8 @@
 #' all collections are listed in \code{collections.on.right} and \code{collections.on.left} is empty
 #' @examples
 #' example(tag.int.ranks)
-#' steps<-best.step.fit.bic(TF.ranks[42,],genes.no,0.5)
+#' step<-best.step.fit.bic(TF.ranks[42,],genes.no,0.5)
+#' nostep<-best.step.fit.bic(TF.ranks[42,],genes.no,1E-50)
 #' @export
 best.step.fit.bic<-function(ranks, tags.no, prior.to.have.friends){
   step.models <- step.fit.ln.likelihoods(ranks,tags.no)
