@@ -4,7 +4,7 @@
 #' Find Tags that are best friends to Collections
 #' 
 #' @param attention original attention matrix
-#' @param non.step.prior The prior for a tag is not important enough to have no friendly collections.
+#' @param prior.to.have.friends The prior for a tag is important enough to have friendly collections.
 #' @param best.no The maximal number of friends for a tag, the default is \code{1}, 
 #' i.e. the best friend. The string "all" means "all friends". 
 #' The value $n$ means that we filter out a tag from the results is it has more 
@@ -19,10 +19,10 @@
 #'                 6,7,8,9,10,
 #'                 20,0,0,0,0), 
 #'                 nrow=6, ncol=5, byrow=TRUE)
-#' res <- best.friends.bic(attention, non.step.prior=0.1)
+#' res <- best.friends.bic(attention, prior.to.have.friends=0.5)
 #' @export
 #' 
-best.friends.bic <- function(attention=NULL, non.marker.prior=-1, best.no = 1) {
+best.friends.bic <- function(attention=NULL, prior.to.have.friends=-1, best.no = 1) {
   #parameter checks
   if (is.na(best.no) || best.no == "all" ||
       best.no == "al" || best.no == "a" ||
@@ -32,8 +32,8 @@ best.friends.bic <- function(attention=NULL, non.marker.prior=-1, best.no = 1) {
   if (best.no < 1 || best.no > nrow(attention)) {
     stop("best.no must be at between 1 and the number of tags.")
   }
-  if (no.friends.prior < 0 || no.friends.prior >1){
-    stop("best.friends.bic requires the no.friends.prior value to be explicetely provided and to be a prior.")
+  if (prior.to.have.friends < 0 || prior.to.have.friends >1){
+    stop("best.friends.bic requires the prior.to.have.friends value to be explicitely provided and to be a prior.")
   }
 
   all_ranks <- tag.int.ranks(attention)
