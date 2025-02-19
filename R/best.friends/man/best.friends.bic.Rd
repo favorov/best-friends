@@ -31,5 +31,7 @@ attention <- matrix(c(10,6,7,8,9,
                 6,7,8,9,10,
                 20,0,0,0,0), 
                 nrow=6, ncol=5, byrow=TRUE)
-res <- best.friends.bic(attention, prior.to.have.friends=0.5)
+attention
+best.friends.bic(attention, prior.to.have.friends=0.5)
+best.friends.bic(attention, prior.to.have.friends=0.001)
 }
