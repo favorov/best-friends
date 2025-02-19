@@ -38,12 +38,10 @@ best.friends.bic <- function(attention=NULL, prior.to.have.friends=-1, best.no =
   #add names to attention matrix rows if necessary
   if(is.null(dimnames(attention)[[1]])) {
     rownames(attention) <- seq(nrow(attention))
-    )
   }
   #add names to attention matrix cols if necessary
   if(is.null(dimnames(attention)[[2]])) {
     colnames(attention) <- seq(ncol(attention))
-    )
   }
   all_ranks <- tag.int.ranks(attention)
   

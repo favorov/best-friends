@@ -42,12 +42,10 @@ best.friends <- function(attention=NULL, threshold = 0.05,
   #add names to attention matrix rows if necessary
   if(is.null(dimnames(attention)[[1]])) {
     rownames(attention) <- seq(nrow(attention))
-    )
   }
   #add names to attention matrix cols if necessary
   if(is.null(dimnames(attention)[[2]])) {
     colnames(attention) <- seq(ncol(attention))
-    )
   }
   #find tags with non-uniform ranks
   all_ranks <- tag.int.ranks(attention)
