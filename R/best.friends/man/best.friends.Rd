@@ -39,5 +39,8 @@ attention <- matrix(c(10,6,7,8,9,
                 6,7,8,9,10,
                 20,0,0,0,0), 
                 nrow=6, ncol=5, byrow=TRUE)
-res <- best.friends(attention, threshold = .25)
+attention
+best.friends(attention, threshold = .05)
+best.friends(attention, threshold = .0001)
+
 }

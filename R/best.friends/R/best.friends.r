@@ -22,7 +22,10 @@
 #'                 6,7,8,9,10,
 #'                 20,0,0,0,0), 
 #'                 nrow=6, ncol=5, byrow=TRUE)
-#' res <- best.friends(attention, threshold = .25)
+#' attention
+#' best.friends(attention, threshold = .05)
+#' best.friends(attention, threshold = .0001)
+#' 
 #' @export
 #' 
 best.friends <- function(attention=NULL, threshold = 0.05, 
@@ -56,7 +59,7 @@ best.friends <- function(attention=NULL, threshold = 0.05,
   marker_ranks <- all_ranks[adj_nunif_pval<=threshold,,drop=FALSE]
 
   if(nrow(marker_ranks) == 0) {
-    message("No tags with non-uniform ranks found for given threshold.")
+    #message("No tags with non-uniform ranks found for given threshold.")
     return(data.frame(tag=character(), collection=character()))
   }
 
