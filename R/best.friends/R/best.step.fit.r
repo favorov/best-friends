@@ -16,7 +16,7 @@
 #' \code{population.on.left} is how many ranks are on left of split; they are friends! \cr
 #' @examples
 #' example(tag.int.ranks)
-#' steps<-best.step.fit(TF.ranks[42,],genes.no)
+#' step<-best.step.fit(TF.ranks[42,],genes.no)
 #' @export
 best.step.fit<-function(ranks,tags.no){
   step.models <- step.fit.ln.likelihoods(ranks,tags.no)

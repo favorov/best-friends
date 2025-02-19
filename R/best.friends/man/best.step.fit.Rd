@@ -29,5 +29,5 @@ See \link{best.friends} documentation for details.
 }
 \examples{
 example(tag.int.ranks)
-steps<-best.step.fit(TF.ranks[42,],genes.no)
+step<-best.step.fit(TF.ranks[42,],genes.no)
 }
