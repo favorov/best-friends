@@ -184,7 +184,7 @@ the blue is the best friend for the orange .
 `. ` `
 The same friendship: the blue is the best friend for the orange (uncorrected p-value='r noquote(format(all.friends$pvals[4,1],digits = p.val.digits))'). All the nodes but the red are better friends for the the orange than the red is (uncorrected p-value='r noquote(format(all.friends$pvals[4,8],digits = p.val.digits))`).  All the nodes but the orange are better friends for the the red than the orange is (uncorrected p-value='r noquote(format(all.friends$pvals[1,8],digits = p.val.digits))').
 
-Session info to match stadadrds:
+Session info to match standards:
 ```{r}
 sessionInfo()
 ```
