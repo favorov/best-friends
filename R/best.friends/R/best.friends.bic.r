@@ -35,7 +35,16 @@ best.friends.bic <- function(attention=NULL, prior.to.have.friends=-1, best.no =
   if (prior.to.have.friends < 0 || prior.to.have.friends >1){
     stop("best.friends.bic requires the prior.to.have.friends value to be explicitely provided and to be a prior.")
   }
-
+  #add names to attention matrix rows if necessary
+  if(is.null(dimnames(attention)[[1]])) {
+    rownames(attention) <- seq(nrow(attention))
+    )
+  }
+  #add names to attention matrix cols if necessary
+  if(is.null(dimnames(attention)[[2]])) {
+    colnames(attention) <- seq(ncol(attention))
+    )
+  }
   all_ranks <- tag.int.ranks(attention)
   
   tags.no <- dim(attention)[1]
@@ -60,7 +69,7 @@ best.friends.bic <- function(attention=NULL, prior.to.have.friends=-1, best.no =
   
   if(!length(best_friends)){
     return(data.frame(tag=character(), collection=character()))
-  } #uf no tag passed best test, return empty frame rather than NULL
+  } #tf no tag passed best test, return empty frame rather than NULL
 
   res_pre <- lapply(seq_along(best_friends), function(x) {
     data.frame(
