@@ -66,7 +66,7 @@ step.fit.ln.likelihoods<-function(ranks,tags.no){
         ln.likelihoods[l1]+(k-k1)*log((1-p1)/(tags.no-l1))
     }
   }
-  ln.likelihoods[tags.no]<-k*log(1/k)
+  ln.likelihoods[tags.no]<-k*log(1/tags.no)
   k1.by.l1[tags.no]<-k
   
   list(
