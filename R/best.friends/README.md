@@ -41,4 +41,5 @@ the worst of best friends.
 0.99.11 - major bugfix (any uniform part is never empty now); the function that fit models and the function that finds the best are separated.  
 0.99.12 - best.frieds function added that put it altogether; jitter amplitude lowered to make KS more stable; best.friends now returns data frame even whaen the return is empty, tests added, docs improved. 
 0.99.13 - ks on ranks mapped to 0..1 rather than on raw ranks
-0.99.14 - the Bayesian (bic) version of the functions added. 
+0.99.14 - the Bayesian (bic) version of the functions added.
+0.99.15 - the "all" best_no parameter behaviour fixed
