@@ -40,6 +40,9 @@ step.fit.ln.likelihoods<-function(ranks,tags.no){
   if(!all(ranks>=1)){
     stop("Ranks are to be integer!")
   }
+  if(!is.null(dim(ranks))){
+    warning("Ranks has not-NULL dim(), it is not a vector.\n")
+  }
   
   
   collectons.order<-order(ranks)
