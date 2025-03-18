@@ -1,7 +1,7 @@
 #' 
 #' best.step.fit
 #' 
-#' finds the ML-best step model
+#' finds the ML-best step model for one tag
 #' 
 #' See [best.friends] documentation for details.
 #'

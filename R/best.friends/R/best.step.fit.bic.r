@@ -1,7 +1,7 @@
 #' 
 #' best.step.fit.bic
 #' 
-#' finds the ML-best step model and 
+#' finds the ML-best step model  for one tag and 
 #' compares the posteriors of the found best step
 #' and non-step uniform model.
 #' 
