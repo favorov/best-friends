@@ -6,9 +6,10 @@
 #' @param attention original attention matrix
 #' @param prior.to.have.friends The prior for a tag is important enough to have friendly collections.
 #' @param best.no The maximal number of friends for a tag, the default is \code{1}, 
-#' i.e. the best friend. The string "all" means "all friends". 
+#' i.e. we look for the best friends only. The string "all" means "all friends", 
+#' i.e. the maximal number of friends in the number of collections
 #' The value $n$ means that we filter out a tag from the results is it has more 
-#' than $n$ friends.
+#' than $n$ friendly collections and we do not tell it from the no-friends case.
 #' @return A data.frame, rows are pairs of tags and collections that are markers and best friends 
 #' friends.
 #' @examples 
@@ -29,7 +30,7 @@ best.friends.bic <- function(attention=NULL, prior.to.have.friends=-1, best.no =
   if (is.na(best.no) || best.no == "all" ||
       best.no == "al" || best.no == "a" ||
       is.null(best.no) || !as.logical(best.no)){
-    best.no <- nrow(attention)
+    best.no <- ncol(attention)
   }
   if (best.no < 1 || best.no > nrow(attention)) {
     stop("best.no must be at between 1 and the number of tags.")
