@@ -37,8 +37,8 @@ best.friends <- function(attention=NULL, threshold = 0.05,
       is.null(best.no) || !as.logical(best.no)){
     best.no <- ncol(attention)
   }
-  if(best.no < 1 || best.no > nrow(attention)) {
-    stop("best.no must be at between 1 and the number of tags.")
+  if (best.no < 1 || best.no > ncol(attention)) {
+    stop("best.no must be between 1 and the number of collections.")
   }
   if(threshold < 0 || threshold > 1) {
     stop("threshold must be between 0 and 1.")

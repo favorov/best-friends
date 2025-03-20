@@ -32,8 +32,8 @@ best.friends.bic <- function(attention=NULL, prior.to.have.friends=-1, best.no =
       is.null(best.no) || !as.logical(best.no)){
     best.no <- ncol(attention)
   }
-  if (best.no < 1 || best.no > nrow(attention)) {
-    stop("best.no must be at between 1 and the number of tags.")
+  if (best.no < 1 || best.no > ncol(attention)) {
+    stop("best.no must be between 1 and the number of collections.")
   }
   if (prior.to.have.friends < 0 || prior.to.have.friends >1){
     stop("best.friends.bic requires the prior.to.have.friends value to be explicitely provided and to be a prior.")
