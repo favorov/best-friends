@@ -27,7 +27,7 @@ then \code{best.step.rank==tags.no}, \code{population.on.left==0},\cr
 all collections are listed in \code{collections.on.right} and \code{collections.on.left} is empty
 }
 \description{
-finds the ML-best step model and
+finds the ML-best step model  for one tag and
 compares the posteriors of the found best step
 and non-step uniform model.
 }

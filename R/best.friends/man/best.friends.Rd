@@ -20,9 +20,10 @@ non-uniformity of ranks.}
 \item{p.adjust.method}{Multiple testing correction method, see \link[stats]{p.adjust}.}
 
 \item{best.no}{The maximal number of friends for a tag, the default is \code{1},
-i.e. the best friend. The string "all" means "all friends".
+i.e. we look for the best friends only. The string "all" means "all friends",
+i.e. the maximal number of friends in the number of collections
 The value $n$ means that we filter out a tag from the results is it has more
-than $n$ friends.}
+than $n$ friendly collections and we do not tell it from the no-friends case.}
 }
 \value{
 A data.frame, rows are pairs of tags and collections that are markers and best friends

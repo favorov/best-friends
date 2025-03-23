@@ -22,7 +22,7 @@ it is not obligatory one on the \code{ranks} value.\cr
 \code{population.on.left} is how many ranks are on left of split; they are friends! \cr
 }
 \description{
-finds the ML-best step model
+finds the ML-best step model for one tag
 }
 \details{
 See \link{best.friends} documentation for details.
