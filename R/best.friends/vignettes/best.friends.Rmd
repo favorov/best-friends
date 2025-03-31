@@ -88,12 +88,17 @@ relation[6,]<-c(2,0.9 ,0.4 )
 relation[7,]<-c(.7,0.1 ,11 )
 noquote(relation)
 ```
-Now, rank
+
 ```{r}
-tag.ranks<-tag.int.ranks(relation)
-noquote(format(relation))
+best.friends.bic(relation,prior.to.have.friends = .5)
 ```
-Cloud 2 is the best friend of tag 3, and it is the only result with p-value less than 0.05. Makes sense. Tag 3 is the best for the collection 2, while it is the worst for other two collections.
+
+```{r}
+best.friends.bic(relation,prior.to.have.friends = .1)
+```
+
+
+Collection 2 is the best friend of tag 3, and it is the only result with p-value less than 0.05. Makes sense. Tag 3 is the best for the collection 2, while it is the worst for other two collections.
 
 ### <a name="toyTF"></a> Toy regulation example
 
