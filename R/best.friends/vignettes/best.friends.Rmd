@@ -168,21 +168,18 @@ connections['blue','orange']<-3
 connections['orange','blue']<-3
 connections['purple','blue']<-1
 connections['blue','purple']<-1
-diag(connections)=NA
+diag(connections)=0
 noquote(format(connections,digits = data.digits))
 ```
 Let's search for best friends (here, the diagonal is neglected by the construstion, and we let the test know it):
 
-` ` `{r}
-friends<-best.friends.test(connections,neglect_diagonal = TRUE)
-noquote(format(friends,digits = p.val.digits))
+```{r}
+friends<-best.friends.bic(-connections,prior.to.have.friends = 0.5)
+friends
+```
 
-` ` `
 the blue is the best friend for the orange .
 
-
-`. ` `
-The same friendship: the blue is the best friend for the orange (uncorrected p-value='r noquote(format(all.friends$pvals[4,1],digits = p.val.digits))'). All the nodes but the red are better friends for the the orange than the red is (uncorrected p-value='r noquote(format(all.friends$pvals[4,8],digits = p.val.digits))`).  All the nodes but the orange are better friends for the the red than the orange is (uncorrected p-value='r noquote(format(all.friends$pvals[1,8],digits = p.val.digits))').
 
 Session info to match standards:
 ```{r}
