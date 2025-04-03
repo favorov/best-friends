@@ -170,42 +170,7 @@ Almost all the effects disappear. There is some week signal for gene E is for {T
 
 
 
-### <a name="toynet"></a> Toy net example
-
-![Toy network example](green-6.png)
-
-Let's represent the graph on the picture by its weighted adjacency matrix. The diagonal tags are NAs.
-
-```{r}
-connections<-matrix(nrow = 10,ncol=10,0)
-names<-c('red','purple','blue','orange','green.1','green.2','green.3','green.4','green.5','green.6')
-rownames(connections)<-names
-colnames(connections)<-names
-connections[,'red']<-5
-connections['red',]<-5
-connections['orange','red']<-0
-connections['red','orange']<-0
-connections['blue','orange']<-3
-connections['orange','blue']<-3
-connections['purple','blue']<-1
-connections['blue','purple']<-1
-diag(connections)=NA
-noquote(format(connections,digits = data.digits))
-```
-Let's search for best friends (here, the diagonal is neglected by the construstion, and we let the test know it):
-
-` ` `{r}
-friends<-best.friends.test(connections,neglect_diagonal = TRUE)
-noquote(format(friends,digits = p.val.digits))
-
-` ` `
-the blue is the best friend for the orange .
-
-
-`. ` `
-The same friendship: the blue is the best friend for the orange (uncorrected p-value='r noquote(format(all.friends$pvals[4,1],digits = p.val.digits))'). All the nodes but the red are better friends for the the orange than the red is (uncorrected p-value='r noquote(format(all.friends$pvals[4,8],digits = p.val.digits))`).  All the nodes but the orange are better friends for the the red than the orange is (uncorrected p-value='r noquote(format(all.friends$pvals[1,8],digits = p.val.digits))').
-
-Session info to match standards:
+### Session info to match standards:
 ```{r}
 sessionInfo()
 ```
