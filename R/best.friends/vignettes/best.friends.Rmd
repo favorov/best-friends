@@ -136,11 +136,11 @@ Searching for the best friend TF for each gene:
 
 
 ```{r}
-best.friends.bic(regulation,prior.to.have.friends = .5,best.no = "all")
+best.friends.bic(regulation,prior.to.have.friends = .5,best.no = 1)
 ```
 
 ```{r}
-best.friends.bic(regulation,prior.to.have.friends = .1,best.no = "all")
+best.friends.bic(regulation,prior.to.have.friends = .1,best.no = 1)
 ```
 
 Only gene E (the fifth) has a reliable best friend, and it is TF1. It is what we could see in the relation matrix, so what we calculate here is consistent with the intuition.
@@ -159,11 +159,11 @@ noquote(format(regulation,digits = data.digits))
 And, let's search for best friends again:
 
 ```{r}
-best.friends.bic(regulation,prior.to.have.friends = .5,best.no = "all")
+best.friends.bic(regulation,prior.to.have.friends = .5,best.no = 1)
 ```
 
 ```{r}
-best.friends.bic(regulation,prior.to.have.friends = .1,best.no = "all")
+best.friends.bic(regulation,prior.to.have.friends = .1,best.no = 1)
 ```
 
 Almost all the effects disappear. There is some week signal for gene E is for {TF1,TF9,TF7,TF10} 
