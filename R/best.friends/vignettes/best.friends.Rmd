@@ -1,16 +1,20 @@
 ---
 title: "Best friends: what collection is friendly to this tag? Is it actually friendly?"
-output: rmarkdown::html_vignette
+output: 
+  html_vignette:
 vignette: >
  %\VignetteIndexEntry{Best friends: what collection is friendly to this tag? Is it actually friendly?}
  %\VignetteEngine{knitr::rmarkdown}
  %\VignetteEncoding{UTF-8}
  %\VignetteDepends{devtools}
 ---
+<!--  tried below html_vignette, did no work
+      theme: Bootstrap
+      toc: true
+      toc_depth: 2 -->
+
 
 [SI AUGUSTUS CERNATUR, CERNANTUR QOUQUE AMICI]{style="float:right"}
-
-##
 
 `r format(Sys.Date(), "%d %b %Y")` 
 
@@ -24,8 +28,8 @@ vignette: >
 
 <div style="line-height: 1.5em;">
 
-## Introduction
 
+# Introduction
 There is a simple intuition of what it means to be a friend. A friend of Augustus cares about Augustus more than about other people. And, if we see Augustus, then we infer to see friends(s) of Augustus also. Let’s translate it into statistical language.
 
 Consider a set of genes and their loads in a set of expression patterns. Each pattern represents a biological process by the expression levels of the involved genes. 
@@ -64,15 +68,14 @@ The main idea of the test is that if a tag $t_i$ is now preferred by any collect
 
 Please see our manuscript [] for more details.
 
-## Code and examples in R
 
+## Toy example
 ```{r source, echo=FALSE}
 data.digits=2
 p.val.digits=4
 ```
 </div>
 
-### Toy example
 
 Let's illustrate the method with something supersimple.
 
@@ -106,7 +109,7 @@ best.friends.bic(regulation,prior.to.have.friends = .25)
 best.friends.bic(regulation,prior.to.have.friends = .5, best.no = "all")
 ```
 
-### Session info to match standards:
+## Session info
 ```{r}
 sessionInfo()
 ```
