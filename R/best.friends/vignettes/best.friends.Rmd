@@ -96,7 +96,7 @@ First, let's apply the Bayesian version of the method, `best.friends.bic`.
 best.friends.bic(regulation,prior.to.have.friends = .5)
 ```
 
-The lower is the prior to have friends for a tag, the lwss marker-friend paies we get.
+The lower is the prior to have friends for a tag (it is an obligatory parameter for `best.friends.bic`), the less marker-friend pairs we get.
 
 ```{r}
 best.friends.bic(regulation,prior.to.have.friends = .25)
