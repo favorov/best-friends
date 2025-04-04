@@ -19,6 +19,7 @@ vignette: >
 `r library(best.friends)`
 `r options(width=80,keep.source=TRUE)`
 `r opts_chunk$set(echo=TRUE,message=FALSE,cache=FALSE,warning=FALSE)`
+`r set.seed(42)`
 <!-- cache is off, we save all the necessary things in Rda -->
 
 <div style="line-height: 1.5em;">
@@ -73,102 +74,37 @@ p.val.digits=4
 
 ### Toy example
 
-Let's start with something supersimple.
+Let's illustrate the method with something supersimple.
 
 ```{r}
-relation<-matrix(ncol = 3,nrow=7)
-rownames(relation)<-c("Tag1","Tag2","Tag3","Tag4","Tag5","Tag6","Tag7")
-colnames(relation)<-c("Collection1","Collection2","Collection3")
-relation[1,]<-c(0.2,0.1,0.3)
-relation[2,]<-c(2,3,1)
-relation[3,]<-c(0.1, 6 ,0.05 )
-relation[4,]<-c(0.4, 1 ,3 )
-relation[5,]<-c(0.25,0.15 ,0.3 )
-relation[6,]<-c(2,0.9 ,0.4 )
-relation[7,]<-c(.7,0.1 ,11 )
+regulation<-matrix(ncol = 3,nrow=7)
+rownames(regulation)<-c("Gene1","Gene2","Gene3","Gene4","Gene5","Gene6","Gene7")
+colnames(regulation)<-c("TF1","TF2","TF3")
+regulation[1,]<-c(0.2,0.1,0.3)
+regulation[2,]<-c(2,3,1)
+regulation[3,]<-c(0.1, 6 ,0.05 )
+regulation[4,]<-c(0.4, 1 ,3 )
+regulation[5,]<-c(0.25,0.15 ,0.3 )
+regulation[6,]<-c(2,0.9 ,0.4 )
+regulation[7,]<-c(.7,0.1 ,11 )
 noquote(relation)
 ```
 
+First, let's apply the Bayesian version of the method, `best.friends.bic`.
+
 ```{r}
-best.friends.bic(relation,prior.to.have.friends = .5)
+best.friends.bic(regulation,prior.to.have.friends = .5)
+```
+
+The lower is the prior to have friends for a tag, the lwss marker-friend paies we get.
+
+```{r}
+best.friends.bic(regulation,prior.to.have.friends = .25)
 ```
 
 ```{r}
-best.friends.bic(relation,prior.to.have.friends = .1)
+best.friends.bic(regulation,prior.to.have.friends = .5, best.no = "all")
 ```
-
-
-Collection 2 is the best friend of tag 3, and it is the only result with p-value less than 0.05. Makes sense. Tag 3 is the best for the collection 2, while it is the worst for other two collections.
-
-### <a name="toyTF"></a> Toy regulation example
-
-Let's return to the regulation example. We have ten TFs (TF1, TF2, ..) and ten genes (A,B,...) The strength of the regulation is shown by the matrix. The tags are genes, the collections are derived from their regulation by TFs.
-
-```{r}
-genes<-10
-regulation=matrix(
-    c(0.2, 0.2, 0.2, 0.2, 0.25, rep(0.2,genes-5),
-      rep(1, genes),
-        rep(1, genes),
-        rep(1, genes),
-        rep(1, genes),
-        rep(1, genes),
-        rep(1, genes),
-        rep(1, genes),
-        rep(1, genes),
-        rep(1, genes)
-    ),
-    ncol=10,byrow=FALSE
-)
-gene.names<-LETTERS[seq( from = 1, to = genes )]
-TF.names<-c('TF1','TF2','TF3','TF4','TF5','TF6','TF7','TF8','TF9','TF10')
-rownames(regulation)<-gene.names
-colnames(regulation)<-TF.names
-```
-So, we prepared the relation matrix.
-
-```{r}
-noquote(format(regulation,digits = data.digits))
-```
-Tags (genes) are rows, collections (TFs) are columns, it is consistent with $A\left(t,c\right)$ notation.
-
-Searching for the best friend TF for each gene:
-
-
-```{r}
-best.friends.bic(regulation,prior.to.have.friends = .5,best.no = 1)
-```
-
-```{r}
-best.friends.bic(regulation,prior.to.have.friends = .1,best.no = 1)
-```
-
-Only gene E (the fifth) has a reliable best friend, and it is TF1. It is what we could see in the relation matrix, so what we calculate here is consistent with the intuition.
-
-
-Again, only gene E (the fifth) has a reliable best friend, and it is TF1.
-It is interesting to see that the tenth (worst) rank of all the genes is unexpectedly far away from 1 (the right column). It is an effect of ties, the worst ranks of all the genes but E but E are 5.5 and E is 6.
-
-Add some randomness to the equal columns:
-```{r}
-set.seed(42)
-regulation<-jitter(regulation)
-noquote(format(regulation,digits = data.digits))
-```
-
-And, let's search for best friends again:
-
-```{r}
-best.friends.bic(regulation,prior.to.have.friends = .5,best.no = 1)
-```
-
-```{r}
-best.friends.bic(regulation,prior.to.have.friends = .1,best.no = 1)
-```
-
-Almost all the effects disappear. There is some week signal for gene E is for {TF1,TF9,TF7,TF10} 
-
-
 
 ### Session info to match standards:
 ```{r}
