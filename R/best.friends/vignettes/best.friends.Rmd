@@ -80,16 +80,15 @@ p.val.digits=4
 Let's illustrate the method with something supersimple.
 
 ```{r}
-regulation<-matrix(ncol = 3,nrow=7)
-rownames(regulation)<-c("Gene1","Gene2","Gene3","Gene4","Gene5","Gene6","Gene7")
-colnames(regulation)<-c("TF1","TF2","TF3")
-regulation[1,]<-c(0.2,4,3)
-regulation[2,]<-c(0.25,3,1)
-regulation[3,]<-c(0.1, 6 ,5 )
-regulation[4,]<-c(0.23, 1 ,6 )
-regulation[5,]<-c(0.3,9 ,3 )
-regulation[6,]<-c(0.12,7 ,4 )
-regulation[7,]<-c(0.14,10 ,11 )
+regulation<-structure(c(
+  0.2, 0.25, 0.1, 0.23, 0.3, 0.12, 0.14, 
+  4, 3, 6, 1, 9, 7, 10, 
+  3, 1, 5, 6, 3, 4, 11), 
+  dim = c(7, 3), 
+  dimnames = list(
+    c("Gene1", "Gene2", "Gene3", 
+      "Gene4", "Gene5", "Gene6", "Gene7"), 
+    c("TF1", "TF2", "TF3")))
 noquote(regulation)
 ```
 
