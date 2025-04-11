@@ -83,14 +83,14 @@ Let's illustrate the method with something supersimple.
 regulation<-matrix(ncol = 3,nrow=7)
 rownames(regulation)<-c("Gene1","Gene2","Gene3","Gene4","Gene5","Gene6","Gene7")
 colnames(regulation)<-c("TF1","TF2","TF3")
-regulation[1,]<-c(0.2,0.1,0.3)
-regulation[2,]<-c(2,3,1)
-regulation[3,]<-c(0.1, 6 ,0.05 )
-regulation[4,]<-c(0.4, 1 ,3 )
-regulation[5,]<-c(0.25,0.15 ,0.3 )
-regulation[6,]<-c(2,0.9 ,0.4 )
-regulation[7,]<-c(.7,0.1 ,11 )
-noquote(relation)
+regulation[1,]<-c(0.2,4,3)
+regulation[2,]<-c(0.25,3,1)
+regulation[3,]<-c(0.1, 6 ,5 )
+regulation[4,]<-c(0.23, 1 ,6 )
+regulation[5,]<-c(0.3,9 ,3 )
+regulation[6,]<-c(0.12,7 ,4 )
+regulation[7,]<-c(0.14,10 ,11 )
+noquote(regulation)
 ```
 
 First, let's apply the Bayesian version of the method, `best.friends.bic`.
@@ -108,7 +108,7 @@ best.friends.bic(regulation,prior.to.have.friends = .25)
 In bot examples above, the `best.no` parameter was 1 by default. It means that the function filters out all the tags that have more that one friendly collection. If we relax the restriction, we get:
 
 ```{r}
-best.friends.bic(regulation,prior.to.have.friends = .5, best.no = "all")
+best.friends.bic(regulation,prior.to.have.friends = .25, best.no = "all")
 ```
 
 ## Session info
