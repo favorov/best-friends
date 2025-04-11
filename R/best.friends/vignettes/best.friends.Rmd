@@ -110,6 +110,10 @@ In bot examples above, the `best.no` parameter was 1 by default. It means that t
 best.friends.bic(regulation,prior.to.have.friends = .25, best.no = "all")
 ```
 
+```{r}
+best.friends(regulation,best.no = "all")
+```
+
 ## Session info
 ```{r}
 sessionInfo()
