@@ -69,7 +69,7 @@ The main idea of the test is that if a tag $t_i$ is now preferred by any collect
 Please see our manuscript [] for more details.
 
 
-## Toy example
+## Toy example for the Bayesian option
 ```{r source, echo=FALSE}
 data.digits=2
 p.val.digits=4
@@ -110,8 +110,11 @@ In bot examples above, the `best.no` parameter was 1 by default. It means that t
 best.friends.bic(regulation,prior.to.have.friends = .25, best.no = "all")
 ```
 
+## Toy example for the default option
+
+
 ```{r}
-best.friends(regulation,best.no = "all")
+best.friends(regulation)
 ```
 
 ## Session info
