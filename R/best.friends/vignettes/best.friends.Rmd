@@ -91,6 +91,7 @@ regulation<-structure(c(
     c("TF1", "TF2", "TF3")))
 noquote(regulation)
 ```
+What we want to identify is Gene2-TF1 pair. Gene2 is not the strongest downstream gene in the TF1 collection (column), it is only the second, but, on the other hand its rank in other TF-based collections is much lower.
 
 First, let's apply the Bayesian version of the method, `best.friends.bic`.
 
@@ -98,23 +99,38 @@ First, let's apply the Bayesian version of the method, `best.friends.bic`.
 best.friends.bic(regulation,prior.to.have.friends = .5)
 ```
 
+We see the expected Gene2-TF1 pair as well as the Gene1-TF1 pair, that is similar to the expected, Gene1 has rank of 3 in the TF1 collection.
+
 The lower is the prior to have friends for a tag (it is an obligatory parameter for `best.friends.bic`), the less marker-friend pairs we get.
+
+```{r}
+best.friends.bic(regulation,prior.to.have.friends = .33)
+```
 
 ```{r}
 best.friends.bic(regulation,prior.to.have.friends = .25)
 ```
 
-In bot examples above, the `best.no` parameter was 1 by default. It means that the function filters out all the tags that have more that one friendly collection. If we relax the restriction, we get:
+In all the three examples above, the `best.no` parameter was 1 by default. It means that the function filters out all the tags that have more that one friendly collection. If we relax the restriction, we get:
 
 ```{r}
+best.friends.bic(regulation,prior.to.have.friends = .5, best.no = "all")
+best.friends.bic(regulation,prior.to.have.friends = .33, best.no = "all")
 best.friends.bic(regulation,prior.to.have.friends = .25, best.no = "all")
 ```
 
 ## The same toy example: default option
 
+Let's run the p-value-based option of the method on the same data. It is less sensitive on small dataset, so we use unpractical threshold for the p-value to see the result.
 
 ```{r}
 best.friends(regulation,threshold = .5,p.adjust.method = "no")
+```
+
+Amd, again, if we relax the `best.no` restriction, we will see more pairs, but now the friends are not required to be unique for a marker.
+
+```{r}
+best.friends(regulation,threshold = .5,p.adjust.method = "no",best.no = "all")
 ```
 
 ## Session info
