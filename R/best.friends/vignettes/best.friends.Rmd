@@ -114,7 +114,7 @@ best.friends.bic(regulation,prior.to.have.friends = .25, best.no = "all")
 
 
 ```{r}
-best.friends(regulation)
+best.friends(regulation,threshold = .5,p.adjust.method = "no")
 ```
 
 ## Session info
