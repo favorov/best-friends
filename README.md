@@ -5,7 +5,7 @@ This is an implementation of the friends test (friends.test in R), formely known
 
 The idea is: we have two sets of elements, and elements of the second (${C}$) pays some attention to elements of the first (${T}$), 
 and the strength of the attention is described by a $|T|x|C|$ matrix. The stronger is the attention, the higher is the number. 
-Here we propose a method that identifies the C elemetns that friends to particular elements of T.
+Here we propose a method that identifies the C elemetns that friends to particular elements of ${T}$.
 
 To be a friend means to pay attention to a $t \in {T}$ element that is higher than for other elements of ${T}$ 
 
