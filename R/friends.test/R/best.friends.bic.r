@@ -1,5 +1,5 @@
 #'
-#' best.friends.bic
+#' friends.test.bic
 #' 
 #' Find Tags that are best friends to Collections
 #' 
@@ -21,11 +21,11 @@
 #'                 20,0,0,0,0), 
 #'                 nrow=6, ncol=5, byrow=TRUE)
 #' attention
-#' best.friends.bic(attention, prior.to.have.friends=0.5)
-#' best.friends.bic(attention, prior.to.have.friends=0.001)
+#' friends.test.bic(attention, prior.to.have.friends=0.5)
+#' friends.test.bic(attention, prior.to.have.friends=0.001)
 #' @export
 #' 
-best.friends.bic <- function(attention=NULL, prior.to.have.friends=-1, best.no = 1) {
+friends.test.bic <- function(attention=NULL, prior.to.have.friends=-1, best.no = 1) {
   #parameter checks
   if (is.na(best.no) || best.no == "all" ||
       best.no == "al" || best.no == "a" ||
@@ -36,7 +36,7 @@ best.friends.bic <- function(attention=NULL, prior.to.have.friends=-1, best.no =
     stop("best.no must be between 1 and the number of collections.")
   }
   if (prior.to.have.friends < 0 || prior.to.have.friends >1){
-    stop("best.friends.bic requires the prior.to.have.friends value to be explicitely provided and to be a prior.")
+    stop("friends.test.bic requires the prior.to.have.friends value to be explicitely provided and to be a prior.")
   }
   #add names to attention matrix rows if necessary
   if(is.null(dimnames(attention)[[1]])) {
