@@ -14,13 +14,12 @@ Authors@R: c(
     person("Alexander","Favorov", email = "favorov@sensi.org", role=c("aut","cre"),
         comment=c(ORCID="0000-0003-2595-1091"))
     )
-Description: We have two sets:T (rows) and C (columns) and each 
-    t--c pair, where t is element of T and c is an elemant of C
-    is described by the the value of the attention (real number) 
-    the c pays to the t. 
-            Given the attention matrix, 
-    we want to identify whether t seperates C by the relevance 
-    of the t for different c. If it does, those c for which the t is relevant, 
+Description: We have two sets:T (rows) and C (columns) and 
+    A real matrix A(t,c) that describes the strength of association 
+    between each t and each c; t is an element of T and c is an element of C. 
+    Given the A matrix, for each t we want to identify whether a particular t is signivantly more 
+    relevant for some c's than for the remaining c's.
+    If it does, those c for which the t is relevant, 
     are the t's friend. And, the is the c's marker.
 License: Artistic-2.0
 LazyLoad: yes
