@@ -1,4 +1,4 @@
-Package: best.friends
+Package: friends.test
 Type: Package
 Title: We look for collections that are friendly for the tags 
 Version: 0.99.15
@@ -14,13 +14,14 @@ Authors@R: c(
     person("Alexander","Favorov", email = "favorov@sensi.org", role=c("aut","cre"),
         comment=c(ORCID="0000-0003-2595-1091"))
     )
-Description: We have tags (rows) and collections (columns) and each 
-    tag-collection pair is described by the the value of the attention (real) 
-    the collection pays to the tag. Given the attention matrix, 
-    we want to identify whether a tag seperates all the collections 
-    by the relevance of the tag for the collections. 
-    The collection, for which the tag is relevant, is the tag's friend.
-    The tag is the collection's marker.
+Description: We have two sets:T (rows) and C (columns) and each 
+    t--c pair, where t is element of T and c is an elemant of C
+    is described by the the value of the attention (real number) 
+    the c pays to the t. 
+            Given the attention matrix, 
+    we want to identify whether t seperates C by the relevance 
+    of the t for different c. If it does, those c for which the t is relevant, 
+    are the t's friend. And, the is the c's marker.
 License: Artistic-2.0
 LazyLoad: yes
 Depends: R (>= 4.4.0)
