@@ -14,12 +14,17 @@
 #' non-uniformity of ranks.
 #' @param p.adjust.method Multiple testing correction method, 
 #' see \link[stats]{p.adjust}.
-#' @param max.friends.n The maximal number of friends for a tag, the default is \code{'all'}, that is an alias for #of collections 
-#' i.e. we look for the best friends only. The string "all" means "all friends", 
-#' i.e. the maximal number of friends in the number of collections
-#' The value $n$ means that we filter out a tag from the results is it has more 
-#' than $n$ friendly collections and we do not tell it from the no-friends case.
-#' @return A data.frame, rows are pairs of tags and collections that are markers and best friends 
+#' @param max.friends.n The maximal number of friends for a marker, the default 
+#' is \code{'all'}, that is an alias for #of columns in A. 
+#' The string "all" means "all friends", i.e. we do not filter by this parameter 
+#' value. A value $n$ means that we filter out a row if it has more 
+#' than $n$ friendly columns. 1 means we look only for unuque (best) friends.
+
+#' @param uniform.max The maximum of the uniform distribution of the ranks we 
+#' fit the null model,it can be the maximal possible rank that is common for all 
+#' rows and equals the number of rows \code{'c'} or the maximal observed rank 
+#' for the row we test now, \code{'m'}.
+#' @return A data.frame, rows are pairs of markers 
 #' friends.
 #' @importFrom stats p.adjust
 #' @examples 
@@ -89,13 +94,13 @@ friends.test <- function(A=NULL, threshold = 0.05,
   
   if(!length(best_friends)){
     return(data.frame(tag=character(), collection=character()))
-  } #uf no tag passed best test, return empty frame rather than NULL
+  } #if no tag passed best test, return empty frame rather than NULL
 
   res_pre <- lapply(seq_along(best_friends), function(x) {
     data.frame(
        marker=names(best_friends[x]),
        friend=colnames(marker_ranks)[best_friends[[x]]$collections.on.left],
-       friend.rank
+       marker.rank=
      )})
 
   res <- do.call(rbind, res_pre)
