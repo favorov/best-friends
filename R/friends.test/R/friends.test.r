@@ -58,8 +58,8 @@ friends.test <- function(A=NULL, threshold = 0.05,
   if(is.null(dimnames(A)[[2]])) {
     colnames(A) <- seq(ncol(A))
   }
-  #find tags with non-uniform ranks
   all_ranks <- tag.int.ranks(A)
+  
   adj_nunif_pval <- p.adjust(
       apply(all_ranks, 1, unif.ks.test),
       method = p.adjust.method)
@@ -93,8 +93,9 @@ friends.test <- function(A=NULL, threshold = 0.05,
 
   res_pre <- lapply(seq_along(best_friends), function(x) {
     data.frame(
-       tag=names(best_friends[x]),
-       collection=colnames(marker_ranks)[best_friends[[x]]$collections.on.left]
+       marker=names(best_friends[x]),
+       friend=colnames(marker_ranks)[best_friends[[x]]$collections.on.left],
+       friend.rank
      )})
 
   res <- do.call(rbind, res_pre)
