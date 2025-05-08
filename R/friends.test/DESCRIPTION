@@ -1,8 +1,8 @@
 Package: friends.test
 Type: Package
 Title: We look for collections that are friendly for the tags 
-Version: 0.99.15
-Date: 2025-02-19
+Version: 0.99.16
+Date: 2025-04-30
 Encoding: UTF-8
 Authors@R: c(
     person("Alexandra","Suvorikova",email = "a.suvorikova@gmail.com",role=c("aut","ctb")),
@@ -17,10 +17,10 @@ Authors@R: c(
 Description: We have two sets:T (rows) and C (columns) and 
     A real matrix A(t,c) that describes the strength of association 
     between each t and each c; t is an element of T and c is an element of C. 
-    Given the A matrix, for each t we want to identify whether a particular t is signivantly more 
+    For each t we want to identify whether it is significantly more 
     relevant for some c's than for the remaining c's.
     If it does, those c for which the t is relevant, 
-    are the t's friend. And, the is the c's marker.
+    are the t's friend. And, the t is the c's marker.
 License: Artistic-2.0
 LazyLoad: yes
 Depends: R (>= 4.4.0)
