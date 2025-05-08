@@ -14,7 +14,7 @@
 #' non-uniformity of ranks.
 #' @param p.adjust.method Multiple testing correction method, 
 #' see \link[stats]{p.adjust}.
-#' @param max.friends.no The maximal number of friends for a tag, the default is \code{'all'}, that is an alias for #of collections 
+#' @param max.friends.n The maximal number of friends for a tag, the default is \code{'all'}, that is an alias for #of collections 
 #' i.e. we look for the best friends only. The string "all" means "all friends", 
 #' i.e. the maximal number of friends in the number of collections
 #' The value $n$ means that we filter out a tag from the results is it has more 
@@ -37,15 +37,15 @@
 #' @export
 #' 
 friends.test <- function(A=NULL, threshold = 0.05, 
-                         p.adjust.method = "BH", max.friends.no = 'all') {
+                         p.adjust.method = "BH", max.friends.n = 'all') {
   #parameter checks
-  if (is.na(max.friends.no) || max.friends.no == "all" ||
-      max.friends.no == "al" || max.friends.no == "a" ||
-      is.null(max.friends.no) || !as.logical(max.friends.no)){
-    max.friends.no <- ncol(A)
+  if (is.na(max.friends.n) || max.friends.n == "all" ||
+      max.friends.n == "al" || max.friends.n == "a" ||
+      is.null(max.friends.n) || !as.logical(max.friends.n)){
+    max.friends.n <- ncol(A)
   }
-  if (max.friends.no < 1 || max.friends.no > ncol(A)) {
-    stop("max.friends.no must be between 1 and the number of collections.")
+  if (max.friends.n < 1 || max.friends.n > ncol(A)) {
+    stop("max.friends.n must be between 1 and the number of collections.")
   }
   if(threshold < 0 || threshold > 1) {
     stop("threshold must be between 0 and 1.")
@@ -78,13 +78,13 @@ friends.test <- function(A=NULL, threshold = 0.05,
   all_friends <- apply(marker_ranks, 1,
                        function(x) best.step.fit(x, tags.no = tags.no))
   #we filter to match
-  #max.friends.no parameter here,
+  #max.friends.n parameter here,
   #best friends are cases where a tag is a marker in 
-  #no more than max.friends.no collections
+  #no more than max.friends.n collections
   #vapply is recommended by BioCheck as safer than sapply
 
   best_friends <- all_friends[vapply(all_friends, function(x) {
-    x$population.on.left <= max.friends.no
+    x$population.on.left <= max.friends.n
   },logical(1))]
   
   if(!length(best_friends)){
