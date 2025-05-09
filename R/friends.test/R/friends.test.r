@@ -23,7 +23,7 @@
 #' @param uniform.max The maximum of the uniform distribution of the ranks we 
 #' fit the null model,it can be the maximal possible rank that is common for all 
 #' rows and equals the number of rows \code{'c'} or the maximal observed rank 
-#' for the row we test now, \code{'m'}.
+#' for the row we test now, \code{'m'} (default).
 #' @return A data.frame, rows are pairs of markers 
 #' friends.
 #' @importFrom stats p.adjust
@@ -42,7 +42,9 @@
 #' @export
 #' 
 friends.test <- function(A=NULL, threshold = 0.05, 
-                         p.adjust.method = "BH", max.friends.n = 'all') {
+                         p.adjust.method = "BH",
+                         max.friends.n = 'all',
+                         uniform.max = 'm') {
   #parameter checks
   if (is.na(max.friends.n) || max.friends.n == "all" ||
       max.friends.n == "al" || max.friends.n == "a" ||
@@ -55,6 +57,17 @@ friends.test <- function(A=NULL, threshold = 0.05,
   if(threshold < 0 || threshold > 1) {
     stop("threshold must be between 0 and 1.")
   }
+  #case for uniform.max: M or m assign nrow(A) (max rank), 
+  #for C or c assign NA, any other fails
+  if(uniform.max == 'm' || uniform.max == 'M') {
+    uniform.max <- NA
+  } else if(uniform.max == 'c' || uniform.max == 'C') {
+    uniform.max <- nrow(A)
+  } else if(!is.numeric(uniform.max)) {
+    stop("uniform.max must be either 'm', 'M', 'c', 'C'.")
+  }
+  
+  
   #add names to A matrix rows if necessary
   if(is.null(dimnames(A)[[1]])) {
     rownames(A) <- seq(nrow(A))
@@ -63,10 +76,14 @@ friends.test <- function(A=NULL, threshold = 0.05,
   if(is.null(dimnames(A)[[2]])) {
     colnames(A) <- seq(ncol(A))
   }
+ 
+  #rank all the A elements in columns
   all_ranks <- tag.int.ranks(A)
   
+  #calculate the p-values for null hypothesis for all the rows
+  
   adj_nunif_pval <- p.adjust(
-      apply(all_ranks, 1, unif.ks.test),
+      apply(all_ranks, 1, unif.ks.test,uniform.max=uniform.max),
       method = p.adjust.method)
 
   marker_ranks <- all_ranks[adj_nunif_pval<=threshold,,drop=FALSE]
@@ -99,8 +116,7 @@ friends.test <- function(A=NULL, threshold = 0.05,
   res_pre <- lapply(seq_along(best_friends), function(x) {
     data.frame(
        marker=names(best_friends[x]),
-       friend=colnames(marker_ranks)[best_friends[[x]]$collections.on.left],
-       marker.rank=
+       friend=colnames(marker_ranks)[best_friends[[x]]$collections.on.left]
      )})
 
   res <- do.call(rbind, res_pre)
