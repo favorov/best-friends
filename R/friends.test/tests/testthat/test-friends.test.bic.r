@@ -38,12 +38,12 @@ probe<-data.frame(tag=paste0(c("tag"),1:ncolls),
 
 
 test_that("passes non-diagonal diagonal test with low prior to have friend",{
-  res <- best.friends.bic(almost_diagon_mat,.001)
+  res <- friends.test.bic(almost_diagon_mat,.001)
   expect_equivalent(res,probe)
 })
 
 test_that("passes non-diagonal diagonal test with high prior to have friend",{
-  res <- best.friends.bic(almost_diagon_mat,.5)
+  res <- friends.test.bic(almost_diagon_mat,.5)
   expect_equivalent(left_join(probe,res),probe)
   #we test that probe is contained in res
 })
