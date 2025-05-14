@@ -9,7 +9,6 @@ Authors@R: c(
     person("Alexey","Kroshnin",email = "kroshnin@wias-berlin.de",role=c("aut","ctb")),
     person("Dmitrijs","Lvovs",email = "dmitrijs.lvovs@gmail.com",role=c("aut","ctb")),
     person("Vera","Mukhina",email = "atgc@vigg.ru",role=c("aut","ctb")),
-    person("Vasily","Ramensky", email="ramensky@gmail.com",role=c("aut","ctb")),
     person("Andrey A.","Mironov", email="mironov@bioinf.fbb.msu.ru",role=c("aut","ctb")),
     person("Alexander","Favorov", email = "favorov@sensi.org", role=c("aut","cre"),
         comment=c(ORCID="0000-0003-2595-1091"))
