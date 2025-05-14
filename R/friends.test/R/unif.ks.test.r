@@ -13,7 +13,7 @@
 #' example(tag.int.ranks)
 #' ks.p.vals<-apply(TF.ranks,1,"unif.ks.test")
 #' @export
-unif.ks.test<-function(ranks,uniform.max){
+unif.ks.test<-function(ranks,uniform.max=NA){
   jranks<-jitter(ranks,amount=0.1E-6)
   jrmin <- min(jranks)
   if(is.na(uniform.max)){
