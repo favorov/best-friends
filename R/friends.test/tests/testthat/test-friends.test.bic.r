@@ -2,7 +2,7 @@ test_that("no errors in simplest case",{
     mat <- diag(nrow=5, ncol=5)
     rownames(mat) <- paste0("tag",1:5)
     colnames(mat) <- paste0("coll",1:5)
-    expect_no_error(best.friends.bic(mat,.5))
+    expect_no_error(friends.test.bic(mat,.5))
 })
 
 test_that("best friend is determined correctly",{
@@ -14,13 +14,13 @@ test_that("best friend is determined correctly",{
             tag5 0.0000000 0.0000000 0.0000000 0.00000000 1.0000000"
     attention <- as.matrix(read.table(text=text, header=TRUE))
     
-    expect_equivalent(best.friends.bic(attention,.25),
-                      data.frame(tag=c("tag5"),
-                                 collection=c("coll5")))    
-    expect_equivalent(best.friends.bic(attention,.5),
-                      data.frame(tag=c("tag3","tag5"),
-                                 collection=c("coll4","coll5")))    
-    
+    expect_equivalent(
+      friends.test.bic(attention,.25,max.friends.n = 1),
+      data.frame(tag=c("tag5"),collection=c("coll5")))    
+    expect_equivalent(
+      friends.test.bic(attention,.5,max.friends.n = 1),
+      data.frame(tag=c("tag3","tag5"),
+                                 collection=c("coll4","coll5")))
 })
 
 #best.friends method is not illustrated well using square diagonal matrices
