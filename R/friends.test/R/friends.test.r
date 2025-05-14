@@ -19,9 +19,8 @@
 #' The string "all" means "all friends", i.e. we do not filter by this parameter 
 #' value. A value $n$ means that we filter out a row if it has more 
 #' than $n$ friendly columns. 1 means we look only for unuque (best) friends.
-
 #' @param uniform.max The maximum of the uniform distribution of the ranks we 
-#' fit the null model,it can be the maximal possible rank that is common for all 
+#' fit the null model, it can be the maximal possible rank that is common for all 
 #' rows and equals the number of rows \code{'c'} or the maximal observed rank 
 #' for the row we test now, \code{'m'} (default).
 #' @return A data.frame, rows are pairs of markers 
@@ -38,6 +37,8 @@
 #' A
 #' friends.test(A, threshold = .05)
 #' friends.test(A, threshold = .0001)
+#' friends.test(A, threshold = .05, uniform.max='m')
+#' friends.test(A, threshold = .0001, uniform.max='m')
 #' 
 #' @export
 #' 
@@ -97,26 +98,30 @@ friends.test <- function(A=NULL, threshold = 0.05,
   #find friends that make tag ranks non-uniform
   tags.no <- dim(A)[1]
 
-  all_friends <- apply(marker_ranks, 1,
+  #we make a list of fit structures (returned by best.step.fit)
+  #per marker (marker row)
+  best.fits.for.markers <- apply(marker_ranks, 1,
                        function(x) best.step.fit(x, tags.no = tags.no))
   #we filter to match
   #max.friends.n parameter here,
-  #best friends are cases where a tag is a marker in 
   #no more than max.friends.n collections
   #vapply is recommended by BioCheck as safer than sapply
 
-  best_friends <- all_friends[vapply(all_friends, function(x) {
+  best.fits.for.markers <- best.fits.for.markers[vapply(best.fits.for.markers, function(x) {
     x$population.on.left <= max.friends.n
   },logical(1))]
   
-  if(!length(best_friends)){
+  if(!length(best.fits.for.markers)){
     return(data.frame(tag=character(), collection=character()))
   } #if no tag passed best test, return empty frame rather than NULL
 
-  res_pre <- lapply(seq_along(best_friends), function(x) {
-    data.frame(
-       marker=names(best_friends[x]),
-       friend=colnames(marker_ranks)[best_friends[[x]]$collections.on.left]
+  res_pre <- lapply(seq_along(best.fits.for.markers), 
+      function(x) {
+          data.frame(
+            marker=names(friends[x]),
+            friend=colnames(marker_ranks)[best.fits.for.markers[x]$collections.on.left],
+            friend.rank=best.fits.for.markers[[x]]$step.models$collectons.order[best.fits.for.markers[x]$collections.on.left]#,
+            #marker.rank=
      )})
 
   res <- do.call(rbind, res_pre)
