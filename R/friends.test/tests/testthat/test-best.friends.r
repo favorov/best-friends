@@ -14,10 +14,11 @@ test_that("best friend is determined correctly",{
             tag5 0.0000000 0.0000000 0.0000000 0.00000000 1.0000000"
     attention <- as.matrix(read.table(text=text, header=TRUE))
     
-    expect_equivalent(best.friends(attention),
-                data.frame(tag=c("tag5"),
-                           collection=c("coll5")))
-
+    friends<-best.friends(attention)
+    expect_equivalent(dim(friends),c(1,3))
+    expect_equivalent(friends$marker=c("tag5"))
+    expect_equivalent(friends$friend=c("coll5"))
+    expect_equivalent(friends$friend.rank=c(1))
 })
 
 
