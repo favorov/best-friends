@@ -44,7 +44,7 @@ test_that("passes non-diagonal diagonal test with low prior to have friend",{
 
 test_that("passes non-diagonal diagonal test with high prior to have friend",{
   res <- friends.test.bic(almost_diagon_mat,.5)
-  expect_equivalent(left_join(probe,res),probe)
+  expect_equivalent(dplyr::left_join(probe,res),probe)
   #we test that probe is contained in res
 })
 
