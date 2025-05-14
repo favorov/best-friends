@@ -16,9 +16,9 @@ test_that("best friend is determined correctly",{
     
     friends<-friends.test(attention)
     expect_equivalent(dim(friends),c(1,3))
-    expect_equivalent(friends$marker=c("tag5"))
-    expect_equivalent(friends$friend=c("coll5"))
-    expect_equivalent(friends$friend.rank=c(1))
+    expect_equivalent(friends$marker,c("tag5"))
+    expect_equivalent(friends$friend,c("coll5"))
+    expect_equivalent(friends$friend.rank,c(1))
 })
 
 
