@@ -118,10 +118,9 @@ friends.test <- function(A=NULL, threshold = 0.05,
   res_pre <- lapply(seq_along(best.fits.for.markers), 
       function(x) {
           data.frame(
-            marker=names(friends[x]),
-            friend=colnames(marker_ranks)[best.fits.for.markers[x]$collections.on.left],
-            friend.rank=best.fits.for.markers[[x]]$step.models$collectons.order[best.fits.for.markers[x]$collections.on.left]#,
-            #marker.rank=
+            marker=names(best.fits.for.markers)[x],
+            friend=colnames(marker_ranks)[best.fits.for.markers[[x]]$collections.on.left],
+            friend.rank=best.fits.for.markers[[x]]$step.models$collectons.order[best.fits.for.markers[[x]]$collections.on.left]
      )})
 
   res <- do.call(rbind, res_pre)
