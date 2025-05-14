@@ -33,8 +33,9 @@ test_that("passes non-diagonal diagonal test",{
   diag(almost_diagon_mat) <- 19
   rownames(almost_diagon_mat) <- paste0("tag",1:ntags)
   colnames(almost_diagon_mat) <- paste0("coll",1:ncolls)
-  res <- best.friends(almost_diagon_mat)
-  expect_equivalent(res,
-                    data.frame(tag=paste0(c("tag"),1:ncolls),
-                               collection=paste0(c("coll"),1:ncolls)))
+  friends <- friends.test(almost_diagon_mat)
+  expect_equivalent(dim(friends),c(1,3))
+  expect_equivalent(friends$marker,paste0(c("tag"),1:ncolls))
+  expect_equivalent(friends$friend,paste0(c("coll"),1:ncolls))
+  expect_equivalent(friends$friend.rank,rep(1,ncolls))
 })
