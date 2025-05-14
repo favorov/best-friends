@@ -4,10 +4,13 @@
 \alias{unif.ks.test}
 \title{unif.ks.test}
 \usage{
-unif.ks.test(ranks)
+unif.ks.test(ranks, uniform.max)
 }
 \arguments{
 \item{ranks}{vector of ranks of a tag in different collections, \eqn{1 .. N})}
+
+\item{uniform.max}{the maximal rank in the uniform, default is NA which means
+that we take the max(ranks) as the maximal value}
 }
 \value{
 p-value for the KS test comparing the ranks distribution with uniform
