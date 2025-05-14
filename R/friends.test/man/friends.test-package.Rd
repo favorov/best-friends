@@ -34,7 +34,6 @@ Authors:
   \item Alexey Kroshnin \email{kroshnin@wias-berlin.de} [contributor]
   \item Dmitrijs Lvovs \email{dmitrijs.lvovs@gmail.com} [contributor]
   \item Vera Mukhina \email{atgc@vigg.ru} [contributor]
-  \item Vasily Ramensky \email{ramensky@gmail.com} [contributor]
   \item Andrey A. Mironov \email{mironov@bioinf.fbb.msu.ru} [contributor]
 }
 
