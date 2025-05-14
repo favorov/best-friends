@@ -1,12 +1,12 @@
 test_that("best.step.fit returns expected values for known input", {
-  ranks <- c(1, 97, 98, 99, 100)
+  ranks <- c(97, 1, 98, 99, 100)
   tags.no <- 100
   result <- best.step.fit(ranks, tags.no)
   expect_true(result$best.step.rank %in% seq(1,96))
   #split into 1 and all others
   expect_equal(result$population.on.left, 1)
-  expect_equal(result$collections.on.left, c(1))
-  expect_equal(result$collections.on.right, c(2, 3, 4, 5))
+  expect_equal(result$collections.on.left, c(2))
+  expect_equal(result$collections.on.right, c(1, 3, 4, 5))
 })
 
 
