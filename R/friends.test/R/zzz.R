@@ -1,7 +1,7 @@
 .onAttach <- function(libname, pkgname) {
-    version <- packageDescription("best.friends", fields="Version")
-    packageStartupMessage(paste("Welcome to best.friends, version", version,
-        "(Lebre de mar\u00E7o) and stay tuned!")
+    version <- packageDescription("friends.test", fields="Version")
+    packageStartupMessage(paste("Welcome to friends.test, version", version,
+        "(Lebre de mayo) and stay tuned!")
     )
 }
 # \u00E1 is á
