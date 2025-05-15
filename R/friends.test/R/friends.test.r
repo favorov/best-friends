@@ -23,8 +23,10 @@
 #' fit the null model, it can be the maximal possible rank that is common for all 
 #' rows and equals the number of rows \code{'c'} or the maximal observed rank 
 #' for the row we test now, \code{'m'} (default).
-#' @return A data.frame, rows are pairs of markers 
-#' friends.
+#' @return A data.frame, rows are pairs of markers and friends,
+#' columns are: marker, friend and friend.rank. The latter is 
+#' the rank of the column-friend in the vector of ranks of the
+#' ranks of the row-marker in different columns. 
 #' @importFrom stats p.adjust
 #' @examples 
 #' A <- matrix(c(10,6,7,8,9,
@@ -65,7 +67,7 @@ friends.test <- function(A=NULL, threshold = 0.05,
   } else if(uniform.max == 'c' || uniform.max == 'C') {
     uniform.max <- nrow(A)
   } else if(!is.numeric(uniform.max)) {
-    stop("uniform.max must be either 'm', 'M', 'c', 'C'.")
+    stop("uniform.max must be either 'm', 'M', 'c', 'C' or numeric.")
   }
   
   
@@ -117,11 +119,17 @@ friends.test <- function(A=NULL, threshold = 0.05,
 
   res_pre <- lapply(seq_along(best.fits.for.markers), 
       function(x) {
+          collections.on.left<-
+            best.fits.for.markers[[x]]$collections.on.left
           data.frame(
             marker=names(best.fits.for.markers)[x],
-            friend=colnames(marker_ranks)[best.fits.for.markers[[x]]$collections.on.left],
-            friend.rank=best.fits.for.markers[[x]]$step.models$collectons.order[best.fits.for.markers[[x]]$collections.on.left]
-     )})
+            friend=colnames(marker_ranks)[collections.on.left],
+            friend.rank=which(
+              best.fits.for.markers[[x]]$step.models$collectons.order %in% 
+              collections.on.left
+            )
+          )
+        })
 
   res <- do.call(rbind, res_pre)
 
