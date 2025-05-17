@@ -16,8 +16,10 @@
 #' The string "all" means "all friends", i.e. we do not filter by this parameter 
 #' value. A value $n$ means that we filter out a row if it has more 
 #' than $n$ friendly columns. 1 means we look only for unuque (best) friends.
-#' @return A data.frame, rows are pairs of tags and collections that are markers and best friends 
-#' friends.
+#' @return A data.frame, rows are pairs of markers and friends,
+#' columns are: marker, friend and friend.rank. The latter is 
+#' the rank of the column-friend in the vector of ranks of the
+#' ranks of the row-marker in different columns. 
 #' @examples 
 #' A <- matrix(c(10,6,7,8,9,
 #'                 9,10,6,7,8,
@@ -31,7 +33,7 @@
 #' friends.test.bic(A, prior.to.have.friends=0.001)
 #' @export
 #' 
-friends.test.bic <- function(A=NULL, prior.to.have.friends=-1, max.friends.n = 1) {
+friends.test.bic <- function(A=NULL, prior.to.have.friends=-1, max.friends.n = 'all') {
   #parameter checks
   #parameter checks
   if (is.na(max.friends.n) || max.friends.n == "all" ||
@@ -57,13 +59,13 @@ friends.test.bic <- function(A=NULL, prior.to.have.friends=-1, max.friends.n = 1
   
   tags.no <- dim(A)[1]
 
-  all_friends <- apply(all_ranks, 1,
+  best.fits.for.rows <- apply(all_ranks, 1,
                        function(x) best.step.fit.bic(
                          x, tags.no = tags.no,
                          prior.to.have.friends=prior.to.have.friends)
                        )
 
-  #here, we filer out the tags uniform model wins for
+  #here, we filer out the rows where uniform model wins for
   #we also filter to match
   #max.friends.n parameter here,
   #best friends are cases where a tag is a marker in 
@@ -71,19 +73,29 @@ friends.test.bic <- function(A=NULL, prior.to.have.friends=-1, max.friends.n = 1
 
   #vapply is recommended by BioCheck as safer than sapply
 
-  best_friends <- all_friends[vapply(all_friends, function(x) {
+  best.fits.for.markers <- best.fits.for.rows[vapply(best.fits.for.rows, function(x) {
     x$population.on.left>0 && x$population.on.left <= max.friends.n
   },logical(1))]
   
-  if(!length(best_friends)){
-    return(data.frame(tag=character(), collection=character()))
-  } #tf no tag passed best test, return empty frame rather than NULL
+  if(!length(best.fits.for.markers)){
+    return(data.frame(tag=character(), 
+            collection=character(),
+            friend.rank=integer()))
+  } #if no tag passed best test, return empty frame rather than NULL
 
-  res_pre <- lapply(seq_along(best_friends), function(x) {
-    data.frame(
-       tag=names(best_friends[x]),
-       collection=colnames(all_ranks)[best_friends[[x]]$collections.on.left]
-     )})
+  res_pre <- lapply(seq_along(best.fits.for.markers), 
+      function(x) {
+          collections.on.left<-
+            best.fits.for.markers[[x]]$collections.on.left
+          data.frame(
+            marker=names(best.fits.for.markers)[x],
+            friend=colnames(all_ranks)[collections.on.left],
+            friend.rank=which(
+              best.fits.for.markers[[x]]$step.models$collectons.order %in% 
+              collections.on.left
+            )
+          )
+     })
 
   res <- do.call(rbind, res_pre)
 
