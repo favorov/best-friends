@@ -93,8 +93,10 @@ friends.test <- function(A=NULL, threshold = 0.05,
 
   if(nrow(marker_ranks) == 0) {
     #message("No tags with non-uniform ranks found for given threshold.")
-    return(data.frame(tag=character(), collection=character()))
-  }
+      return(data.frame(tag=character(), 
+                        collection=character(),
+                        friend.rank=integer()))
+    }
 
 
   #find friends that make tag ranks non-uniform
@@ -112,9 +114,12 @@ friends.test <- function(A=NULL, threshold = 0.05,
   best.fits.for.markers <- best.fits.for.markers[vapply(best.fits.for.markers, function(x) {
     x$population.on.left <= max.friends.n
   },logical(1))]
+
   
   if(!length(best.fits.for.markers)){
-    return(data.frame(tag=character(), collection=character()))
+    return(data.frame(tag=character(), 
+            collection=character(),
+            friend.rank=integer()))
   } #if no tag passed best test, return empty frame rather than NULL
 
   res_pre <- lapply(seq_along(best.fits.for.markers), 
