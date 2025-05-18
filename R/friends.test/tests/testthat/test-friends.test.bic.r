@@ -37,8 +37,9 @@ almost_diagon_mat[1:ncolls,] <- runif(ncolls*ncolls)
 diag(almost_diagon_mat) <- 19
 rownames(almost_diagon_mat) <- paste0("tag",1:ntags)
 colnames(almost_diagon_mat) <- paste0("coll",1:ncolls)
-probe<-data.frame(tag=paste0(c("tag"),1:ncolls),
-           collection=paste0(c("coll"),1:ncolls))
+probe<-data.frame(marker=paste0(c("tag"),1:ncolls),
+           friend=paste0(c("coll"),1:ncolls),
+           friend.rank=rep(1,ncolls))
 
 
 test_that("passes non-diagonal diagonal test with low prior to have friend",{
