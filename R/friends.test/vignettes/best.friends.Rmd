@@ -20,7 +20,7 @@ vignette: >
 
 `r library(knitr)`
 `r library(markdown)`
-`r library(best.friends)`
+`r library(friends.test)`
 `r options(width=80,keep.source=TRUE)`
 `r opts_chunk$set(echo=TRUE,message=FALSE,cache=FALSE,warning=FALSE)`
 `r set.seed(42)`
@@ -35,35 +35,31 @@ There is a simple intuition of what it means to be a friend. A friend of Augustu
 Consider a set of genes and their loads in a set of expression patterns. Each pattern represents a biological process by the expression levels of the involved genes. 
 
 Sometimes, the expression of a single gene indicates the activity of the entire pattern. In the simplest case, the gene has a nonzero load in only one pattern. 
-Moreover, the gene may have several nonzero loads, but all of them but one are relatively small. Then the gene (AKA Augustus) is the marker gene for the pattern, and the marked pattern is the best friend of this gene. We want to identify the marker genes and corresponding patterns statistically.  
+Moreover, the gene may have several nonzero loads, but all of them but one are relatively small. Then the gene (AKA Augustus) is the marker gene for the pattern, and the marked pattern is the best friend of this gene. We want to identify the marker genes and corresponding patterns computationaly.  
 
-\paragraph{Model} The bipartite graph naturally fits this model. To generalise the example, we will refer to genes as \textit{{\tag}s}, and to expression patterns, as \textit{{\collection}s}, and to any load as \textit{attention}. The sketch below illustrates the setting.
+\paragraph{Model} 
 
-![The bipartite graph picture shows only edges with nonzero values](bipartite.png){width=25%}
+We have two sets:T (rows) and C (columns) and A real matrix A(t,c) that describes the strength of association between each t and each c; t is an element of T and c is an element of C. 
+For each t we want to identify whether it is significantly more relevant for some c's than for the remaining c's. If it does, those c for which the t is relevant, are the t's friend. And, the t is the c's marker.
 
-To be more specific, we are given a set of collections $C = \{c_1, \dots, c_k\}$, and a set of tags $T = \{t_1, \dots, t_n\}$.
-Each tag $t \in T$ and collection $c \in C$ are related by the attention $A(t, c)$, that the cloud pays to the tag. The strength of attention varies from $0$ to infinity, $A(t, c)\ge 0$. 
+The model applies to many problems in bioinformatics and statistics.
 
-In the following, the attention values are stored in $n\times k$ matrix $\mathcal{A}$. 
-
-The tag-collection-attention model applies to many problems in bioinformatics and statistics.
-
-        Example                           tag $t$         collection $c$                           attention $A\left(t,c\right)$
---------------------------------------   -------------   ----------------------------------  ----------------------------
-[gene regulation by TFs](#toyTF)          gene            genes under the TF regulation       strength of regulation
-[transctironal correlations](#toynet)     gene            genes coexpressed with a gene       transcription correlation
-fuzzy clustering                          object          cluster                             object weight in cluster
-transcription decomposition               transcript      transcription pattern               transcript's load in pattern
-weighted graph                            vertex          another vertex                      weight of edge between collection and tag
---------------------------------------   -------------   ----------------------------------  ----------------------------
+        Example                           $\left\{T\right\}$  $\left\{C\right\}$                    $A\left(t,c\right)$
+--------------------------------------    -------------     ----------------------------------  ----------------------------
+[gene regulation by TFs](#toyTF)          gene              genes under the TF regulation       strength of regulation
+[transctironal correlations](#toynet)     gene              genes coexpressed with a gene       transcription correlation
+fuzzy clustering                          object            cluster                             object weight in cluster
+transcription decomposition               transcript        transcription pattern               transcript's load in pattern
+weighted graph                            vertex            another vertex                      weight of edge between collection and tag
+--------------------------------------    -------------     ----------------------------------  ----------------------------
 
 
 
-\paragraph{Goal} For each tag, we want to identify the collection(s) that particularly prefer(s) the tag, if any. Then such a cloud is a friend (or the best friend if there is only one) for the tag. The simplest example: imagine that only one cloud pays attention to the tag in hand. We intend to express the meaning of the word "particularly" in this context by a statistical test.
+\paragraph{Goal} For each row, we want to identify whather there are columns(s) that particularly prefer(s) the row, and list the columns. Then such a column is a friend (or the best friend if there is only one) for the row. The simplest example: imagine that for a row, only one column is associated with it. We intend to express the meaning of the word "particularly" in this context by a statistical test.
 
-Let's denote the rank of the $i$-th tag's attention value paid by $j$-the collection inside the collection, or, in our notation, rank of $A_{ij}$ in $A_{*j}$ column, as $r(t_i,c_j)$. 
+Let's denote the rank of the $i$-th rows's attention association with $j$-the column inside the column, or, in our notation, the rank of $A_{ij}$ in $A_{*j}$ column, as $r(t_i,c_j)$. 
 
-The main idea of the test is that if a tag $t_i$ is now preferred by any collection, the distribution of the ranks of the tag in all the collections $r(t_i,c_j)$ behaves like $j$  i.i.d integers that are uniformely distributed in $1..n$
+The main idea of the test is that if a row $t_i$ is not preferred by any collection(s), the distribution of the ranks of the row in all the collections $r(t_i,c_j)$ behaves like $j$  i.i.d integers that are uniformely distributed in $1..n$
 
 
 Please see our manuscript [] for more details.
@@ -96,41 +92,41 @@ What we want to identify is Gene2-TF1 pair. Gene2 is not the strongest downstrea
 First, let's apply the Bayesian version of the method, `best.friends.bic`.
 
 ```{r}
-best.friends.bic(regulation,prior.to.have.friends = .5)
+friends.test.bic(regulation,prior.to.have.friends = .5,max.friends.n = 1)
 ```
 
 We see the expected Gene2-TF1 pair as well as the Gene1-TF1 pair, that is similar to the expected, Gene1 has rank of 3 in the TF1 collection.
 
-The lower is the prior to have friends for a tag (it is an obligatory parameter for `best.friends.bic`), the less marker-friend pairs we get.
+The lower is the prior to have friends for a tag (it is an obligatory parameter for `friends.test.bic`), the less marker-friend pairs we get. 
 
 ```{r}
-best.friends.bic(regulation,prior.to.have.friends = .33)
+friends.test.bic(regulation,prior.to.have.friends = .33,max.friends.n = 1)
+
+friends.test.bic(regulation,prior.to.have.friends = .25,max.friends.n = 1)
 ```
+
+In all the three examples above, the `max.friends.n` parameter was set to 1. It means that the function filters out all the tags that have more that one friendly collection, or in other words, we look only for the best friends. If we relax the restriction, we get:
 
 ```{r}
-best.friends.bic(regulation,prior.to.have.friends = .25)
+friends.test.bic(regulation,prior.to.have.friends = .5, max.friends.n = "all")
+friends.test.bic(regulation,prior.to.have.friends = .33, max.friends.n  = "all")
+friends.test.bic(regulation,prior.to.have.friends = .25, max.friends.n = "all")
 ```
 
-In all the three examples above, the `best.no` parameter was 1 by default. It means that the function filters out all the tags that have more that one friendly collection. If we relax the restriction, we get:
+Note that `max.friends.n = "all"` is the default value for both `friends.test` (see below) and `friends.test.bic`.
 
-```{r}
-best.friends.bic(regulation,prior.to.have.friends = .5, best.no = "all")
-best.friends.bic(regulation,prior.to.have.friends = .33, best.no = "all")
-best.friends.bic(regulation,prior.to.have.friends = .25, best.no = "all")
-```
-
-## The same toy example: default option
+## The same toy example: the KS option
 
 Let's run the p-value-based option of the method on the same data. It is less sensitive on small dataset, so we use unpractical threshold for the p-value to see the result.
 
 ```{r}
-best.friends(regulation,threshold = .5,p.adjust.method = "no")
+friends.test(regulation,threshold = .5,p.adjust.method = "no",max.friends.n = 1)
 ```
 
-Amd, again, if we relax the `best.no` restriction, we will see more pairs, but now the friends are not required to be unique for a marker.
+And, again, if we relax the `max.friends.no` restriction, we will see more pairs, but now the friends are not required to be unique for a marker.
 
 ```{r}
-best.friends(regulation,threshold = .5,p.adjust.method = "no",best.no = "all")
+friends.test(regulation,threshold = .5,p.adjust.method = "no")
 ```
 
 ## Session info
