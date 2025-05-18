@@ -16,7 +16,7 @@
 #' The last value with the index \eqn{tags.no} is calculated for a
 #' non-step uniform model.
 
-#' See [best.friends] documentation for details.
+#' See [friends.test] documentation for details.
 #'
 #' @param ranks vector of ranks of a tag in different collections
 #' @param tags.no number of tags, i.e. maximal rank 

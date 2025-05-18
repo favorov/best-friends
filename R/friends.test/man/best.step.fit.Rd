@@ -25,7 +25,7 @@ it is not obligatory one on the \code{ranks} value.\cr
 finds the ML-best step model for one tag
 }
 \details{
-See \link{best.friends} documentation for details.
+See \link{friends.test} documentation for details.
 }
 \examples{
 example(tag.int.ranks)

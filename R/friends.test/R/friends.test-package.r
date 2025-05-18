@@ -15,7 +15,7 @@
 #'
 #' @keywords internal
 "_PACKAGE"
-#' @section best.friends functions:
+#' @section friends.test functions:
 #' [friends.test] finds whether there column(s) that are friends for a row 
 #' and find them if they do. The friends presence is tested by rejecting
 #' the null hypothesis that claims that all the ranks of a row in different columns 

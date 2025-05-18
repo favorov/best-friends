@@ -32,7 +32,7 @@ compares the posteriors of the found best step
 and non-step uniform model.
 }
 \details{
-See \link{best.friends} documentation for details.
+See \link{friends.test} documentation for details.
 }
 \examples{
 example(tag.int.ranks)

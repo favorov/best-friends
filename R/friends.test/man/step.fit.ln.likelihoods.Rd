@@ -35,7 +35,7 @@ of the ordering (the original ranks are descending, so best
 collections are in the left part) and calculates the likelihood.
 The last value with the index \eqn{tags.no} is calculated for a
 non-step uniform model.
-See \link{best.friends} documentation for details.
+See \link{friends.test} documentation for details.
 }
 \examples{
 example(tag.int.ranks)

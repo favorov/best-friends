@@ -33,8 +33,10 @@ rows and equals the number of rows \code{'c'} or the maximal observed rank
 for the row we test now, \code{'m'} (default).}
 }
 \value{
-A data.frame, rows are pairs of markers
-friends.
+A data.frame, rows are pairs of markers and friends,
+columns are: marker, friend and friend.rank. The latter is
+the rank of the column-friend in the vector of ranks of the
+ranks of the row-marker in different columns.
 }
 \description{
 We have two sets:T (rows) and C (columns) and

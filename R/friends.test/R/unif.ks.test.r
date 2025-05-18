@@ -2,7 +2,7 @@
 #' unif.ks.test
 #' 
 #' returns p-value for uniformity of the ranks (they are in \eqn{1 .. N}) vector
-#' #' See [best.friends] documentation for details.
+#' #' See [friends.test] documentation for details.
 #' 
 #' @param ranks vector of ranks of a tag in different collections, \eqn{1 .. N})
 #' @param uniform.max the maximal rank in the uniform, default is NA which means

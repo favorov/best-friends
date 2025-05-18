@@ -68,7 +68,7 @@ friends.test.bic <- function(A=NULL, prior.to.have.friends=-1, max.friends.n = '
   #here, we filer out the rows where uniform model wins for
   #we also filter to match
   #max.friends.n parameter here,
-  #best friends are cases where a tag is a marker in 
+  #friends.test are cases where a tag is a marker in 
   #no more than max.friends.n collections
 
   #vapply is recommended by BioCheck as safer than sapply

@@ -3,7 +3,7 @@
 #' 
 #' finds the ML-best step model for one tag
 #' 
-#' See [best.friends] documentation for details.
+#' See [friends.test] documentation for details.
 #'
 #' @inheritParams step.fit.ln.likelihoods
 #' @return a list of four values: \cr

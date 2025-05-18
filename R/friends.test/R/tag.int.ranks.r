@@ -2,7 +2,7 @@
 #' tag.int.ranks
 #' 
 #' Given the (\code{attention}) \eqn{|T| \times |C|} matrix, convert it to matrix of descending ranks of tags(rows) in collections (columns). 
-#' See [best.friends] documentation for details.
+#' See [friends.test] documentation for details.
 #' @param attention original attention matrix
 #' @param distance_like if \code{TRUE}, ranks are ascending (the smaller is the better). Default is \code{FALSE}.
 #' @param neglect_diagonal if square matrix, and the diagonal does not make sense, we \code{NA} it and our ranks are in \eqn{[1 .. |T|-1]}. Default is \code{FALSE}.
@@ -31,7 +31,7 @@ tag.int.ranks<-function(
         neglect_diagonal=FALSE){
     dims<-dim(attention)
     if(min(dims)<2){
-        stop("The best.friends requires both dimetions of the attention matrix to be more than 1")
+        stop("The friends.test requires both dimentions of the attention matrix to be more than 1")
     }
     if (neglect_diagonal){ 
         if(dims[1]==dims[2]) {

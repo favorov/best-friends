@@ -5,7 +5,7 @@
 #' compares the posteriors of the found best step
 #' and non-step uniform model.
 #' 
-#' See [best.friends] documentation for details.
+#' See [friends.test] documentation for details.
 #'
 #' @inheritParams step.fit.ln.likelihoods
 #' @param prior.to.have.friends The prior for a tag is important enough to have friendly collections.
