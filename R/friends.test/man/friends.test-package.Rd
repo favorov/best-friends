@@ -3,8 +3,7 @@
 \docType{package}
 \name{friends.test-package}
 \alias{friends.test-package}
-\title{friends.test: A package that checks if a partition element in a bipartite
-graph has friends in the other partition.}
+\title{friends.test: In a matrix, we look for columns that are friendly to a row}
 \description{
 We have two sets:T (rows) and C (columns) and
 A real matrix A(t,c) that describes the strength of association

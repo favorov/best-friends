@@ -1,6 +1,6 @@
 Package: friends.test
 Type: Package
-Title: We look for collections that are friendly for the tags 
+Title: In a matrix, we look for columns that are friendly to a row. 
 Version: 0.99.16
 Date: 2025-05-20
 Encoding: UTF-8

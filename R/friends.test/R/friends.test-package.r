@@ -1,6 +1,5 @@
 #'
-#' friends.test: A package that checks if a partition element in a bipartite 
-#' graph has friends in the other partition.
+#' friends.test: In a matrix, we look for columns that are friendly to a row 
 #' 
 #' We have two sets:T (rows) and C (columns) and 
 #' A real matrix A(t,c) that describes the strength of association 

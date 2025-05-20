@@ -1,9 +1,9 @@
 ---
-title: "Best friends: what collection is friendly to this tag? Is it actually friendly?"
+title: "In a matrix, we look for columns that are friendly to a row"
 output: 
   html_vignette:
 vignette: >
- %\VignetteIndexEntry{Best friends: what collection is friendly to this tag? Is it actually friendly?}
+ %\VignetteIndexEntry{In a matrix, we look for columns that are friendly to a row}
  %\VignetteEngine{knitr::rmarkdown}
  %\VignetteEncoding{UTF-8}
  %\VignetteDepends{devtools}

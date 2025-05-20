@@ -1,7 +1,7 @@
-best.friends test R implementation
+friends.test R implementation
 ===
 
-This is R implementation of the best.friends test.
+This is R implementation of the friends.test.
 The idea is: we have T tags and C collections and 
 collection-to-tag attention described as a |T|x|C| matrix.
 Attention is a metaphor for any relation, weight, load, etc.
