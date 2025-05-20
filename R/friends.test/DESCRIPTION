@@ -1,6 +1,6 @@
 Package: friends.test
 Type: Package
-Title: In a matrix, we look for columns that are friendly to a row. 
+Title: In a matrix, we look for columns that are friendly to a row
 Version: 0.99.16
 Date: 2025-05-20
 Encoding: UTF-8
