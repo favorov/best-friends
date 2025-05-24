@@ -1,5 +1,9 @@
 nM<-M/rowSums(M)
 
+scaleMask<-mask
+scaleMask[selected_rows,]=!mask[selected_rows]
+
+
 
 hM<-Heatmap(M,
   name = "Mixture test", # Name of the heatmap legend
@@ -13,7 +17,7 @@ hM<-Heatmap(M,
   column_title = "mixture"
 )
 
-
+falsecolor<-"gray97"
 
 friends<-friends.test::friends.test.bic(M,prior.to.have.friends = 0.001)
 
@@ -25,7 +29,7 @@ hmask<-Heatmap(mask,
              show_row_names = FALSE,
              show_column_names = FALSE,
              col = colorRamp2::colorRamp2(c(0, 0, 1),
-                                          c("lightgrey", "lightgrey", "red")), # Optional: custom color scheme
+                                          c(falsecolor, falsecolor, "red")), # Optional: custom color scheme
              column_title = "mask",
              show_heatmap_legend = FALSE
 )
@@ -46,12 +50,12 @@ hfb<-Heatmap(friends.mat,
             show_row_names = FALSE,
             show_column_names = FALSE,
             col = colorRamp2::colorRamp2(c(0, 0, 1),
-                          c("white", "white", "orange")), # Optional: custom color scheme
+                          c(falsecolor, falsecolor, "orange")), # Optional: custom color scheme
             column_title = "friends.test.bic",
             show_heatmap_legend = FALSE
 )
 
-pdf("mixture_and_bic.pdf")
+pdf("mixture_and_friends_bic.pdf")
 plot(hM+hmask+hfb)
 dev.off()
 
